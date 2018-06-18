@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!--服务唯一标识，类似于spring中的beanid-->
+    <dubbo:application name="demo-provider" owner="zhao"/>
+    <!--暴露的服务地址, dubbo也是基于tcp协议，相互之间交互也需要ip:端口-->
+    <dubbo:registry address="N/A"/>
+    <!--当前服务所依赖的协议， 协议名称不能写错webservice, hessian, thrift....-->
+    <dubbo:protocol name="dubbo" port="20880"/>
+
+    <!--进去正题， 服务暴露的接口， 及对应的实现-->
+    <dubbo:service interface="com.lx.demo.IOrderService" ref="orderService"/>
+    <bean id="orderService" class="com.lx.demo.OrderServiceImpl"/>
+</beans>
