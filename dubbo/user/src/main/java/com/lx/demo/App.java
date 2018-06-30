@@ -2,6 +2,8 @@ package com.lx.demo;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.io.IOException;
+
 /**
  * Hello world!
  *
@@ -19,6 +21,11 @@ public class App
         doOrderRequest.setName("zhao");
         DoOrderResponse doOrderResponse = iOrderService.doOrder(doOrderRequest);
         System.out.println("客户端 user输出: ==== " + doOrderResponse);
+        try {
+            System.in.read();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
