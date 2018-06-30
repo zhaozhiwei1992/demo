@@ -1,6 +1,9 @@
 package com.lx.demo;
 
 import com.alibaba.dubbo.container.Main;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import java.io.IOException;
 
 /**
  * Hello world!
@@ -15,9 +18,13 @@ public class App
 
         //官方提供的方式
 //        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
-//                new String[] {"META-INF/spring/dubbo-demo-provider.xml"});
+//                new String[] {"META-INF/spring/order-provider.xml"});
 //        context.start();
 //        // press any key to exit
-//        System.in.read();
+//        try {
+//            System.in.read();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 }

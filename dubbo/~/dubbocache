@@ -1,3 +1,0 @@
-#Dubbo Registry Cache
-#Sat Jun 30 12:45:14 CST 2018
-com.lx.demo.IOrderService=empty\://192.168.122.1/com.lx.demo.IOrderService?application\=order-consumer&category\=configurators&dubbo\=2.5.3&interface\=com.lx.demo.IOrderService&methods\=doOrder&pid\=8552&side\=consumer&timestamp\=1530333904310 empty\://192.168.122.1/com.lx.demo.IOrderService?application\=order-consumer&category\=routers&dubbo\=2.5.3&interface\=com.lx.demo.IOrderService&methods\=doOrder&pid\=8552&side\=consumer&timestamp\=1530333904310 dubbo\://192.168.122.1\:20880/com.lx.demo.IOrderService?anyhost\=true&application\=demo-provider&dubbo\=2.5.3&interface\=com.lx.demo.IOrderService&methods\=doOrder&owner\=zhao&pid\=9776&side\=provider&timestamp\=1530333270641

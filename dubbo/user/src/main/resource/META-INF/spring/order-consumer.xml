@@ -9,5 +9,9 @@
     <dubbo:registry protocol="zookeeper" address="192.168.140.128:2181"/>
     <!--<dubbo:registry protocol="zookeeper" address="192.168.140.128:2181" file="D:/dubbocache"/>-->
     <!--生成远程服务调用代理, 直连方式调用-->
-    <dubbo:reference id="orderService" interface="com.lx.demo.IOrderService" protocol="dubbo"/>
+    <dubbo:reference id="orderService"
+                     interface="com.lx.demo.IOrderService"
+                     protocol="dubbo"
+                     version="1.0.1"
+                     mock="com.lx.demo.DemoMock"/>
 </beans>
