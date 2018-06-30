@@ -11,11 +11,12 @@
     <!--暴露的服务地址, dubbo也是基于tcp协议，相互之间交互也需要ip:端口-->
     <!--<dubbo:registry address="N/A"/>-->
     <!-- 加入dubbo结合zookeeper后的配置-->
-    <dubbo:registry protocol="zookeeper" address="192.168.140.128:2181,192.168.140.129:2181,192.168.140.130:2181"/>
-    <!--当前服务所依赖的协议， 协议名称不能写错webservice, hessian, thrift....-->
+    <dubbo:registry protocol="zookeeper" address="192.168.140.128:2181"/>
+    <!--当前服务所依赖的协议， 协议名称不能写错webservice, hessian, thrift...., 如果是单个协议不需要写-->
     <dubbo:protocol name="dubbo" port="20880"/>
+    <dubbo:protocol name="hessian" port="8080"/>
 
     <!--进去正题， 服务暴露的接口， 及对应的实现-->
-    <dubbo:service interface="com.lx.demo.IOrderService" ref="orderService"/>
+    <dubbo:service interface="com.lx.demo.IOrderService" ref="orderService" protocol="hessian, dubbo"/>
     <bean id="orderService" class="com.lx.demo.OrderServiceImpl"/>
 </beans>

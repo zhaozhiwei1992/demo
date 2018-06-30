@@ -6,7 +6,8 @@
     <dubbo:application name="order-consumer"/>
     <!--不使用注册中心-->
     <!--<dubbo:registry address="N/A"/>-->
-    <dubbo:registry protocol="zookeeper" address="192.168.140.128:2181,192.168.140.129:2181,192.168.140.130:2181"/>
+    <dubbo:registry protocol="zookeeper" address="192.168.140.128:2181"/>
+    <!--<dubbo:registry protocol="zookeeper" address="192.168.140.128:2181" file="D:/dubbocache"/>-->
     <!--生成远程服务调用代理, 直连方式调用-->
-    <dubbo:reference id="orderService" interface="com.lx.demo.IOrderService"/>
+    <dubbo:reference id="orderService" interface="com.lx.demo.IOrderService" protocol="dubbo"/>
 </beans>
