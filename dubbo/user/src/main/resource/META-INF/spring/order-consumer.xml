@@ -5,13 +5,15 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
     <dubbo:application name="order-consumer"/>
     <!--不使用注册中心-->
-    <!--<dubbo:registry address="N/A"/>-->
-    <dubbo:registry protocol="zookeeper" address="192.168.140.128:2181"/>
+    <dubbo:registry address="N/A"/>
+    <!--<dubbo:registry protocol="zookeeper" address="192.168.140.128:2181"/>-->
+    <!--缓存zookeeper 地址-->
     <!--<dubbo:registry protocol="zookeeper" address="192.168.140.128:2181" file="D:/dubbocache"/>-->
     <!--生成远程服务调用代理, 直连方式调用-->
     <dubbo:reference id="orderService"
                      interface="com.lx.demo.IOrderService"
                      protocol="dubbo"
-                     version="1.0.1"
+                     url="dubbo://192.168.122.1:20880/com.lx.demo.IOrderService"
+                     version="1.0.0"
                      mock="com.lx.demo.DemoMock"/>
 </beans>
