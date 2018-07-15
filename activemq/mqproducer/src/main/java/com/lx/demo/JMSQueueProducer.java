@@ -12,7 +12,7 @@ import javax.jms.*;
  **/
 public class JMSQueueProducer {
     public static void main(String[] args) {
-        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://192.168.31.248:61616");
+        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://127.0.0.1:61616");
         Connection connection = null;
         try {
             //建立连接
