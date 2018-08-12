@@ -45,6 +45,14 @@ public class User {
         return date;
     }
 
+    public User() {
+    }
+
+    public User(long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public void setDate(Date date) {
         this.date = date;
     }
