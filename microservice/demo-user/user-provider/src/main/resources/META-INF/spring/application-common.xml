@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+
+ 	<context:component-scan base-package="com.lx.user.dal"/>
+	<context:component-scan base-package="com.lx.user.services"/>
+
+	<context:annotation-config />
+
+    <!--spring 4.x以后就不需要手动引入mybatis配置文件，直接配置log4j.properties即可-->
+<!--    <bean id="log4jInitialization"
+		class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="targetClass" value="org.springframework.util.Log4jConfigurer" />
+		<property name="targetMethod" value="initLogging" />
+		<property name="arguments">
+			<list>
+				<value>classpath:log4j-cfg.xml</value>
+			</list>
+		</property>
+	</bean>-->
+
+    <!--加载properties配置文件, 将一些properties配置信息解析到spring的bean中-->
+	<context:property-placeholder location="classpath:application.properties" />
+
+</beans>
