@@ -4,7 +4,9 @@ import com.lx.demo.model.User;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.apache.commons.lang.StringUtils;
 
+import javax.persistence.Table;
 import java.lang.reflect.Field;
 import java.sql.*;
 import java.util.ArrayList;
@@ -70,14 +72,21 @@ public class JDBCTest
             Class.forName("com.mysql.jdbc.Driver");
             //建立连接
             conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/demo?characterEncoding=UTF-8&rewriteBatchedStatements=true","root","root");
-            //创建Statement\PreparedStatement对象：
-            preparedStatement = conn.prepareStatement("select id, name, password from t_user");
-
             List<User> users = new ArrayList<User>();
 
             //获取类的属性
             Class<?> aClass = User.class;
             Field[] fields4User = aClass.getDeclaredFields();
+            Table table = aClass.getAnnotation(Table.class);
+
+            ArrayList<String> cols = new ArrayList<String>();
+            for (Field field : fields4User) {
+                cols.add(field.getName());
+            }
+            String sql = "select " + StringUtils.join(cols, ",") + " from " + (table == null? aClass.getSimpleName().toLowerCase() : table.name());
+            System.out.println(sql);
+            //创建Statement\PreparedStatement对象：
+            preparedStatement = conn.prepareStatement(sql);
 
             //获取结果集
             resultSet = preparedStatement.executeQuery();
@@ -90,6 +99,8 @@ public class JDBCTest
 //                    }if(field.getType() == String.class){
 //                        field.set(user, resultSet.getString(field.getName()));
 //                    }
+                    // jdbc内部对getobject做了特殊处理转换成了java对应的类型 mysql-connectj  --> ResultSetiml中进行了转换
+//                    System.out.println(resultSet.getObject(field.getName()).getClass());
                     field.set(user, resultSet.getObject(field.getName()));
                 }
                 users.add(user);

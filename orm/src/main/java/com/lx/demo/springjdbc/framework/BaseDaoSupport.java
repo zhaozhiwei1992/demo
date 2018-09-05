@@ -16,12 +16,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -1575,6 +1570,54 @@ public abstract class BaseDaoSupport<T extends Serializable, PK extends Serializ
 		 }
 		
 		return map;
+	}
+
+	/**
+	 * 将过长的in语句解析成or语句
+	 * @return or和in语句
+	 */
+	public String parseInSql(String colcode, Collection<String> guids) {
+		StringBuilder vchsql = new StringBuilder();
+		vchsql.append(colcode).append(" in( ");
+		int index = 0;
+		Iterator iterator = guids.iterator();
+		for (; iterator.hasNext();) {
+			index++;
+			vchsql.append("'").append(iterator.next()).append("'");
+			if (index == 998) {
+				index = 0;
+				vchsql.append(") or ").append(colcode).append(" in (");
+			} else {
+				if (iterator.hasNext()) {
+					vchsql.append(",");
+				}
+			}
+		}
+		return vchsql.append(")").toString();
+	}
+
+	/**
+	 * 将过长的in语句解析成or语句
+	 * @return or和in语句
+	 */
+	public String parseNotInSql(String colcode, Collection<String> guids) {
+		StringBuilder vchsql = new StringBuilder();
+		vchsql.append(colcode).append(" not in( ");
+		int index = 0;
+		Iterator iterator = guids.iterator();
+		for (; iterator.hasNext();) {
+			index++;
+			vchsql.append("'").append(iterator.next()).append("'");
+			if (index == 998) {
+				index = 0;
+				vchsql.append(") and ").append(colcode).append(" not in (");
+			} else {
+				if (iterator.hasNext()) {
+					vchsql.append(",");
+				}
+			}
+		}
+		return vchsql.append(")").toString();
 	}
 	
 }

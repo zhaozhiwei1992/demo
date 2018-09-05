@@ -32,7 +32,6 @@ public class OrmTest {
 
 
     @Test
-    @Ignore
     public void testSelect(){
 
         try {
