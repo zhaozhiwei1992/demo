@@ -70,7 +70,7 @@ public class QueryRuleSqlBuilder {
 		properties = new ArrayList<String>();
 		values = new ArrayList<Object>();
 		orders = new ArrayList<Order>();
-		for (Rule rule : queryRule.getRuleList()) {
+		for (QueryRule.Rule rule : queryRule.getRuleList()) {
 			switch (rule.getType()) {
 			case QueryRule.BETWEEN:
 				processBetween(rule);
@@ -168,7 +168,7 @@ public class QueryRuleSqlBuilder {
 	 * 处理like
 	 * @param rule
 	 */
-	private  void processLike(Rule rule) {
+	private  void processLike(QueryRule.Rule rule) {
 		if (ArrayUtils.isEmpty(rule.getValues())) {
 			return;
 		}
@@ -188,7 +188,7 @@ public class QueryRuleSqlBuilder {
 	 * 处理between
 	 * @param rule
 	 */
-	private  void processBetween(Rule rule) {
+	private  void processBetween(QueryRule.Rule rule) {
 		if ((ArrayUtils.isEmpty(rule.getValues()))
 				|| (rule.getValues().length < 2)) {
 			return;
@@ -201,7 +201,7 @@ public class QueryRuleSqlBuilder {
 	 * 处理 =
 	 * @param rule
 	 */
-	private  void processEqual(Rule rule) {
+	private  void processEqual(QueryRule.Rule rule) {
 		if (ArrayUtils.isEmpty(rule.getValues())) {
 			return;
 		}
@@ -212,7 +212,7 @@ public class QueryRuleSqlBuilder {
 	 * 处理 <>
 	 * @param rule
 	 */
-	private  void processNotEqual(Rule rule) {
+	private  void processNotEqual(QueryRule.Rule rule) {
 		if (ArrayUtils.isEmpty(rule.getValues())) {
 			return;
 		}
@@ -224,7 +224,7 @@ public class QueryRuleSqlBuilder {
 	 * @param rule
 	 */
 	private  void processGreaterThen(
-			Rule rule) {
+			QueryRule.Rule rule) {
 		if (ArrayUtils.isEmpty(rule.getValues())) {
 			return;
 		}
@@ -236,7 +236,7 @@ public class QueryRuleSqlBuilder {
 	 * @param rule
 	 */
 	private  void processGreaterEqual(
-			Rule rule) {
+			QueryRule.Rule rule) {
 		if (ArrayUtils.isEmpty(rule.getValues())) {
 			return;
 		}
@@ -247,7 +247,7 @@ public class QueryRuleSqlBuilder {
 	 * 处理<
 	 * @param rule
 	 */
-	private  void processLessThen(Rule rule) {
+	private  void processLessThen(QueryRule.Rule rule) {
 		if (ArrayUtils.isEmpty(rule.getValues())) {
 			return;
 		}
@@ -259,7 +259,7 @@ public class QueryRuleSqlBuilder {
 	 * @param rule
 	 */
 	private  void processLessEqual(
-			Rule rule) {
+			QueryRule.Rule rule) {
 		if (ArrayUtils.isEmpty(rule.getValues())) {
 			return;
 		}
@@ -270,7 +270,7 @@ public class QueryRuleSqlBuilder {
 	 * 处理  is null
 	 * @param rule
 	 */
-	private  void processIsNull(Rule rule) {
+	private  void processIsNull(QueryRule.Rule rule) {
 		add(rule.getAndOr(),rule.getPropertyName(),"is null",null);
 	}
 
@@ -278,7 +278,7 @@ public class QueryRuleSqlBuilder {
 	 * 处理 is not null
 	 * @param rule
 	 */
-	private  void processIsNotNull(Rule rule) {
+	private  void processIsNotNull(QueryRule.Rule rule) {
 		add(rule.getAndOr(),rule.getPropertyName(),"is not null",null);
 	}
 
@@ -286,7 +286,7 @@ public class QueryRuleSqlBuilder {
 	 * 处理  <>''
 	 * @param rule
 	 */
-	private  void processIsNotEmpty(Rule rule) {
+	private  void processIsNotEmpty(QueryRule.Rule rule) {
 		add(rule.getAndOr(),rule.getPropertyName(),"<>","''");
 	}
 
@@ -294,7 +294,7 @@ public class QueryRuleSqlBuilder {
 	 * 处理 =''
 	 * @param rule
 	 */
-	private  void processIsEmpty(Rule rule) {
+	private  void processIsEmpty(QueryRule.Rule rule) {
 		add(rule.getAndOr(),rule.getPropertyName(),"=","''");
 	}
 
@@ -304,7 +304,7 @@ public class QueryRuleSqlBuilder {
 	 * @param rule
 	 * @param name
 	 */
-	private void inAndNotIn(Rule rule,String name){
+	private void inAndNotIn(QueryRule.Rule rule, String name){
 		if (ArrayUtils.isEmpty(rule.getValues())) {
 			return;
 		}
@@ -349,7 +349,7 @@ public class QueryRuleSqlBuilder {
 	 * 处理 not in
 	 * @param rule
 	 */
-	private void processNotIN(Rule rule){
+	private void processNotIN(QueryRule.Rule rule){
 		inAndNotIn(rule,"not in");
 	}
 	
@@ -357,7 +357,7 @@ public class QueryRuleSqlBuilder {
 	 * 处理 in
 	 * @param rule
 	 */
-	private  void processIN(Rule rule) {
+	private  void processIN(QueryRule.Rule rule) {
 		inAndNotIn(rule,"in");
 	}
 	
@@ -365,7 +365,7 @@ public class QueryRuleSqlBuilder {
 	 * 处理 order by
 	 * @param rule 查询规则
 	 */
-	private void processOrder(Rule rule) {
+	private void processOrder(QueryRule.Rule rule) {
 		switch (rule.getType()) {
 		case QueryRule.ASC_ORDER:
 			// propertyName非空
@@ -451,5 +451,47 @@ public class QueryRuleSqlBuilder {
 		}
 		this.valueArr = val;
 	}
-	
+
+	/**
+	 * sql排序组件
+	 * @author Tom
+	 */
+	public static class Order {
+		private boolean ascending; //升序还是降序
+		private String propertyName; //哪个字段升序，哪个字段降序
+
+		@Override
+		public String toString() {
+			return propertyName + ' ' + (ascending ? "asc" : "desc");
+		}
+
+		/**
+		 * Constructor for Order.
+		 */
+		protected Order(String propertyName, boolean ascending) {
+			this.propertyName = propertyName;
+			this.ascending = ascending;
+		}
+
+		/**
+		 * Ascending order
+		 *
+		 * @param propertyName
+		 * @return Order
+		 */
+		public static Order asc(String propertyName) {
+			return new Order(propertyName, true);
+		}
+
+		/**
+		 * Descending order
+		 *
+		 * @param propertyName
+		 * @return Order
+		 */
+		public static Order desc(String propertyName) {
+			return new Order(propertyName, false);
+		}
+
+	}
 }
