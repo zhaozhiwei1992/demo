@@ -6,5 +6,10 @@ package com.lx.demo;
  */
 public interface DatabaseDriver
 {
+    /**
+     *
+     * @param host
+     * @return
+     */
     String connect(String host);
 }

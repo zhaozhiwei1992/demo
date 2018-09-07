@@ -4,12 +4,22 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+import java.util.ServiceLoader;
+
 /**
  * Unit test for simple App.
  */
 public class AppTest 
     extends TestCase
 {
+
+    public void testDynamicDatasourceDriver(){
+        ServiceLoader<DatabaseDriver> load = ServiceLoader.load(DatabaseDriver.class);
+        for (DatabaseDriver databaseDriver : load) {
+            System.out.println(databaseDriver.connect("localhost"));
+        }
+    }
+
     /**
      * Create the test case
      *

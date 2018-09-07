@@ -6,6 +6,7 @@ package com.lx.demo;
  */
 public class MySqlDatabaseDriver implements DatabaseDriver
 {
+    @Override
     public String connect(String host) {
         return "mysql connect " + host;
     }
