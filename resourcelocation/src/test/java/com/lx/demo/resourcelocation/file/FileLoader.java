@@ -27,11 +27,12 @@ public class FileLoader {
     @Test
     public void testRelativePath() throws IOException {
 
-        URL resource = Thread.currentThread().getContextClassLoader().getResource("application.properties");
+//        URL resource = Thread.currentThread().getContextClassLoader().getResource("application.properties");
 //        URL resource = this.getClass().getClassLoader().getResource("application.properties");
-        InputStream inputStream = resource.openStream();
-        byte[] bytes = new byte[50];
-        int read = inputStream.read(bytes);
+//        InputStream inputStream = resource.openStream();
+        InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("application.properties");
+//        byte[] bytes = new byte[50];
+//        int read = inputStream.read(bytes);
 //        for (byte aByte : bytes) {
 //            System.out.println((char)aByte);
 //        }
