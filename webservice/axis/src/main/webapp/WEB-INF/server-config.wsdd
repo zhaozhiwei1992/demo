@@ -43,9 +43,16 @@
 
   <service name="GDPushIndex" provider="java:RPC" style="document" use="literal">
     <parameter name="className" value="com.lx.demo.zjjg.GDPushIndex"/>
-    <parameter name="allowedMethods" value="*"/>
+    <parameter name="allowedMethods" value="PushIndex"/>
     <parameter name="scope" value="Application"/>
-    <namespace>http://example</namespace>
+    <namespace>http://zjjg</namespace>
+  </service>
+
+  <service name="GDPushIndexTotal" provider="java:RPC" style="document" use="literal">
+    <parameter name="className" value="com.lx.demo.zjjg.GDPushIndexTotal"/>
+    <parameter name="allowedMethods" value="PushIndexTotal"/>
+    <parameter name="scope" value="Application"/>
+    <namespace>http://zjjg</namespace>
   </service>
 
     <handler name="soapmonitor" type="java:org.apache.axis.handlers.SOAPMonitorHandler">
