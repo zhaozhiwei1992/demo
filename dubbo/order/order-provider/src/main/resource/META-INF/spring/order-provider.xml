@@ -4,23 +4,31 @@
        xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-    <!--服务唯一标识，类似于spring中的beanid-->
+    <!--服务唯一标识，类似于spring中的beanid, 监控中心查看以来关系时候唯一id-->
     <dubbo:application name="demo-provider" owner="zhao"/>
 
+    <!--如果要做监控必须打开这个配置-->
     <dubbo:monitor protocol="registry"/>
+
     <!--暴露的服务地址, dubbo也是基于tcp协议，相互之间交互也需要ip:端口-->
-    <dubbo:registry address="N/A"/>
+    <!--<dubbo:registry address="N/A"/>-->
     <!-- 加入dubbo结合zookeeper后的配置-->
-    <!--<dubbo:registry protocol="zookeeper" address="192.168.140.128:2181"/>-->
-    <!--当前服务所依赖的协议， 协议名称不能写错webservice, hessian, thrift...., 如果是单个协议不需要写-->
-    <!--<dubbo:protocol name="dubbo" port="20880"/>-->
-    <!--<dubbo:protocol name="hessian" port="8080"/>-->
+    <!--<dubbo:registry address="zookeeper://127.0.0.1:2181"/>-->
+    <dubbo:registry protocol="zookeeper" address="127.0.0.1:2181"/>
+    <!--当前服务所依赖的协议， 协议名称不能写错webservice, hessian, thrift...., 如果是单个协议不需要写, 默认dubbo-->
+    <dubbo:protocol name="dubbo" port="20880"/>
+    <dubbo:protocol name="hessian" port="8080"/>
 
     <!--进去正题， 服务暴露的接口， 及对应的实现-->
     <!--<dubbo:service interface="com.lx.demo.IOrderService" ref="orderService" protocol="hessian, dubbo"/>-->
-    <dubbo:service interface="com.lx.demo.IOrderService" ref="orderService" version="1.0.0"/>
+    <dubbo:service id="orderServiceDubbo" interface="com.lx.demo.IOrderService" ref="orderService" version="1.0.0" protocol="dubbo"/>
+    <!--bean定义， 也可以使用注解直接写到service上-->
     <bean id="orderService" class="com.lx.demo.OrderServiceImpl"/>
 
-    <dubbo:service interface="com.lx.demo.IOrderService" ref="orderService2" version="1.0.1"/>
-    <bean id="orderService2" class="com.lx.demo.OrderServiceImplV2"/>
+    <!--使用hessian协议接口暴露服务， 兼容第三方系统可能使用hessian协议-->
+    <dubbo:service id="orderServiceHessian" interface="com.lx.demo.IOrderService" ref="orderService" protocol="hessian"/>
+
+    <!--多个版本注册， 解决开发新功能时兼容旧版本-->
+    <!--<dubbo:service interface="com.lx.demo.IOrderService" ref="orderService2" version="1.0.1"/>-->
+    <!--<bean id="orderService2" class="com.lx.demo.OrderServiceImplV2"/>-->
 </beans>
