@@ -9,7 +9,6 @@ import lombok.Data;
  * @description [描述该类的功能]
  * @create 2018-07-06 下午4:20
  **/
-@Data
 public class UserLoginResponse extends AbstractResponse{
     private static final long serialVersionUID = 8837620432368198051L;
 
@@ -30,4 +29,36 @@ public class UserLoginResponse extends AbstractResponse{
      *
      */
     private String token;
+
+    public Integer getUid() {
+        return uid;
+    }
+
+    public void setUid(Integer uid) {
+        this.uid = uid;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 }

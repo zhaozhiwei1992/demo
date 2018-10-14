@@ -9,8 +9,15 @@ import lombok.Data;
  * @description [描述该类的功能]
  * @create 2018-07-10 下午2:21
  **/
-@Data
 public class UserRegisterResponse extends AbstractResponse{
     private static final long serialVersionUID = -3096897824581672811L;
     private Integer uid;
+
+    public Integer getUid() {
+        return uid;
+    }
+
+    public void setUid(Integer uid) {
+        this.uid = uid;
+    }
 }

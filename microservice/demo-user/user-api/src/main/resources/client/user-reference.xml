@@ -16,5 +16,5 @@
     <dubbo:reference id="userCoreService"
                      interface="com.lx.user.IUserCoreService"
                      protocol="dubbo"
-                     url="dubbo://192.168.31.248:20880/com.lx.user.IUserCoreService"/>
+                     url="dubbo://127.0.0.1:20880/com.lx.user.IUserCoreService"/>
 </beans>

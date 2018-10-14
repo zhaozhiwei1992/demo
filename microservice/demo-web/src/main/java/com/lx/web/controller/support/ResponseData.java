@@ -1,6 +1,5 @@
 package com.lx.web.controller.support;
 
-import lombok.Data;
 
 /**
  * @author 赵志伟
@@ -8,11 +7,34 @@ import lombok.Data;
  * @description [描述该类的功能]
  * @create 2018-07-10 下午2:17
  **/
-@Data
 public class ResponseData {
     private String code;
 
     private String message;
 
     private Object data;
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public Object getData() {
+        return data;
+    }
+
+    public void setData(Object data) {
+        this.data = data;
+    }
 }

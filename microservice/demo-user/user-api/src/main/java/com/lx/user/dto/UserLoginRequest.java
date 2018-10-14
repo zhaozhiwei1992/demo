@@ -1,7 +1,6 @@
 package com.lx.user.dto;
 
 import com.lx.user.abs.AbstractRequest;
-import lombok.Data;
 
 /**
  * @author 赵志伟
@@ -9,7 +8,6 @@ import lombok.Data;
  * @description [描述该类的功能]
  * @create 2018-07-06 下午4:20
  **/
-@Data
 public class UserLoginRequest extends AbstractRequest{
     private static final long serialVersionUID = 122547013489164419L;
     /**
@@ -20,4 +18,21 @@ public class UserLoginRequest extends AbstractRequest{
      * 密码
      */
     private String password;
+
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
