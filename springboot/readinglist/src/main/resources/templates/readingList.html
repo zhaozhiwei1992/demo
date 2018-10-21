@@ -3,12 +3,13 @@
     <title>Reading List</title>
     <link rel="stylesheet" th:href="@{/style.css}"></link>
 </head>
-<body
+<body>
 <h2>Your Reading List</h2>
 <div th:unless="${#lists.isEmpty(books)}">
     <dl th:each="book : ${books}">
         <dt class="bookHeadline">
-            <span th:text="${book.title}">Title</span> by
+            <!--<span th:text="${book.title}">Title</span> by-->
+            <a th:href="'http://www.amazon.com/gp/product/'+ ${book.isbn}+ '/tag=' + ${amazonID}" th:text="${book.title}">Title</a>
             <span th:text="${book.author}">Author</span>
             (ISBN: <span th:text="${book.isbn}">ISBN</span>)
         </dt>
