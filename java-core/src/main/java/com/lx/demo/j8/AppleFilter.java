@@ -34,6 +34,9 @@ public class AppleFilter {
         //不知到啥语法
         System.out.println("诡异型---->" + filterApples(inventory, AppleFilter::isGreenApple));
 
+        // 自定义一个匿名函数??
+        System.out.println("nb-->" + filterApples(inventory, (Apple apple) -> "green".equalsIgnoreCase(apple.getColor())));
+
     }
 
     /**
