@@ -113,8 +113,4 @@ public class UserRepository {
     public int updateByPrimaryKey(User record){
         return 0;
     }
-
-    public <R> int save(User user) {
-        return this.saveBySpringJDBC(user);
-    }
 }
