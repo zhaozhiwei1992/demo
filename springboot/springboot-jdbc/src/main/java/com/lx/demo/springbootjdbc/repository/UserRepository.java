@@ -1,12 +1,11 @@
 package com.lx.demo.springbootjdbc.repository;
 
 import com.lx.demo.springbootjdbc.domain.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.sql.DataSource;
@@ -21,10 +20,12 @@ import java.sql.SQLException;
 public class UserRepository {
 
     private DataSource dataSource;
+    private DataSource masterDataSource;
+    private DataSource slaveDataSource;
 
-    public int insert(User record){
+    public boolean insert(User record){
 //        return this.saveByJDBC(record);
-        return this.saveBySpringJDBC(record);
+        return this.saveBySpringJDBC(record) > 0;
     }
 
     private JdbcTemplate jdbcTemplate;
@@ -55,9 +56,9 @@ public class UserRepository {
         });
 
         // 有报错时候事务不能提交
-        if(0<1){
-            throw new NullPointerException();
-        }
+//        if(0<1){
+//            throw new NullPointerException();
+//        }
         platformTransactionManager.commit(transactionStatus);
         return 0;
     }
@@ -65,11 +66,19 @@ public class UserRepository {
     /**
      * 使用构造方法可以自动注入，不需要在@autowrite
      * @param dataSource
+     * @param masterDataSource
+     * @param slaveDataSource
      * @param jdbcTemplate
      * @param platformTransactionManager
      */
-    public UserRepository(DataSource dataSource, JdbcTemplate jdbcTemplate, PlatformTransactionManager platformTransactionManager) {
+    public UserRepository(DataSource dataSource,
+                          @Qualifier("masterDataSource") DataSource masterDataSource,
+                          @Qualifier("slaveDataSource") DataSource slaveDataSource,
+                          JdbcTemplate jdbcTemplate,
+                          PlatformTransactionManager platformTransactionManager) {
         this.dataSource = dataSource;
+        this.masterDataSource = masterDataSource;
+        this.slaveDataSource = slaveDataSource;
         this.jdbcTemplate = jdbcTemplate;
         this.platformTransactionManager = platformTransactionManager;
     }
@@ -103,5 +112,9 @@ public class UserRepository {
 
     public int updateByPrimaryKey(User record){
         return 0;
+    }
+
+    public <R> int save(User user) {
+        return this.saveBySpringJDBC(user);
     }
 }
