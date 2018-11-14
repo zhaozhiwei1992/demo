@@ -12,6 +12,9 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Collection;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  *
@@ -23,9 +26,25 @@ public class UserRepository {
     private DataSource masterDataSource;
     private DataSource slaveDataSource;
 
+    private final ConcurrentHashMap<Long, User> repository = new ConcurrentHashMap();
+    private final AtomicLong idGenerator = new AtomicLong();
+
     public boolean insert(User record){
 //        return this.saveByJDBC(record);
-        return this.saveBySpringJDBC(record) > 0;
+//        return this.saveBySpringJDBC(record) > 0;
+
+        //线程安全
+        long id = idGenerator.incrementAndGet();
+        return repository.put(id, record) == null;
+    }
+
+    /**
+     * 返回所有用户
+     * 面向 接口提高灵活性
+     * @return
+     */
+    public Collection<User> findAll(){
+        return repository.values();
     }
 
     private JdbcTemplate jdbcTemplate;
