@@ -1,22 +1,29 @@
 package com.lx.demo.springcloudconfigclient;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.bootstrap.config.PropertySourceLocator;
+import org.springframework.cloud.context.refresh.ContextRefresher;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.MapPropertySource;
 import org.springframework.core.env.PropertySource;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 @SpringBootApplication
+@EnableScheduling
 public class SpringCloudConfigClientApplication {
 
-	public static void main(String[] args) {
+
+    public static void main(String[] args) {
 		SpringApplication.run(SpringCloudConfigClientApplication.class, args);
 	}
 
@@ -38,5 +45,26 @@ public class SpringCloudConfigClientApplication {
                     new MapPropertySource("mycustom-property-source", source);
             return propertySource;
         }
+    }
+
+    private final ContextRefresher contextRefresher;
+    private final Environment environment;
+
+    @Autowired
+    public SpringCloudConfigClientApplication(ContextRefresher contextRefresher, Environment environment) {
+        this.contextRefresher = contextRefresher;
+        this.environment = environment;
+    }
+
+    /**
+     * 定时刷新缓存
+     *  五秒执行一次， 延时3秒
+     */
+    @Scheduled(fixedRate = 5 * 1000, initialDelay = 3 * 1000)
+    public void autoRefresh(){
+        Set<String> refreshSets = contextRefresher.refresh();
+        refreshSets.forEach(propertyName->{
+            System.err.printf("[Thread: %s] 当前配置已更新, key: %s, value: %s\n", Thread.currentThread().getName(), propertyName, environment.getProperty(propertyName));
+        });
     }
 }
