@@ -1,0 +1,191 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta charset="utf-8"/>
+    <title>咕泡云商城--幸运抽奖</title>
+    <link rel="stylesheet" type="text/css" href="../resources/css/home.css">
+
+
+
+</head>
+<body>
+<div class="sign">
+    <div class="sign-right">
+        <ul>
+            <li><a href="#">返回首页</a></li>
+            <li id="sign-right-2"><a href="javascript:;">幸运一把</a></li>
+            <li id="sign-right-3"><a href="javascript:;">活动规则</a></li>
+            <li id="sign-right-4"><a href="javascript:;">奖品详情</a></li>
+            <li id="sign-right-5"><a href="javascript:;">返回顶部</a></li>
+        </ul>
+        <div class="sign-erweima">
+            <img src="//cdn.lx.com/common/images/foot-weix.png"/>
+            <p>扫一扫</p>
+            <p>了解更多咕泡学院</p>
+        </div>
+    </div>
+
+    <div class="sign-1">
+
+    </div>
+    <div class="sign-2" id="sign-2">
+        <div class="sign-2-1">
+            <p class="sign-p1" id="sign_logined">您目前拥有：<i>0</i>次抽奖机会</p>
+        </div>
+    </div>
+    <div class="sign-3">
+        <div class="wripe">
+            <div class="sign-3-1"><img src="../resources/images/activity/sign_8.png"/></div>
+            <div class="turntable-bg">
+                <!--<div class="mask"><img src="images/award_01.png"/></div>-->
+                <div class="pointer"><img src="../resources/images/activity/pointer.png" alt="pointer"/></div>
+                <div class="rotate" ><img id="rotate" src="../resources/images/activity/turntable.png" alt="turntable"/></div>
+            </div>
+            <div class="sign-3-2">
+                <h3>获奖记录</h3>
+                <div class="sign-3-2-1">
+                    <span class="span1">手机号</span>
+                    <span class="span2">奖品</span>
+                </div>
+                <div class="sign-3-2-2">
+                    <ul>
+                        <li>134***--------------------iphone</li>
+                        <li>134***--------------------iphone</li>
+                        <li>134***--------------------iphone</li>
+                        <li>134***--------------------iphone</li>
+                        <li>134***--------------------iphone</li>
+                        <li>134***--------------------iphone</li>
+                        <li>134***--------------------iphone</li>
+                        <li>134***--------------------iphone</li>
+                        <li>134***--------------------iphone</li>
+                        <li>134***--------------------iphone</li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sign-4">
+        <div class="wripe">
+            <h3>活动规则</h3>
+            <p><i>1</i>此活动只允许平台会员参加。</p>
+            <p><i>2</i>用户第1天签到，可获得10元体验金；第2天签到，可获15元；第3天签到，可获得20元；第4天签到，可获得25元；第5天签到，可获得30元；第6天签到，可获得35元；第7天签到，可获得35元……以此类推，连续第10天签到，累计共获得275元体验金，并获得1次抽奖机会； </p>
+            <p><i>3</i>连续签到20天，可获得2次抽奖机会； 连续签到30天，可获得4次抽奖机会；</p>
+            <p><i>4</i>若在此期间用户未连续签到，系统将自动从第1天计算签到金额；</p>
+            <p><i>5</i>推荐好友注册，可获得2次抽奖机会；</p>
+            <p><i>6</i>此活动时间期限为2016年6月16日至2016年7月16日； </p>
+            <p><i>7</i>本活动最终解释权归湖南咕泡网络科技有限公司所有。</p>
+        </div>
+    </div>
+    <div class="sign-5">
+        <div class="wripe">
+            <div class="sign-5-1"><img src="../resources/images/activity/sign_logo.png" width="300" height="100"/></div>
+            <div class="sign-5-2">
+                <p class="p1">湖南咕泡网络科技有限公司</p>
+                <p class="p2">客服热线：0731-89729575</p>
+                <p class="p2">公司网址：www.lx.com</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/resources/js/jquery-1.7.2.min.js"></script>
+<script src="../resources/js/layer/layer.js" type="text/javascript"></script>
+<script type="text/javascript" src="/resources/js/activity/awardRotate.js"></script>
+<script type="text/javascript">
+    $(function (){
+
+        var rotateTimeOut = function (){
+            $('#rotate').rotate({
+                angle:0,
+                animateTo:2160,
+                duration:8000,
+                callback:function (){
+                    alert('网络超时，请检查您的网络设置！');
+                }
+            });
+        };
+        var bRotate = false;
+
+        var rotateFn = function (awards, angles, txt){
+            bRotate = !bRotate;
+            $('#rotate').stopRotate();
+            $('#rotate').rotate({
+                angle:0,
+                animateTo:angles+1800,
+                duration:8000,
+                callback:function (){
+                    alert(txt);
+                    bRotate = !bRotate;
+                }
+            })
+        };
+
+        $('.pointer').click(function (){
+            if(bRotate)return;
+            $.ajax({
+                url:"/doDraw",
+                type:"POST",
+                success:function(data){
+                    var rsData=data;
+                    if(rsData.code=="000000"){
+                        switch (rsData.data.level) {
+                            case 0:
+                                rotateFn(0, 16, '200元体验金');
+                                break;
+                            case 1:
+
+                                rotateFn(1, 52, 'Apple Watch');
+                                break;
+                            case 2:
+
+                                rotateFn(2, 88, '30元话费');
+                                break;
+                            case 3:
+
+                                rotateFn(3, 124, '100元体验金');
+                                break;
+                            case 4:
+
+                                rotateFn(4, 160, '小米运动手环');
+                                break;
+                            case 5:
+
+                                rotateFn(5, 196, '精美杯子');
+                                break;
+                            case 6:
+
+                                rotateFn(6, 232, '陶瓷套装餐具');
+                                break;
+                            case 7:
+
+                                rotateFn(7, 268, '300元体验金');
+                                break;
+                            case 8:
+
+                                rotateFn(8, 304, '50元话费');
+                                break;
+                            case 9:
+
+                                rotateFn(9, 340, 'iphone 6s');
+                                break;
+                        }
+                    }else if(rsData.code=="001003"){
+                        layer.msg("登陆已失效，请重新登陆");
+                        setTimeout(function(){
+                            window.location.href=rsData.url;
+                        },2000)
+                    }else{
+                        alert(rsData.parse(data).msg);
+                    }
+                }
+            });
+        });
+    });
+
+</script>
+
+</body>
+</html>

@@ -96,16 +96,20 @@
       <artifactId>kaptcha</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+    </dependency>
+
+    <dependency>
       <groupId>com.lx.user</groupId>
       <artifactId>user-api</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
+      <groupId>com.lx.common</groupId>
+      <artifactId>demo-common</artifactId>
     </dependency>
   </dependencies>
   <build>
-    <finalName>${artifactId}</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

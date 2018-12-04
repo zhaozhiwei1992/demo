@@ -6,9 +6,9 @@
 
     <dubbo:application name="demo-web" owner="zhao"/>
 
-    <dubbo:registry address="N/A"/>
-    <!--<dubbo:registry protocol="zookeeper" group="dubbo-dev"-->
-                    <!--address="192.168.11.156:2181"/>-->
+    <!--<dubbo:registry address="N/A"/>-->
+    <dubbo:registry protocol="zookeeper" group="dubbo-dev"
+                    address="127.0.0.1:2181"/>
 
     <!--引入提供者提供的bean信息-->
     <import resource="classpath*:client/user-reference.xml"/>

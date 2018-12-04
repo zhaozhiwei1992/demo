@@ -1,0 +1,106 @@
+*{margin:0;padding:0;}
+body{font-family:微软雅黑;font-size:14px;min-width:1100px;}
+p{margin:0;padding:0;}
+.sign div{box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;}
+.wripe{width:1000px;margin:0 auto;box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;position:relative;}
+.sign{background-color:#FEE595;}
+.sign-1{width:100%;height:630px;background:url(/resources/images/activity/sign_head.jpg) no-repeat center center;}
+.sign-2{width:100%;height:40px;}
+.sign-2-1{width:100%;height:838px;padding:0 41px;}
+.sign-2-1 ul{margin:0;padding:0;list-style:none;width:100%;overflow:hidden;padding-top:125px;}
+.sign-2-1 ul li{width:14.28%;font-size:20px;color:#323232;line-height:35px;float:left;text-align:center;}
+.sign-2-1-1{overflow:hidden;}
+.sign-date{width:44px;height:45px;background:url(/resources/images/activity/sign_12.png) no-repeat center center;float:left;font-size: 18px;text-align: center;line-height: 45px;margin:44px 43px 0;position:relative;}
+.sign-date p{font-size:14px;color:#E10B1B;display:none;width:100px;text-align:center;position:absolute;bottom:-38px;left:-28px;}
+.sign-date p i{font-style:normal;color:#E10B1B;}
+.sign-date-1{width:48px;height:69px;background:url(/resources/images/activity/sign_5.png) no-repeat top center;position:absolute;top:-2px;left:-2px;display:none;}
+.sign-date-2{width:41px;height:60px;background:url(/resources/images/activity/sign_13.png) no-repeat center center;position:absolute;top:-7px;right:-48px;;display:none;}
+.sign-submit{width:211px;height:53px;text-align:center;line-height:53px;font-size:30px;color:#7C3F13;margin:70px auto 22px;background:url(/resources/images/activity/sign_6.png) no-repeat center center;clear:both;cursor:pointer;}
+.sign-2-1 .sign-p1{width:100%;text-align:center;color:#323232;font-size:16px;}
+.sign-p1 i{color:#FE3C00;text-decoration:underline;font-style:normal;margin:0 5px;}
+.sign-p1 button{width:112px;height:30px;text-align: center;line-height: 25px;background-color:#FEF9E0;border:1px solid #ff4840;color:#ff4840;font-size: 16px;font-weight:bold;border-radius:4px;cursor: pointer;}
+.sign-p1 button:hover{background-color: #ff4840;color:#fff;}
+#sign_nologin{display:none;}
+
+
+
+
+.sign-3{width:100%;height:846px;background:url(/resources/images/activity/sign_7.png) no-repeat center center;}
+.sign-3-1{text-align:center;}
+.sign-3 .turntable-bg{float:left;margin-top:68px;}
+.sign-3 .sign-3-2{width:343px;height:513px;background:url(/resources/images/activity/sign_10.png) no-repeat top right;float:right;margin-top:128px;}
+.sign-3-2 h3{font-size:20px;color:#fff;width:100%;text-align:center;line-height:45px;}
+.sign-3-2-1{overflow:hidden;padding:0 65px;}
+.sign-3-2-1 .span1{float:left;color:#d01b21;line-height:60px;font-size:16px;font-weight:bold;}
+.sign-3-2-1 .span2{float:right;color:#d01b21;line-height:60px;font-size:16px;font-weight:bold;}
+.sign-3-2-2{padding:0 65px;}
+.sign-3-2-2 ul{margin:0;padding:0;list-style:none;height:410px;overflow-y:auto;}
+.sign-3-2-2 ul li{color:#8e5a17;font-size:14px;line-height:35px;}
+
+
+.sign-4{width:100%;height:488px;}
+.sign-4 h3{color:#c40000;font-size:36px;line-height:90px;border-bottom:1px dashed #AF8341;margin-top:40px;margin-bottom:15px;}
+.sign-4 p{color:#8e5a17;font-size:16px;line-height:38px;margin-top:7px;}
+.sign-4 p i{font-style:normal;display:inline-block;width:14px;height:14px;border-radius:7px;border:1px solid #8e5a17;text-align:center;line-height:14px;margin-right:10px;font-size:14px;}
+
+.sign-5{width:100%;height:225px;background-color:#F4B430;}
+.sign-5-1{width:395px;height:100px;float:left;border-right:1px solid #D79716;text-align:right;margin-top:60px;}
+.sign-5-1 img{margin-right:30px;}
+.sign-5-2{width:500px;height:100px;float:left;border-left:1px solid #FBC85B;color:#fff;margin-top:60px;padding-left:25px;}
+.sign-5-2 .p1{font-size:22px;line-height:45px;}
+.sign-5-2 .p2{font-size:16px;line-height:22px;}
+
+.sign-right{width:215px;height:480px;position:fixed;right:5%;top:50%;margin-top:-250px;background:url(/resources/images/activity/sign_3.png) no-repeat top center;z-index: 10000;}
+.sign-right ul{margin:0;padding:0;list-style:none;margin-left:50px;margin-top:100px;}
+.sign-right ul li{line-height:38px;text-align:center;}
+.sign-right ul li a{display:block;font-size:16px;color:#5B2607;text-decoration:none;font-weight:bold;}
+.sign-right ul li a:hover{text-decoration:underline;}
+.sign-erweima{width:130px;height:150px;text-align:center;background-color:#F5B529;font-size:11px;color:#5B2607;position:relative;margin-top:3px;margin-left:64px;padding-top:5px;}
+.sign-fenxiang{width:64px;height:74px;text-align:center;line-height:80px;background:url(/resources/images/activity/sign_4.png) no-repeat center center;position:absolute;top:140px;left:34px;font-size:18px;font-weight:bold;cursor:pointer;}
+.sign-fenxiang:hover .sign-fenxiang-1{display:block;}
+.sign-fenxiang-1{width:100px;position:absolute;top:12px;left:-100px;background-color:#FFEFD9;display:none;}
+.sign-fenxiang-1 a{display:block;width:100%;margin:5px 0;margin-left:7px;color: #5B2607;font-size: 12px;line-height:30px;}
+.sign-fenxiang-1 a:hover{background-color:#EAE0D1;}
+.sign-fenxiang-1 span{display:inline-block;width:36px;height:34px;background:url(/resources/images/activity/fenxiangtubiao.png) no-repeat;vertical-align:middle;}
+.sign-fenxiang-1 .jiathis_button_qzone span{background-position:0px -31px;}
+.sign-fenxiang-1 .jiathis_button_tsina span{background-position:0px 2px;}
+.sign-fenxiang-1 .jiathis_button_tqq span{background-position:0px -1760px;height:32px;}
+.sign-fenxiang-1 .jiathis_button_weixin span{background-position:0px -3680px;height:32px;}
+.sign-fenxiang-1 .jiathis_button_renren span{background-position:0px -64px;height:32px;}
+.sign-fenxiang-1 i{display:inline-block;width:50px;font-style:normal;vertical-align:middle;}
+.bshare-custom.icon-medium-plus a{padding-left:10px!important;}
+
+
+.turntable-bg {
+    width: 650px;
+    height: 677px;
+    margin: 0 auto;
+    position: relative;
+    background: url("/resources/images/activity/turntable_bg.png") no-repeat center center;
+}
+.turntable-bg .mask {
+    width: 454px;
+    height: 451px;
+    position: absolute;
+    left: 116px;
+    top: 60px;
+    /*z-index:9;*/
+}
+.turntable-bg .pointer {
+    width: 155px;
+    height: 256px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -77px;
+    margin-top: -180px;
+    z-index: 8;
+    cursor:pointer;
+}
+.turntable-bg .rotate {
+    width: 450px;
+    height: 450px;
+    position: absolute;
+    left: 40px;
+    top: 27px;
+}

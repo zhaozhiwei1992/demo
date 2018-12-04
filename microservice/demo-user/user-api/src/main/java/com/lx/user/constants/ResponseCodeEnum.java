@@ -1,4 +1,4 @@
-package com.lx.user;
+package com.lx.user.constants;
 
 public enum ResponseCodeEnum {
     USERORPASSWORD_ERRROR("001001","用户名或密码不存在"),

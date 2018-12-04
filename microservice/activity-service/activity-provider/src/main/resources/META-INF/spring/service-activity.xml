@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans        http://www.springframework.org/schema/beans/spring-beans.xsd        http://code.alibabatech.com/schema/dubbo        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<!--服务发布的配置，需要暴露的服务接口-->
+	<dubbo:service interface="com.lx.activity.draw.ActivityTurntableDrawService"
+				   ref="activityTurntableDrawService" timeout="3000"/>
+
+	<import resource="classpath*:client/user-reference.xml"/>
+
+</beans>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lx.activity.dal.persistence.ActDrawRecordMapper">
+    <resultMap id="BaseResultMap" type="com.lx.activity.dal.entitys.ActDrawRecord" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="uid" property="uid" jdbcType="INTEGER" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="level" property="level" jdbcType="INTEGER" />
+        <result column="mobile" property="mobile" jdbcType="INTEGER" />
+        <result column="award_name" property="awardName" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+    <!-- 插入中奖记录-->
+    <insert id="addActDrawRecord" parameterType="com.lx.activity.dal.entitys.ActDrawRecord">
+        <![CDATA[
+            INSERT INTO activity_record (uid,NAME,LEVEL,mobile,award_name) VALUES (#{uid},#{name},#{level},#{mobile},#{awardName})
+        ]]>
+    </insert>
+
+
+    <select id="queryDrawRecordList" resultMap="BaseResultMap">
+        <![CDATA[
+          SELECT * FROM activity_record order by create_time desc limit 10
+        ]]>
+    </select>
+  
+</mapper>

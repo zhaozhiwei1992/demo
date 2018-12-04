@@ -1,5 +1,9 @@
 package com.lx.web.controller.support;
 
+/**
+ * @author lx7ly
+ */
+
 public enum ResponseEnum {
     SUCCESS("0","成功"),
     FAILED("1","系统繁忙,请稍后重试"),

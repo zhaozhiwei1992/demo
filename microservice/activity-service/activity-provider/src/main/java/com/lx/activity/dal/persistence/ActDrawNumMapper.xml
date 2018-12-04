@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lx.activity.dal.persistence.ActDrawNumMapper" >
+  <resultMap id="BaseResultMap" type="com.lx.activity.dal.entitys.ActDrawNum" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="now_number" property="nowNumber" jdbcType="INTEGER" />
+    <result column="max_number" property="maxNumber" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+  <!-- 插入抽奖次数表记录 -->
+  <insert id="inputDrawNumber" parameterType="com.lx.activity.dal.entitys.ActDrawNum">
+    <![CDATA[
+        INSERT INTO activity_draw_num
+        (uid,name,now_number,max_number) values (#{uid},#{name},#{now_number},#{max_number})
+    ]]>
+  </insert>
+
+  <!-- 查询抽奖次数记录列表 -->
+  <select id="queryDrawNumForUid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <![CDATA[
+      select id,uid,name,max_number,now_number,create_time from activity_draw_num where uid=#{uid}
+    ]]>
+  </select>
+
+  <!-- 更新已抽次数 -->
+  <update id="updateNowNumber">
+    <![CDATA[
+            UPDATE activity_draw_num t
+            SET t.now_number = t.nowNumber + 1
+            WHERE t.uid = #{uid}
+            AND t.maxNumber > t.nowNumber
+    ]]>
+  </update>
+
+  <!-- 更新总的抽奖次数 -->
+  <update id="updateMaxNumber">
+    <![CDATA[
+        UPDATE activity_draw_num t
+        SET t.max_number = t.max_number + 1
+        WHERE t.uid = #{uid}
+    ]]>
+  </update>
+
+</mapper>

@@ -13,4 +13,9 @@ import java.io.Serializable;
 @Data
 public abstract class AbstractRequest implements Serializable {
     private static final long serialVersionUID = -2772214897530815797L;
+
+    @Override
+    public String toString() {
+        return "AbstractRequest{}";
+    }
 }

@@ -2,14 +2,11 @@ package com.lx.user.services;
 
 import com.alibaba.dubbo.common.utils.StringUtils;
 import com.lx.user.IUserCoreService;
-import com.lx.user.ResponseCodeEnum;
+import com.lx.user.constants.ResponseCodeEnum;
 import com.lx.user.constants.Constants;
 import com.lx.user.dal.entity.User;
 import com.lx.user.dal.persistence.UserMapper;
-import com.lx.user.dto.UserLoginRequest;
-import com.lx.user.dto.UserLoginResponse;
-import com.lx.user.dto.UserRegisterRequest;
-import com.lx.user.dto.UserRegisterResponse;
+import com.lx.user.dto.*;
 import com.lx.user.exception.ServiceException;
 import com.lx.user.exception.ValidateException;
 import com.lx.user.util.ExceptionUtil;
@@ -20,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -81,6 +77,7 @@ public class UserCoreServiceImpl implements IUserCoreService {
 
     /**
      * 用户注册
+     * curl -H "Accept:application/json" -H "Content-Type:application/json" -X POST -d '{"id":1,"email":"11@qq.co","mobile":"18224807218","username":"zhangsan", "password":11}' http://127.0.0.1:8080/register
      * @param request
      * @return
      */
@@ -120,6 +117,11 @@ public class UserCoreServiceImpl implements IUserCoreService {
         }
 
         return response;
+    }
+
+    @Override
+    public CheckAuthResponse validToken(CheckAuthRequest request) {
+        return null;
     }
 
     /**

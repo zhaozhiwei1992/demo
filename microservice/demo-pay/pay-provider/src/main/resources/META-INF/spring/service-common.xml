@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:p="http://www.springframework.org/schema/p"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.3.xsd"
+	   default-autowire="byName">
+
+	<context:property-placeholder location="classpath:application.properties,paymentConfig.properties" />
+
+	<bean id="payDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close"
+		  p:url="${datasource.pay.url}"
+		  p:username="${datasource.pay.username}"
+		  p:password="${datasource.pay.password}"
+		  p:initialSize="${datasource.pay.initialSize}"
+		  p:minIdle="${datasource.pay.minIdle}"
+		  p:maxActive="${datasource.pay.maxActive}"
+		  p:maxWait="${datasource.pay.maxWait}"
+		  p:timeBetweenEvictionRunsMillis="${datasource.pay.timeBetweenEvictionRunsMillis}"
+		  p:minEvictableIdleTimeMillis="${datasource.pay.minEvictableIdleTimeMillis}"
+		  p:validationQuery="${datasource.pay.validationQuery}"
+		  p:testWhileIdle="${datasource.pay.testWhileIdle}"
+		  p:testOnBorrow="${datasource.pay.testOnBorrow}"
+		  p:testOnReturn="${datasource.pay.testOnReturn}"
+		  p:poolPreparedStatements="${datasource.pay.poolPreparedStatements}"
+		  p:maxPoolPreparedStatementPerConnectionSize="${datasource.pay.maxPoolPreparedStatementPerConnectionSize}"
+		  p:connectionProperties="config.decrypt=true;config.decrypt.key=${datasource.pay.publickey}"
+		  p:filters="${datasource.pay.filters}">
+	</bean>
+
+	<bean id="paySqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="payDataSource" />
+		<property name="typeAliasesPackage"
+				  value="com.gupao.vip.mic.dubbo.dal.entity" />
+		<property name="mapperLocations" value="classpath*:com/lx/pay/dal/persistence/*Mapper.xml" />
+	</bean>
+
+	<bean name="payMapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage"
+				  value="com.lx.user.dal.persistence" />
+		<property name="sqlSessionFactory" ref="paySqlSessionFactory" />
+	</bean>
+
+	<context:component-scan base-package="com.lx.pay.dal" />
+	<context:component-scan base-package="com.lx.pay.services" />
+	<context:component-scan base-package="com.lx.pay.biz" />
+</beans>

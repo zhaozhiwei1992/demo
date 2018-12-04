@@ -1,0 +1,106 @@
+<html>
+<head>
+    <title>咕泡商城收银台</title>
+    <link href="/resources/css/home.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/common.css" rel="stylesheet" type="text/css">
+    <script src="/resources/js/jquery-1.7.2.min.js" type="text/javascript"></script>
+    <script src="/resources/js/header.js"></script>
+</head>
+<body>
+
+<div class="wrap_header">
+    <div class="header clearfix">
+        <div class="logo_panel clearfix">
+            <div class="logo fl"><img src="//cdn.lx.com/common/images/nav_logo.png" alt=""></div>
+            <div class="lg_txt">| 收银台</div>
+        </div>
+        <div class="fr tip_panel">
+            <div class="txt">咕泡学院,只为更好的你</div>
+            <a href="">常见问题</a>
+        </div>
+    </div>
+</div>
+
+<div class="cashier_desk pay_ment">
+    <div class="bd">
+        <ul class="payment">
+            <li style="margin-left: 20px;">
+                <img src="/resources/images/weixin.png" alt="微信支付"/>
+                <form action="/execPay" method="post">
+                    <input type="hidden" name="productName" value="微信支付产品"/><br/>
+                    <input type="hidden" name="orderPrice" value="10"/><br/>
+                    <input type="hidden" name="payWayCode" value="wechat_pay">
+                    <input type="hidden" name="remark" value="微信支付备注信息"/>
+                    <p class="pay_btn">
+                        <input type="submit" value="支付0.1元获取抽奖资格"/>
+                    </p>
+                </form>
+            </li>
+            <li style="margin-left: 20px;"><img src="/resources/images/zhifubao.png" alt="支付宝支付"/>
+                <form action="/execPay" method="post">
+                    <input type="hidden" name="productName" value="支付宝支付产品"/><br/>
+                    <input type="hidden" name="orderPrice" value="10"/><br/>
+                    <input type="hidden" name="payWayCode" value="alipay">
+                    <input type="hidden" name="remark" value="支付宝支付备注信息"/>
+                    <p class="pay_btn">
+                        <input type="submit" value="支付0.1元获取抽奖资格"/>
+                    </p>
+                </form>
+            </li>
+
+        </ul>
+    </div>
+</div>
+
+
+<footer>
+    <div id="footerCode"></div>
+    <div class="flot">
+        <div class="flot-content">
+            <ul>
+                <li><img src="//cdn.lx.com/index/images/logo.png" alt="">咕泡学院 只为更好的你！</li>
+                <li>在线学习人数11万+</li>
+                <li>VIP学员人数3300+</li>
+                <li><a target="_blank" href="https://wpa.qq.com/msgrd?v=3&amp;uin=800185235&amp;site=qq&amp;menu=yes">VIP试听</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="float-fixed"></div>
+    <div id="footer">
+        <div class="footer-contert">
+            <div class="footer-content-logo"><img
+                    src="//cdn.lx.com/index/images/logo.png" alt="底部LOGO"> <span>做技术人的指路明灯，职场生涯的精神导师</span>
+            </div>
+            <div class="footer-content-aboutUs">
+                <ul>
+                    <li>关于我们</li>
+                    <li><a href="https://www.lx.com/about.html?con=xueyjianjie">学院简介</a></li>
+                    <li><a href="https://www.lx.com/about.html?con=lianxiwomen">联系我们</a></li>
+                    <li><a href="https://www.lx.com/about.html?con=chengpycai">加入我们</a></li>
+                </ul>
+            </div>
+            <div class="footer-content-service">
+                <ul>
+                    <li>服务与支持</li>
+                    <li><a href="https://www.lx.com/qa.html">常见问题</a></li>
+                    <li><a href="https://www.lx.com/about.html?con=shangwuhez">商务合作</a></li>
+                </ul>
+            </div>
+            <div class="footer-content-img">
+                <div class="footer-content-img-wx"><span><img
+                        src="//cdn.lx.com/common/images/foot-weix.png" alt="微信"></span>
+                    <span>官方微信</span></div>
+                <div class="footer-content-img-wb"><a href="https://weibo.com/lx.?is_hot=1" target="_blank"> <span
+                        class="weibo"><img src="//cdn.lx.com/common/images/foot-web.png"
+                                           alt="微博"></span> <span>官方微博</span> </a></div>
+            </div>
+        </div>
+        <div class="footer-copy"> Copyright©2017-2020 lx.com All Rights Reserved. 版权所有 <a
+                href="https://www.miitbeian.gov.cn/" target="_blank">沪ICP备16036932号-2</a></div>
+    </div>
+</footer>
+
+</body>
+
+</html>

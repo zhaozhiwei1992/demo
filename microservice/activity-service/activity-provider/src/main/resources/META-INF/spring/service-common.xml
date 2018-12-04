@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:p="http://www.springframework.org/schema/p"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.3.xsd"
+	   default-autowire="byName">
+
+	<context:property-placeholder location="classpath:application.properties" />
+
+	<bean id="userDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close"
+		  p:url="${datasource.activity.url}"
+		  p:username="${datasource.activity.username}"
+		  p:password="${datasource.activity.password}"
+		  p:initialSize="${datasource.activity.initialSize}"
+		  p:minIdle="${datasource.activity.minIdle}"
+		  p:maxActive="${datasource.activity.maxActive}"
+		  p:maxWait="${datasource.activity.maxWait}"
+		  p:timeBetweenEvictionRunsMillis="${datasource.activity.timeBetweenEvictionRunsMillis}"
+		  p:minEvictableIdleTimeMillis="${datasource.activity.minEvictableIdleTimeMillis}"
+		  p:validationQuery="${datasource.activity.validationQuery}"
+		  p:testWhileIdle="${datasource.activity.testWhileIdle}"
+		  p:testOnBorrow="${datasource.activity.testOnBorrow}"
+		  p:testOnReturn="${datasource.activity.testOnReturn}"
+		  p:poolPreparedStatements="${datasource.activity.poolPreparedStatements}"
+		  p:maxPoolPreparedStatementPerConnectionSize="${datasource.activity.maxPoolPreparedStatementPerConnectionSize}"
+		  p:connectionProperties="config.decrypt=true;config.decrypt.key=${datasource.activity.publickey}"
+		  p:filters="${datasource.activity.filters}">
+	</bean>
+
+	<bean id="userSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="userDataSource" />
+		<property name="typeAliasesPackage"
+				  value="com.lx.activity.dal.entitys" />
+		<property name="mapperLocations" value="classpath*:com/lx./activity/dal/persistence/*Mapper.xml" />
+	</bean>
+
+	<bean name="userMapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage"
+				  value="com.lx.activity.dal.persistence" />
+		<property name="sqlSessionFactory" ref="userSqlSessionFactory" />
+	</bean>
+
+	<context:component-scan base-package="com.lx.activity.dal" />
+	<context:component-scan base-package="com.lx.activity.services" />
+	<context:component-scan base-package="com.lx.activity.notify" />
+
+
+	<!--连接池配置-->
+	<bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="maxIdle" value="${redis.maxIdle}" />
+		<property name="maxWaitMillis" value="${redis.maxWait}" />
+		<property name="testOnBorrow" value="${redis.testOnBorrow}" />
+		<property name="maxTotal" value="${redis.maxActive}"/>
+	</bean>
+	<!-- redis连接工厂 -->
+	<bean id="jedisConnectionFactory"  class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" >
+		<property name="port" value="${redis.port}"/>
+		<property name="hostName" value="${redis.host}"/>
+		<constructor-arg name="poolConfig" ref="poolConfig"/>
+	</bean >
+
+	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate" >
+		<property name="connectionFactory" ref="jedisConnectionFactory" />
+		<property name="keySerializer" >
+			<bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+		</property>
+		<property name="valueSerializer" >
+			<bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+		</property>
+	</bean >
+</beans>

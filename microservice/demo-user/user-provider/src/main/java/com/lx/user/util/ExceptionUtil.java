@@ -1,6 +1,6 @@
 package com.lx.user.util;
 
-import com.lx.user.ResponseCodeEnum;
+import com.lx.user.constants.ResponseCodeEnum;
 import com.lx.user.exception.ServiceException;
 import com.lx.user.exception.ValidateException;
 import org.apache.log4j.Logger;

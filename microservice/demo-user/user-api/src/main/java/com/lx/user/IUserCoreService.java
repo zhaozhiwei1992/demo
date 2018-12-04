@@ -1,9 +1,6 @@
 package com.lx.user;
 
-import com.lx.user.dto.UserLoginRequest;
-import com.lx.user.dto.UserLoginResponse;
-import com.lx.user.dto.UserRegisterRequest;
-import com.lx.user.dto.UserRegisterResponse;
+import com.lx.user.dto.*;
 
 public interface IUserCoreService {
 
@@ -15,4 +12,11 @@ public interface IUserCoreService {
     UserLoginResponse login(UserLoginRequest userLoginRequest);
 
     UserRegisterResponse register(UserRegisterRequest request);
+
+    /**
+     * 校验过程
+     * @param request
+     * @return
+     */
+    CheckAuthResponse validToken(CheckAuthRequest request);
 }

@@ -10,8 +10,11 @@ import com.lx.web.controller.support.ResponseEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
@@ -26,27 +29,20 @@ public class UserController {
     IUserCoreService userCoreService;
 
     @PostMapping("/login")
-    public ResponseEntity doLogin(String username, String password,
+    public ResponseEntity doLogin(@RequestBody UserLoginRequest userLoginRequest,
                                   HttpServletResponse response){
-        UserLoginRequest request=new UserLoginRequest();
-        request.setPassword(password);
-        request.setUserName(username);
-        UserLoginResponse userLoginResponse=userCoreService.login(request);
+        UserLoginResponse userLoginResponse=userCoreService.login(userLoginRequest);
         response.addHeader("Set-Cookie",
                 "access_token="+userLoginResponse.getToken()+";Path=/;HttpOnly");
         return ResponseEntity.ok(response);
     }
 
     @PostMapping("/register")
-    public ResponseData register(String username, String password, String mobile){
+    public ResponseData register(@RequestBody UserRegisterRequest userRegisterRequest){
         ResponseData data=new ResponseData();
 
-        UserRegisterRequest request=new UserRegisterRequest();
-        request.setMobile(mobile);
-        request.setUsername(username);
-        request.setPassword(password);
         try {
-            UserRegisterResponse response = userCoreService.register(request);
+            UserRegisterResponse response = userCoreService.register(userRegisterRequest);
             data.setMessage(response.getMsg());
             data.setCode(response.getCode());
         }catch(Exception e) {

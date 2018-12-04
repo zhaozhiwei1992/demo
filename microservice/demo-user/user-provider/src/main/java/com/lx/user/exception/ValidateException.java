@@ -1,6 +1,6 @@
 package com.lx.user.exception;
 
-import com.lx.user.ResponseCodeEnum;
+import com.lx.user.constants.ResponseCodeEnum;
 
 /**
  * @author 赵志伟
