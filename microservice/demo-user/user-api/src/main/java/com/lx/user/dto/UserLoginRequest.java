@@ -7,6 +7,8 @@ import com.lx.user.abs.AbstractRequest;
  * @ClassName: UserLoginRequest
  * @description [描述该类的功能]
  * @create 2018-07-06 下午4:20
+ *
+ * //todo 这里假如注解，后续通过注解来校验参数信息
  **/
 public class UserLoginRequest extends AbstractRequest{
     private static final long serialVersionUID = 122547013489164419L;

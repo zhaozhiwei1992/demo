@@ -10,9 +10,14 @@ import com.lx.user.dto.*;
 import com.lx.user.exception.ServiceException;
 import com.lx.user.exception.ValidateException;
 import com.lx.user.util.ExceptionUtil;
+import com.lx.user.util.JwtTokenUtils;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.SignatureException;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
@@ -29,8 +34,8 @@ import java.util.Map;
  **/
 @Service("userCoreService")
 public class UserCoreServiceImpl implements IUserCoreService {
-    private static final Logger logger = Logger.getLogger(UserCoreServiceImpl.class);
 
+    private static final Logger logger = LoggerFactory.getLogger(UserCoreServiceImpl.class);
 
     @Autowired
     UserMapper userMapper;
@@ -58,6 +63,8 @@ public class UserCoreServiceImpl implements IUserCoreService {
             Map<String,Object> map=new HashMap<>();
             map.put("uid",user.getId());
             map.put("exp", DateTime.now().plusSeconds(40).toDate().getTime()/1000);
+
+            response.setToken(JwtTokenUtils.generatorToken(map));
 
             response.setUid(user.getId());
             response.setAvatar(user.getAvatar());
@@ -119,9 +126,44 @@ public class UserCoreServiceImpl implements IUserCoreService {
         return response;
     }
 
+    private void beforeValidateAuth(CheckAuthRequest request){
+        if(request==null){
+            throw new ValidateException("请求对象为空");
+        }
+        if(StringUtils.isEmpty(request.getToken())){
+            throw new ValidateException("token信息为空");
+        }
+    }
+
     @Override
     public CheckAuthResponse validToken(CheckAuthRequest request) {
-        return null;
+        CheckAuthResponse response=new CheckAuthResponse();
+        try{
+            beforeValidateAuth(request);
+
+            Claims claims=JwtTokenUtils.phaseToken(request.getToken());
+            response.setUid(claims.get("uid").toString());
+            response.setCode(ResponseCodeEnum.SUCCESS.getCode());
+            response.setMsg(ResponseCodeEnum.SUCCESS.getMsg());
+
+        }catch (ExpiredJwtException e){
+            logger.error("Expire :"+e);
+            response.setCode(ResponseCodeEnum.TOKEN_EXPIRE.getCode());
+            response.setMsg(ResponseCodeEnum.TOKEN_EXPIRE.getMsg());
+        }catch (SignatureException e1){
+            logger.error("SignatureException :"+e1);
+            response.setCode(ResponseCodeEnum.SIGNATURE_ERROR.getCode());
+            response.setMsg(ResponseCodeEnum.SIGNATURE_ERROR.getMsg());
+        }catch (Exception e){
+            logger.error("login occur exception :"+e);
+            ServiceException serviceException=(ServiceException) ExceptionUtil.handlerException4biz(e);
+            response.setCode(serviceException.getErrorCode());
+            response.setMsg(serviceException.getErrorMessage());
+        }finally {
+            logger.info("response:"+response);
+        }
+
+        return response;
     }
 
     /**
@@ -142,6 +184,8 @@ public class UserCoreServiceImpl implements IUserCoreService {
 
     /**
      * 注册校验, 感觉这个地方应该写活，改代码太苦逼了
+     *
+     * //todo 这里统一通过注解来控制
      * @param request
      */
     private void beforeRegisterValidate(UserRegisterRequest request){
