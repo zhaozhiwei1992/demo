@@ -15,7 +15,7 @@ public class PersonalMvcConfig implements WebMvcConfigurer {
     @Override
     public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
         //mvc内部加载的一些转换器
-        System.out.println(converters);
+        System.out.println("所有的解析方式" + converters);
         //可以通过下面方式只留下自己需要的转换器
 //        converters.clear();
         //只留下json解析

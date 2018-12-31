@@ -44,8 +44,8 @@ public class PersonRestController {
     }
 
     @PostMapping(value = "/person/properties/to/json",
-            consumes = "application/properties+person", // 请求类型 // Content-Type
-            produces =  MediaType.APPLICATION_JSON_UTF8_VALUE// 响应类型 // Accept
+            consumes = "application/properties+person", // 请求类型 //  Accept
+            produces =  MediaType.APPLICATION_JSON_UTF8_VALUE// 响应类型 // Content-Type
     )
     public Person personPropertiesToJson(@RequestBody Person person) {
         // @RequestBody 的内容是 Properties
