@@ -4,6 +4,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
 
+/**
+ * 这里实体是否有get，set方法很重要， 如果没get， controller解析json时候就不会加入这个属性
+ */
 @Entity
 public class User implements Serializable {
 
@@ -25,6 +28,14 @@ public class User implements Serializable {
 
 //    @OneToMany(mappedBy = "user")
 //    private Collection<Book> books;
+
+    public Collection<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(Collection<Book> books) {
+        this.books = books;
+    }
 
     @ManyToMany
     private Collection<Book> books;

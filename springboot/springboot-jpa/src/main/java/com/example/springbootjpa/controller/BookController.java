@@ -16,6 +16,11 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
+    /**
+     * curl -H "Content-Type:application/json;charset=UTF-8" -X POST -d '{"name":"chinese", "price":6.6}' http://127.0.0.1:8080/book/save
+     * @param book
+     * @return
+     */
     @PostMapping(value = "/book/save")
     public Book save(@RequestBody Book book){
         return bookService.save(book);
