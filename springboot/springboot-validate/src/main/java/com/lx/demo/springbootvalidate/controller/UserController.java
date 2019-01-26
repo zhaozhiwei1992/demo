@@ -1,15 +1,33 @@
 package com.lx.demo.springbootvalidate.controller;
 
 import com.lx.demo.springbootvalidate.domain.User;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+/**
+ *  1. 如果某些属性的规则确定，适合用注解形式, 比如说not null, 或者age < 20等
+ *  2. 如果属性在不同请求中校验不能相同，并且可能冲突， 那只能自定义或者使用groups, 比如a方法中age > 20 b方法中age < 20
+ */
 @RestController
 public class UserController {
+
+    /**
+     * 传统校验方式需要自己做很多判断，如果pojo属性很多时候比较麻烦, 耦合度很高
+     * @param user
+     * @return
+     */
+    @GetMapping("/user/tradition")
+    public User saveUserTradition(User user){
+        if(StringUtils.isEmpty(user.getName())){
+            System.out.println("用户名不能为空");
+        }else{
+           //...
+        }
+        return user;
+    }
 
     /**
      * curl -H "Accept:application/json" -H "Content-Type:application/json" -X POST -d '{"id":1}' http://127.0.0.1:8080/user/save
