@@ -27,4 +27,11 @@ public @interface Card {
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
+
+    /**
+     * 可以作为ValidationMessages.properties中javax.validation.constraints.Card.message的参数
+     *  参数的表达式就是方法名, 例如{value}
+     * @return
+     */
+    String value();
 }
