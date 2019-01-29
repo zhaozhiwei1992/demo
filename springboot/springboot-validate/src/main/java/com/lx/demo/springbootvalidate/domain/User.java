@@ -8,6 +8,7 @@ import javax.validation.constraints.*;
  * 分组校验
  * 未满18不可以看片
  * //单元测试不知道怎么搞
+ *
  */
 public class User {
 
@@ -36,13 +37,13 @@ public class User {
      * 自定义校验规则
      * 处理一些正则表达式也处理不了的规则
      */
-    @Card
+    @Card(value = "[0-9]{7}")
     private String cardNum;
 
     /**
      * 允许为空，有值时候校验合法
      */
-    @Email
+    @Email(message = "就是不对你能咋地")
     private String email;
 
     public String getEmail() {
