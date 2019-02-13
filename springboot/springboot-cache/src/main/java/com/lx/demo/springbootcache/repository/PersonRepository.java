@@ -10,8 +10,11 @@ import org.springframework.stereotype.Repository;
 public class PersonRepository {
     private static final Logger logger = LoggerFactory.getLogger(PersonRepository.class);
 
+    private Person person2 = new Person();
+
     /**
      * 打开缓存后， 后续查询都会直接从缓存中取， 需要enablecache
+     * 使用spring注解的方式缓存可以管理， 设置超时事件
      * @param id
      * @return
      */
@@ -21,6 +24,18 @@ public class PersonRepository {
         Person person = new Person();
         person.setId(0L);
         person.setName("张三");
+
+        person2.setId(0L);
+        person2.setName("张三");
         return person;
+    }
+
+    /**
+     * 通过全局变量保存缓存信息
+     * @param id
+     * @return
+     */
+    public Person findByID2(Long id){
+        return person2;
     }
 }

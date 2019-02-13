@@ -16,4 +16,9 @@ public class PersonController {
     public Person findByID(Long id){
         return personRepository.findByID(id);
     }
+
+    @GetMapping("/person/get2/{id}")
+    public Person findByID2(Long id){
+        return personRepository.findByID2(id);
+    }
 }
