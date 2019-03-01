@@ -19,27 +19,27 @@ public class CacheController {
     @Autowired
     private SimpleCacheManager simpleCacheManager;
 
-//    private Map map2 = new HashMap();
+    // private Map map2 = new HashMap();
 
     @PostMapping(value = "/save")
-    public Map<String, Object> cacheData(@RequestParam String key, @RequestParam String value){
+    public Map<String, Object> cacheData(@RequestParam String key, @RequestParam String value) {
         Cache cache = simpleCacheManager.getCache("cache-1");
         cache.put(key, value);
 
         HashMap<String, Object> map = new HashMap<>();
         map.put(key, value);
 
-//        map2.putAll(map);
+        // map2.putAll(map);
         return map;
     }
 
     @GetMapping(value = "/find/{key}")
-    public Map<String, Object> findByKey(@PathVariable String key){
+    public Map<String, Object> findByKey(@PathVariable String key) {
         Cache cache = simpleCacheManager.getCache("cache-1");
         HashMap<String, Object> map = new HashMap<>();
         map.put(key, cache.get(key).get());
 
-//        System.out.println(map2);
+        // System.out.println(map2);
         return map;
     }
 }
