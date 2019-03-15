@@ -1,5 +1,7 @@
 package com.lx.demo.springbootjmx.spring;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import javax.management.AttributeChangeNotification;
@@ -14,8 +16,11 @@ import javax.management.NotificationListener;
  */
 @Component
 public class NotificationListenImpl implements NotificationListener, NotificationFilter {
+
+    private static final Logger logger = LoggerFactory.getLogger(NotificationListenImpl.class);
+
     /**
-     *
+     * 符合条件的才会去监控
      * @param notification
      * @return
      */
@@ -41,6 +46,6 @@ public class NotificationListenImpl implements NotificationListener, Notificatio
         AttributeChangeNotification attributeChangeNotification = (AttributeChangeNotification) notification;
         String oldData = (String) attributeChangeNotification.getOldValue();
         String newData = (String) attributeChangeNotification.getNewValue();
-        System.out.printf("The notification of data's attribute  - old data : %s , new data : %s \n", oldData, newData);
+        logger.info(String.format("The notification of data's attribute  - old data : %s , new data : %s \n", oldData, newData));
     }
 }
