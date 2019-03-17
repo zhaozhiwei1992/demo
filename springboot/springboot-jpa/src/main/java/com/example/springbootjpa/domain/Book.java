@@ -1,11 +1,17 @@
 package com.example.springbootjpa.domain;
 
+import com.example.springbootjpa.domain.listener.CustomListener;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
 
+/**
+ * EntityListener可以指定监听器，监听数据持久化a
+ */
 @Entity
+@EntityListeners(CustomListener.class)
 public class Book implements Serializable {
     private static final long serialVersionUID = 230883684204974285L;
 
