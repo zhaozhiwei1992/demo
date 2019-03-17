@@ -5,7 +5,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="realname" jdbcType="VARCHAR" property="realname" />
+    <result column="realname" jdbcType="VARCHAR" property="realname" typeHandler="com.lx.demo.springbootmybatis.handler.StringTypeHandler"/>
     <result column="avatar" jdbcType="VARCHAR" property="avatar" />
     <result column="mobile" jdbcType="VARCHAR" property="mobile" />
     <result column="sex" jdbcType="VARCHAR" property="sex" />

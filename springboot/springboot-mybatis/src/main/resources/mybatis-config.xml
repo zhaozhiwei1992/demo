@@ -23,5 +23,7 @@
     </environments>
     <mappers>
         <mapper resource="mappers/UserMapper.xml"/>
+        <!--注解方式引入-->
+        <mapper class="com.lx.demo.springbootmybatis.mapper.UserMapperAnnotation"/>
     </mappers>
 </configuration>

@@ -3,7 +3,8 @@ package com.lx.demo.springbootmybatis.mapper;
 import com.lx.demo.springbootmybatis.domain.User;
 import com.lx.demo.springbootmybatis.domain.UserExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
+
+import org.apache.ibatis.annotations.*;
 
 public interface UserMapper {
     long countByExample(UserExample example);
