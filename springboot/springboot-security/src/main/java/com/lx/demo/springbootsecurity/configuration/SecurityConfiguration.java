@@ -25,6 +25,12 @@ import javax.servlet.http.HttpServletRequest;
  * 一种采用spring官方demo中的方式，InMemoryUserDetailsManager
  * 另一种初始化一个passwordencoder
  * {@see https://github.com/spring-projects/spring-boot/blob/master/spring-boot-samples/spring-boot-sample-actuator-custom-security/src/main/java/sample/actuator/customsecurity/SecurityConfiguration.java}
+ * {@see https://docs.spring.io/spring-boot/docs/2.0.8.RELEASE/reference/htmlsingle/#boot-features-security-mvc}
+ * org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+ *
+ * 下面的方式是spring默认初始化方式，可以重写
+ * org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
+ * org.springframework.boot.autoconfigure.security.SecurityProperties.User 这个里面会默认初始化user， 密码为随机数
  */
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {

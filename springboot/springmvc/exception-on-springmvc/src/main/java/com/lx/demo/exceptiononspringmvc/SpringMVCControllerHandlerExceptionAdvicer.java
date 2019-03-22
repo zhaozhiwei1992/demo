@@ -10,6 +10,7 @@ import java.util.Map;
  * springmvc 中异常拦截器
  * https://docs.spring.io/spring/docs/5.0.0.RELEASE/spring-framework-reference/web.html
  * c+f exceptonhandler
+ * {@see https://docs.spring.io/spring-boot/docs/2.0.8.RELEASE/reference/htmlsingle/#boot-features-error-handling}
  */
 @RestControllerAdvice
 public class SpringMVCControllerHandlerExceptionAdvicer {

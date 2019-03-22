@@ -14,7 +14,12 @@ import java.util.Properties;
 
 /**
  * 自定义扩展描述
- *
+ *https://docs.spring.io/spring-boot/docs/2.0.8.RELEASE/reference/htmlsingle/#boot-features-spring-mvc-message-converters
+ * Spring MVC uses the HttpMessageConverter interface to convert HTTP requests and responses.
+ * Sensible defaults are included out of the box.
+ * For example, objects can be automatically converted to JSON (by using the Jackson library) or
+ * XML (by using the Jackson XML extension,
+ * if available, or by using JAXB if the Jackson XML extension is not available). By default, strings are encoded in UTF-8.
  */
 public class PropertiesPerson2HttpMessageConverter extends AbstractHttpMessageConverter<Person> {
     public PropertiesPerson2HttpMessageConverter(){

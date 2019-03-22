@@ -12,6 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 /**
  * @{link org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter} //这个是springboot中用来扩展拦截器的一种方式
+ * {@see https://docs.spring.io/spring-boot/docs/2.0.8.RELEASE/reference/htmlsingle/#boot-features-error-handling-mapping-error-pages-without-mvc}
  */
 @SpringBootApplication
 public class ExceptionOnSpringmvcApplication
