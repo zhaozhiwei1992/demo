@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>springcloud-eureka-client</artifactId>
+	<artifactId>springcloud-config-client</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>springcloud-eureka-client</name>
+	<name>springcloud-config-client</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
@@ -34,7 +34,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-config</artifactId>
+			<artifactId>spring-cloud-config-server</artifactId>
 		</dependency>
 
 		<dependency>
