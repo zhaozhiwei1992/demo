@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <classPathEntry location="/home/lx7ly/.m2/repository/mysql/mysql-connector-java/5.1.14/mysql-connector-java-5.1.14.jar"/>
+    <context id="MysqlTables" targetRuntime="MyBatis3">
+        <!--增加generator插件， 将Javabean使用lombok形式-->
+        <!--<plugin type="javax.core.common.plugin.MapperAnnotationPlugin"></plugin>-->
+        <!--<plugin type="javax.core.common.plugin.LombokPlugin"></plugin>-->
+        <!--去除注释  -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/user?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC"
+                        userId="root"
+                        password="root">
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <javaModelGenerator targetPackage="com.lx.demo.springbootmybatis.domain" targetProject="/tmp">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="xml" targetProject="/tmp">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.lx.user.dal.persistence" targetProject="/tmp">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+
+        <!--<table schema="gp" tableName="test" domainObjectName="Test">-->
+            <!--<property name="useActualColumnNames" value="false"/>-->
+        <!--</table>-->
+
+        <!--<table schema="gp" tableName="posts" domainObjectName="Posts">-->
+            <!--<property name="useActualColumnNames" value="false"/>-->
+        <!--</table>-->
+        <table tableName="%" >
+            <!--<generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+            <property name="useActualColumnNames" value="false"/>
+            <domainObjectRenamingRule searchString="^T" replaceString="" />
+        </table>
+
+    </context>
+</generatorConfiguration>

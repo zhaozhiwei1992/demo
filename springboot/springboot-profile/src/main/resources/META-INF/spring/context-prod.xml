@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+
+    <!--需要研究下怎么精确指定 用哪个xml, 类似激活application-prod.properties一样-->
+    <bean id="initWithXML-prod" class="com.example.springbootprofile.domain.InitWithXML" >
+        <property name="id" value="${person.id}"/>
+        <property name="name" value="${person.name: lisi}-prod"/>
+        <property name="age" value="${person.age}"/>
+    </bean>
+</beans>
