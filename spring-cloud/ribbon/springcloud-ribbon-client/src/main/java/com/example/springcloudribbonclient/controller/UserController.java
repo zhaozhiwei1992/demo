@@ -13,27 +13,30 @@ public class UserController {
     @Autowired
     private RestTemplate restTemplate;
 
-    @Value("${serivce-provider.host}")
+    @Value("${service-provider.host}")
     private String serviceProviderHost;
 
-    @Value("${serivce-provider.port}")
+    @Value("${service-provider.port}")
     private Integer serviceProviderPort;
 
     @Value("${service-provider.name}")
     private String serviceProviderName;
 
+
     @GetMapping("")
-    public String index(){
+    public String index() {
         User user = new User();
         user.setId(1L);
         user.setName("zhao");
         user.setAge(18);
-        return restTemplate.postForObject(String.format("http://%s:%d/greeting", serviceProviderHost, serviceProviderPort),
-                user, String.class);
-
-//        return restTemplate.postForObject("http://" +
-//                        serviceProviderName +
-//                        "/greeting",
+        // 這個方式不用ribbon就可以用
+//        return restTemplate.postForObject(String.format("http://%s:%d/greeting", serviceProviderHost, serviceProviderPort),
 //                user, String.class);
+
+        // 使用ribbon就可以用實例來訪問了
+        return restTemplate.postForObject("http://" +
+                        serviceProviderName +
+                        "/greeting",
+                user, String.class);
     }
 }
