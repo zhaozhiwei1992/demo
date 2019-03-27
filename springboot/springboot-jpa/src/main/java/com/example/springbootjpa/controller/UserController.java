@@ -31,4 +31,17 @@ public class UserController {
     public Collection<User> findAll(){
         return userService.findAll();
     }
+
+
+    @Autowired
+    private UserRepository userRepository;
+
+    /**
+     * curl 127.0.0.1:8080/user/findbysql
+     * @return
+     */
+    @GetMapping("/user/findbysql")
+    public Collection<User> findBySQL(){
+        return userRepository.findBySql();
+    }
 }
