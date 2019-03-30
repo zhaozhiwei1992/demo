@@ -1,4 +1,4 @@
-package com.example.springcloudhystrixserviceprovider.controller;
+package com.example.springcloudhystrixserviceprovider.web.controller;
 
 import com.example.springcloudhystrixserviceprovider.domain.User;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +22,7 @@ public class CustomExceptionHandlerController {
     public List<User> getUsers() throws TimeoutException {
         long executeTime = random.nextInt(200);
         if (executeTime > 100) { // 执行时间超过了 100 ms
-            throw new TimeoutException(String.format("Execute %ss timeout!", executeTime));
+            throw new TimeoutException(String.format("Execute %sms timeout!", executeTime));
         }
         return Arrays.asList(new User(1L, "张三", 18), new User(2L, "李四", 19));
     }
