@@ -1,5 +1,6 @@
 package com.example.springcloudhystrixserviceprovider.web.controller;
 
+import com.example.springcloudhystrixserviceprovider.aop.UserHystrixCommand;
 import com.example.springcloudhystrixserviceprovider.domain.User;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
@@ -26,6 +27,17 @@ public class UserController {
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     private static Random random = new Random();
+
+    @GetMapping("/user/hystrix/list")
+    public List<User> getUsersByHystrix() throws TimeoutException, InterruptedException {
+        long executeTime = random.nextInt(200);
+        // 通过休眠来模拟执行时间
+        System.out.println("Execute Time : " + executeTime + " ms");
+        Thread.sleep(executeTime);
+
+        return new UserHystrixCommand("").execute();
+    }
+
 
     @HystrixCommand(
             commandProperties = {
