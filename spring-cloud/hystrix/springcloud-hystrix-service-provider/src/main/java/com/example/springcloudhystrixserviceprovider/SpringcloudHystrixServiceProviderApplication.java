@@ -7,6 +7,8 @@ import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 
 /**
  * 这俩玩意儿感觉一样{@see EnableHystrix EnableCircuitBreaker}
+ *
+ * http://127.0.0.1:7071/hystrix.stream 可以放入到dashboard中进行管理，或者可以使用chrome访问
  */
 @SpringBootApplication
 //@EnableHystrix
