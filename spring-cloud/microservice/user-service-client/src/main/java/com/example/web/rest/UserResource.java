@@ -19,6 +19,9 @@ import java.util.List;
 @RestController
 public class UserResource{
 
+    /**
+     * 这个userservice被feign初始化，必须打开enablefeign
+     */
     @Autowired
     private UserService userService;
 
