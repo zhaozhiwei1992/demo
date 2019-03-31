@@ -1,13 +1,16 @@
 package com.example;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.config.server.EnableConfigServer;
+
 /**
- * Hello world!
- *
+ * 激活configserver配置
  */
-public class App 
-{
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
+@SpringBootApplication
+@EnableConfigServer
+public class App {
+    public static void main( String[] args ) {
+        SpringApplication.run(App.class, args);
     }
 }
