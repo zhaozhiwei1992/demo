@@ -64,13 +64,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
      * @param auth
      * @throws Exception
      */
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("zhangsan").password("11").roles("ADMIN")
-                .and()
-                .withUser("lisi").password("11").roles("USER");
-    }
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.inMemoryAuthentication()
+//                .withUser("zhangsan").password("11").roles("ADMIN")
+//                .and()
+//                .withUser("lisi").password("11").roles("USER");
+//    }
 
     /**
      * @param http
