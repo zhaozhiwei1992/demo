@@ -5,6 +5,9 @@ import com.example.springbootactivity.domain.Person;
 import com.example.springbootactivity.repository.CompRepository;
 import com.example.springbootactivity.repository.PersonRepository;
 import com.example.springbootactivity.service.ActivitiService;
+import org.activiti.engine.RepositoryService;
+import org.activiti.engine.RuntimeService;
+import org.activiti.engine.TaskService;
 import org.activiti.spring.boot.SecurityAutoConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -14,6 +17,7 @@ import org.springframework.context.annotation.Bean;
 
 /**
  * 参考: http://www.cnblogs.com/momoweiduan/p/9454140.html
+ * https://www.activiti.org/userguide/
  */
 @SpringBootApplication(exclude = SecurityAutoConfiguration.class)
 public class SpringbootActivityApplication {
@@ -27,31 +31,48 @@ public class SpringbootActivityApplication {
         SpringApplication.run(SpringbootActivityApplication.class, args);
     }
 
-    /**
-     *
-     * 初始化模拟数据
-     * @param myService
-     * @return
-     */
+    //    /**
+//     *
+//     * 初始化模拟数据
+//     * @param myService
+//     * @return
+//     */
+//    @Bean
+//    public CommandLineRunner init(final ActivitiService myService) {
+//        return strings -> {
+//            if (personRepository.findAll().size() == 0) {
+//                personRepository.save(new Person("wtr"));
+//                personRepository.save(new Person("wyf"));
+//                personRepository.save(new Person("admin"));
+//            }
+//            if (compRepository.findAll().size() == 0) {
+//                Comp group = new Comp("great company");
+//                compRepository.save(group);
+//                Person admin = personRepository.findByName("admin");
+//                Person wtr = personRepository.findByName("wtr");
+//                admin.setComp(group);
+//                wtr.setComp(group);
+//                personRepository.save(admin);
+//                personRepository.save(wtr);
+//            }
+//        };
+//    }
     @Bean
-    public CommandLineRunner init(final ActivitiService myService) {
-        return strings -> {
-            if (personRepository.findAll().size() == 0) {
-                personRepository.save(new Person("wtr"));
-                personRepository.save(new Person("wyf"));
-                personRepository.save(new Person("admin"));
-            }
-            if (compRepository.findAll().size() == 0) {
-                Comp group = new Comp("great company");
-                compRepository.save(group);
-                Person admin = personRepository.findByName("admin");
-                Person wtr = personRepository.findByName("wtr");
-                admin.setComp(group);
-                wtr.setComp(group);
-                personRepository.save(admin);
-                personRepository.save(wtr);
+    public CommandLineRunner init(final RepositoryService repositoryService,
+                                  final RuntimeService runtimeService,
+                                  final TaskService taskService) {
+
+        return new CommandLineRunner() {
+            @Override
+            public void run(String... strings) throws Exception {
+                System.out.println("Number of process definitions : "
+                        + repositoryService.createProcessDefinitionQuery().count());
+                System.out.println("Number of tasks : " + taskService.createTaskQuery().count());
+                runtimeService.startProcessInstanceByKey("oneTaskProcess");
+                System.out.println("Number of tasks after process start: " + taskService.createTaskQuery().count());
             }
         };
-    }
 
+
+    }
 }
