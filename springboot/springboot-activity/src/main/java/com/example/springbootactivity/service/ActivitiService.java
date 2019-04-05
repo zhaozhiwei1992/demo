@@ -38,7 +38,8 @@ public class ActivitiService {
         variables.put("personId", personId);
         variables.put("compId", compId);
 
-        runtimeService.startProcessInstanceByKey("oneTaskProcess", variables);
+        runtimeService.startProcessInstanceByKey("twotaskprocess", variables);
+//        runtimeService.startProcessInstanceByKey("oneTaskProcess", variables);
     }
 
     /**

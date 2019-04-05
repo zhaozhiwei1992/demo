@@ -28,8 +28,8 @@ public class JoinService {
         if (bool) {
             Long personId = (Long) execution.getVariable("personId");
             Long compId = (Long) execution.getVariable("compId");
-            Comp comp = compRepository.findOne(compId);
-            Person person = personRepository.findOne(personId);
+            Comp comp = compRepository.findById(compId).get();
+            Person person = personRepository.findById(personId).get();
             person.setComp(comp);
             personRepository.save(person);
             System.out.println("加入组织成功");

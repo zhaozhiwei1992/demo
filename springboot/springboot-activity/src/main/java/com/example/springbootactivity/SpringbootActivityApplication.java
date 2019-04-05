@@ -10,7 +10,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 
 /**
  * 参考: http://www.cnblogs.com/momoweiduan/p/9454140.html
