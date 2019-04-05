@@ -5,21 +5,23 @@ import com.example.springbootactivity.domain.Person;
 import com.example.springbootactivity.repository.CompRepository;
 import com.example.springbootactivity.repository.PersonRepository;
 import com.example.springbootactivity.service.ActivitiService;
-import org.activiti.engine.RepositoryService;
-import org.activiti.engine.RuntimeService;
-import org.activiti.engine.TaskService;
-import org.activiti.spring.boot.SecurityAutoConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 
 /**
  * 参考: http://www.cnblogs.com/momoweiduan/p/9454140.html
  * https://www.activiti.org/userguide/
  */
-@SpringBootApplication(exclude = SecurityAutoConfiguration.class)
+//@SpringBootApplication(exclude = {
+//        org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration.class
+//        , org.activiti.spring.boot.SecurityAutoConfiguration.class})
+@SpringBootApplication(exclude = {
+        org.activiti.spring.boot.SecurityAutoConfiguration.class
+})
 public class SpringbootActivityApplication {
 
     @Autowired
@@ -31,9 +33,9 @@ public class SpringbootActivityApplication {
         SpringApplication.run(SpringbootActivityApplication.class, args);
     }
 
-        /**
-     *
+    /**
      * 初始化模拟数据
+     *
      * @param myService
      * @return
      */

@@ -48,6 +48,8 @@ public class ActivitiRestController {
 
     /**
      *
+     * curl http://localhost:8080/complete/true/27510
+     *
      * 完成任务
      * @param joinApproved
      * @param taskId
