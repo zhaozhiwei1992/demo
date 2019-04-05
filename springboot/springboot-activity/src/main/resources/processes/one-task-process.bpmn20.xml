@@ -5,10 +5,15 @@
         targetNamespace="Examples">
 
     <process id="oneTaskProcess" name="The One Task Process">
+<!--        启动点-->
         <startEvent id="theStart" />
+<!--        线条-->
         <sequenceFlow id="flow1" sourceRef="theStart" targetRef="theTask" />
-        <userTask id="theTask" name="my task" />
+<!--        点, activiti:assignee设置代理人-->
+        <userTask id="theTask" name="my task" activiti:assignee="${personId}"/>
+<!--        线条-->
         <sequenceFlow id="flow2" sourceRef="theTask" targetRef="theEnd" />
+<!--        结束-->
         <endEvent id="theEnd" />
     </process>
 

@@ -31,48 +31,48 @@ public class SpringbootActivityApplication {
         SpringApplication.run(SpringbootActivityApplication.class, args);
     }
 
-    //    /**
-//     *
-//     * 初始化模拟数据
-//     * @param myService
-//     * @return
-//     */
-//    @Bean
-//    public CommandLineRunner init(final ActivitiService myService) {
-//        return strings -> {
-//            if (personRepository.findAll().size() == 0) {
-//                personRepository.save(new Person("wtr"));
-//                personRepository.save(new Person("wyf"));
-//                personRepository.save(new Person("admin"));
-//            }
-//            if (compRepository.findAll().size() == 0) {
-//                Comp group = new Comp("great company");
-//                compRepository.save(group);
-//                Person admin = personRepository.findByName("admin");
-//                Person wtr = personRepository.findByName("wtr");
-//                admin.setComp(group);
-//                wtr.setComp(group);
-//                personRepository.save(admin);
-//                personRepository.save(wtr);
-//            }
-//        };
-//    }
+        /**
+     *
+     * 初始化模拟数据
+     * @param myService
+     * @return
+     */
     @Bean
-    public CommandLineRunner init(final RepositoryService repositoryService,
-                                  final RuntimeService runtimeService,
-                                  final TaskService taskService) {
-
-        return new CommandLineRunner() {
-            @Override
-            public void run(String... strings) throws Exception {
-                System.out.println("Number of process definitions : "
-                        + repositoryService.createProcessDefinitionQuery().count());
-                System.out.println("Number of tasks : " + taskService.createTaskQuery().count());
-                runtimeService.startProcessInstanceByKey("oneTaskProcess");
-                System.out.println("Number of tasks after process start: " + taskService.createTaskQuery().count());
+    public CommandLineRunner init(final ActivitiService myService) {
+        return strings -> {
+            if (personRepository.findAll().size() == 0) {
+                personRepository.save(new Person("wtr"));
+                personRepository.save(new Person("wyf"));
+                personRepository.save(new Person("admin"));
+            }
+            if (compRepository.findAll().size() == 0) {
+                Comp group = new Comp("great company");
+                compRepository.save(group);
+                Person admin = personRepository.findByName("admin");
+                Person wtr = personRepository.findByName("wtr");
+                admin.setComp(group);
+                wtr.setComp(group);
+                personRepository.save(admin);
+                personRepository.save(wtr);
             }
         };
-
-
     }
+//    @Bean
+//    public CommandLineRunner init(final RepositoryService repositoryService,
+//                                  final RuntimeService runtimeService,
+//                                  final TaskService taskService) {
+//
+//        return new CommandLineRunner() {
+//            @Override
+//            public void run(String... strings) throws Exception {
+//                System.out.println("Number of process definitions : "
+//                        + repositoryService.createProcessDefinitionQuery().count());
+//                System.out.println("Number of tasks : " + taskService.createTaskQuery().count());
+//                runtimeService.startProcessInstanceByKey("oneTaskProcess");
+//                System.out.println("Number of tasks after process start: " + taskService.createTaskQuery().count());
+//            }
+//        };
+//
+//
+//    }
 }

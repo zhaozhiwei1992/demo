@@ -6,6 +6,7 @@ import org.activiti.engine.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,11 +30,15 @@ public class ActivitiService {
      * @param personId
      * @param compId
      */
+    @Transactional
     public void startProcess(Long personId, Long compId) {
+
+//        这里设置的变量会被xml        <userTask id="theTask" name="my task" activiti:assignee="${personId}"/>读取
         Map<String, Object> variables = new HashMap<String, Object>();
         variables.put("personId", personId);
         variables.put("compId", compId);
-        runtimeService.startProcessInstanceByKey("myprocess", variables);
+
+        runtimeService.startProcessInstanceByKey("oneTaskProcess", variables);
     }
 
     /**
@@ -42,8 +47,10 @@ public class ActivitiService {
      * @param assignee
      * @return
      */
+    @Transactional
     public List<Task> getTasks(String assignee) {
-        return taskService.createTaskQuery().taskCandidateUser(assignee).list();
+//        return taskService.createTaskQuery().taskCandidateUser(assignee).list();
+        return taskService.createTaskQuery().taskAssignee(assignee).list();
     }
 
     /**

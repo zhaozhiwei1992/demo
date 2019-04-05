@@ -3,6 +3,7 @@ package com.example.springbootactivity.controller;
 import com.example.springbootactivity.service.ActivitiService;
 import org.activiti.engine.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public class ActivitiRestController {
     /**
      *
      * 开启流程实例
+     * curl 127.0.0.1:8080/process/1/1
      * @param personId
      * @param compId
      */
@@ -28,10 +30,13 @@ public class ActivitiRestController {
     /**
      *
      * 获取当前人的任务
+     * curl http://localhost:8080/tasks?assignee=1
+     * [{"id":"27510","name":"my task"}]
      * @param assignee
      * @return
      */
-    @RequestMapping(value = "/tasks", method = RequestMethod.GET)
+    @GetMapping(value = "/tasks"
+            , produces= MediaType.APPLICATION_JSON_VALUE)
     public List<TaskRepresentation> getTasks(@RequestParam String assignee) {
         List<Task> tasks = myService.getTasks(assignee);
         List<TaskRepresentation> dtos = new ArrayList<TaskRepresentation>();
