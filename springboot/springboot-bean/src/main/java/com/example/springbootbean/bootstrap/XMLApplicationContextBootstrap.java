@@ -1,4 +1,4 @@
-package com.example.springbootbean.beaninit;
+package com.example.springbootbean.bootstrap;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -20,9 +20,25 @@ public class XMLApplicationContextBootstrap {
         System.setProperty("env", envValue);
     }
 
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
-        //打开上下文
-        ClassPathXmlApplicationContext classPathXmlApplicationContext = new ClassPathXmlApplicationContext("META-INF/configurable-context.xml");
+        //打开上下文 方法1, 直接构造,内部刷新
+        //public ClassPathXmlApplicationContext(String configLocation) throws BeansException {
+        //        this(new String[]{configLocation}, true, (ApplicationContext)null);
+        //    }
+//        ClassPathXmlApplicationContext classPathXmlApplicationContext = new ClassPathXmlApplicationContext("META-INF/configurable-context.xml");
+
+        //方法2 需要设置并刷新
+        // 构建 XML 配置驱动 Spring 上下文
+        ClassPathXmlApplicationContext classPathXmlApplicationContext = new ClassPathXmlApplicationContext();
+        // 设置 XML 配置文件的位置
+        classPathXmlApplicationContext.setConfigLocation("classpath:/META-INF/configurable-context.xml");
+        // 启动上下文
+        classPathXmlApplicationContext.refresh();
+
         String name = String.valueOf(classPathXmlApplicationContext.getBean("name"));
         System.out.println(name);
 
