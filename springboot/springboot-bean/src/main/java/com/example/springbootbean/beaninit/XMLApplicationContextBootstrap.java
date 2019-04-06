@@ -1,12 +1,12 @@
-package com.example.springbootbean.spring2;
+package com.example.springbootbean.beaninit;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * {@see https://docs.spring.io/spring/docs/4.3.23.RELEASE/spring-framework-reference/htmlsingle/#beans}
- * {@see https://github.com/mercyblitz/thinking-in-spring-boot-samples/blob/master/spring-framework-samples/spring-framework-2.0.x-sample/src/main/java/thinking/in/spring/boot/samples/spring2/bootstrap/ConfigurableApplicationContextBootstrap.java}
+ * {@see https://github.com/mercyblitz/thinking-in-spring-boot-samples/blob/master/spring-framework-samples/spring-framework-2.0.x-sample/src/main/java/thinking/in/spring/boot/samples/spring2/bootstrap/XMLApplicationContextBootstrap.java}
  */
-public class ConfigurableApplicationContextBootstrap {
+public class XMLApplicationContextBootstrap {
 
     static{
         // 调整系统属性 "env"，实现 "name" bean 的定义切换
