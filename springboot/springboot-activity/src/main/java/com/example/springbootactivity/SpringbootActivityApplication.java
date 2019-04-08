@@ -1,8 +1,6 @@
 package com.example.springbootactivity;
 
-import com.example.springbootactivity.domain.Comp;
 import com.example.springbootactivity.domain.Person;
-import com.example.springbootactivity.repository.CompRepository;
 import com.example.springbootactivity.repository.PersonRepository;
 import com.example.springbootactivity.service.ActivitiService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +22,6 @@ import org.springframework.context.annotation.Bean;
 public class SpringbootActivityApplication {
 
     @Autowired
-    private CompRepository compRepository;
-    @Autowired
     private PersonRepository personRepository;
 
     public static void main(String[] args) {
@@ -45,16 +41,6 @@ public class SpringbootActivityApplication {
                 personRepository.save(new Person("wtr"));
                 personRepository.save(new Person("wyf"));
                 personRepository.save(new Person("admin"));
-            }
-            if (compRepository.findAll().size() == 0) {
-                Comp group = new Comp("great company");
-                compRepository.save(group);
-                Person admin = personRepository.findByName("admin");
-                Person wtr = personRepository.findByName("wtr");
-                admin.setComp(group);
-                wtr.setComp(group);
-                personRepository.save(admin);
-                personRepository.save(wtr);
             }
         };
     }

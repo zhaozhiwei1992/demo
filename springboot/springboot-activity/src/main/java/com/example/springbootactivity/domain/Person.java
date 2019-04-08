@@ -16,23 +16,12 @@ public class Person {
     private String name;
     private int age;
 
-    @OneToOne
-    private Comp comp;
-
     public Person(){
 
     }
 
     public Person(String name) {
         this.name = name;
-    }
-
-    public Comp getComp() {
-        return comp;
-    }
-
-    public void setComp(Comp comp) {
-        this.comp = comp;
     }
 
     public Long getId() {

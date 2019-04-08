@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>springboot-druid</artifactId>
+	<artifactId>springboot-jdbc-druid</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>springboot-druid</name>
 	<description>Demo project for Spring Boot</description>
