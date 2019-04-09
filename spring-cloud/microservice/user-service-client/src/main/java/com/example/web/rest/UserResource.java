@@ -25,6 +25,12 @@ public class UserResource{
     @Autowired
     private UserService userService;
 
+    /**
+     * curl -X POST http://127.0.0.1:8080/users -H "Content-Type:application/json;charset=utf8" -d '{"id":998,"name":"zhangsan"}'
+     * 这里会使用feign的方式请求服务端
+     * @param user
+     * @return
+     */
     @PostMapping("/users")
     boolean createUser(@RequestBody  User user){
         return userService.createUser(user);
