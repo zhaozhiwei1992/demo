@@ -31,6 +31,7 @@ public class UserResource{
 
     /**
      * 保存用户
+     * curl -X POST http://127.0.0.1:9090/users -H "Content-Type:application/json;charset=utf8" -d '{"id":66,"name":"zhangsan"}'
      * @param user
      * @return
      */
