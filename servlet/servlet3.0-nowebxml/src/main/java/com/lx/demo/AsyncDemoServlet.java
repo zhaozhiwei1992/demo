@@ -1,6 +1,8 @@
 package com.lx.demo;
 
 import javax.servlet.AsyncContext;
+import javax.servlet.AsyncEvent;
+import javax.servlet.AsyncListener;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +18,7 @@ import java.util.Date;
  */
 @WebServlet(urlPatterns = "/async-demo", asyncSupported = true)
 public class AsyncDemoServlet extends HttpServlet {
+
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws IOException, ServletException {
@@ -26,6 +29,29 @@ public class AsyncDemoServlet extends HttpServlet {
 
         //在子线程中执行业务调用，并由其负责输出响应，主线程退出
         AsyncContext ctx = req.startAsync();
+
+        //设置超时时间后会进入timeout方法
+//        ctx.setTimeout(1000);
+
+        // 3.0提供了异步事件处理相关问题
+        ctx.addListener(new AsyncListener() {
+            public void onComplete(AsyncEvent asyncEvent) throws IOException {
+                // 做一些清理工作或者其他
+                System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+            }
+
+            public void onTimeout(AsyncEvent asyncEvent) throws IOException {
+                System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+            }
+
+            public void onError(AsyncEvent asyncEvent) throws IOException {
+                System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+            }
+
+            public void onStartAsync(AsyncEvent asyncEvent) throws IOException {
+                System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+            }
+        });
         new Thread(new Executor(ctx)).start();
 
         out.println("结束Servlet的时间：" + new Date() + ".\n");
