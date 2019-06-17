@@ -32,7 +32,7 @@ public class DomainUserDetailService implements UserDetailsService {
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         User user = new User();
         String userName = "admin";
-        user.setAuthorities(new HashSet(Arrays.asList(new Authority("ADMIN"), new Authority("USER"))));
+        user.setAuthorities(new HashSet(Arrays.asList(new Authority("ADMIN1"), new Authority("USER"))));
         user.setId(0L);
         user.setName(userName);
         user.setAge(0);
