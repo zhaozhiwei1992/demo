@@ -22,6 +22,8 @@ public class DomainUserDetailService implements UserDetailsService {
      * 在这里可以硬灌用户来支持访问, 与{@see SecurityCOnfiguration中inMemoryAuthentication效果相同}
      * 每次的校验逻辑都会通过这里, 可以增加用户后读取数据提供动态校验
      * {@see https://docs.spring.io/spring-boot/docs/2.0.8.RELEASE/reference/htmlsingle/#howto-change-the-user-details-service-and-add-user-accounts}
+     *
+     * 这里设置好的用户名密码，　security内部会进行比对
      * @param s
      * @return
      * @throws UsernameNotFoundException
@@ -34,7 +36,7 @@ public class DomainUserDetailService implements UserDetailsService {
         user.setId(0L);
         user.setName(userName);
         user.setAge(0);
-        user.setPassword("1");
+        user.setPassword("11");
         user.setActivated(true);
         return this.createSpringSecurityUser(userName, user);
     }

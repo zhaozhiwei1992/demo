@@ -66,10 +66,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
      */
 //    @Override
 //    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication()
-//                .withUser("zhangsan").password("11").roles("ADMIN")
-//                .and()
-//                .withUser("lisi").password("11").roles("USER");
+////        auth.inMemoryAuthentication()
+////                .withUser("zhangsan").password("11").roles("ADMIN")
+////                .and()
+////                .withUser("lisi").password("11").roles("USER");
+//        auth
+//            .inMemoryAuthentication()
+//                .withUser("admin").password("11").roles("USER");
 //    }
 
     /**
@@ -79,24 +82,24 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         //CSRF
-        http.csrf().csrfTokenRepository(new CookieCsrfTokenRepository()).requireCsrfProtectionMatcher(
-                httpServletRequest -> httpServletRequest.getMethod().equals("POST")
-        );
+//        http.csrf().csrfTokenRepository(new CookieCsrfTokenRepository()).requireCsrfProtectionMatcher(
+//                httpServletRequest -> httpServletRequest.getMethod().equals("POST")
+//        );
 
         // CSP header
-        http.headers().contentSecurityPolicy("script-src https://code.jquery.com/");
+//        http.headers().contentSecurityPolicy("script-src https://code.jquery.com/");
 
         // X-Frame-Options header
         // 相同域名是允许的
-        // http.headers().frameOptions().sameOrigin();
+//        http.headers().frameOptions().sameOrigin();
 
         // 实现白名单方式
-        http.headers().addHeaderWriter(new XFrameOptionsHeaderWriter(new AllowFromStrategy() {
-            @Override
-            public String getAllowFromValue(HttpServletRequest request) {
-                return "xiaomage.com";
-            }
-        }));
+//        http.headers().addHeaderWriter(new XFrameOptionsHeaderWriter(new AllowFromStrategy() {
+//            @Override
+//            public String getAllowFromValue(HttpServletRequest request) {
+//                return "xiaomage.com";
+//            }
+//        }));
 
         // XSS header
 //        http.headers().xssProtection().block(false);
@@ -105,15 +108,26 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
         // 授权
-        http.authorizeRequests().anyRequest().fullyAuthenticated()
+//        http.authorizeRequests().anyRequest().fullyAuthenticated()
+//                .and()
+//                .formLogin()
+//                .usernameParameter("name") // 用户名参数
+//                .passwordParameter("pwd") // 密码参数
+//                .loginProcessingUrl("/loginAction") // 登录 Action 的 URI
+//                .loginPage("/login") // 登录页面 URI
+//                .failureForwardUrl("/error") // 登录失败后的页面URI
+//                .permitAll()
+//                .and().logout().permitAll();
+        http
+            .authorizeRequests()
+                .antMatchers("/", "/home").permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .usernameParameter("name") // 用户名参数
-                .passwordParameter("pwd") // 密码参数
-                .loginProcessingUrl("/loginAction") // 登录 Action 的 URI
-                .loginPage("/login") // 登录页面 URI
-                .failureForwardUrl("/error") // 登录失败后的页面URI
+                .loginPage("/login")
                 .permitAll()
-                .and().logout().permitAll();
+                .and()
+                .logout()
+                .permitAll();
     }
 }

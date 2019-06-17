@@ -27,4 +27,10 @@ public class ExampleController {
         return "login";
     }
 
+    @GetMapping("/hello")
+    public String hello() {
+        return "hello";
+    }
+
+
 }
