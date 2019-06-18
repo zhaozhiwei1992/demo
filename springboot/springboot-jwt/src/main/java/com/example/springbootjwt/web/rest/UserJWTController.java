@@ -46,6 +46,10 @@ public class UserJWTController {
         return new ResponseEntity<>(new JWTToken(token), httpHeaders, HttpStatus.OK);
     }
 
+    /**
+     * 通过authenticate测试， 访问index时 header中加入id_token参数
+     * @return
+     */
     @GetMapping("/index")
     public String index(){
         return "请求成功";

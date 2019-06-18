@@ -43,7 +43,8 @@ public class TokenProvider {
             keyBytes = Decoders.BASE64.decode("f3973b64918e4324ad85acea1b6cbec5");
         }
         this.key = Keys.hmacShaKeyFor(keyBytes);
-        this.tokenValidityInMilliseconds = 1000 * 5;
+        //50秒过期啊兄弟，加油
+        this.tokenValidityInMilliseconds = 1000 * 50;
     }
 
     /**
@@ -52,7 +53,8 @@ public class TokenProvider {
      * @return
      */
     public String createToken() {
-        String authorities = "ADMIN,USER";
+        // 签名作者
+        String authorities = "zhangsan, lisi";
         long now = (new Date()).getTime();
 
         //過期時間

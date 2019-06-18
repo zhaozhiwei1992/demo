@@ -2,6 +2,7 @@ package com.example.springbootjwt.intercept;
 
 import com.example.springbootjwt.security.jwt.TokenProvider;
 import com.example.springbootjwt.utils.CookieUtil;
+import io.jsonwebtoken.Claims;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -34,28 +35,14 @@ public class TokenIntercepter extends HandlerInterceptorAdapter {
         if(!(handler instanceof HandlerMethod)){
             return true;
         }
-        String token= CookieUtil.getCookieValue(request,ACCESS_TOKEN);
-        boolean isAjax=CookieUtil.isAjax(request);
-        if(StringUtils.isEmpty(token)){
-            if(isAjax){
-                response.setContentType("text/html;charset=UTF-8");
-                response.getWriter().write("{\"code\":\"-1\",\"msg\":\"error\",\"url\":\""+"http://bing.com"+"\"}");
-                return false;
-            }
-            response.sendRedirect("http://bing.com");
-            return false;
-        }
-
+        String token = request.getHeader("id_token");
+        Claims claims = tokenProvider.phaseToken(token);
+        String id = claims.getId();
         if(tokenProvider.validateToken(token)){
+            System.out.println("验证通过, token: " + token);
             return super.preHandle(request, response, handler);
         }
-        if(isAjax){
-            response.setContentType("text/html;charset=UTF-8");
-            response.getWriter().write("{\"code\":\""+"200"+"\"" +
-                    ",\"msg\":\""+"xx"+"\",\"url\":\""+"http://bing.com"+"\"}");
-            return false;
-        }
-        response.sendRedirect("http://bing.com");
+//        response.sendRedirect("http://bing.com");
         return false;
     }
 }
