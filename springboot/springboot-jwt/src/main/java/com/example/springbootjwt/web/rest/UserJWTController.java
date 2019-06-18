@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,6 +34,10 @@ public class UserJWTController {
         this.tokenProvider = tokenProvider;
     }
 
+    /**
+     * curl -X POST http://127.0.0.1:8080/api/authenticate -H "Content-Type:application/json;charset=utf8" -d '{"id":1,"username":"zhangsan","password":"1"}'
+     * @return
+     */
     @PostMapping("/authenticate")
     public ResponseEntity<JWTToken> authorize() {
         String token = tokenProvider.createToken();
@@ -41,8 +46,13 @@ public class UserJWTController {
         return new ResponseEntity<>(new JWTToken(token), httpHeaders, HttpStatus.OK);
     }
 
+    @GetMapping("/index")
+    public String index(){
+        return "请求成功";
+    }
+
     @PostMapping("/login")
-    public ResponseData doLogin(String username, String password,
+    public ResponseData doLogin(@PathParam("username") String username, @PathParam("password") String password,
                                 HttpServletResponse response){
         ResponseData data=new ResponseData();
 

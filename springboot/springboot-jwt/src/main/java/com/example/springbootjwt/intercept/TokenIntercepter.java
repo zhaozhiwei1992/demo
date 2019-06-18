@@ -3,6 +3,8 @@ package com.example.springbootjwt.intercept;
 import com.example.springbootjwt.security.jwt.TokenProvider;
 import com.example.springbootjwt.utils.CookieUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -14,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  * 加群获取视频：608583947
  * 风骚的Michael 老师
  */
+@Component
 public class TokenIntercepter extends HandlerInterceptorAdapter {
 
     private final String ACCESS_TOKEN="access_token";

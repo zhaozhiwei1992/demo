@@ -61,7 +61,7 @@ public class TokenProvider {
         return Jwts.builder()
                 .setSubject("user")
                 .claim(AUTHORITIES_KEY, authorities)
-                .signWith(key, SignatureAlgorithm.HS512)
+                .signWith(key, SignatureAlgorithm.HS256)
                 .setExpiration(validity)
                 .compact();
 //        Map<String,Object> map=new HashMap<>();
@@ -132,7 +132,7 @@ public class TokenProvider {
     private Key generatorKey(){
         SignatureAlgorithm saa=SignatureAlgorithm.HS256;
         byte[] bin= DatatypeConverter.parseBase64Binary
-                ("f3973b64918e4324ad85acea1b6cbec5");
+                ("f3973b64918e4324ad85acea1b6cbec5f3973b64918e4324ad85acea1b6cbec5");
         Key key=new SecretKeySpec(bin,saa.getJcaName());
         return key;
     }
