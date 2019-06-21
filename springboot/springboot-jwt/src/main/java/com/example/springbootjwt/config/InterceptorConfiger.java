@@ -1,5 +1,6 @@
 package com.example.springbootjwt.config;
 
+import com.example.springbootjwt.intercept.LoginIntercepter;
 import com.example.springbootjwt.intercept.TokenIntercepter;
 import com.example.springbootjwt.security.jwt.TokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ public class InterceptorConfiger implements WebMvcConfigurer {
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new TokenIntercepter(tokenProvider)).addPathPatterns("/api/index");
+//        registry.addInterceptor(new TokenIntercepter(tokenProvider)).addPathPatterns("/api/index");
+        registry.addInterceptor(new LoginIntercepter()).addPathPatterns("/**").excludePathPatterns("/", "/login", "/index", "/api/login", "/api/index");
     }
 }
