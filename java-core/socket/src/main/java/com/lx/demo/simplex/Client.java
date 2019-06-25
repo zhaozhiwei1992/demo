@@ -1,23 +1,38 @@
 package com.lx.demo.simplex;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.net.Socket;
 
+/**
+ * 为甚么要用println {@link https://www.cnblogs.com/wxgblogs/p/5347996.html}
+ */
 public class Client {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
-        //建立连接
-        Socket socket = new Socket("127.0.0.1", 8888);
+        try {
 
-        BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+            //建立连接
+            Socket socket = new Socket("127.0.0.1", 8888);
 
-        bufferedWriter.write("hello world");
+            PrintWriter bufferedWriter = new PrintWriter(socket.getOutputStream(), true);
+//            BufferedReader sysBuff = new BufferedReader(new InputStreamReader(System.in));
+            // 这里不用println就死翘翘了
+//            bufferedWriter.println(sysBuff.readLine());
+            bufferedWriter.println("laji ");
+//            bufferedWriter.flush();
+            System.out.println("写出完成..");
 
-        System.out.println("写出完成..");
-        bufferedWriter.close();
-        socket.close();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            String s = bufferedReader.readLine();
+            System.out.println("服务端传入消息" + s);
+
+//            bufferedReader.close();
+//            bufferedWriter.close();
+//            socket.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
