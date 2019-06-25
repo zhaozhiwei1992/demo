@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 /**
- *
+ * 按照不同的条件放置苹果
  */
 public class AppleFilter {
 
@@ -36,6 +36,9 @@ public class AppleFilter {
 
         // 自定义一个匿名函数??
         System.out.println("nb-->" + filterApples(inventory, (Apple apple) -> "green".equalsIgnoreCase(apple.getColor())));
+
+        //j8形
+        inventory.stream().filter(apple -> "red".equals(apple.getColor())).forEach(System.out::println);
 
     }
 
