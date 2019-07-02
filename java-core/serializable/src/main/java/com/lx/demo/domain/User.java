@@ -62,4 +62,6 @@ public class User implements Serializable {
      * 哥哥我不被序列化
      */
     private transient String password;
+
+    public static String staticField = "我是静态变量";
 }

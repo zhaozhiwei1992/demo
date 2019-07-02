@@ -20,10 +20,12 @@ public class SerializeDemo {
         user.setPassword("11");
         String serializePath = new SerializeDemo().serialize(user);
 
+        User.staticField = "序列化不保存静态变量的状态,反序列后程序直接用这个值了";
         // 这里修改后也不影响序列化
         user.setName("lisi");
         User user1 = new SerializeDemo().deSerialize(serializePath);
         System.out.println(user1);
+        System.out.println(user1.staticField);
     }
 
     /**
