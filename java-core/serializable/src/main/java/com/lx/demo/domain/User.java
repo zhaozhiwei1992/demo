@@ -1,5 +1,8 @@
 package com.lx.demo.domain;
 
+import com.baidu.bjf.remoting.protobuf.FieldType;
+import com.baidu.bjf.remoting.protobuf.annotation.Protobuf;
+
 import java.beans.Transient;
 import java.io.Serializable;
 
@@ -39,6 +42,8 @@ public class User implements Serializable {
                 '}';
     }
 
+    //不加入注解就不序列化
+//    @Protobuf(fieldType = FieldType.UINT64)
     private long id;
 
     public long getId() {
@@ -57,6 +62,7 @@ public class User implements Serializable {
         this.name = name;
     }
 
+    @Protobuf(fieldType = FieldType.STRING)
     private String name;
 
     public String getPassword() {
