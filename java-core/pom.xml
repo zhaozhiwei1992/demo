@@ -9,7 +9,11 @@
         <module>j8</module>
         <module>bio-chat</module>
     <module>reference</module>
+<<<<<<< HEAD
     <module>socket</module>
+=======
+    <module>serializable</module>
+>>>>>>> 4ec7c6c844fd2cec5dcfd65c31650b055578ed57
   </modules>
     <build>
         <plugins>
