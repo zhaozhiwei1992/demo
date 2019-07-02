@@ -9,6 +9,7 @@
         <module>j8</module>
         <module>bio-chat</module>
     <module>reference</module>
+    <module>socket</module>
   </modules>
     <build>
         <plugins>
