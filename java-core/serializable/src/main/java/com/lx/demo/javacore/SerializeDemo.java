@@ -6,6 +6,8 @@ import java.io.*;
 
 /**
  * javacore 序列化 反序列化实现
+ *
+ * 1. 验证serialVersionUID作用， 序列化一个对象后，变更serialVersionUID进行反序列化报错
  */
 public class SerializeDemo {
 
@@ -36,7 +38,7 @@ public class SerializeDemo {
             FileOutputStream fileOutputStream = new FileOutputStream(path);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
             objectOutputStream.writeObject(user);
-            System.out.println("serialize in user.ser");
+            System.out.println("serialize in " + path);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
