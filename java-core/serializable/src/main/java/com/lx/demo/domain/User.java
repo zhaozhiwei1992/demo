@@ -22,6 +22,15 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = 2083262352962630020L;
 
+    public User(long id, String name, String password) {
+        this.id = id;
+        this.name = name;
+        this.password = password;
+    }
+
+    public User() {
+    }
+
     @Override
     public String toString() {
         return "User{" +

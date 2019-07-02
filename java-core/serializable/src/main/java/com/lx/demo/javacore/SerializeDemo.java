@@ -25,7 +25,14 @@ public class SerializeDemo {
         user.setName("lisi");
         User user1 = new SerializeDemo().deSerialize(serializePath);
         System.out.println(user1);
-        System.out.println(user1.staticField);
+//        System.out.println(user1.staticField);
+
+        //深克隆
+        User user2 = deepClone(user);
+        user.setPassword("密码被改了哈哈");
+        System.out.println(user2.getPassword()); //null transient修饰string反序列化默认为null
+        user.setName("名字被换了");
+        System.out.println(!user2.getName().equals(user.getName()));
     }
 
     /**
@@ -41,7 +48,15 @@ public class SerializeDemo {
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(path);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+
+            //96
             objectOutputStream.writeObject(user);
+            objectOutputStream.flush();
+
+            //101 - 96  对同一个对象序列化多次，只会加入个引用，占用5个字节
+//            objectOutputStream.writeObject(user);
+//            objectOutputStream.flush();
+            System.out.println(new File(path).length());
             System.out.println("serialize in " + path);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -69,5 +84,27 @@ public class SerializeDemo {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * 利用序列化深克隆
+     * @param <T>
+     * @param t
+     * @return
+     */
+    public static <T> T deepClone(T t){
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        try {
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
+            objectOutputStream.writeObject(t);
+
+            ObjectInputStream objectInputStream = new ObjectInputStream(new ByteArrayInputStream(byteArrayOutputStream.toByteArray()));
+            return (T) objectInputStream.readObject();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return t;
     }
 }
