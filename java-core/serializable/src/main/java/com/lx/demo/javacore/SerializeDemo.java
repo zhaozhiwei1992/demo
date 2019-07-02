@@ -16,6 +16,8 @@ public class SerializeDemo {
         User user = new User();
         user.setId(1L);
         user.setName("zhangsan");
+        // password被transient修饰，不参与序列化
+        user.setPassword("11");
         String serializePath = new SerializeDemo().serialize(user);
 
         // 这里修改后也不影响序列化

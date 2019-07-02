@@ -1,5 +1,6 @@
 package com.lx.demo.domain;
 
+import java.beans.Transient;
 import java.io.Serializable;
 
 
@@ -48,4 +49,17 @@ public class User implements Serializable {
     }
 
     private String name;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    /**
+     * 哥哥我不被序列化
+     */
+    private transient String password;
 }
