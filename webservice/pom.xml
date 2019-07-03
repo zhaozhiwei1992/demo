@@ -25,5 +25,6 @@
   </build>
   <modules>
     <module>axis</module>
+    <module>javacore</module>
   </modules>
 </project>
