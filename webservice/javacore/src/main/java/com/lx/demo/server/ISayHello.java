@@ -1,4 +1,4 @@
-package com.lx.demo;
+package com.lx.demo.server;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;

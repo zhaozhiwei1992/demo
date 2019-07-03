@@ -1,4 +1,4 @@
-package com.lx.demo;
+package com.lx.demo.server;
 
 import javax.xml.ws.Endpoint;
 
@@ -52,6 +52,8 @@ import javax.xml.ws.Endpoint;
  * </port>
  * </service>
  * </definitions>
+ *
+ * 生成客户端代码:  wsimport -keep http://localhost:8080/hello?wsdl
  */
 public class Bootstrap {
 
