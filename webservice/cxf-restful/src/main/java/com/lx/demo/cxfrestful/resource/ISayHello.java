@@ -1,14 +1,24 @@
 package com.lx.demo.cxfrestful.resource;
 
+import org.springframework.stereotype.Service;
+
 import javax.jws.WebMethod;
 import javax.jws.WebService;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 /**
- * webservice需要先定义接口
+ * curl -X GET http://127.0.0.1:8080/services/ws/sayHello/zhangsan
  */
-@WebService(name = "sayhello") //sei 和 sei实现类
+@Path("/sayHello")
+@Service
 public interface ISayHello {
 
-    @WebMethod //sei中的方法
-    String sayHello(String name);
+    @GET
+    @Path("/{name}")
+    @Produces(MediaType.TEXT_PLAIN)
+    String sayHello(@PathParam("name") String name);
 }
