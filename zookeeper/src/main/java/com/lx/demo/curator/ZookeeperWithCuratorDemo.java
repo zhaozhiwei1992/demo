@@ -1,5 +1,6 @@
 package com.lx.demo.curator;
 
+import com.lx.demo.config.IPConfig;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.framework.api.BackgroundCallback;
@@ -21,8 +22,7 @@ public class ZookeeperWithCuratorDemo {
     /**
      * 服务器配置的zkserver， 其中ip地址为各个服务器的ip地址, 2181端口为客户端访问服务器的端口
      */
-    private final static String CONNECTSTRING="192.168.140.128:2181,192.168.140.129:2181," +
-            "192.168.140.130:2181";
+    private final static String CONNECTSTRING= IPConfig.CONNECTSTRING;
 
     /**
      * session超时时间
@@ -80,7 +80,7 @@ public class ZookeeperWithCuratorDemo {
         // 事务操作
         Collection<CuratorTransactionResult> curatorTransactionResults = zkWithCuratorBuild.inTransaction().create().forPath("/xxtt", "111".getBytes())
                 .and()
-                .setData().forPath("/tt", "2222".getBytes())
+                .setData().forPath("/xxtt", "2222".getBytes())
                 .and()
                 .commit();
         for (CuratorTransactionResult curatorTransactionResult : curatorTransactionResults) {
