@@ -1,16 +1,16 @@
 package com.lx.demo.exceptiononspringmvc;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
 @RestController
+@Slf4j
 public class IndexController {
 
     // @PostMapping    // Post 请求   @RequestMapping(method = RequestMethod.POST)  Create(C)
@@ -21,7 +21,9 @@ public class IndexController {
     // curl -X POST
     @RequestMapping("/hello")
     public String hello(){
-        return "hello world";
+        String msg = "hello world";
+        log.info(msg);
+        return msg;
     }
 
     @RequestMapping("/npe")
@@ -58,5 +60,20 @@ public class IndexController {
                 request.getAttribute("javax.servlet.error.request_uri"));
 
         return errors;
+    }
+
+    //捕获所有异常
+//    @ExceptionHandler(Exception.class)
+
+    //局部方式异常捕获优先级最高
+    //精确指定
+    @ExceptionHandler(value = {
+//            NullPointerException.class,
+            IllegalAccessException.class,
+            IllegalStateException.class,
+    })
+    @ResponseBody
+    public void exceptionHandler(Exception e) {
+        log.error("[{}] system error", e);
     }
 }
