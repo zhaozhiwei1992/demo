@@ -1,6 +1,6 @@
-HELP.md
-/target/
-!.mvn/wrapper/maven-wrapper.jar
+mybatis/HELP.md
+*/target/*
+!mybatis/.mvn/wrapper/maven-wrapper.jar
 
 ### STS ###
 .apt_generated
