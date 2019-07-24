@@ -15,8 +15,7 @@ public class ZookeeperWithZKClientDemo {
     /**
      * 服务器配置的zkserver， 其中ip地址为各个服务器的ip地址, 2181端口为客户端访问服务器的端口
      */
-    private final static String CONNECTSTRING="192.168.140.128:2181,192.168.140.129:2181," +
-            "192.168.140.130:2181";
+    private final static String CONNECTSTRING="127.0.0.1:2181,127.0.0.1:2182,127.0.0.1:2183";
 
     /**
      * 超时时间
