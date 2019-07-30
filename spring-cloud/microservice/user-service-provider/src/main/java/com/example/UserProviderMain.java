@@ -18,4 +18,17 @@ public class UserProviderMain {
     public static void main( String[] args ) {
         SpringApplication.run(UserProviderMain.class, args);
     }
+
+    /**
+     * 服务发现时传入参数, eurekaserver认证的另一种方式
+     * @return
+     */
+//    @Bean
+//    public DiscoveryClient.DiscoveryClientOptionalArgs discoveryClientOptionalArgs(){
+//        final DiscoveryClient.DiscoveryClientOptionalArgs discoveryClientOptionalArgs = new DiscoveryClient.DiscoveryClientOptionalArgs();
+//        final List<ClientFilter> additionalFilters = new ArrayList<ClientFilter>();
+//        additionalFilters.add(new HTTPBasicAuthFilter("user", "password"));
+//        discoveryClientOptionalArgs.setAdditionalFilters(additionalFilters);
+//        return discoveryClientOptionalArgs;
+//    }
 }
