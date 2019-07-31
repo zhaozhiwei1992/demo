@@ -1,0 +1,67 @@
+# 默认单注册中心, 类似properties　默认配置会带入到所有peer配置中, 比如security安全配置
+eureka:
+  client:
+    # 下面两个参数控制不进行注册，本身就死注册中心
+    fetch-registry: false
+    register-with-eureka: false
+    serviceUrl:
+      defaultZone: http://${security.user.name}:${security.user.password}@${eureka.instance.hostname}:${server.port}/eureka
+  instance:
+    # 读取的是/etc/host 中的localhost
+    hostname: localhost
+    preferIpAddress: true
+    # 自定义元数据
+    metadataMap:
+      my-metadata: hello
+  helthcheck:
+    enabled: true
+management:
+  security:
+    enabled: false
+security:
+  basic:
+    enabled: true
+  user:
+    name: user # 配置登录用户user
+    password: password #配置登录密码password
+server:
+  port: ${port:10000}
+#读取pom中的名字作为应用名称
+spring:
+  application:
+    name: '@artifactId@'
+
+---
+# 多注册中心分别启动peer1/2
+spring:
+  profiles: peer1
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    serviceUrl:
+      defaultZone: http://peer2:8762/eureka
+  instance:
+    hostname: peer1
+management:
+  security:
+    enabled: false
+server:
+  port: ${port:8761}
+
+---
+spring:
+  profiles: peer2
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    serviceUrl:
+      defaultZone: http://peer1:8761/eureka
+  instance:
+    hostname: peer2
+management:
+  security:
+    enabled: false
+server:
+  port: ${port:8762}
