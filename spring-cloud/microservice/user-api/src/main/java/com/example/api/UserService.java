@@ -1,5 +1,6 @@
 package com.example.api;
 
+import com.example.config.FooConfiguration;
 import com.example.domain.User;
 import com.example.fallback.UserServiceFallback;
 import org.springframework.cloud.netflix.feign.FeignClient;
