@@ -20,14 +20,6 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableFeignClients
-@ComponentScan(
-        includeFilters = {
-                @ComponentScan.Filter(type = FilterType.REGEX, pattern = "com.example.web.*")
-        },
-        excludeFilters = {
-                // 不自动扫描
-                @ComponentScan.Filter(type = FilterType.REGEX, pattern = "com.example.config.*")
-        })
 public class UserServiceClientMain {
     public static void main(String[] args) {
         SpringApplication.run(UserServiceClientMain.class, args);
