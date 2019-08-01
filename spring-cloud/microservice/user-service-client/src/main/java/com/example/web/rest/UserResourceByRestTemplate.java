@@ -1,6 +1,7 @@
 package com.example.web.rest;
 
 import com.example.domain.User;
+import com.netflix.loadbalancer.IRule;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,7 +31,6 @@ public class UserResourceByRestTemplate {
     @Autowired
     private LoadBalancerClient loadBalancerClient;
 
-
     /**
      * 查找所有用户
      * resttemplate请求会负载均衡, 原理类似下面choose，挑了一个
@@ -56,6 +56,6 @@ public class UserResourceByRestTemplate {
     @GetMapping("/log-user-instance")
     public void logUserInstance(){
         final ServiceInstance serviceInstance = loadBalancerClient.choose(providerInstanceName);
-        log.info("当前被宠信的节点: {}:{}:{}", serviceInstance.getServiceId(), serviceInstance.getHost(), serviceInstance.getPort());
+        log.info("当前被宠幸的节点: {}:{}:{}", serviceInstance.getServiceId(), serviceInstance.getHost(), serviceInstance.getPort());
     }
 }
