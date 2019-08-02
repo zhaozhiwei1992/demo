@@ -1,0 +1,19 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://user:password@${eureka.instance.hostname}:${eureka.instance.port}/eureka
+  instance:
+    hostname: localhost
+    port: 10000
+    preferIpAddress: true # 将自己的ip注册到eureka server上, 没起作用
+management:
+  security:
+    enabled: false
+server:
+  port: ${port:9001}
+spring:
+  application:
+    name: '@artifactId@'
+turbine:
+  appConfig: user-service-provider
+  clusterNameExpression: "'default'"
