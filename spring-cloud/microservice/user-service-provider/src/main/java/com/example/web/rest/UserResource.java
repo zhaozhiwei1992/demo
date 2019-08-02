@@ -55,6 +55,7 @@ public class UserResource{
                     name="execution.isolation.thread.timeoutInMilliseconds", value = "100"
             ),
             fallbackMethod = "fallbackTimeout"
+//            , ignoreExceptions = {NullPointerException.class}//空指针不触发fallback
     )
     @GetMapping("/users")
     public List<User> getAllUser() throws InterruptedException {
@@ -62,6 +63,11 @@ public class UserResource{
         int executeTime = random.nextInt(200);
         logger.info(String.format("Execute time %sms ", executeTime));
         Thread.sleep(executeTime);
+
+        // 抛出空指针异常测试　打开忽略空指针异常后，就不会进入fallback
+//        if(1>0){
+//            throw new NullPointerException();
+//        }
         return userService.getAllUser();
     }
 
@@ -90,8 +96,9 @@ public class UserResource{
      * 超时回调
      * @return
      */
-    public List<User> fallbackTimeout() {
+    public List<User> fallbackTimeout(Throwable throwable) {
         logger.error("访问超时!");
+//        logger.error("访问超时! 异常信息:{}", throwable);
         return Collections.emptyList();
     }
 }
