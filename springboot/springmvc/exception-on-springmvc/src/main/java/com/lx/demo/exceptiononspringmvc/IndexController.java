@@ -22,7 +22,12 @@ public class IndexController {
     @RequestMapping("/hello")
     public String hello(){
         String msg = "hello world";
-        log.info(msg);
+        return msg;
+    }
+
+    @RequestMapping("/hello/{name}")
+    public String hello(@PathVariable("name") String name){
+        String msg = "hello " + name;
         return msg;
     }
 
