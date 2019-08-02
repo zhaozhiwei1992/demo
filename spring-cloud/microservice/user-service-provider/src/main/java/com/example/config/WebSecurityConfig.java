@@ -37,6 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // 所有请求都需要通过http basic认证
         http.authorizeRequests().anyRequest().authenticated()
                 .and()
+                .csrf().disable() //关闭CSRF
                 .httpBasic();
     }
 

@@ -26,4 +26,9 @@ public class InMemeryUserService implements UserService {
     public List<User> getAllUser() {
         return new ArrayList<>(repository.values());
     }
+
+    @Override
+    public User findById(Long id) {
+        return repository.get(id);
+    }
 }
