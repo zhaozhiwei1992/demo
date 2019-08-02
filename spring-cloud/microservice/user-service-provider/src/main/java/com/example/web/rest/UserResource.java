@@ -4,11 +4,16 @@ import com.example.api.UserService;
 import com.example.domain.User;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -17,6 +22,7 @@ import java.util.Random;
  *
  */
 @RestController
+@Slf4j
 public class UserResource{
 
     private UserService userService;
@@ -64,8 +70,14 @@ public class UserResource{
      * @param id
      * @return
      */
-    @GetMapping("/id")
+    @GetMapping("/users/{id}")
     User findById(@PathVariable("id") Long id){
+        final Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(principal instanceof UserDetails){
+            UserDetails user = (UserDetails) principal;
+            final Collection<? extends GrantedAuthority> authorities = user.getAuthorities();
+            authorities.forEach(authoritie -> log.info("当前登录用户: {}, 角色为: {}", user.getUsername(), authoritie.getAuthority()));
+        }
         final User user = new User();
         user.setId(id);
         user.setName("张三");
