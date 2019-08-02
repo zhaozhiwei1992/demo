@@ -24,4 +24,13 @@
 	 	<property name="prefix" value="/WEB-INF/jsp/" />
 	 	<property name="suffix" value=".jsp" />
 	 </bean>
+
+	<mvc:interceptors>
+		<!-- 日志拦截器 -->
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+<!--			<mvc:exclude-mapping path="/static/**" />-->
+			<bean class="com.lx.demo.interceptor.DefaultHandlerInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
 </beans>
