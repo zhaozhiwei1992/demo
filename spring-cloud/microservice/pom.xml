@@ -10,7 +10,8 @@
 		<module>user-service-client</module>
 		<module>hystrix-dashboard</module>
         <module>zuul-proxy</module>
-    </modules>
+		<module>netflix-turbine</module>
+	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
