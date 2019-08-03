@@ -6,11 +6,19 @@ eureka:
     hostname: localhost
     port: 10000
     preferIpAddress: true # 将自己的ip注册到eureka server上, 没起作用
+
 management:
   security:
     enabled: false
+
 server:
   port: ${port:9090}
 spring:
   application:
     name: '@artifactId@'
+  # mq
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
