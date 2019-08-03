@@ -1,0 +1,81 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://user:password@${eureka.instance.hostname}:${eureka.instance.port}/eureka
+  instance:
+    hostname: localhost
+    port: 10000
+management:
+  security:
+    enabled: false
+server:
+  port: ${port:7070}
+spring:
+  application:
+    name: '@artifactId@'
+  profiles:
+    active: native #默认使用本地配置
+
+---
+
+spring:
+  profiles: git
+  cloud:
+    config:
+      bus:
+        trace:
+          enabled: true
+      server:
+        git:
+          basedir: /tmp/data
+          search-paths: '{application}'
+          force-pull: true
+          uri: https://github.com/microzhao/cloud-config-repo
+          username: xxx #账号密码写真实的快一些我觉得，不使用也能访问有点慢
+          password: '{cipher}AIAC6nB/V+0UxnIrBj4pv0xUEdPog9GxklYpMtp3K7dLflI+u64aFv60xG37LyiqYjEQ6yXaNni9IvxNKUdLlUV7k8FwGLaarc9EF+uPhVewcZ1JnIXBXhDsyj4A9BKl0DbmwZX1issCvnoerTv5Ee4Va03zm6esVgN+pvqqG84DnXpUHzJUZ8IamWK7/H2hAsm4XAqMUQTgOxFZU+TWZ75i'
+
+---
+
+spring:
+  profiles: native  # 配置使用本地储存
+  cloud:
+    config:
+      server:
+        native:
+          # 访问http://host:port/zuul/dev 就会到xxx/zuul/目录下去找
+          search-locations: ${user.dir}/config-server/src/main/resources/configs/{application}
+      allowOverride: false
+      overrideNone: false
+      overrideSystemProperties: false
+
+---
+
+spring:
+  profiles: subversion
+  cloud:
+    config:
+      bus:
+        trace:
+          enabled: true
+      server:
+        svn:
+          basedir: /tmp/data
+          default-label:
+          password: '{cipher}AICZ22ragF2cVLaYaPOXXMz2uCQ3e++5sLTRI6eokUi3HPAQE6+HjxeMvavBjwlnUcrH5t+Q/0IC7kwMnxqxHvdPENsziEl+cCfjXug+/5cjbmqcwYY+YbRwIzQIKBEliSPgfCEg23VbBzYNR0N/uDAAY2fmWlNHO/K6XMQ6aBUnc9AnIXIJ4Zo6ZZ6ZztqAa8b8ZyMMauklsHp0zegtYXZB'
+          search-paths: '{application}'
+          uri: http://host:port/cloud-config-repo
+          username: xxx
+
+#spring.application.name=@artifactId@
+#server.port=${port:7070}
+#management.security.enabled=false
+#
+## cloudserver 配置
+#spring.cloud.config.server.git.uri=file://${user.dir}/config-server/src/main/resources/configs
+## 一定注意， 如果不是github上获取配置，下面千万别打开，不然客户端这辈子取不到配置
+#spring.cloud.config.server.git.force-pull=true
+#
+## 注册到eureka
+#eureka.instance.hostname=localhost
+#eureka.instance.port=10000
+#eureka.client.serviceUrl.defaultZone=http://user:password@${eureka.instance.hostname}:${eureka.instance.port}/eureka

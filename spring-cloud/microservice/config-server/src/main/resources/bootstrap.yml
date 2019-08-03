@@ -1,0 +1,104 @@
+#server:
+#  port: 8880
+#spring:
+#  application:
+#    name: ifmis-framework-config
+#  security:
+#    user:
+#      name: ${CONFIG_SERVER_USERNAME:user}
+#      password: ${CONFIG_SERVER_PASSWORD:password}
+#    admin:
+#      name: ${ADMIN_SERVER_USERNAME:user}
+#      password: ${ADMIN_SERVER_PASSWORD:password}
+#  boot:
+#    admin:
+#      client:
+#        instance:
+#          management-base-url: http://${eureka.instance.ip-address:${spring.cloud.client.ip-address}}:${server.port}
+#          name:  ${spring.application.name}-admin
+#          service-base-url: http://${eureka.instance.ip-address:${spring.cloud.client.ip-address}}:${server.port}
+#          metadata:
+#            user.name: ${spring.security.user.name}
+#            user.password: ${spring.security.user.password}
+#        url: http://${ADMIN_SERVER:admin}:${ADMIN_SERVER_PORT:8082}  #要注册的服务端
+#        username: ${spring.security.admin.name}
+#        password: ${spring.security.admin.password}
+#  cloud:
+#    config:
+#      bus:
+#        trace:
+#          enabled: true
+#  rabbitmq:
+#    host: ${RABBITMQ_SERVER:192.168.2.68}
+#    port: ${RABBITMQ_SERVER_PORT:5672}
+#    username: ${RABBITMQ_SERVER_USERNAME:admin}
+#    password: ${RABBITMQ_SERVER_PASSWORD:123456}
+#eureka:
+#  instance:
+#    hostname: ${spring.application.name}
+#    lease-expiration-duration-in-seconds: 30 # 续约更新时间间隔（默认30秒）
+#    lease-renewal-interval-in-seconds: 10 # 续约到期时间（默认90秒）
+#    prefer-ip-address: true
+#    status-page-url-path: /actuator/info
+#    health-check-url-path: /actuator/health
+#    metadata-map:
+#      zone: ${zone.name}
+#      user:
+#        name: ${spring.security.user.name}
+#        password: ${spring.security.user.password}
+#  client:
+#    healthcheck:
+#      enabled: true
+#    register-with-eureka: true
+#    fetch-registry: true
+#    prefer-same-zone-eureka: true
+#    #地区
+#    region: beijing
+#    availability-zones:
+#      beijing: zone-1,zone-2
+#    service-url:
+#      zone-1: http://${REGISTRY_SERVER_USERNAME:user}:${REGISTRY_SERVER_PASSWORD:password}@${REGISTRY_SERVER1:127.0.0.1}:${REGISTRY_SERVER1_PORT:8761}/eureka/
+#      zone-2: http://${REGISTRY_SERVER_USERNAME:user}:${REGISTRY_SERVER_PASSWORD:password}@${REGISTRY_SERVER2:127.0.0.1}:${REGISTRY_SERVER2_PORT:8762}/eureka/
+#
+#management:
+#  # 设置端点是否可用 默认只有shutdown可用
+#  enabled-by-default: true
+#  endpoints:
+#    web:
+#      # 设置是否暴露端点 默认只有health和info可见
+#      exposure:
+#        # 包括所有端点
+#        include: '*'  # 注意需要添加引号
+#  endpoint:
+#    health:
+#      show-details: ALWAYS
+#    logfile:
+#      enabled: true #可在线查看日志
+#    shutdown:
+#      enabled: true #客户端开启停止服务端点
+#      sensitive: false  #禁用密码验证
+#encrypt相关的配置必须配置在bootstrap配置文件中，不然没法解密
+#keytool -genkeypair -alias mytestkey -keyalg RSA -dname "CN=Web Server,OU=Unit,O=Organization,L=City,S=State,C=US" -keypass changeme -keystore server.jks -storepass letmein
+##下面除了location之外的其他三个属性建议设置到部署机的环境变量当中去更安全，对应的是ENCRYPT_KEY_STORE_ALIAS，ENCRYPT_KEY_STORE_PASSWORD,ENCRYPT_KEY_STORE_SECRET
+#curl -X POST http://user:password@127.0.0.1:8880/encrypt -d 明文
+#curl -X POST http://user:password@127.0.0.1:8880/decrypt -d 密文
+#message = {cipher}密文
+encrypt:
+#  key: foo #对称加密密钥
+  keyStore:
+    location: classpath:/server.jks # jks文件的路径
+    password: letmein               # storepass
+    alias: mytestkey                # alias
+    secret: changeme                # keypass
+logging:
+  level:
+    root: 'INFO'
+  levels:
+    org:
+      springframework:
+        boot:
+          env:
+            PropertySourcesLoader: 'TRACE'
+        cloud:
+          config:
+            server: 'DEBUG'
