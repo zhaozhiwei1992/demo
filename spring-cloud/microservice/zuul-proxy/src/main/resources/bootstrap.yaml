@@ -16,7 +16,18 @@ spring:
       profile: default
       username: user
       password: password
-
+  profiles:
+    acrive: dev
+---
+spring:
+  profiles: dev
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+  instance:
+    lease-expiration-duration-in-seconds: 30 #续约更新时间间隔　默认30s
+    lease-renewal-interval-in-seconds: 10 # 续约到期时间 默认90s
 ## 配置怎么访问到配置服务器, url的方式
 ##spring.cloud.config.uri=http://127.0.0.1:7071
 ## 配置服务的名字

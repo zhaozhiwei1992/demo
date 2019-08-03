@@ -1,20 +1,3 @@
-# 默认单注册中心, 类似properties　默认配置会带入到所有peer配置中, 比如security安全配置
-eureka:
-  client:
-    # 下面两个参数控制不进行注册，本身就死注册中心
-    fetch-registry: false
-    register-with-eureka: false
-    serviceUrl:
-      defaultZone: http://${security.user.name}:${security.user.password}@${eureka.instance.hostname}:${server.port}/eureka
-  instance:
-    # 读取的是/etc/host 中的localhost
-    hostname: localhost
-    preferIpAddress: true
-    # 自定义元数据
-    metadataMap:
-      my-metadata: hello
-  helthcheck:
-    enabled: true
 management:
   security:
     enabled: false
@@ -26,10 +9,44 @@ security:
     password: password #配置登录密码password
 server:
   port: ${port:10000}
+# Tomcat
+  tomcat:
+    max-connections: 50 # 最大连接数
+    uri-encoding: UTF-8
+    max-threads: 1000 # 最大线程数
+    min-spare-threads: 30 #最小空闲数
+    accept-count: 10 #线程数达到最大时, 允许排队请求个数
+
 #读取pom中的名字作为应用名称
 spring:
   application:
     name: '@artifactId@'
+  profiles:
+    active: dev #默认开发模式单体
+
+---
+spring:
+  profiles: dev
+
+# 默认单注册中心, 类似properties　默认配置会带入到所有peer配置中, 比如security安全配置
+eureka:
+  client:
+    # 下面两个参数控制不进行注册，本身就死注册中心
+    fetch-registry: false
+    register-with-eureka: false
+    serviceUrl:
+      defaultZone: http://${security.user.name}:${security.user.password}@${eureka.instance.hostname}:${server.port}/eureka
+  instance:
+    # 读取的是/etc/host 中的localhost
+    hostname: localhost
+    # 自定义元数据
+    metadataMap:
+      my-metadata: hello
+  # 加快服务清理, 只在开发测试时使用
+  server:
+    # THE SELF PRESERVATION MODE IS TURNED OFF.THIS MAY NOT PROTECT INSTANCE EXPIRY IN CASE OF NETWORK/OTHER PROBLEMS.
+    enable-self-preservation: false # 设为false表示关闭自我保护
+    eviction-interval-timer-in-ms: 4000 # 清理间隔,单位ms
 
 ---
 # 多注册中心分别启动peer1/2

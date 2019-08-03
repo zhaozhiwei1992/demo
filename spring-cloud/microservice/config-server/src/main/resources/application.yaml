@@ -5,6 +5,10 @@ eureka:
   instance:
     hostname: localhost
     port: 10000
+    preferIpAddress: true
+    # 自定义元数据
+    metadataMap:
+      my-metadata: hello
 management:
   security:
     enabled: false

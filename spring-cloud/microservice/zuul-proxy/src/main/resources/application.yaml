@@ -45,6 +45,8 @@ logging:
 # 上传超过一分钟抛异常
 hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds:
   60000
+
+# ribbon设置超时
 ribbon:
   ConnectTimeout: 30000
   ReadTimeout: 60000
@@ -55,3 +57,6 @@ zuul:
   PreRequestLogFilter:
     pre:
       disable: true
+  ribbon:
+    eager-load:
+      enabled: true # 提前加载，加快首次访问速度
