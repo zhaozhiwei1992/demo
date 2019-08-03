@@ -11,6 +11,7 @@
 		<module>hystrix-dashboard</module>
         <module>zuul-proxy</module>
 		<module>netflix-turbine</module>
+		<module>file-upload</module>
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
