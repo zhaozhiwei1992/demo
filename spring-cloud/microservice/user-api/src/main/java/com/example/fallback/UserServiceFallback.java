@@ -19,4 +19,9 @@ public class UserServiceFallback implements UserService {
     public List<User> getAllUser() {
         return Collections.emptyList();
     }
+
+    @Override
+    public User findById(Long id) {
+        return new User();
+    }
 }
