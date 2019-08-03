@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.lx.demo</groupId>
+  <artifactId>jax-rs-search</artifactId>
+  <packaging>pom</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>jax-rs-search</name>
+  <url>http://maven.apache.org</url>
+<!--  引入通用依赖-->
+  <dependencies>
+    <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+
+  </dependencies>
+  <modules>
+    <module>jax-rs-search-jpa</module>
+    <module>jax-rs-search-rsql</module>
+    <module>jax-rs-search-extension</module>
+    <module>jax-rs-search-odata</module>
+  </modules>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>2.1.3.RELEASE</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>cz.jirutka.rsql</groupId>
+        <artifactId>rsql-parser</artifactId>
+        <version>2.1.0</version>
+      </dependency>
+      <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>1.18.8</version>
+        <scope>provided</scope>
+      </dependency>
+
+<!--      http://cxf.apache.org/docs/jax-rs-search.html-->
+      <dependency>
+        <groupId>org.apache.cxf</groupId>
+        <artifactId>cxf-spring-boot-starter-jaxrs</artifactId>
+        <version>3.2.5</version>
+      </dependency>
+      <!-- https://mvnrepository.com/artifact/org.apache.cxf/cxf-rt-rs-extension-search -->
+      <dependency>
+        <groupId>org.apache.cxf</groupId>
+        <artifactId>cxf-rt-rs-extension-search</artifactId>
+        <version>3.3.1</version>
+      </dependency>
+      <!-- https://mvnrepository.com/artifact/org.apache.olingo/olingo-odata2-core-incubating -->
+      <dependency>
+        <groupId>org.apache.olingo</groupId>
+        <artifactId>olingo-odata2-core-incubating</artifactId>
+        <version>1.1.0</version>
+      </dependency>
+
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>3.8.1</version>
+        <scope>test</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+    <build>
+      <pluginManagement>
+        <plugins>
+          <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+          </plugin>
+        </plugins>
+      </pluginManagement>
+    </build>
+</project>

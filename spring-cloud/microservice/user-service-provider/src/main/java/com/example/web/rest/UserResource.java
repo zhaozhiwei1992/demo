@@ -78,17 +78,13 @@ public class UserResource{
      */
     @GetMapping("/users/{id}")
     User findById(@PathVariable("id") Long id){
-        final Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if(principal instanceof UserDetails){
-            UserDetails user = (UserDetails) principal;
-            final Collection<? extends GrantedAuthority> authorities = user.getAuthorities();
-            authorities.forEach(authoritie -> log.info("当前登录用户: {}, 角色为: {}", user.getUsername(), authoritie.getAuthority()));
-        }
-        final User user = new User();
-        user.setId(id);
-        user.setName("张三");
-        user.setAge(0);
-        return user;
+//        final Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        if(principal instanceof UserDetails){
+//            UserDetails user = (UserDetails) principal;
+//            final Collection<? extends GrantedAuthority> authorities = user.getAuthorities();
+//            authorities.forEach(authoritie -> log.info("当前登录用户: {}, 角色为: {}", user.getUsername(), authoritie.getAuthority()));
+//        }
+        return userService.findById(id);
     }
 
     private static final Logger logger = LoggerFactory.getLogger(UserResource.class);

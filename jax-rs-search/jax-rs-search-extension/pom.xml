@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.lx.demo</groupId>
+    <artifactId>jax-rs-search</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <groupId>com.lx.demo</groupId>
+  <artifactId>jax-rs-search-extension</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <name>jax-rs-search-extension</name>
+  <url>http://maven.apache.org</url>
+  <dependencies>
+    <!-- https://mvnrepository.com/artifact/org.apache.cxf/cxf-rt-rs-extension-search -->
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-rs-extension-search</artifactId>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.apache.olingo/olingo-odata2-core-incubating -->
+    <dependency>
+      <groupId>org.apache.olingo</groupId>
+      <artifactId>olingo-odata2-core-incubating</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-spring-boot-starter-jaxrs</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+</project>
