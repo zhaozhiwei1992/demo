@@ -1,6 +1,15 @@
 server:
   port: 9411
 
+zipkin:
+  collector:
+    rabbitmq:
+      # 多个地址逗号分隔
+      addresses: localhost:5672
+      username: guest
+      password: guest
+      queue: zipkin
+
 spring:
   application:
     name: '@artifactId@'

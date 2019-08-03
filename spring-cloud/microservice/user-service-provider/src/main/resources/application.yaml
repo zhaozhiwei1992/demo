@@ -24,11 +24,13 @@ spring:
     password: guest
   #zipkin
   zipkin:
-    # zipkin的地址：通过真实IP地址访问
-#    base-url: http://${ZIPKIN_SERVER:127.0.0.1}:${ZIPKIN_SERVER_PORT:9411}
-    #通过服务名访问
-    base-url: http://zipkin-server/
-    enabled: true
+    rabbitmq:
+      queue: zipkin
+#    # zipkin的地址：通过真实IP地址访问
+##    base-url: http://${ZIPKIN_SERVER:127.0.0.1}:${ZIPKIN_SERVER_PORT:9411}
+#    #通过服务名访问
+#    base-url: http://zipkin-server/
+#    enabled: true
   sleuth:
     web:
       client:
