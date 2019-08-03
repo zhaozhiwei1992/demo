@@ -3,13 +3,6 @@
 #spring:
 #  application:
 #    name: ifmis-framework-config
-#  security:
-#    user:
-#      name: ${CONFIG_SERVER_USERNAME:user}
-#      password: ${CONFIG_SERVER_PASSWORD:password}
-#    admin:
-#      name: ${ADMIN_SERVER_USERNAME:user}
-#      password: ${ADMIN_SERVER_PASSWORD:password}
 #  boot:
 #    admin:
 #      client:
@@ -28,11 +21,6 @@
 #      bus:
 #        trace:
 #          enabled: true
-rabbitmq:
-  host: 127.0.0.1
-  port: 5672
-  username: guest
-  password: guest
 #eureka:
 #  instance:
 #    hostname: ${spring.application.name}

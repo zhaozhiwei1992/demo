@@ -14,6 +14,8 @@ spring:
       label: master
       name: zuul
       profile: default
+      username: user
+      password: password
 
 ## 配置怎么访问到配置服务器, url的方式
 ##spring.cloud.config.uri=http://127.0.0.1:7071
