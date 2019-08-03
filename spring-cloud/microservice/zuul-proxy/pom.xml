@@ -16,6 +16,7 @@
     <url>http://www.example.com</url>
 
     <dependencies>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
