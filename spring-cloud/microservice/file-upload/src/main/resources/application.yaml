@@ -1,0 +1,22 @@
+server:
+  port: 9999
+spring:
+  application:
+    name: '@artifactId@'
+  http:
+    multipart:
+      max-file-size: 200Mb # 最大上传文件, 默认1M
+      max-request-size: 220Mb
+#      spring.http.multipart.maxFileSize=100Mb
+#      spring.http.multipart.maxRequestSize=1000Mb
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://user:password@${eureka.instance.hostname}:${eureka.instance.port}/eureka
+  instance:
+    hostname: localhost
+    port: 10000
+    preferIpAddress: true # 将自己的ip注册到eureka server上, 没起作用
+
+
