@@ -38,6 +38,21 @@ public class UserResourceByFeign {
         return userService.getAllUser();
     }
 
+    /**
+     * 测试聚合服务，　目前绕不过去provider的security
+     * curl -X GET http://localhost:10086/aggregate/998
+     * @param id
+     * @return
+     */
+    @GetMapping("/users/{id}")
+    User findById(@PathVariable("id") Long id){
+        final User user = new User();
+        user.setId(id);
+        user.setName("测试聚合");
+        user.setAge(998);
+        return user;
+    }
+
 //    @Autowired
 //    private UserServiceFeignContract userServiceFeignContract;
 //
