@@ -48,3 +48,10 @@ hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds:
 ribbon:
   ConnectTimeout: 30000
   ReadTimeout: 60000
+
+# 禁用过滤器 zuul.<filtername>.<filtertype>.disable=true
+# 这个龟儿子关不掉..
+zuul:
+  PreRequestLogFilter:
+    pre:
+      disable: true
