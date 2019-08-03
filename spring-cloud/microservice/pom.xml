@@ -12,6 +12,7 @@
         <module>zuul-proxy</module>
 		<module>netflix-turbine</module>
 		<module>file-upload</module>
+		<module>zipkin-server</module>
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
