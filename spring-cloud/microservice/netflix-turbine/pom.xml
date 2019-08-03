@@ -24,10 +24,24 @@
   </properties>
 
   <dependencies>
+<!--    <dependency>-->
+<!--      <groupId>org.springframework.cloud</groupId>-->
+<!--      <artifactId>spring-cloud-starter-netflix-turbine</artifactId>-->
+<!--    </dependency>-->
+
+    <!--        消息中间件方式同步数据 begin-->
+    <!--        使用hystrix和hystrix-stream不能共存-->
     <dependency>
       <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-netflix-turbine</artifactId>
+      <artifactId>spring-cloud-starter-netflix-turbine-stream</artifactId>
     </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-stream-rabbit -->
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-stream-rabbit</artifactId>
+    </dependency>
+    <!--        消息中间件方式同步数据  end -->
   </dependencies>
 
 </project>
