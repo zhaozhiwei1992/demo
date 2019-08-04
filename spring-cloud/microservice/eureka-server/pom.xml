@@ -20,10 +20,11 @@
             <artifactId>spring-cloud-starter-eureka-server</artifactId>
         </dependency>
 
-<!--        引入security 注册中心身份验证-->
+        <!--        引入security 注册中心身份验证-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
     </dependencies>
+
 </project>

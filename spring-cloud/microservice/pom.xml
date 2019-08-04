@@ -31,6 +31,9 @@
 		<java.version>1.8</java.version>
 		<spring-cloud.version>Edgware.SR5</spring-cloud.version>
 		<spring-boot.version>1.5.19.RELEASE</spring-boot.version>
+		<docker.image.prefix>microservice-cloud</docker.image.prefix>
+		<docker.plugin.version>1.1.1</docker.plugin.version>
+
 	</properties>
 
 	<dependencies>
@@ -138,6 +141,51 @@
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>${docker.plugin.version}</version>
+				<executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                        <goal>build</goal>
+                    </goals>
+                    </execution>
+                </executions>
+				<configuration>
+<!--					<dockerHost>https://192.168.2.68:2376</dockerHost>-->
+<!--					<dockerCertPath>../docker/cenos-certs</dockerCertPath>-->
+					<imageName>${docker.image.prefix}/${project.artifactId}:${project.version}</imageName>
+					<!--<dockerDirectory>${project.basedir}/</dockerDirectory>-->
+					<forceTags>true</forceTags>
+					<maintainer>zhaozhiweishanxi@gmail.com</maintainer>
+					<baseImage>java:8</baseImage>
+					<volumes>/tmp</volumes>
+<!--					<workdir>/root</workdir>-->
+					<!--"${JAVA_OPTS}",-->
+<!--					系统属性egd表示熵收集守护进程(entropy gathering daemon)-->
+					<entryPoint>
+						["java","-Djava.security.egd=file:/dev/./urandom","-jar","/${project.build.finalName}.jar"]
+					</entryPoint>
+<!--					<skipDockerBuild>true</skipDockerBuild>-->
+					<resources>
+						<resource>
+							<targetPath>/</targetPath>
+							<directory>${project.build.directory}</directory>
+							<include>${project.build.finalName}.jar</include>
+						</resource>
+						<!--                        <resource>-->
+						<!--                            <targetPath>/docker</targetPath>-->
+						<!--                            <directory>../docker</directory>-->
+						<!--                            <include>api.env</include>-->
+						<!--                        </resource>-->
+					</resources>
+
+					<serverId>registry-aliyuncs</serverId>
+				</configuration>
+			</plugin>
+
 			<!-- Maven Java 编译器插件 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -145,9 +193,21 @@
 				<version>3.1</version>
 			</plugin>
 
+<!--			处理多模块项目　docker没有manifest文件-->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<!--加入下面两项配置-->
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<includeSystemScope>true</includeSystemScope>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
