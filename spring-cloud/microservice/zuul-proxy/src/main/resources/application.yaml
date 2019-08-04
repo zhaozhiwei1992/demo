@@ -7,7 +7,7 @@
 ##zuul.routes.api-a.serviceId=user-service-client
 #
 ## eureka地址
-##eureka.client.serviceUrl.defaultZone=http://user:password@localhost:10000/eureka/
+##eureka.client.serviceUrl.defaultZone=http://user:password@localhost:8761/eureka/
 #
 ##打开endpoint
 #management.security.enabled=false

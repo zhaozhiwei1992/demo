@@ -8,14 +8,14 @@ security:
     name: user # 配置登录用户user
     password: password #配置登录密码password
 server:
-  port: ${port:10000}
+  port: ${port:8761}
 # Tomcat
   tomcat:
-    max-connections: 50 # 最大连接数
+    max-connections: 1000 # 最大连接数
     uri-encoding: UTF-8
     max-threads: 1000 # 最大线程数
     min-spare-threads: 30 #最小空闲数
-    accept-count: 10 #线程数达到最大时, 允许排队请求个数
+    accept-count: 50 #线程数达到最大时, 允许排队请求个数
 
 #读取pom中的名字作为应用名称
 spring:
@@ -57,7 +57,7 @@ eureka:
     fetch-registry: true
     register-with-eureka: true
     serviceUrl:
-      defaultZone: http://peer2:8762/eureka
+      defaultZone: http://${security.user.name}:${security.user.password}@peer2:8762/eureka
   instance:
     hostname: peer1
 management:
@@ -74,7 +74,7 @@ eureka:
     fetch-registry: true
     register-with-eureka: true
     serviceUrl:
-      defaultZone: http://peer1:8761/eureka
+      defaultZone: http://${security.user.name}:${security.user.password}@peer1:8761/eureka
   instance:
     hostname: peer2
 management:

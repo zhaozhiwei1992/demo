@@ -1,10 +1,10 @@
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://user:password@${eureka.instance.hostname}:${eureka.instance.port}/eureka
+      defaultZone: http://user:password@peer1:8761/eureka,http://user:password@peer2:8762/eureka #高可用配置
   instance:
     hostname: localhost
-    port: 10000
+    port: 8761
     preferIpAddress: true # 将自己的ip注册到eureka server上, 没起作用
 
 management:

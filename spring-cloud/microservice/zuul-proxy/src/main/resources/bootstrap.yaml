@@ -1,10 +1,10 @@
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://user:password@${eureka.instance.hostname}:${eureka.instance.port}/eureka
+      defaultZone: http://user:password@peer1:8761/eureka,http://user:password@peer2:8762/eureka #高可用配置
   instance:
     hostname: localhost
-    port: 10000
+    port: 8761
 spring:
   cloud:
     config:
@@ -41,10 +41,10 @@ eureka:
 #spring.cloud.config.discovery.serviceId = config-server
 #
 ## Spring Cloud Eureka 客户端 注册到 Eureka 服务器
-##eureka.client.serviceUrl.defaultZone=http://user:password@localhost:10000/eureka
+##eureka.client.serviceUrl.defaultZone=http://user:password@localhost:8761/eureka
 #
 ## 注册到eureka
 #eureka.instance.hostname=localhost
-#eureka.instance.port=10000
+#eureka.instance.port=8761
 #eureka.client.serviceUrl.defaultZone=http://user:password@${eureka.instance.hostname}:${eureka.instance.port}/eureka
 #

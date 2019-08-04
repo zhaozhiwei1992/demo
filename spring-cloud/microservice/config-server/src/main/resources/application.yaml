@@ -1,10 +1,11 @@
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://user:password@${eureka.instance.hostname}:${eureka.instance.port}/eureka
+      defaultZone: http://user:password@peer1:8761/eureka,http://user:password@peer2:8762/eureka #高可用配置
+#      defaultZone: http://user:password@${eureka.instance.hostname}:${eureka.instance.port}/eureka
   instance:
-    hostname: localhost
-    port: 10000
+#    hostname: localhost
+#    port: 8761
     preferIpAddress: true
     # 自定义元数据
     metadataMap:
@@ -98,5 +99,5 @@ spring:
 #
 ## 注册到eureka
 #eureka.instance.hostname=localhost
-#eureka.instance.port=10000
+#eureka.instance.port=8761
 #eureka.client.serviceUrl.defaultZone=http://user:password@${eureka.instance.hostname}:${eureka.instance.port}/eureka
