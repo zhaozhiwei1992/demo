@@ -65,7 +65,7 @@ spring:
       server:
         native:
           # 访问http://host:port/zuul/dev 就会到xxx/zuul/目录下去找
-          search-locations: ${user.dir}/config-server/src/main/resources/configs/{application}
+          search-locations: ${CONFIGSPATH:${user.dir}/config-server/src/main/home/configs}/{application}
       allowOverride: false
       overrideNone: false
       overrideSystemProperties: false

@@ -145,14 +145,15 @@
 				<groupId>com.spotify</groupId>
 				<artifactId>docker-maven-plugin</artifactId>
 				<version>${docker.plugin.version}</version>
-				<executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                        <goal>build</goal>
-                    </goals>
-                    </execution>
-                </executions>
+<!--                这玩意儿打出来的包没有manifest-->
+<!--				<executions>-->
+<!--                    <execution>-->
+<!--                        <phase>package</phase>-->
+<!--                        <goals>-->
+<!--                        <goal>build</goal>-->
+<!--                    </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
 				<configuration>
 <!--					<dockerHost>https://192.168.2.68:2376</dockerHost>-->
 <!--					<dockerCertPath>../docker/cenos-certs</dockerCertPath>-->
@@ -161,7 +162,7 @@
 					<forceTags>true</forceTags>
 					<maintainer>zhaozhiweishanxi@gmail.com</maintainer>
 					<baseImage>java:8</baseImage>
-					<volumes>/tmp</volumes>
+<!--					<volumes>/tmp</volumes>-->
 <!--					<workdir>/root</workdir>-->
 					<!--"${JAVA_OPTS}",-->
 <!--					系统属性egd表示熵收集守护进程(entropy gathering daemon)-->

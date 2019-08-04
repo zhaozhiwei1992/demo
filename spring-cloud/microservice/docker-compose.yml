@@ -1,47 +1,47 @@
-version: "2"
+version: "3"
 services:
- peer1: # 默认情况下，其他服务可以使用服务名称连接到该服务。因此，对于peer2的节点，它需要连接http://${REGISTRY_SERVER1:127.0.0.1}:${REGISTRY_SERVER1_PORT:8761}/eureka/，因此需要配置该服务的名称是peer1。
-  image: microservice/eureka-server:1.0.0-SNAPSHOT
-  hostname: eureka_master
-  networks:
-   - eureka-net
-  env_file:
-   - api.env
-  ports:
-   - "8761:8761"
-  restart: always
-  environment:
-   - spring.profiles.active=peer1
- peer2:
-  image: microservice/eureka-server:1.0.0-SNAPSHOT
-  hostname: eureka_backup
-  networks:
-   - eureka-net
-  env_file:
-   - api.env
-  ports:
-   - "8762:8762"
-  restart: always
-  environment:
-   - spring.profiles.active=peer2
- config:
-  image: microservice/config-server:1.0.0-SNAPSHOT
-  hostname: config
-  networks:
-   - eureka-net
-  env_file:
-   - api.env
-  ports:
-   - "7070:7070"
-  restart: always
-  depends_on:
-   - peer1
-   - peer2
-  volumes:
-   - "/usr/local/data:/usr/local/data"
-  environment:
-   - spring.profiles.active=native
+  peer1: # 默认情况下，其他服务可以使用服务名称连接到该服务。因此，对于peer2的节点，它需要连接http://${REGISTRY_SERVER1:127.0.0.1}:${REGISTRY_SERVER1_PORT:8761}/eureka/，因此需要配置该服务的名称是peer1。
+    image: microservice-cloud/eureka-server:0.0.1-SNAPSHOT
+    hostname: eureka_master
+    networks:
+      - eureka-net
+    env_file:
+      - api.env
+    ports:
+      - "8761:8761"
+    restart: always
+    environment:
+      - spring.profiles.active=peer1
+  peer2:
+    image: microservice-cloud/eureka-server:0.0.1-SNAPSHOT
+    hostname: eureka_backup
+    networks:
+      - eureka-net
+    env_file:
+      - api.env
+    ports:
+      - "8762:8762"
+    restart: always
+    environment:
+      - spring.profiles.active=peer2
+  config-server:
+    image: microservice-cloud/config-server:0.0.1-SNAPSHOT
+    hostname: config
+    networks:
+      - eureka-net
+    env_file:
+      - api.env
+    ports:
+      - "7070:7070"
+    restart: always
+    depends_on:
+      - peer1
+      - peer2
+    volumes:
+     - "/home/lx7ly/workspace/demo/spring-cloud/microservice/config-server/src/main/resources/configs:/home/configs"
+    environment:
+      - spring.profiles.active=native
 networks:
- eureka-net:
-  driver: bridge
+  eureka-net:
+    driver: bridge
 #docker network create eureka-net
