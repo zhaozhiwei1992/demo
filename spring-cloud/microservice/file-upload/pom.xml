@@ -23,16 +23,4 @@
         </dependency>
     </dependencies>
 
-<!--    这玩意儿不往docker里打-->
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-                <configuration>
-                    <skipDockerBuild>true</skipDockerBuild>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 </project>

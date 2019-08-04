@@ -179,7 +179,7 @@
 						<!--                        <resource>-->
 						<!--                            <targetPath>/docker</targetPath>-->
 						<!--                            <directory>../docker</directory>-->
-						<!--                            <include>api.env</include>-->
+						<!--                            <include>.env</include>-->
 						<!--                        </resource>-->
 					</resources>
 

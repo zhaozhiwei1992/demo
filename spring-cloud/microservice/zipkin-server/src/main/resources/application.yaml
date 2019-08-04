@@ -5,9 +5,11 @@ zipkin:
   collector:
     rabbitmq:
       # 多个地址逗号分隔
-      addresses: localhost:5672
-      username: guest
-      password: guest
+      addresses: ${RABBITMQ_SERVER:localhost}:5672
+#      host: ${RABBITMQ_SERVER:localhost}
+#      port: ${RABBITMQ_SERVER_PORT:5672}
+      username: ${RABBITMQ_SERVER_USERNAME:guest}
+      password: ${RABBITMQ_SERVER_PASSWORD:guest}
       queue: zipkin
 #  storage:
 #    type: elasticsearch

@@ -32,7 +32,7 @@ security:
     name: user
     password: password
 
-# rabbitmq
+# rabbitmq bus
 rabbitmq:
   host: 127.0.0.1
   port: 5672
