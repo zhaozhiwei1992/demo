@@ -14,6 +14,12 @@
     <name>user-service-provider</name>
 
     <dependencies>
+<!--        文档-->
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>custom-monitor</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 <!-- rebbitmq-->
         <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-zipkin -->
         <dependency>

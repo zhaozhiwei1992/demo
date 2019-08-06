@@ -13,6 +13,7 @@
 		<module>netflix-turbine</module>
 		<module>file-upload</module>
 		<module>zipkin-server</module>
+		<module>custom-monitor</module>
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -33,7 +34,8 @@
 		<spring-boot.version>1.5.19.RELEASE</spring-boot.version>
 		<docker.image.prefix>microservice-cloud</docker.image.prefix>
 		<docker.plugin.version>1.1.1</docker.plugin.version>
-
+		<springfox-swagger.version>2.8.0</springfox-swagger.version>
+		<springfox-staticdocs.version>2.6.1</springfox-staticdocs.version>
 	</properties>
 
 	<dependencies>
@@ -136,6 +138,24 @@
 				<optional>true</optional>
 				<scope>provided</scope>
 			</dependency>
+
+			<!-- swagger2 API文档生成 -->
+			<dependency>
+				<groupId>io.springfox</groupId>
+				<artifactId>springfox-swagger2</artifactId>
+				<version>${springfox-swagger.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.springfox</groupId>
+				<artifactId>springfox-swagger-ui</artifactId>
+				<version>${springfox-swagger.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.springfox</groupId>
+				<artifactId>springfox-staticdocs</artifactId>
+				<version>${springfox-staticdocs.version}</version>
+			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 

@@ -36,7 +36,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // 所有请求都需要通过http basic认证
-        http.authorizeRequests().anyRequest().authenticated()
+        http.authorizeRequests()
+                .and().authorizeRequests()
+                .antMatchers("/management/**").permitAll()
+                // swagger start
+                .antMatchers("/swagger-ui.html").permitAll()
+                .antMatchers("/swagger-resources/**").permitAll()
+                .antMatchers("/images/**").permitAll()
+                .antMatchers("/webjars/**").permitAll()
+                .antMatchers("/v2/api-docs").permitAll()
+                .antMatchers("/configuration/ui").permitAll()
+                .antMatchers("/configuration/security").permitAll()
+                //全部校验
+                .anyRequest().authenticated()
                 .and()
                 .csrf().disable() //关闭CSRF
                 .httpBasic();
@@ -62,7 +74,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         // 配置忽略验证的url
-        web.ignoring().antMatchers("/users/**");
+        web.ignoring().antMatchers("/users/**", "swagger-ui.html");
     }
 
     @Component

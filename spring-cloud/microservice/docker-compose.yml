@@ -11,7 +11,7 @@ services:
       - .env
     ports:
       - "8761:8761"
-    restart: always
+    # restart: always
     environment:
       - spring.profiles.active=peer1
   peer2:
@@ -23,7 +23,7 @@ services:
       - .env
     ports:
       - "8762:8762"
-    restart: always
+    # restart: always
     environment:
       - spring.profiles.active=peer2
 # config-server
@@ -36,7 +36,7 @@ services:
       - .env
     ports:
       - "7070-7075"
-    restart: always
+    # restart: always
     depends_on:
       - peer1
       - peer2
@@ -54,7 +54,7 @@ services:
       - .env
     ports:
       - "9997-9999"
-    restart: always
+    # restart: always
     depends_on:
       - peer1
       - peer2
@@ -68,7 +68,7 @@ services:
       - .env
     ports:
       - "10086:10086"
-    restart: always
+    # restart: always
     depends_on:
       - peer1
       - peer2
@@ -80,7 +80,7 @@ services:
       - eureka-net
     ports:
       - "9000:9000"
-    restart: always
+    # restart: always
 # turbine 聚合多个微服务运行指标
   netflix-turbine:
     image: microservice-cloud/netflix-turbine:0.0.1-SNAPSHOT
@@ -91,7 +91,7 @@ services:
       - .env
     ports:
       - "9001:9001"
-    restart: always
+    # restart: always
 # zipkin-server 链路跟踪
   zipkin-server:
     image: microservice-cloud/zipkin-server:0.0.1-SNAPSHOT
@@ -101,7 +101,7 @@ services:
       - .env
     ports:
       - "9411:9411"
-    restart: always
+    # restart: always
     depends_on:
       - peer1
       - peer2
