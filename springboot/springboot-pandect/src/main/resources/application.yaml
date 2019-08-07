@@ -1,0 +1,27 @@
+# 测试属性初始化
+my:
+  name: zhangsan
+  age: 18
+  id: 1
+
+# endpoint
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+#datasource
+spring:
+  datasource:
+#    driver-class-name: com.mysql.jdbc.Driver
+    password: root
+    url: jdbc:mysql://localhost:3306/test
+    username: root
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        hbm2ddl:
+          auto: update
+    show-sql: true
