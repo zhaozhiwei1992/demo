@@ -27,4 +27,6 @@ public class CacheConfig {
         simpleCacheManager.setCaches(Arrays.asList(concurrentMapCache, concurrentMapCache2));
         return simpleCacheManager;
     }
+
+    //todo 同时假如各种缓存 redis, jcache, ehcache等，如何切换
 }
