@@ -1,5 +1,7 @@
 package com.lx.demo.springbootmybatis.domain;
 
+import com.lx.demo.springbootmybatis.contrant.SexEnum;
+
 import java.util.Date;
 
 public class User {
@@ -15,7 +17,7 @@ public class User {
 
     private String mobile;
 
-    private String sex;
+    private SexEnum sex;
 
     private Integer status;
 
@@ -69,12 +71,12 @@ public class User {
         this.mobile = mobile == null ? null : mobile.trim();
     }
 
-    public String getSex() {
+    public SexEnum getSex() {
         return sex;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex == null ? null : sex.trim();
+    public void setSex(SexEnum sex) {
+        this.sex=sex;
     }
 
     public Integer getStatus() {

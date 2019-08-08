@@ -6,6 +6,10 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.*;
 
+/**
+ * 如果想通过spring注入还是需要假如mapper注解或者配置扫描mapperscan
+ */
+@Mapper
 public interface UserMapper {
     long countByExample(UserExample example);
 

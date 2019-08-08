@@ -24,7 +24,7 @@
     </environments>
     <mappers>
         <mapper resource="mappers/UserMapper.xml"/>
-        <!--注解方式引入-->
-        <mapper class="com.lx.demo.springbootmybatis.mapper.UserMapperAnnotation"/>
+        <!--注解方式引入, 这里springboot项目已经＠Mapper引进去了,不需要这个了-->
+<!--        <mapper class="com.lx.demo.springbootmybatis.mapper.UserMapperAnnotation"/>-->
     </mappers>
 </configuration>

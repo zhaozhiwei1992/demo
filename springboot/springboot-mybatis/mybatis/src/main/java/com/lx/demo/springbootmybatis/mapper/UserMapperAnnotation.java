@@ -1,5 +1,6 @@
 package com.lx.demo.springbootmybatis.mapper;
 
+import com.lx.demo.springbootmybatis.contrant.SexEnum;
 import com.lx.demo.springbootmybatis.domain.User;
 import com.lx.demo.springbootmybatis.handler.StringTypeHandler;
 import org.apache.ibatis.annotations.*;
@@ -36,4 +37,27 @@ public interface UserMapperAnnotation {
     })
     @Select("select name, password, realname from t_user where id = #{id}")
     User selectByID(Integer id);
+
+    @Select("SELECT * FROM t_user")
+    @Results({
+            @Result(property = "sex",  column = "sex", javaType = SexEnum.class),
+            @Result(property = "realname", column = "real_name")
+    })
+    List<User> getAll();
+
+    @Select("SELECT * FROM t_user WHERE id = #{id}")
+    @Results({
+            @Result(property = "sex",  column = "sex", javaType = SexEnum.class),
+            @Result(property = "realname", column = "real_name")
+    })
+    User getOne(Integer id);
+
+    @Insert("INSERT INTO t_user(name,passWord,sex) VALUES(#{name}, #{password}, #{sex})")
+    void insert(User user);
+
+    @Update("UPDATE t_user SET name=#{name},real_name=#{realname} WHERE id =#{id}")
+    void update(User user);
+
+    @Delete("DELETE FROM t_user WHERE id =#{id}")
+    void delete(Integer id);
 }
