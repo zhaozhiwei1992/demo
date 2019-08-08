@@ -16,7 +16,7 @@ public class Book implements Serializable {
     private static final long serialVersionUID = 230883684204974285L;
 
     @Id
-    @GeneratedValue
+//    @GeneratedValue
     //会自动生成一个id生成器, 不指定默认生成 hibernate_sequence的表
 //    @GeneratedValue(generator = "book_id")
     private Long id;
@@ -33,6 +33,15 @@ public class Book implements Serializable {
 
     @ManyToMany(mappedBy = "books")
     private Collection<User> users;
+
+    public Book(Long id, String name, Float price) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+    }
+
+    public Book() {
+    }
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
