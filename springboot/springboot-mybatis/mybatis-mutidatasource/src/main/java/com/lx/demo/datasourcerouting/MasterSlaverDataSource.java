@@ -42,6 +42,10 @@ public class MasterSlaverDataSource extends AbstractRoutingDataSource {
         contextHolder.remove();
     }
 
+    /**
+     * 实际访问时返回当前线程的数据源
+     * @return
+     */
     @Override
     protected Object determineCurrentLookupKey() {
         log.debug("数据源为{}", MasterSlaverDataSource.getDB());
