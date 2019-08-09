@@ -21,7 +21,7 @@ public class MasterSlaverDataSource extends AbstractRoutingDataSource {
      * @param dbType
      */
     public static void setDB(String dbType) {
-        log.debug("切换到{}数据源", dbType);
+        log.info("切换到{}数据源", dbType);
         contextHolder.set(dbType);
     }
 
@@ -48,7 +48,7 @@ public class MasterSlaverDataSource extends AbstractRoutingDataSource {
      */
     @Override
     protected Object determineCurrentLookupKey() {
-        log.debug("数据源为{}", MasterSlaverDataSource.getDB());
+        log.info("数据源为{}", MasterSlaverDataSource.getDB());
 
         return MasterSlaverDataSource.getDB();
     }
