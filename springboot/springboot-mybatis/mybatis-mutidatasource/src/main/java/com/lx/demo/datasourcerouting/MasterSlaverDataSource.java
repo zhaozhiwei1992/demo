@@ -7,7 +7,7 @@ import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
  * 主从数据源切换, 保存到threadLocal动态切换
  */
 @Slf4j
-public class DynamicDataSource extends AbstractRoutingDataSource {
+public class MasterSlaverDataSource extends AbstractRoutingDataSource {
 
     /**
      * 默认数据源
@@ -44,9 +44,9 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
 
     @Override
     protected Object determineCurrentLookupKey() {
-        log.debug("数据源为{}", DynamicDataSource.getDB());
+        log.debug("数据源为{}", MasterSlaverDataSource.getDB());
 
-        return DynamicDataSource.getDB();
+        return MasterSlaverDataSource.getDB();
     }
 
 }

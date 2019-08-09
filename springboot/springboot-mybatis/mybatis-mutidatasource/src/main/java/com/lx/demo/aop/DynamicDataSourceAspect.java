@@ -1,6 +1,6 @@
 package com.lx.demo.aop;
 
-import com.lx.demo.datasourcerouting.DynamicDataSource;
+import com.lx.demo.datasourcerouting.MasterSlaverDataSource;
 import com.lx.demo.annotation.DS;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -28,7 +28,7 @@ public class DynamicDataSourceAspect {
         String methodName = point.getSignature().getName();
         //得到方法的参数的类型
         Class[] argClass = ((MethodSignature) point.getSignature()).getParameterTypes();
-        String dataSource = DynamicDataSource.DEFAULT_DS;
+        String dataSource = MasterSlaverDataSource.DEFAULT_DS;
         try {
             // 得到访问的方法对象
             Method method = className.getMethod(methodName, argClass);
@@ -44,7 +44,7 @@ public class DynamicDataSourceAspect {
         }
 
         // 切换数据源
-        DynamicDataSource.setDB(dataSource);
+        MasterSlaverDataSource.setDB(dataSource);
     }
 
 
@@ -54,6 +54,6 @@ public class DynamicDataSourceAspect {
      */
     @After("@annotation(com.lx.demo.annotation.DS)")
     public void afterSwitchDS(JoinPoint point) {
-        DynamicDataSource.clearDB();
+        MasterSlaverDataSource.clearDB();
     }
 }

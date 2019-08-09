@@ -1,6 +1,6 @@
 package com.lx.demo.config;
 
-import com.lx.demo.datasourcerouting.DynamicDataSource;
+import com.lx.demo.datasourcerouting.MasterSlaverDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -53,7 +53,7 @@ public class DataSourceConfigDynamic {
      */
     @Bean(name = "dynamicDataSource")
     public DataSource dataSource() {
-        DynamicDataSource dynamicDataSource = new DynamicDataSource();
+        MasterSlaverDataSource dynamicDataSource = new MasterSlaverDataSource();
         // 默认数据源
         dynamicDataSource.setDefaultTargetDataSource(dataSource1());
 
