@@ -1,4 +1,4 @@
-package com.lx.demo;
+package com.lx.demo.datasourcerouting;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;

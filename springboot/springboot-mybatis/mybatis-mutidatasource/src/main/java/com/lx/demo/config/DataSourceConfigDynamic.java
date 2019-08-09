@@ -1,6 +1,6 @@
 package com.lx.demo.config;
 
-import com.lx.demo.DynamicDataSource;
+import com.lx.demo.datasourcerouting.DynamicDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
