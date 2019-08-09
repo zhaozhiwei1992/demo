@@ -1,6 +1,8 @@
 package com.lx.demo.web.controller;
 
+import com.lx.demo.annotation.DS;
 import com.lx.demo.domain.User;
+import com.lx.demo.mapper.dynamic.UserMapperDynamic;
 import com.lx.demo.mapper.master.UserMapperMaster;
 import com.lx.demo.mapper.slaver.UserMapperSlaver;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,4 +52,25 @@ public class UserController {
     public void save(@RequestBody User user){
         userMapperMaster.insert(user);
     }
+
+    @Autowired
+    private UserMapperDynamic userMapperDynamic;
+
+    /**
+     * 增加动态主从数据源注解，　配置后自动切换数据源
+     * @param user
+     */
+    @DS("slaver")
+    @PostMapping("/users-dy")
+    public void saveByDynamic(@RequestBody User user){
+        userMapperDynamic.insert(user);
+    }
+
+    @DS("slaver")
+    @GetMapping("/users-dy")
+    public List<User> usersByDynamic(){
+        return userMapperDynamic.getAll();
+    }
+
+
 }
