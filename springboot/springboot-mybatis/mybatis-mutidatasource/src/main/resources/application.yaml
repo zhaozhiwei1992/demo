@@ -1,0 +1,11 @@
+# 配置主从数据源
+spring:
+  datasource:
+    master:
+      jdbcUrl: jdbc:mysql://localhost:3306/mybatismaster?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=true
+      username: root
+      password: root
+    slaver:
+      jdbcUrl: jdbc:mysql://localhost:3306/mybatisslaver?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=true
+      username: root
+      password: root
