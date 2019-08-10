@@ -1,8 +1,7 @@
-package com.lx.demo.controller;
+package com.lx.demo.web.controller;
 
 import com.lx.demo.domain.User;
 import com.lx.demo.mapper.UserMapper;
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
