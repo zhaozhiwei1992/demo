@@ -19,6 +19,8 @@ public class DynamicTaskController {
 
     /**
      * 调整效果
+     * curl -X PUT -F expression="*\/3****?" http://localhost:8080/cron
+
      * 2019-08-11 16:29:30.001  INFO 5476 --- [pool-2-thread-1] c.l.d.s.spring.dynamic.DynamicTimeTask   : dynamictask running ......, 当前时间: Sun Aug 11 16:29:30 CST 2019
      * 2019-08-11 16:29:30.002  INFO 5476 --- [pool-2-thread-1] c.l.d.s.spring.dynamic.DynamicTimeTask   : task trigger, new cron *\/30****?
             *2019-08-11 16:30:00.000INFO 5476---[pool-2-thread-1]c.l.d.s.spring.dynamic.DynamicTimeTask   :
