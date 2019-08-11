@@ -4,9 +4,14 @@ import com.lx.demo.springbootschedulerquartz.jobs.ScheduledJob;
 import com.lx.demo.springbootschedulerquartz.service.SchedulerManager;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/quartz")
@@ -60,6 +65,36 @@ public class QuartzController {
             e.printStackTrace();
         }
         return "删除定时器失败";
+    }
+
+    /**
+     * 启动配置或者数据库中所有定时任务
+     * @return
+     */
+    @GetMapping("/all")
+    public String startSchedulerJobAll(){
+        // 这里可以是任意地方配置
+        final ArrayList<Map<String, String>> jobList = new ArrayList<>();
+        final HashMap<String, String> job1 = new HashMap<>();
+        job1.put("cron", "0/5 * * * * ?");
+        job1.put("jobName", "com.lx.demo.springbootschedulerquartz.business.Job1#execute");
+        job1.put("jobGroup", "group1");
+        jobList.add(job1);
+
+        final HashMap<String, String> job2 = new HashMap<>();
+        job2.put("cron", "0/5 * * * * ?");
+        job2.put("jobName", "com.lx.demo.springbootschedulerquartz.business.Job2#execute");
+        job2.put("jobGroup", "group1");
+        jobList.add(job2);
+            jobList.forEach(jobMap -> {
+                try {
+                    myScheduler.startJob(jobMap.get("cron"), jobMap.get("jobName"), jobMap.get("jobGroup"), ScheduledJob.class);
+                } catch (SchedulerException e) {
+                    e.printStackTrace();
+                }
+
+            });
+        return "启动定时器成功";
     }
 
 }
