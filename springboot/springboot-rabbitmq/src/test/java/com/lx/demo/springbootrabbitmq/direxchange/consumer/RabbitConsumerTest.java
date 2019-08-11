@@ -23,12 +23,16 @@ public class RabbitConsumerTest {
 
     @Test
     public void msg() {
-        final ExecutorService fixedThreadPool = Executors.newFixedThreadPool(5);
+//        final ExecutorService fixedThreadPool = Executors.newFixedThreadPool(5);
+//        for (int i = 0; i < 10; i++) {
+//            fixedThreadPool.execute(() -> {
+//                producer.sendMsgString();
+//            });
+//        }
+
         for (int i = 0; i < 10; i++) {
-            fixedThreadPool.execute(() -> {
-                producer.sendMsgString();
-                producer.sendMsgInt(new Random(10).nextInt());
-            });
+            producer.sendMsgInt(i);
+            producer.sendMsgString();
         }
     }
 }

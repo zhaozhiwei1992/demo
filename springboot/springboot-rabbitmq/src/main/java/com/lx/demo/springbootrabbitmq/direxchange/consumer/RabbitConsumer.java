@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 
 /**
  *
+ * 接收消息
+ *
  */
 @Component
 @RabbitListener(queues = "ttang")
