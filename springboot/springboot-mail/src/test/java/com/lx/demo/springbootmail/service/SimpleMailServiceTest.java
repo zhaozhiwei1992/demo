@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
 
 import javax.mail.MessagingException;
 
@@ -57,5 +59,18 @@ public class SimpleMailServiceTest {
         String content="<html><body>这是有图片的邮件：<img src=\'cid:" + rscId + "\' ></body></html>";
 
         simpleMailService.sendInlineResourceMail("带图片的邮件", mailto, content, rscId, "/home/lx7ly/Pictures/Wallpapers/002.jpg");
+    }
+
+    @Autowired
+    private TemplateEngine templateEngine;
+
+    @Test
+    public void sendTemplateMail() throws MessagingException {
+        //创建邮件正文
+        Context context = new Context();
+        context.setVariable("id", "006");
+        String emailContent = templateEngine.process("emailTemplate", context);
+
+        simpleMailService.sendHtmlMail("这是模板邮件",mailto,emailContent);
     }
 }
