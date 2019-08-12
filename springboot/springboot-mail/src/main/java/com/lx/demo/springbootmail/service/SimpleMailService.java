@@ -77,6 +77,23 @@ public class SimpleMailService{
         mimeMessageHelper.addAttachment(fileName, fileSystemResource);
 
         javaMailSender.send(mimeMessage);
-        log.info("html邮件发送成功");
+        log.info("附件邮件发送成功");
+    }
+
+    public void sendInlineResourceMail(String subject, String to, String text, String contentId, String imgpath) throws MessagingException {
+
+        final MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+
+        final MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
+        mimeMessageHelper.setFrom(from);
+        mimeMessageHelper.setTo(to);
+        mimeMessageHelper.setSubject(subject);
+        mimeMessageHelper.setText(text, true);
+
+        final FileSystemResource fileSystemResource = new FileSystemResource(new File(imgpath));
+        mimeMessageHelper.addInline(contentId, fileSystemResource);
+
+        javaMailSender.send(mimeMessage);
+        log.info("带图片邮件发送成功");
     }
 }

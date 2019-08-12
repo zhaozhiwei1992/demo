@@ -49,4 +49,13 @@ public class SimpleMailServiceTest {
                 "</html>";
         simpleMailService.sendAttachmentsMail("带附件de邮件", mailto, content, "/tmp/attachment.txt");
     }
+
+    @Test
+    public void sendInlineResourceMail() throws MessagingException {
+
+        String rscId = "001";
+        String content="<html><body>这是有图片的邮件：<img src=\'cid:" + rscId + "\' ></body></html>";
+
+        simpleMailService.sendInlineResourceMail("带图片的邮件", mailto, content, rscId, "/home/lx7ly/Pictures/Wallpapers/002.jpg");
+    }
 }
