@@ -27,12 +27,26 @@ public class SimpleMailServiceTest {
     }
 
     @Test
-    public void sendHtmlMain() throws MessagingException {
+    public void sendHtmlMail() throws MessagingException {
         String content="<html>\n" +
                 "<body>\n" +
                 "    <h3>hello world ! 这是一封Html邮件!</h3>\n" +
                 "</body>\n" +
                 "</html>";
         simpleMailService.sendHtmlMail("test", mailto, content);
+    }
+
+    /**
+     * 生成的附件带了个下划线(_attachment.txt)好神奇
+     * @throws MessagingException
+     */
+    @Test
+    public void sendAttachmentsMail() throws MessagingException {
+        String content="<html>\n" +
+                "<body>\n" +
+                "    <h3>hello world ! 这是一封带附件的邮件!</h3>\n" +
+                "</body>\n" +
+                "</html>";
+        simpleMailService.sendAttachmentsMail("带附件de邮件", mailto, content, "/tmp/attachment.txt");
     }
 }

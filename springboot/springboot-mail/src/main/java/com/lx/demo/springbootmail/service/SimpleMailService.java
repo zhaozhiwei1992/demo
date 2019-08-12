@@ -1,9 +1,11 @@
 package com.lx.demo.springbootmail.service;
+import java.io.File;
 import java.util.Date;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -39,6 +41,13 @@ public class SimpleMailService{
         log.info("邮件发送成功");
     }
 
+    /**
+     * 发送html格式邮件
+     * @param subject
+     * @param to
+     * @param text
+     * @throws MessagingException
+     */
     public void sendHtmlMail(String subject, String to, String text) throws MessagingException {
         final MimeMessage mimeMessage = javaMailSender.createMimeMessage();
 
@@ -48,6 +57,24 @@ public class SimpleMailService{
         mimeMessageHelper.setSubject(subject);
         // 标识是html
         mimeMessageHelper.setText(text, true);
+
+        javaMailSender.send(mimeMessage);
+        log.info("html邮件发送成功");
+    }
+
+    public void sendAttachmentsMail(String subject, String to, String text, String attachment) throws MessagingException {
+        final MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+
+        final MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
+        mimeMessageHelper.setFrom(from);
+        mimeMessageHelper.setTo(to);
+        mimeMessageHelper.setSubject(subject);
+        // 标识是html
+        mimeMessageHelper.setText(text, true);
+
+        final FileSystemResource fileSystemResource = new FileSystemResource(new File(attachment));
+        String fileName=attachment.substring(attachment.lastIndexOf(File.separator));
+        mimeMessageHelper.addAttachment(fileName, fileSystemResource);
 
         javaMailSender.send(mimeMessage);
         log.info("html邮件发送成功");
