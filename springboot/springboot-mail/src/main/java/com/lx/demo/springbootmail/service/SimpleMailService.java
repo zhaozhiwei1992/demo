@@ -6,7 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 
 @Slf4j
 @Service
@@ -33,5 +37,19 @@ public class SimpleMailService{
 
         javaMailSender.send(simpleMailMessage);
         log.info("邮件发送成功");
+    }
+
+    public void sendHtmlMail(String subject, String to, String text) throws MessagingException {
+        final MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+
+        final MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
+        mimeMessageHelper.setFrom(from);
+        mimeMessageHelper.setTo(to);
+        mimeMessageHelper.setSubject(subject);
+        // 标识是html
+        mimeMessageHelper.setText(text, true);
+
+        javaMailSender.send(mimeMessage);
+        log.info("html邮件发送成功");
     }
 }
