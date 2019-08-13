@@ -15,6 +15,7 @@ public class MultiDataSourceConfiguration {
 
     /**
      * 主数据源
+     * 这里的数据源会冲掉在applicatioin.yaml中配置的数据源，primary才是大爷
      *
      * 多个数据源配置时必须有一个默认的，打标记为primary
      * @return
