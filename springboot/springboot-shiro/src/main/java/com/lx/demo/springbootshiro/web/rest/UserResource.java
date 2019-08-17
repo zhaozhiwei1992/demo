@@ -16,7 +16,7 @@ public class UserResource {
      * 获取所有用户
      * @return
      */
-    @GetMapping("/users")
+    @GetMapping("/users/all")
     public List<User> findAll(){
         return Arrays.asList(new User(), new User());
     }

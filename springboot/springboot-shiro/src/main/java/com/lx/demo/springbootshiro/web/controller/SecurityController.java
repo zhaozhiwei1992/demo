@@ -28,6 +28,11 @@ public class SecurityController {
         return "login";
     }
 
+    @GetMapping("/index")
+    public String index(){
+        return "index";
+    }
+
     @PostMapping("/login")
     public String login(@Valid User user, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {

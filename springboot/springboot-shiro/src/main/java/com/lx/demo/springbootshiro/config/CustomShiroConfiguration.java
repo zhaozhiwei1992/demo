@@ -40,6 +40,7 @@ public class CustomShiroConfiguration {
      * anon:所有 url 都都可以匿名访问
      * authc: 需要认证才能进行访问
      * user:配置记住我或认证通过可以访问
+     *
      * @param securityManager
      * @return
      */
@@ -58,7 +59,9 @@ public class CustomShiroConfiguration {
         shiroFilterFactoryBean.setUnauthorizedUrl("/403");
         /*定义shiro过滤器,例如实现自定义的FormAuthenticationFilter，需要继承FormAuthenticationFilter **本例中暂不自定义实现，在下一节实现验证码的例子中体现 */
 
-        /*定义shiro过滤链 Map结构 * Map中key(xml中是指value值)的第一个'/'代表的路径是相对于HttpServletRequest.getContextPath()的值来的 * anon：它对应的过滤器里面是空的,什么都没做,这里.do和.jsp后面的*表示参数,比方说login.jsp?main这种 * authc：该过滤器下的页面必须验证后才能访问,它是Shiro内置的一个拦截器org.apache.shiro.web.filter.authc.FormAuthenticationFilter */
+        /*定义shiro过滤链 Map结构 * Map中key(xml中是指value值)的第一个'/'代表的路径是相对于HttpServletRequest.getContextPath()的值来的 *
+        anon：它对应的过滤器里面是空的,什么都没做,这里.do和.jsp后面的*表示参数,比方说login.jsp?main这种 * authc：该过滤器下的页面必须验证后才能访问,它是Shiro内置的一个拦截器org
+        .apache.shiro.web.filter.authc.FormAuthenticationFilter */
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
         // 配置退出过滤器,其中的具体的退出代码Shiro已经替我们实现了
         filterChainDefinitionMap.put("/logout", "logout");
@@ -85,7 +88,7 @@ public class CustomShiroConfiguration {
 //    }
 
     @Bean
-    public CustomShiroRealm customShiroRealm(){
+    public CustomShiroRealm customShiroRealm() {
         return new CustomShiroRealm();
     }
 
@@ -111,6 +114,7 @@ public class CustomShiroConfiguration {
      * 开启Shiro的注解
      * (如@RequiresRoles,@RequiresPermissions),需借助SpringAOP扫描使用Shiro注解的类,并在必要时进行安全逻辑验证
      * 配置以下两个bean(DefaultAdvisorAutoProxyCreator(可选)和AuthorizationAttributeSourceAdvisor)即可实现此功能
+     *
      * @return
      */
     @Bean
@@ -123,13 +127,15 @@ public class CustomShiroConfiguration {
 
     @Bean
     public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager) {
-        AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
+        AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor =
+                new AuthorizationAttributeSourceAdvisor();
         authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
         return authorizationAttributeSourceAdvisor;
     }
 
     /**
      * 异常处理
+     *
      * @return
      */
     @Bean
@@ -137,7 +143,7 @@ public class CustomShiroConfiguration {
         SimpleMappingExceptionResolver r = new SimpleMappingExceptionResolver();
         Properties mappings = new Properties();
         mappings.setProperty("DatabaseException", "databaseError");//数据库异常处理
-        mappings.setProperty("UnauthorizedException","403");
+        mappings.setProperty("UnauthorizedException", "403");
         r.setExceptionMappings(mappings);  // None by default
         r.setDefaultErrorView("error");    // No default
         r.setExceptionAttribute("ex");     // Default is "exception"
@@ -152,18 +158,21 @@ public class CustomShiroConfiguration {
 
         /**
          * 授权, 通过角色授权, 这里设置角色信息即可
-         * 参考: https://gitee.com/ityouknow/spring-boot-examples/blob/master/spring-boot-shiro/src/main/java/com/neo/config/MyShiroRealm.java
+         * 参考: https://gitee.com/ityouknow/spring-boot-examples/blob/master/spring-boot-shiro/src/main/java/com/neo
+         * /config/MyShiroRealm.java
          * https://blog.csdn.net/fu_fei_wen/article/details/77571989
+         *
          * @param principals
          * @return
          */
         @Override
         protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
             //在实际开发中，开发者根据自身情况自行获取用户信息。此处简化如下：
-            String role="admin";
-            String permission ="add";
+            String role = "admin";
+            String permission = "add";
 
-            log.info("{}, role:{}, permission:{}", Thread.currentThread().getStackTrace()[1].getMethodName(), role, permission);
+            log.info("{}, role:{}, permission:{}", Thread.currentThread().getStackTrace()[1].getMethodName(), role,
+                    permission);
 
             //设置权限信息
             SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
@@ -175,8 +184,8 @@ public class CustomShiroConfiguration {
 
 
         /**
-         *
          * 主要是用来进行身份认证的，也就是说验证用户输入的账号和密码是否正确。
+         *
          * @param token
          * @return
          * @throws AuthenticationException
@@ -192,8 +201,8 @@ public class CustomShiroConfiguration {
             String username = upt.getUsername();
             String password = new String(upt.getPassword());
 
-            if(name.equals(username)&&pwd.equals(password)){
-                return new SimpleAuthenticationInfo(username,password,"zhangsansan");
+            if (name.equals(username) && pwd.equals(password)) {
+                return new SimpleAuthenticationInfo(username, password, "zhangsansan");
             }
             return null;
             //获取用户的输入的账号.
