@@ -24,6 +24,11 @@ public class UserController {
         this.user = user;
     }
 
+    /**
+     * http://localhost:8080/users/
+     * @param model
+     * @return
+     */
     @GetMapping("/")
     public String index(ModelMap model) {
         model.addAttribute("name", user.getName());
