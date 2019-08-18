@@ -33,6 +33,9 @@ public class FilterManageController {
         filterMap.put("/user/login**", "anon");
         filterMap.put("/admin/**", "anon");//把 admin 设置成不需要拦截
         filterMap.put("/super/**", "authc,roles[super],perms[super:info]");
+        //管理员才可以操做
+        filterMap.put("/users/**", "authc,roles[user]");
+        filterMap.put("/**", "authc,kickout");
         addAndUpdatePermission(filterMap);
 
         return myShiroFilterFactoryBean.getFilterChainDefinitionMap();
@@ -56,7 +59,7 @@ public class FilterManageController {
                     (DefaultFilterChainManager) filterChainResolver.getFilterChainManager();
 
             //清空拦截管理器中的存储
-//            filterManager.getFilterChains().clear();
+            filterManager.getFilterChains().clear();
             /*
             清空拦截工厂中的存储,如果不清空这里,还会把之前的带进去
             ps:如果仅仅是更新的话,可以根据这里的 map 遍历数据修改,重新整理好权限再一起添加
@@ -64,6 +67,7 @@ public class FilterManageController {
 //            myShiroFilterFactoryBean.getFilterChainDefinitionMap().clear();
 
             Map<String, String> chains = myShiroFilterFactoryBean.getFilterChainDefinitionMap();
+            chains.remove("/**");
             //把修改后的 map 放进去
             filterMap.entrySet().forEach(fm -> {
                 chains.putIfAbsent(fm.getKey(), fm.getValue());
@@ -71,7 +75,7 @@ public class FilterManageController {
 //            chains.putAll(filterMap);
 
             //这个相当于是全量添加
-            for (Map.Entry<String, String> entry : filterMap.entrySet()) {
+            for (Map.Entry<String, String> entry : chains.entrySet()) {
                 //要拦截的地址
                 String url = entry.getKey().trim().replace(" ", "");
                 //地址持有的权限

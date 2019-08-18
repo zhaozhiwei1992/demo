@@ -34,6 +34,31 @@ public class UserResource {
 
     /**
      * 删除一个用户
+     *
+     * 权限测试,
+     * 1. 默认情况下可以登录后可直接访问
+     * {
+     *   "/logout": "logout",
+     *   "/login": "anon",
+     *   "/swagger-ui.html": "anon",
+     *   "/v2/api-docs/**": "anon",
+     *   "/swagger-resources/**": "anon",
+     *   "/**": "authc,kickout"
+     * }
+     * 2. 修改权限后
+     * {
+     *   "/logout": "logout",
+     *   "/login": "anon",
+     *   "/swagger-ui.html": "anon",
+     *   "/v2/api-docs/**": "anon",
+     *   "/swagger-resources/**": "anon",
+     *   "/**": "authc,kickout",
+     *   "/super/**": "authc,roles[super],perms[super:info]",
+     *   "/admin/**": "anon",
+     *   "/user/login**": "anon",
+     *   "/users/**": "authc,roles[user]"
+     * }
+     * 3. 这里就不能直接访问了，角色必须是user的用户才可以请求该方法
      * @param id
      * @return
      */
