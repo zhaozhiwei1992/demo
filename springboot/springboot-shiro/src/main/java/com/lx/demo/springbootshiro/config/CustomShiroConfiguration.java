@@ -1,6 +1,10 @@
 package com.lx.demo.springbootshiro.config;
 
+import com.lx.demo.springbootshiro.domain.Permission;
+import com.lx.demo.springbootshiro.domain.Role;
+import com.lx.demo.springbootshiro.domain.User;
 import com.lx.demo.springbootshiro.filter.KickoutSessionControlFilter;
+import com.lx.demo.springbootshiro.service.UserService;
 import org.apache.shiro.mgt.SecurityManager;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.*;
@@ -11,12 +15,14 @@ import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.ByteSource;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.crazycake.shiro.RedisCacheManager;
 import org.crazycake.shiro.RedisManager;
 import org.crazycake.shiro.RedisSessionDAO;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -165,11 +171,17 @@ public class CustomShiroConfiguration {
         // <!-- 过滤链定义，从上向下顺序执行，一般将 /**放在最为下边 -->:这是一个坑呢，一不小心代码就不好使了;
         // <!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问-->
         filterChainDefinitionMap.put("/login", "anon");//anon 可以理解为不拦截
-        filterChainDefinitionMap.put("/reg", "anon");
-        filterChainDefinitionMap.put("/plugins/**", "anon");
-        filterChainDefinitionMap.put("/pages/**", "anon");
-        filterChainDefinitionMap.put("/api/**", "anon");
-        filterChainDefinitionMap.put("/dists/img/*", "anon");
+
+        //swagger
+        filterChainDefinitionMap.put("/swagger-ui.html", "anon");
+        filterChainDefinitionMap.put("/v2/api-docs/**", "anon");
+        filterChainDefinitionMap.put("/swagger-resources/**", "anon");
+
+        //权限认证
+        //用户为ROLE_USER 角色可以访问。由用户角色控制用户行为。
+//        filterChainDefinitionMap.put("/user/**", "authc,roles[ROLE_USER]");
+//        filterChainDefinitionMap.put("/user/edit/**", "authc,perms[user:edit]");
+
         filterChainDefinitionMap.put("/**", "authc,kickout");
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
@@ -256,6 +268,9 @@ public class CustomShiroConfiguration {
      */
     class CustomShiroRealm extends AuthorizingRealm {
 
+        @Autowired
+        private UserService userService;
+
         /**
          * 授权, 通过角色授权, 这里设置角色信息即可
          * 参考: https://gitee.com/ityouknow/spring-boot-examples/blob/master/spring-boot-shiro/src/main/java/com/neo
@@ -267,21 +282,31 @@ public class CustomShiroConfiguration {
          */
         @Override
         protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-            //在实际开发中，开发者根据自身情况自行获取用户信息。此处简化如下：
-            String role = "admin";
-            String permission = "add";
+            // 简化版本, demo可以不读取数据库直接写死撸：
+//            String role = "admin";
+//            String permission = "add";
+//            log.info("{}, role:{}, permission:{}", Thread.currentThread().getStackTrace()[1].getMethodName(), role,
+//                    permission);
+//
+//            //设置权限信息
+//            SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
+//            simpleAuthorizationInfo.addRole(role);
+//            simpleAuthorizationInfo.addStringPermission(permission);
+//            return simpleAuthorizationInfo;
 
-            log.info("{}, role:{}, permission:{}", Thread.currentThread().getStackTrace()[1].getMethodName(), role,
-                    permission);
+            // 常规版本
+            SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
+            String loginName = String.valueOf(principals.getPrimaryPrincipal());
+            final User userInfo = userService.findByLoginName(loginName);
+            for(Role role:userInfo.getRoleList()){
+                authorizationInfo.addRole(role.getName());
+                for(Permission p:role.getPermissions()){
+                    authorizationInfo.addStringPermission(p.getPermission());
+                }
+            }
+            return authorizationInfo;
 
-            //设置权限信息
-            SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
-            simpleAuthorizationInfo.addRole(role);
-            simpleAuthorizationInfo.addStringPermission(permission);
-
-            return simpleAuthorizationInfo;
         }
-
 
         /**
          * 主要是用来进行身份认证的，也就是说验证用户输入的账号和密码是否正确。
@@ -293,35 +318,35 @@ public class CustomShiroConfiguration {
         @Override
         protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token)
                 throws AuthenticationException {
-            //在实际开发中，开发者根据自身情况自行获取用户信息。此处简化如下：
-            String name = "zhangsan";
-            String pwd = "11";
-
-            UsernamePasswordToken upt = (UsernamePasswordToken) token;
-            String username = upt.getUsername();
-            String password = new String(upt.getPassword());
-
-            if (name.equals(username) && pwd.equals(password)) {
-                return new SimpleAuthenticationInfo(username, password, "zhangsansan");
-            }
-            return null;
-            //获取用户的输入的账号.
-//            String username = (String)token.getPrincipal();
-//            System.out.println(token.getCredentials());
-//            //通过username从数据库中查找 User对象，如果找到，没找到.
-//            //实际项目中，这里可以根据实际情况做缓存，如果不做，Shiro自己也是有时间间隔机制，2分钟内不会重复执行该方法
-//            UserInfo userInfo = userInfoService.findByUsername(username);
-//            System.out.println("----->>userInfo="+userInfo);
-//            if(userInfo == null){
-//                return null;
+            //简化版本：
+//            String name = "zhangsan";
+//            String pwd = "11";
+//
+//            UsernamePasswordToken upt = (UsernamePasswordToken) token;
+//            String username = upt.getUsername();
+//            String password = new String(upt.getPassword());
+//
+//            if (name.equals(username) && pwd.equals(password)) {
+//                return new SimpleAuthenticationInfo(username, password, "zhangsansan");
 //            }
-//            SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
-//                    userInfo, //用户名
-//                    userInfo.getPassword(), //密码
-//                    ByteSource.Util.bytes(userInfo.getCredentialsSalt()),//salt=username+salt
-//                    getName()  //realm name
-//            );
-//            return authenticationInfo;
+//            return null;
+
+            //获取用户的输入的账号.
+            String username = (String)token.getPrincipal();
+            log.info("{}", token.getCredentials());
+            //通过username从数据库中查找 User对象，如果找到，没找到.
+            //实际项目中，这里可以根据实际情况做缓存，如果不做，Shiro自己也是有时间间隔机制，2分钟内不会重复执行该方法
+            User userInfo = userService.findByLoginName(username);
+            log.info("----->>userInfo= {}", userInfo);
+            if(userInfo == null){
+                return null;
+            }
+            return new SimpleAuthenticationInfo(
+                    userInfo.getLoginName(), //用户名
+                    userInfo.getPassword(), //密码
+                    ByteSource.Util.bytes(userInfo.getCredentialsSalt()),//salt=username+salt
+                    getName()  //realm name
+            );
         }
     }
 }

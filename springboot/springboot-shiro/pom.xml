@@ -16,9 +16,28 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+		<springfox-swagger.version>2.8.0</springfox-swagger.version>
+		<springfox-staticdocs.version>2.6.1</springfox-staticdocs.version>
 	</properties>
 
 	<dependencies>
+		<!-- swagger2 API文档生成 -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>${springfox-swagger.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>${springfox-swagger.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-staticdocs</artifactId>
+			<version>${springfox-staticdocs.version}</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
