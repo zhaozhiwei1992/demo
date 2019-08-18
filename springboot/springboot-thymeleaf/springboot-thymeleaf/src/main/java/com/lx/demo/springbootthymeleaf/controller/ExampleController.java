@@ -24,7 +24,9 @@ public class ExampleController {
 
     @RequestMapping("/list")
     public String list(ModelMap map) {
-        map.addAttribute("users", Arrays.asList(new User(1L, "大牛", 18), new User(2L,"二牛",16)));
+        map.addAttribute("users", Arrays.asList(
+                new User(1L, "大牛", 18, "11"),
+                new User(2L,"二牛",16, "22")));
         return "list";
     }
 
