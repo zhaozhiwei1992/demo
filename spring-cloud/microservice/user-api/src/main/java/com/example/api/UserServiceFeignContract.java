@@ -1,10 +1,8 @@
 package com.example.api;
 
-import com.example.config.FeignConfiguration;
 import com.example.domain.User;
 import feign.Param;
 import feign.RequestLine;
-import org.springframework.cloud.netflix.feign.FeignClient;
 
 /**
  * 使用feign原生契约的客户端, 一但指定configuration后对使用springmvc 契约的客户端造成影响不能启动，所以不能混用
