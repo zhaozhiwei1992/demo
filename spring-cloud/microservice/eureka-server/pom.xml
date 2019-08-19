@@ -17,7 +17,8 @@
         <!-- 依赖 Spring Cloud Netflix Eureka -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-eureka-server</artifactId>
+            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+            <version>2.0.0.RELEASE</version>
         </dependency>
 
         <!--        引入security 注册中心身份验证-->
