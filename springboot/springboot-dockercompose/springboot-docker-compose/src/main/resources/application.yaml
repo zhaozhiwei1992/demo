@@ -1,0 +1,24 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+    show-sql: true
+  profiles:
+    active: dev
+---
+spring:
+  profiles: dev
+  datasource:
+    password: root
+    url: jdbc:mysql://localhost:3306/test
+    username: root
+---
+spring:
+  profiles: docker
+  datasource:
+    password: root
+    url: jdbc:mysql://mysql:3306/test
+    username: root
