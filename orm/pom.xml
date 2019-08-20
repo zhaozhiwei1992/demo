@@ -11,7 +11,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- dependency versions -->
-        <spring.version>5.0.2.RELEASE</spring.version>
+        <spring.version>5.0.7.RELEASE</spring.version>
     </properties>
 
     <dependencyManagement>
@@ -131,7 +131,7 @@
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
-                <version>1.2.4</version>
+                <version>1.2.31</version>
             </dependency>
             <dependency>
                 <groupId>junit</groupId>
