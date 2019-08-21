@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>i18n</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+<h1 th:text="#{love}">大声说</h1>
+
+<h2>接口切换语言</h2>
+<form action="/changeSessionLanauage" method="POST">
+    <input name="lang" type="hidden" value="zh"  />
+    <button>切换为中文</button>
+</form>
+
+<form action="/changeSessionLanauage" method="POST">
+    <input name="lang" type="hidden" value="en" />
+    <button>切换为英文</button>
+</form>
+
+<h2>拦截器切换语言</h2>
+<form action="/changeSessionLanauage" method="get">
+    <input name="lang" type="hidden" value="zh"  />
+    <button>切换为中文</button>
+</form>
+
+<form action="/changeSessionLanauage" method="get">
+    <input name="lang" type="hidden" value="en" />
+    <button>切换为英文</button>
+</form>
+</body>
+</html>
