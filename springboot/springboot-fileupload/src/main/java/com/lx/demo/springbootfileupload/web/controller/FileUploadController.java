@@ -7,13 +7,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class FileUploadController {
@@ -76,6 +82,37 @@ public class FileUploadController {
             e.printStackTrace();
         }
 
+        return "redirect:/uploadStatus";
+    }
+
+    @GetMapping("/uploadMuti")
+    public String uploadMuti(){
+        return "uploadMuti";
+    }
+
+    @PostMapping("/batch/upload")
+    public String handlerFileUploadMulti(HttpServletRequest httpServletRequest, RedirectAttributes redirectAttributes){
+        final List<MultipartFile> files = ((MultipartHttpServletRequest) httpServletRequest).getFiles("file");
+
+        final ArrayList<String> filePathArrayList = new ArrayList<>();
+
+        files.stream().filter(multipartFile -> !multipartFile.isEmpty()).forEach(multipartFile -> {
+
+            try {
+                byte[] bytes = multipartFile.getBytes();
+//                final File file = new File(multipartFile.getOriginalFilename());
+//                FileCopyUtils.copy(bytes, file);
+//                filePathArrayList.add(file.getAbsolutePath());
+                final BufferedOutputStream outputStream =
+                        new BufferedOutputStream(new FileOutputStream(multipartFile.getOriginalFilename()));
+                outputStream.write(bytes);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        redirectAttributes.addFlashAttribute("message",
+                "You successfully uploaded '" + filePathArrayList + "'");
         return "redirect:/uploadStatus";
     }
 }
