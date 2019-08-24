@@ -23,3 +23,7 @@
 /dist/
 /nbdist/
 /.nb-gradle/
+
+### logs
+/logs/
+/catalina.base_IS_UNDEFINED/
