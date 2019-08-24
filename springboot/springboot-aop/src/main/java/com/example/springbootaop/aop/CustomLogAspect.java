@@ -5,15 +5,20 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 /**
  * 用于增强{@link com.example.springbootaop.annotation.CustomLogAnnotation}
  * 其他方法接入上述注解后就会加入日志
  *  这种方式适合定点爆破, 谁用谁加， 事务注解应该也可以根据这种方式进行搞{@link Transactional}
+ *
+ *  可以通过配置profile，根据激活模式激活拦截器
+ *  目前该拦截器只能启动dev模式下激活 -Dspring.profiles.active=dev
  */
 @Aspect
 @Component
+@Profile(value = "dev")
 public class CustomLogAspect {
 
     private static final Logger logger = LoggerFactory.getLogger(CustomLogAspect.class);
