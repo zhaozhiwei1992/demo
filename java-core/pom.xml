@@ -11,6 +11,8 @@
     <module>reference</module>
     <module>socket</module>
     <module>serializable</module>
+    <module>enum</module>
+    <module>basetype</module>
   </modules>
     <build>
         <plugins>
