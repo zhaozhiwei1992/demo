@@ -15,6 +15,14 @@ public class ConsumerTestExp {
 
     public static void main(String[] args) {
 
+        // 调用一个可以执行两个线程的对象
+        final Runnable runnable = andThen(() -> {
+            System.out.println("我是线程１");
+        }, () -> {
+            System.out.println("我是线程2");
+        });
+        new Thread(runnable).start();
+
         //最low方式
         Consumer<Integer> consumer = new Consumer<Integer>() {
             @Override
@@ -36,6 +44,18 @@ public class ConsumerTestExp {
                 .andThen(consumerStr) //world
                 .andThen(ConsumerTestExp::echo) //echo world
                 .accept("world");
+    }
+
+    /**
+     * 返回可以运行多个线程的
+     * @param runnable
+     */
+    public static Runnable andThen(Runnable ... runnable){
+        return ()->{
+            Stream.of(runnable).forEach(runnable1 -> {
+                new Thread(runnable1).start();
+            });
+        };
     }
 
     public static void echo(String msg){

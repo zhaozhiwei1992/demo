@@ -1,7 +1,10 @@
 package com.lx.demo.j8;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.function.Consumer;
 import java.util.function.IntBinaryOperator;
+import java.util.stream.Stream;
 
 /**
  * 简单lambada测试
@@ -10,6 +13,11 @@ import java.util.function.IntBinaryOperator;
 public class LambadaSimple {
 
     public static void main(String[] args) {
+
+        final String[] strings = new String[]{"zhang", "wang", "li", "zhao"};
+        Arrays.sort(strings, (x, y) -> Integer.compare(x.length(), y.length()));
+        Arrays.sort(strings, Comparator.comparingInt(String::length));
+        Stream.of(strings).forEach(System.out::println);
 
         LambadaSimple lambadaSimple = new LambadaSimple();
 
@@ -36,9 +44,15 @@ public class LambadaSimple {
         System.out.println(i1);
 
         //sayHello
-        final Consumer<String> stringConsumer = (String message) -> {
+        Consumer<String> stringConsumer = (String message) -> {
             System.out.println("hello: " + message);
         };
+
+        // 类型可推导Consumer<String>，　参数类型可省略
+        stringConsumer = message -> {
+            System.out.printf("hello: %s \n", message);
+        };
+
         stringConsumer.accept("李四"); //一次
         stringConsumer.andThen(stringConsumer).andThen(stringConsumer).accept("李四"); //多次
 

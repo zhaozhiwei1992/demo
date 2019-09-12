@@ -22,6 +22,10 @@ public class StreamExp {
 
     public static void main(String[] args) {
 
+        // 统计大于５的数字个数
+        final long count1 = Stream.of(1, 2, 5, 6, 7, 8, 9).filter(integer -> integer > 5).count();
+        System.out.printf("大于５的数字有 %s 个\n", count1);
+
         parallelCount(1,2,3,4,5,6);
 
         count(1,2,3,4,5);
