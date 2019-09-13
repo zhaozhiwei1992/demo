@@ -7,6 +7,8 @@ import java.util.function.Predicate;
 
 /**
  * 按照不同的条件放置苹果
+ * {@see Predicate}
+ *    boolean test(T t);
  */
 public class AppleFilter {
 

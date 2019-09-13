@@ -7,9 +7,25 @@ import java.util.stream.Stream;
 
 public class FileFilter {
     public static void main(String[] args) {
+        listDir("/tmp");
         beforeJ8Filter();
         j8Lambada();
         j8Filter();
+    }
+
+    /**
+     * 列出当前子目录
+     * @param path
+     */
+    public static void listDir(String path){
+        final File file = new File(path);
+        final File[] files = file.listFiles(curfile -> {
+            return curfile.isDirectory();
+        });
+
+        Stream.of(files).sorted((file1, file2) -> {
+            return file1.compareTo(file2);
+        }).forEach(System.out::println);
     }
 
     /**

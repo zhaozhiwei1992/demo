@@ -30,6 +30,7 @@ public class MethodRef {
         final List<String> stringList = Arrays.asList("zhangsan", "lisi", "wangsu");
         //todo 为啥不能 PrintStream::println?
         stringList.forEach(System.out::println);
+        stringList.forEach(x-> System.out.println(x));//等价上述, 函数式是一种模式,不要硬套面相对象, 符合consumer格式的都是consumer
     }
 }
 

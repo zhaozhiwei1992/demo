@@ -7,7 +7,38 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class FunctionTestExp {
+
     public static void main(String[] args) {
+
+        //function convert
+        Function<String, Integer> stringToInt = Integer::parseInt;
+        final Integer integer = stringToInt.apply("2");
+        System.out.println(integer);
+
+        Function<Integer, String> intToString = String::valueOf;
+        final String str = intToString.apply(integer);
+        System.out.println(str);
+
+        // compose vs andthen
+        Function<Integer, Integer> f = x -> x + 1;
+        Function<Integer, Integer> g = x -> x * 2;
+
+        // 先g 后 f
+        // (V v) -> apply(before.apply(v))
+        // first applies the function to its input, and then applies this function to the result
+        Function<Integer, Integer> h = f.compose(g);
+        System.out.printf("compose: %d \n", h.apply(1));
+
+        // 先f 后g
+        Function<Integer, Integer> h2 = f.andThen(g);
+        System.out.printf("andthen: %d \n", h2.apply(1));
+
+        //lambda$main$0
+        CustomFunctional customFunctional = ()->{
+            System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+        };
+        customFunctional.execute();
+
         map(Arrays.asList("zhangsan", "lisi", "wangwu", "zhaoliu"), new Function<String, Integer>() {
             @Override
             public Integer apply(String s) {
@@ -40,3 +71,14 @@ public class FunctionTestExp {
         return rs;
     }
 }
+
+@FunctionalInterface
+interface CustomFunctional{
+    void execute();
+
+    default String description(){
+        return "this is description";
+    }
+
+}
+

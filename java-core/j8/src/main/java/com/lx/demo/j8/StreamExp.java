@@ -2,6 +2,7 @@ package com.lx.demo.j8;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Stream 使用一种类似用 SQL 语句从数据库查询数据的直观方式来提供一种对 Java 集合运算和表达的高阶抽象。
@@ -18,7 +19,22 @@ import java.util.stream.Collectors;
  */
 public class StreamExp {
 
+
     public static void main(String[] args) {
+
+        // 统计大于５的数字个数
+        final long count1 = Stream.of(1, 2, 5, 6, 7, 8, 9).filter(integer -> integer > 5).count();
+        System.out.printf("大于５的数字有 %s 个\n", count1);
+
+        parallelCount(1,2,3,4,5,6);
+
+        count(1,2,3,4,5);
+
+        //并行排序, 么得蛋用
+        parallelSort(1,5,6,2,3,0,9,0,6);
+
+        //倒序排列
+        sort((o1, o2) -> o2.compareTo(o1), 1,2,3,6,5,4);
 
         List<Apple> inventory = Arrays.asList(new Apple(80,"green"),
                 new Apple(155, "green"),
@@ -61,6 +77,45 @@ public class StreamExp {
         System.out.println("平均数 : " + stats.getAverage());
     }
 
+    /**
+     * 求和
+     * @param num
+     */
+    private static void parallelCount(Integer ... num) {
+        System.out.println("异步求和");
+        Stream.of(num)
+                .parallel()
+                .reduce(Integer::sum)
+                .ifPresent(System.out::println);
+    }
+
+    /**
+     * 求和
+     * @param num
+     */
+    private static void count(Integer ... num) {
+        System.out.println("求和");
+        Stream.of(num)
+                .reduce(Integer::sum)
+                .ifPresent(System.out::println);
+    }
+
+    /**
+     * 并行后拍不对
+     * @param num
+     */
+    private static void parallelSort(Integer ... num) {
+        Stream.of(num)
+                .sorted()
+//                .parallel()
+                .forEach(System.out::println);
+    }
+
+    private static void sort(Comparator<Integer> comparator, Integer ... num) {
+        Stream.of(num)
+                .sorted(comparator)
+                .forEach(System.out::println);
+    }
 }
 
 class Apple {
