@@ -16,6 +16,7 @@
         <module>annotation</module>
         <module>modularize</module>
     <module>modularize-public</module>
+    <module>collections</module>
   </modules>
     <build>
         <plugins>
