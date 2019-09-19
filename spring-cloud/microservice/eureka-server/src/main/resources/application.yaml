@@ -61,6 +61,9 @@ eureka:
       defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@peer2:8762/eureka
   instance:
     hostname: peer1
+    # 通过ip注册
+#    preferIpAddress: true
+#    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
 management:
   security:
     enabled: false
