@@ -1,12 +1,6 @@
 management:
   security:
     enabled: false
-security:
-  basic:
-    enabled: true
-  user:
-    name: user # 配置登录用户user
-    password: password #配置登录密码password
 server:
   port: ${port:8761}
 # Tomcat
@@ -23,6 +17,13 @@ spring:
     name: '@artifactId@'
   profiles:
     active: dev #默认开发模式单体
+  # 2.0.3以后需要放到spring后面，不然无效凭证
+  security:
+    basic:
+      enabled: true
+    user:
+      name: user # 配置登录用户user
+      password: password #配置登录密码password
 
 ---
 spring:
