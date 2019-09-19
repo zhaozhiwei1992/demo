@@ -36,7 +36,7 @@ eureka:
     fetch-registry: false
     register-with-eureka: false
     serviceUrl:
-      defaultZone: http://${security.user.name}:${security.user.password}@${eureka.instance.hostname}:${server.port}/eureka
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${server.port}/eureka
   instance:
     # 读取的是/etc/host 中的localhost
     hostname: localhost
@@ -58,7 +58,7 @@ eureka:
     fetch-registry: true
     register-with-eureka: true
     serviceUrl:
-      defaultZone: http://${security.user.name}:${security.user.password}@peer2:8762/eureka
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@peer2:8762/eureka
   instance:
     hostname: peer1
 management:
@@ -75,7 +75,7 @@ eureka:
     fetch-registry: true
     register-with-eureka: true
     serviceUrl:
-      defaultZone: http://${security.user.name}:${security.user.password}@peer1:8761/eureka
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@peer1:8761/eureka
   instance:
     hostname: peer2
 management:
