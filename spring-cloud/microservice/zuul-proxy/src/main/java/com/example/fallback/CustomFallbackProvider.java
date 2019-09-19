@@ -20,7 +20,7 @@ import java.nio.charset.Charset;
 @Component
 @Slf4j
 public class CustomFallbackProvider implements FallbackProvider {
-    @Override
+//    @Override
     public ClientHttpResponse fallbackResponse(Throwable cause) {
         log.info("请求出现错误, {}", cause);
         if (cause instanceof HystrixTimeoutException) {
@@ -36,6 +36,11 @@ public class CustomFallbackProvider implements FallbackProvider {
     }
 
     @Override
+    public ClientHttpResponse fallbackResponse(String route, Throwable cause) {
+        return this.response(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+//    @Override
     public ClientHttpResponse fallbackResponse() {
         return this.response(HttpStatus.INTERNAL_SERVER_ERROR);
     }
