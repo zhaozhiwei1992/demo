@@ -23,7 +23,7 @@ spring:
     name: '@artifactId@'
   # mq
   rabbitmq:
-    host: localhost
+    host: 47.75.36.192
     port: 5672
     username: guest
     password: guest

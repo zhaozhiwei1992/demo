@@ -20,7 +20,7 @@ public class PersonalMvcConfig implements WebMvcConfigurer {
 //        converters.clear();
         //只留下json解析
 //        converters.add(new MappingJackson2HttpMessageConverter());
-        converters.clear();
+//        converters.clear();
         converters.add(new PropertiesPerson2HttpMessageConverter());
     }
 }

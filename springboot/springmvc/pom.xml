@@ -9,6 +9,6 @@
   <url>http://maven.apache.org</url>
   <modules>
     <module>exception-on-springmvc</module>
-    <module>servlet-springmvc-springboot</module>
+    <module>rest-on-springmvc</module>
   </modules>
 </project>
