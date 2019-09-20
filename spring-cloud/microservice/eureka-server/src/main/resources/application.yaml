@@ -1,12 +1,6 @@
 management:
   security:
     enabled: false
-security:
-  basic:
-    enabled: true
-  user:
-    name: user # 配置登录用户user
-    password: password #配置登录密码password
 server:
   port: ${port:8761}
 # Tomcat
@@ -23,6 +17,13 @@ spring:
     name: '@artifactId@'
   profiles:
     active: dev #默认开发模式单体
+  # 2.0.3以后需要放到spring后面，不然无效凭证
+  security:
+    basic:
+      enabled: true
+    user:
+      name: user # 配置登录用户user
+      password: password #配置登录密码password
 
 ---
 spring:
@@ -35,7 +36,7 @@ eureka:
     fetch-registry: false
     register-with-eureka: false
     serviceUrl:
-      defaultZone: http://${security.user.name}:${security.user.password}@${eureka.instance.hostname}:${server.port}/eureka
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${server.port}/eureka
   instance:
     # 读取的是/etc/host 中的localhost
     hostname: localhost
@@ -57,9 +58,12 @@ eureka:
     fetch-registry: true
     register-with-eureka: true
     serviceUrl:
-      defaultZone: http://${security.user.name}:${security.user.password}@peer2:8762/eureka
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@peer2:8762/eureka
   instance:
     hostname: peer1
+    # 通过ip注册
+#    preferIpAddress: true
+#    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
 management:
   security:
     enabled: false
@@ -74,7 +78,7 @@ eureka:
     fetch-registry: true
     register-with-eureka: true
     serviceUrl:
-      defaultZone: http://${security.user.name}:${security.user.password}@peer1:8761/eureka
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@peer1:8761/eureka
   instance:
     hostname: peer2
 management:

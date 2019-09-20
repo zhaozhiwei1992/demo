@@ -15,22 +15,22 @@ management:
     enabled: false
 server:
   port: ${port:7070}
+
 spring:
   application:
     name: '@artifactId@'
   profiles:
     active: native #默认使用本地配置
-
-# 开启配置服务安全认证
-security:
-  basic:
-    enabled: true # 开启http basic认证
-  user:
-    name: user
-    password: password
-  admin:
-    name: user
-    password: password
+  # 开启配置服务安全认证
+  security:
+    basic:
+      enabled: true # 开启http basic认证
+    user:
+      name: user
+      password: password
+    admin:
+      name: user
+      password: password
 
 # rabbitmq bus
 rabbitmq:
