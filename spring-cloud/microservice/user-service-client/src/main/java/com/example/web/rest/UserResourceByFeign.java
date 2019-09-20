@@ -3,6 +3,7 @@ package com.example.web.rest;
 import com.example.api.UserService;
 import com.example.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,8 +19,11 @@ public class UserResourceByFeign {
 
     /**
      * 这个userservice被feign初始化，必须打开enablefeign
+     * 推荐直接autowried
+     * 也可以通过实际对象全完整路径获取到feign实例
      */
     @Autowired
+    @Qualifier("com.example.api.UserService")
     private UserService userService;
 
     /**
