@@ -1,5 +1,6 @@
 package com.lx.demo.j8;
 
+import java.math.BigInteger;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -21,6 +22,51 @@ public class StreamExp {
 
 
     public static void main(String[] args) {
+
+        //limit(0-n) skip(>n) concat(连接)
+        Stream.iterate(BigInteger.ZERO, bigInteger -> bigInteger.add(BigInteger.ONE))
+                .limit(5) //输出前五个 0, 1, 2, 3,4
+                .skip(3) //前五个里跳过3个  3, 4
+                .forEach(System.out::println);
+        //concat 合并stream
+        Stream.concat(characterStream("hello"), characterStream("world"))
+                .forEach(System.out::println);
+
+        Stream.iterate(1.0, p -> p * 2)
+                .peek(aDouble -> System.out.printf("fetch e: %s", aDouble)) //只有被使用时候才会输出，可以判断延时加载
+                .limit(5)
+                .toArray();
+
+        //map flatmap
+        Stream.of("zhangsan", "lisi", "wangwu").map(s -> s.charAt(0)).forEach(System.out::println);
+
+        //返回多个stream
+        final Stream<Stream<Character>> streamStream =
+                Stream.of("zhangsan", "lisi", "wangwu").map(s -> characterStream(s));
+        //通过flatmap合成一个stream
+        final Stream<Character> characterStream =
+                Stream.of("zhangsan", "lisi", "wangwu").flatMap(s -> characterStream(s));
+        characterStream.forEach(System.out::println);
+
+        //stream
+        final Stream<String> generate = Stream.generate(() -> "echo");
+        // 这个会一致产生数据
+//        generate.forEach(System.out::println);
+        System.out.printf("获取无限stream中第一个值为: %s \n", generate.findFirst().get());
+        final Stream<BigInteger> bigIntegerStream = Stream.iterate(BigInteger.ZERO, n -> n.add(BigInteger.TEN));
+//        0
+//        10
+//        20
+//        30
+//        40
+//        50
+//        60
+//        70
+//        80
+//        90
+        bigIntegerStream
+                .limit(10) //取前十个结果
+                .forEach(System.out::println);
 
         // 统计大于５的数字个数
         final long count1 = Stream.of(1, 2, 5, 6, 7, 8, 9).filter(integer -> integer > 5).count();
@@ -75,6 +121,14 @@ public class StreamExp {
         System.out.println("列表中最小的数 : " + stats.getMin());
         System.out.println("所有数之和 : " + stats.getSum());
         System.out.println("平均数 : " + stats.getAverage());
+    }
+
+    private static Stream<Character> characterStream(String s) {
+        final ArrayList<Character> characters = new ArrayList<>();
+        for (char c : s.toCharArray()) {
+            characters.add(c);
+        }
+        return characters.stream();
     }
 
     /**
