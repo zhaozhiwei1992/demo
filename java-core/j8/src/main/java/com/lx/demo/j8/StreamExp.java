@@ -1,5 +1,6 @@
 package com.lx.demo.j8;
 
+
 import java.math.BigInteger;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -22,6 +23,29 @@ public class StreamExp {
 
 
     public static void main(String[] args) {
+        // 匹配
+        final Optional<String> first = Stream.of("J8", "Hello", "Hehe").filter(s -> s.startsWith("H")).findFirst();
+        // if这个条件always true
+        if(first.isPresent()){
+            System.out.printf("找到第一个字母是H的一个单词, %s \n", first.get());
+        }
+
+        final Optional<String> any = Stream.of("J8", "Hello", "HeHe").parallel().filter(s -> s.startsWith("H")).findAny();
+        System.out.printf("找到第一个字母是H的一个单词, %s \n", any.get());
+
+        // 找到首字母是H的至少一个单词
+        assert Stream.of("J8", "Hello", "HeHe").parallel().anyMatch(s -> s.startsWith("H"));
+        assert !Stream.of("J8", "Hello", "HeHe").parallel().allMatch(s -> s.startsWith("H"));
+        assert !Stream.of("J8", "Hello", "HeHe").parallel().noneMatch(s -> s.startsWith("H"));
+
+//        distinct
+        final String collect3 = Stream.of("lisi", "lisi", "lisi", "zhangsan").distinct().collect(Collectors.joining(
+                ","));
+        System.out.println(collect3); //lisi,zhangsan
+
+        // 有状态转换, 排序
+        final List<String> collect2 = Stream.of("zhangsan", "lisi", "wangwu").sorted().collect(Collectors.toList());
+        System.out.println(collect2); //[lisi, wangwu, zhangsan]
 
         //limit(0-n) skip(>n) concat(连接)
         Stream.iterate(BigInteger.ZERO, bigInteger -> bigInteger.add(BigInteger.ONE))
