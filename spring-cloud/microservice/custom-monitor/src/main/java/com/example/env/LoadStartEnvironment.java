@@ -1,13 +1,12 @@
 package com.example.env;
 
 import com.example.util.SystemEnvironment;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringApplicationRunListener;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.ConfigurableEnvironment;
-import org.springframework.util.StringUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,9 +14,13 @@ import java.util.Enumeration;
 import java.util.Map;
 import java.util.Properties;
 
+/**
+ * {@link org.springframework.boot.ApplicationRunner}
+ * {@link org.springframework.boot.CommandLineRunner}
+ */
 public class LoadStartEnvironment implements SpringApplicationRunListener {
+    private static final Logger logger = LoggerFactory.getLogger(LoadStartEnvironment.class);
 
-    private final Log logger = LogFactory.getLog(getClass());
     private static boolean init = false;
 
     public LoadStartEnvironment(SpringApplication application, String[] args) {
@@ -52,9 +55,9 @@ public class LoadStartEnvironment implements SpringApplicationRunListener {
         envMap.put("org.apache.tomcat.util.buf.UDecoder.ALLOW_ENCODED_SLASH","true");
         envMap.put("tomcat.util.http.parser.HttpParser.requestTargetAllow","|{}");
         try {
-            if (StringUtils.isEmpty(SystemEnvironment.getProperty("CONFIG_SERVER"))) {
+//            if (StringUtils.isEmpty(SystemEnvironment.getProperty("CONFIG_SERVER"))) {
                 Properties envProperties = new Properties();
-                String[] files = new String[]{"./docker/api.env", "../docker/api.env", "../../docker/api.env", "./api.env"};
+                String[] files = new String[]{"../.env"};
                 for (String filename : files) {
                     File file = new File(filename);
                     if (file.exists()) {
@@ -70,9 +73,9 @@ public class LoadStartEnvironment implements SpringApplicationRunListener {
                         break;
                     }
                 }
-            }else{
-                logger.info("已使用了env_file配置文件！" );
-            }
+//            }else{
+//                logger.info("已使用了env_file配置文件！" );
+//            }
         } catch (Exception e) {
             logger.error(e.getMessage(),e);
         }
