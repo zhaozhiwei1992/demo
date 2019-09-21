@@ -1,2 +1,5 @@
 org.springframework.context.ApplicationListener=\
 com.example.springbootprofile.configuration.CustomizedSpringBootApplicationListener
+
+org.springframework.boot.SpringApplicationRunListener=\
+  com.example.springbootprofile.configuration.LoadStartEnvironment

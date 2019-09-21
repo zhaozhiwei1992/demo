@@ -16,6 +16,7 @@ public class CustomizedSpringBootApplicationListener implements ApplicationListe
     @Override
     public void onApplicationEvent(ApplicationEnvironmentPreparedEvent event) {
         ConfigurableEnvironment environment = event.getEnvironment();
+        // 这里也可以进行一些环境变量初始化
         System.err.println("自定义监听: " + environment.getActiveProfiles());
     }
 }
