@@ -4,6 +4,7 @@ package com.lx.demo.j8;
 import java.math.BigInteger;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 /**
@@ -18,11 +19,16 @@ import java.util.stream.Stream;
  * +--------------------+       +------+   +------+   +---+   +-------+
  * | stream of elements +-----> |filter+-> |sorted+-> |map+-> |collect|
  * +--------------------+       +------+   +------+   +---+   +-------+
+ * 函数式编程只是一种模式，　比如predicate就是一个返回boolean类型的函数
  */
 public class StreamExp {
 
-
     public static void main(String[] args) {
+
+        // 基础要素流和普通对象流
+        final int[] ints = IntStream.of(1, 2, 3).toArray();
+        final Object[] objects = Stream.of(1, 2, 3).toArray();
+
         // 匹配
         final Optional<String> first = Stream.of("J8", "Hello", "Hehe").filter(s -> s.startsWith("H")).findFirst();
         // if这个条件always true
