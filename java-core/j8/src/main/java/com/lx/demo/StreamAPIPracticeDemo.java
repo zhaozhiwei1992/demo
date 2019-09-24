@@ -1,18 +1,18 @@
 package com.lx.demo;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class StreamAPIPracticeDemo {
     public static void main(String[] args) {
+
+        intStream();
 
 //        Stream.generate(()->"echo").limit(20).forEach(System.out::println);
         processCount();
@@ -21,19 +21,27 @@ public class StreamAPIPracticeDemo {
         findMaxSizeStrLimit5();
     }
 
+    private static void intStream() {
+        int[] values = {1, 3, 4, 6, 8};
+        // 数组类型stream
+        final Stream<int[]> values1 = Stream.of(values);
+        // 返回数组内部类型的stream
+        final IntStream stream = Arrays.stream(values);
+    }
+
     private static void findMaxSizeStrLimit5() {
         final Random random = new Random();
         final List<String> list = Stream.generate(() -> getRandomString2(random.nextInt(10))).limit(80).collect(Collectors.toList());
         //80选五个
-//        list.stream()
-//                .sorted((a, b) -> Integer.compare(b.length(), a.length()))
-//                .limit(5)
-//                .forEach(System.out::println);
+        list.stream()
+                .sorted((a, b) -> Integer.compare(b.length(), a.length()))
+                .limit(5)
+                .forEach(System.out::println);
         //
-        list.stream().filter(s -> {
-            System.out.println("调用xx");
-            return s.length() > 3;
-        }).limit(5).forEach(System.out::println);
+//        list.stream().filter(s -> {
+//            System.out.println("调用xx");
+//            return s.length() > 3;
+//        }).limit(5).forEach(System.out::println);
 
     }
 
