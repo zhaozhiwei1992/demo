@@ -33,12 +33,11 @@ public class StreamAPIPracticeDemo {
 
         //分配
         for (int i = 0; i < processors; i++, index += perDealSize) {
-            int start = index;
-            if (start >= list.size()) break;
-            int end = start + perDealSize;
-            end = end > list.size() ? list.size() : end;
+            if (index >= list.size()) break;
+            int end = index + perDealSize;
+            end = Math.min(end, list.size());
 
-            futures.add(ex.submit(new Task(list, start, end)));
+            futures.add(ex.submit(new Task(list, index, end)));
         }
         try {
             int count = 0;
@@ -66,14 +65,14 @@ public class StreamAPIPracticeDemo {
             switch (number) {
                 case 0:
                     result = Math.round(Math.random() * 25 + 65);
-                    sb.append(String.valueOf((char) result));
+                    sb.append((char) result);
                     break;
                 case 1:
                     result = Math.round(Math.random() * 25 + 97);
-                    sb.append(String.valueOf((char) result));
+                    sb.append((char) result);
                     break;
                 case 2:
-                    sb.append(String.valueOf(new Random().nextInt(10)));
+                    sb.append(new Random().nextInt(10));
                     break;
             }
         }
