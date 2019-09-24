@@ -1,5 +1,6 @@
 package com.lx.demo;
 
+import java.math.BigInteger;
 import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
@@ -12,6 +13,8 @@ import java.util.stream.Stream;
 public class StreamAPIPracticeDemo {
     public static void main(String[] args) {
 
+        characterStream();
+
         intStream();
 
 //        Stream.generate(()->"echo").limit(20).forEach(System.out::println);
@@ -19,6 +22,17 @@ public class StreamAPIPracticeDemo {
 
         //找前五个最长单词
         findMaxSizeStrLimit5();
+    }
+
+    /**
+     * 字符串转character stream
+     */
+    private static void characterStream() {
+        String s = "hello";
+        final Stream<Character> characterStream =
+                Stream.iterate(BigInteger.ZERO, a -> a.add(BigInteger.ONE)).limit(s.length())
+                        .map(integer -> s.charAt(Integer.parseInt(integer.toString())));
+        characterStream.forEach(System.out::println);
     }
 
     private static void intStream() {
