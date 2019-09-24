@@ -1,6 +1,7 @@
 package com.lx.demo;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Callable;
@@ -15,6 +16,25 @@ public class StreamAPIPracticeDemo {
 
 //        Stream.generate(()->"echo").limit(20).forEach(System.out::println);
         processCount();
+
+        //找前五个最长单词
+        findMaxSizeStrLimit5();
+    }
+
+    private static void findMaxSizeStrLimit5() {
+        final Random random = new Random();
+        final List<String> list = Stream.generate(() -> getRandomString2(random.nextInt(10))).limit(80).collect(Collectors.toList());
+        //80选五个
+//        list.stream()
+//                .sorted((a, b) -> Integer.compare(b.length(), a.length()))
+//                .limit(5)
+//                .forEach(System.out::println);
+        //
+        list.stream().filter(s -> {
+            System.out.println("调用xx");
+            return s.length() > 3;
+        }).limit(5).forEach(System.out::println);
+
     }
 
     /**
