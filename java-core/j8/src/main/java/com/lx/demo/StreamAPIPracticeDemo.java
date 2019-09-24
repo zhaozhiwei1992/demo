@@ -13,6 +13,22 @@ import java.util.stream.Stream;
 public class StreamAPIPracticeDemo {
     public static void main(String[] args) {
 
+        //{4=[lisi, maqi], 6=[wangwu, yangba], 7=[zhaoliu], 8=[zhangsan]}
+        countWordTimes(Stream.of("zhangsan", "lisi", "wangwu", "zhaoliu", "maqi", "yangba"));
+
+        final double doubleAverage = doubleAverage(Stream.of(1L, 2L, 3L));
+        assert doubleAverage == 2.0;
+
+        final ArrayList<Integer> list1 = new ArrayList<>(Arrays.asList(1, 2, 3));
+        final ArrayList<Integer> list2 = new ArrayList<>(Arrays.asList(4, 5, 6));
+        final ArrayList<Integer> list3 = new ArrayList<>(Arrays.asList(7, 8, 9));
+        final Stream<List<Integer>> listStream = Stream.of(list1, list2, list3);
+        final Stream<Integer> integerStream = streamListObjToStreamObject(listStream);
+        assert integerStream.count() == 9;
+
+        final boolean finite = isFinite(Stream.generate(() -> 0));
+        assert finite;
+
         characterStream();
 
         intStream();
@@ -22,6 +38,54 @@ public class StreamAPIPracticeDemo {
 
         //找前五个最长单词
         findMaxSizeStrLimit5();
+    }
+
+    /**
+     * 每个长度对应单词个数
+     */
+    private static void countWordTimes(Stream<String> stream) {
+        // 根据字符串长度分组
+        final Map<Integer, List<String>> collect = stream.collect(Collectors.groupingBy(String::length));
+        System.out.println(collect);
+    }
+
+    private static double doubleAverage(Stream<Long> stream) {
+        //计算平均值
+        final DoubleSummaryStatistics doubleSummaryStatistics =
+                stream.mapToDouble(x -> x).summaryStatistics();
+        System.out.printf("平均值为: %s\n", doubleSummaryStatistics.getAverage());
+        return doubleSummaryStatistics.getAverage();
+    }
+
+    /**
+     * Stream<List> To Stream<Obj>
+     */
+    private static <T> Stream<T> streamListObjToStreamObject(Stream<List<T>> stream) {
+        //方法1, 先把这玩意儿转成多个stream然后合并stream参考　flatmap聚合操作
+        // 这个好用
+        final Stream<T> tStream = stream.map(l -> l.stream()).flatMap(stream1 -> stream1);
+        return tStream;
+
+        //方法2 这种方式小心 Exception in thread "main" java.lang.UnsupportedOperationException
+        // 不支持arrays.aslist这类unmidify类型的合并
+//        final Stream<T> stream1 = stream.reduce((ts, c) -> {
+//            ts.addAll(c);
+//            return ts;
+//        }).get().stream();
+//        stream1.forEach(System.out::println);
+//        return null;
+    }
+
+    /**
+     * 判断无限流
+     * @param stream
+     * @param <T>
+     * @return
+     */
+    public static <T> boolean isFinite(Stream<T> stream){
+//        stream.count();
+        //todo
+        return false;
     }
 
     /**
