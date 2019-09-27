@@ -5,14 +5,49 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 
+class XXUtil<E extends Number>{
+    /**
+     * 测试泛型推导
+     * @param list
+     * @param <T>
+     * @return
+     */
+    public <T extends Number> T testT(List<T> list){
+        return list.get(0);
+    }
+
+    public static <T extends Number> T testTStatic(List<T> list){
+        return list.get(0);
+    }
+}
+
 public class GenericWildcardsTypeDemo {
 
     public static void main(String[] args) {
+
+        final List<String> strings = new ArrayList<>();
+//        testT(strings); //会检测到类型不匹配
+
+        // 使用对象方式竟然没有判断出类型不匹配
+        final XXUtil xxUtil = new XXUtil();
+        xxUtil.testT(strings);
+        // 静态方法直接报错，类型不匹配
+//        XXUtil.testTStatic(strings);
 
         List<Number> numbers = new ArrayList<>();
         upperBoundedWildcards(numbers);
         unboundedWildcards(numbers);
         lowerBoundedWildcards(numbers);
+    }
+
+    /**
+     * 测试泛型推导
+     * @param list
+     * @param <T>
+     * @return
+     */
+    public static <T extends Number> T testT(List<T> list){
+        return list.get(0);
     }
 
     private static void upperBoundedWildcards(List<Number> numbers) {
