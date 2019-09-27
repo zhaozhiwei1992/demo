@@ -2,6 +2,7 @@ package com.example.web.rest;
 
 import com.example.api.UserService;
 import com.example.domain.User;
+import com.example.service.UserServiceFeignHystrix;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,17 @@ import java.util.List;
  */
 @RestController
 public class UserResourceByFeign {
+
+    /**
+     *
+     */
+    @Autowired
+    private UserServiceFeignHystrix userServiceFeignHystrix;
+
+    @GetMapping("/users/feign")
+    List<User> getAllUserByFeign(){
+        return userServiceFeignHystrix.getAllUser();
+    }
 
     /**
      * 这个userservice被feign初始化，必须打开enablefeign
