@@ -17,6 +17,8 @@
         <module>modularize</module>
     <module>modularize-public</module>
     <module>collections</module>
+    <module>mutithreading</module>
+    <module>process</module>
   </modules>
     <build>
         <plugins>
