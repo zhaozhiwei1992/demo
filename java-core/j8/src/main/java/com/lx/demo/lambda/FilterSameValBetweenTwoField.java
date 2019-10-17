@@ -25,7 +25,11 @@ public class FilterSameValBetweenTwoField {
             final Class<?> aClass = o1.getClass();
             final Field declaredField = o1.getClass().getDeclaredField(fieldName);
             declaredField.setAccessible(true);
-            declaredField.get(o1)
+            try {
+                declaredField.get(o1);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
             for (String fieldName : fieldNames) {
             }
             return false;
