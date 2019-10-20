@@ -11,17 +11,20 @@ import java.time.temporal.TemporalAdjusters;
 public class TemporalAdjustorDemo {
 
     public static void main(String[] args) {
-        final LocalDate localDate = LocalDate.of(2020, 10, 16).with(TemporalAdjusters.nextOrSame(DayOfWeek.MONDAY));
+        // 某个月的第一个周二
+        final LocalDate localDate = LocalDate.of(2020, 9, 1)
+                .with(TemporalAdjusters.nextOrSame(DayOfWeek.THURSDAY));
         System.out.println(localDate);
 
-        final LocalDate with = LocalDate.of(2020, 10, 16).with(w -> {
+        //计算下一个工作日, 一周七天 6, 7不属于工作日
+        final LocalDate with = LocalDate.of(2020, 9, 1).with(w -> {
             LocalDate result = (LocalDate) w;
-//            do {
-//                result = result.plusDays(1);
-//            } while (result.getDayOfWeek().getValue() >= 6);
-            result = result.plusDays(7);
+            do {
+                result = result.plusDays(1);
+            } while (result.getDayOfWeek().getValue() >= 6);
+//            result = result.plusDays(7);
             return result;
         });
-        System.out.printf("自定义周期性日期 %s", with);
+        System.out.printf("下一个工作日 %s", with);
     }
 }

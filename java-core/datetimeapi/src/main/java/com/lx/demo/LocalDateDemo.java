@@ -1,7 +1,5 @@
 package com.lx.demo;
 
-import com.sun.org.apache.bcel.internal.classfile.SourceFile;
-
 import java.time.*;
 import java.time.temporal.ChronoUnit;
 
@@ -27,5 +25,16 @@ public class LocalDateDemo {
         System.out.printf("3月31号上一个月 %s \n", LocalDate.of(2020, 3, 31).minusMonths(1));
 
         System.out.printf("周五再过三天是 %s \n", DayOfWeek.FRIDAY.plus(3));
+
+        System.out.printf("当前月五号 %s \n", now.withDayOfMonth(5));
+
+        // 跳过周六周天
+        System.out.printf("当前开始下一个工作日的日期 %s \n", now.with(w -> {
+            LocalDate result = (LocalDate) w;
+            do {
+                result = result.plusDays(1);
+            } while (result.getDayOfWeek().getValue() >= 6);
+            return result;
+        }));
     }
 }
