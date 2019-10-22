@@ -2,6 +2,7 @@ package com.example.config;
 
 import com.netflix.loadbalancer.NoOpPing;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cglib.proxy.NoOp;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +20,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -29,13 +31,46 @@ import java.util.Collection;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
+     * 需要放行的URL
+     */
+    private static String[] AUTH_WHITELIST = {
+            // -- register url
+            "/busportal/login.page",
+            "/busportal/login/loginId.rcp",
+            "/error/**",
+            // -- swagger ui
+            "/v2/api-docs",
+            "/swagger-resources",
+            "/swagger-resources/**",
+            "/configuration/ui",
+            "/configuration/security",
+            "/swagger-ui.html",
+            "/webjars/**",
+            "/actuator/**",
+            "/404.jsp",
+            "/403.jsp",
+            "/500.jsp"
+            // other public endpoints of your API may be appended to this array
+    };
+
+    @Value("${security.ignoring.antpatterns}")
+    public String[] setAuthWhitelist(String antpatterns){
+        if(StringUtils.hasLength(antpatterns)) {
+            antpatterns += ","+StringUtils.arrayToCommaDelimitedString(AUTH_WHITELIST);
+            AUTH_WHITELIST = StringUtils.commaDelimitedListToStringArray(antpatterns);
+        }
+        return AUTH_WHITELIST;
+    }
+
+
+    /**
      *
      * @param http
      * @throws Exception
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        // 所有请求都需要通过http basic认证
+        // http basic认证
         http.authorizeRequests()
                 .and().authorizeRequests()
                 .antMatchers("/management/**").permitAll()
@@ -47,6 +82,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/v2/api-docs").permitAll()
                 .antMatchers("/configuration/ui").permitAll()
                 .antMatchers("/configuration/security").permitAll()
+                //扩展白名单
+                .antMatchers(AUTH_WHITELIST).permitAll()
                 //全部校验
                 .anyRequest().authenticated()
                 .and()
