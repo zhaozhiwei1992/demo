@@ -16,8 +16,24 @@ public class ArraysDemo {
     public static void main(String[] args) {
         final List<Integer> integers = Arrays.asList(1, 3, 9, 6, 4, 45, 99, 21);
 //        sort(integers);
-        parellerSort(integers);
+//        parellerSort(integers);
 //        test();
+
+        final Integer[] integers1 = {1, 2, 3, 4, 5};
+        Arrays.parallelPrefix(integers1, (x, y) -> x + y);
+        //每一项都是前面累加
+//        1
+//        3
+//        6
+//        10
+//        15
+        Arrays.stream(integers1).forEach(System.out::println);
+
+        final Integer[] strings = integers.toArray(new Integer[0]);
+        Arrays.stream(strings).forEach(System.out::println);
+        // 重置values值
+        Arrays.parallelSetAll(strings, value -> value * 2);
+        Arrays.stream(strings).forEach(System.out::println);
     }
 
     /**
