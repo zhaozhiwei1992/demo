@@ -23,7 +23,12 @@ public class FilterSameValBetweenTwoField {
     public static Predicate lexicographicComparator(String... fieldNames){
         return o1 -> {
             final Class<?> aClass = o1.getClass();
-            final Field declaredField = o1.getClass().getDeclaredField(fieldName);
+            Field declaredField = null;
+            try {
+                declaredField = o1.getClass().getDeclaredField("xx");
+            } catch (NoSuchFieldException e) {
+                e.printStackTrace();
+            }
             declaredField.setAccessible(true);
             try {
                 declaredField.get(o1);
