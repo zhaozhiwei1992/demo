@@ -1,0 +1,48 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.lx.demo",
+      "nativeLanguage": "zh-cn"
+    },
+    "jhipsterVersion": "5.8.2",
+    "applicationType": "microservice",
+    "baseName": "microservice",
+    "packageName": "com.lx.demo",
+    "packageFolder": "com/lx/demo",
+    "serverPort": "8081",
+    "authenticationType": "jwt",
+    "cacheProvider": "hazelcast",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "mariadb",
+    "prodDatabaseType": "mariadb",
+    "searchEngine": "elasticsearch",
+    "messageBroker": "kafka",
+    "serviceDiscoveryType": "consul",
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "OWJlNDUxNGI2MDBkYmI1ZTU4MzlmZWYxYWE0MGNkMmU3MWMzNGZkYzQ2NGQxZmQ5MTlmZjUxMzhiODVhMjNkMjZkMDExZWIzYTg2M2RkMDk0MDlkN2Y0OGVmNjEyYzEwOTZjODhlY2FiMDQ4ZGNkODY3MzVjYzc5N2RjNzNmZDk=",
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [
+      {
+        "name": "generator-jhipster-vuejs",
+        "version": "1.0.0-beta.1"
+      }
+    ],
+    "enableTranslation": true,
+    "clientPackageManager": "npm",
+    "nativeLanguage": "zh-cn",
+    "languages": [
+      "zh-cn",
+      "zh-tw"
+    ],
+    "blueprint": "generator-jhipster-vuejs",
+    "blueprintVersion": "1.0.0-beta.1",
+    "skipClient": true,
+    "skipUserManagement": true
+  }
+}
