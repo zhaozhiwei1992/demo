@@ -10,8 +10,7 @@ spring:
 
 ---
 spring:
-  profiles:
-    active: dev
+  profiles: dev
   liquibase:
     enabled: true
   datasource:
