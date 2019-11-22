@@ -1,9 +1,18 @@
 package com.lx.demo.springbootscheduler.spring;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.scheduling.config.ScheduledTask;
+import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PreDestroy;
 import java.util.Date;
 
 /**
@@ -16,8 +25,10 @@ import java.util.Date;
         *@Scheduled(initialDelay = 1000, fixedRate = 6000) ：第一次延迟1秒后执行，之后按 fixedRate 的规则每6秒执行一次
  */
 @Slf4j
-//@Component
-public class TimeTask {
+@Configuration
+@EnableScheduling
+@ConditionalOnProperty(prefix = "synchronous.bdg.scheduling", name = "enabled", havingValue = "true")
+public class TimeTask extends ScheduledTaskRegistrar implements BeanFactoryPostProcessor{
 
     /**
      * 每3秒执行
@@ -33,5 +44,21 @@ public class TimeTask {
     @Scheduled(fixedRate = 5000)
     public void fixedRateTask(){
         log.info("{}, 当前时间: {}", Thread.currentThread().getStackTrace()[1].getMethodName(), new Date());
+    }
+
+    /**
+     * 销毁当前bean
+     * 通过继承org.springframework.scheduling.config.ScheduledTaskRegistrar的方式
+     */
+//    @PreDestroy
+    @Override
+    public void destroy() {
+        log.info("{}, 当前时间: {}", Thread.currentThread().getStackTrace()[1].getMethodName(), new Date());
+    }
+
+    @Override
+    public void postProcessBeanFactory(ConfigurableListableBeanFactory configurableListableBeanFactory) throws BeansException {
+        // 直接销毁bean ,然后由spring去调用destroy方法
+        configurableListableBeanFactory.destroyBean(this);
     }
 }
