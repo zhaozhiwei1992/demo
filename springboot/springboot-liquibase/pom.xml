@@ -26,8 +26,15 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
+<!--			这里一定要注意 mysql要到运行时不然无法初始化datasource-->
+			<scope>runtime</scope>
 		</dependency>
 
 		<dependency>
