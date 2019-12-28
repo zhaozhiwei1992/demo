@@ -32,6 +32,7 @@ public class ExcelController {
     /**
      * excel导出
      * 使用poi实现, 必要时可灵活通过数据库配置导出
+     * 浏览器访问: http://127.0.0.1:8080/exportExcel
      * @param response
      */
     @RequestMapping("/exportExcel")
