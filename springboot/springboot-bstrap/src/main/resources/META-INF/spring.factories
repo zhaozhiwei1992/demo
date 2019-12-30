@@ -1,2 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.lx.demo.springbootbstrap.configuration.PersonAutoConfiguration
+com.lx.demo.springbootbstrap.configuration.PersonAutoConfiguration,\
+com.lx.demo.springbootbstrap.configuration.CommonControllerAutoConfiguration
