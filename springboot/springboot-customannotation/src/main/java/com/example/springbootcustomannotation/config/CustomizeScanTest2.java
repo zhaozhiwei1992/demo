@@ -1,5 +1,6 @@
 package com.example.springbootcustomannotation.config;
 
+import com.example.springbootcustomannotation.CustomizeScanTest;
 import com.example.springbootcustomannotation.service.MyComponent2Bean;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
@@ -22,6 +23,10 @@ public class CustomizeScanTest2 {
         annotationConfigApplicationContext.refresh();
         MyComponent2Bean injectClass = annotationConfigApplicationContext.getBean(MyComponent2Bean.class);
         injectClass.echo("hello world");
+
+        //scanner.scan("com.example.springbootcustomannotation.service");
+        CustomizeScanTest.ScanClass1 noScan = annotationConfigApplicationContext.getBean(CustomizeScanTest.ScanClass1.class);
+        noScan.print();
     }
 
     /**
@@ -45,7 +50,7 @@ public class CustomizeScanTest2 {
         public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
           Scanner scanner = new Scanner((BeanDefinitionRegistry) beanFactory);
           scanner.setResourceLoader(this.applicationContext);
-          scanner.scan("com.example.springbootcustomannotation");
+          scanner.scan("com.example.springbootcustomannotation.service");
         }
       }
 }

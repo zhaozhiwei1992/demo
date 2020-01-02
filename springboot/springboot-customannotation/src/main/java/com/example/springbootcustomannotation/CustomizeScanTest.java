@@ -5,6 +5,7 @@
 package com.example.springbootcustomannotation;
 
 import com.example.springbootcustomannotation.annotation.CustomizeComponent2;
+import com.example.springbootcustomannotation.service.MyComponent2Bean;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
@@ -52,6 +53,9 @@ public class CustomizeScanTest {
 		annotationConfigApplicationContext.refresh();
 		ScanClass1 injectClass = annotationConfigApplicationContext.getBean(ScanClass1.class);
 		injectClass.print();
+
+		MyComponent2Bean noScanBean = annotationConfigApplicationContext.getBean(MyComponent2Bean.class);
+		noScanBean.echo("hh");
 	}
 
 	/**
@@ -173,6 +177,13 @@ public class CustomizeScanTest {
 		}
 	}
 
+	/**
+	 * 不加注解就不会被扫描到
+     *                @Override
+	 *        public void registerDefaultFilters() {
+	 * 			this.addIncludeFilter(new AnnotationTypeFilter(CustomizeComponent2.class));
+	 *        }
+	 */
 	@CustomizeComponent2
 	public static class ScanClass1 {
 		public void print() {
