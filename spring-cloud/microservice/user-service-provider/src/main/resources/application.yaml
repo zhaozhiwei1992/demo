@@ -1,7 +1,8 @@
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://user:password@peer1:8761/eureka,http://user:password@peer2:8762/eureka #高可用配置
+#      defaultZone: http://user:password@peer1:8761/eureka,http://user:password@peer2:8762/eureka #高可用配置
+      defaultZone: http://user:password@localhost:8761/eureka
   instance:
     hostname: localhost
     port: 8761
@@ -13,10 +14,6 @@ security:
   ignoring:
     antpatterns: '/demo/**,/swagger-ui.html,/api/**'
 
-management:
-  security:
-    enabled: false
-
 server:
   port: ${port:9090}
 spring:
@@ -24,7 +21,7 @@ spring:
     name: '@artifactId@'
   # mq
   rabbitmq:
-    host: 47.75.36.192
+    host: localhost
     port: 5672
     username: guest
     password: guest
@@ -44,6 +41,45 @@ spring:
     sampler:
       #设置采样率，为了测试设置100%采集，设置为1.0
       percentage: 1.0  #zipkin采集率  0.1表示 10%采集率
+#  cloud:
+#    config:
+#      failFast: true
+#      retry: #和重试机制相关的配置有如下四个：
+#        max-interval: 2000 # 最大间隔时间，默认2000ms
+#        multiplier: 1.1 # 间隔乘数，默认1.1
+#        initial-interval: 1000 # 初始重试间隔时间，默认1000ms
+#        max-attempts: 6 # 配置重试次数，默认为6
+#      bus:
+#        trace:
+#          enabled: true
+#      allowOverride: true
+#      overrideNone: true
+#      overrideSystemProperties: false
+#    stream:
+#      debugmode: true
+#      #sender: ${spring.stream.sender:false}
+#      #Binding: 包括 Input Binding 和 Output Binding。
+#      #Binding 在消息中间件与应用程序提供的 Provider 和 Consumer 之间提供了一个桥梁，
+#      #实现了开发者只需使用应用程序的 Provider 或 Consumer 生产或消费数据即可，屏蔽了开发者与底层消息中间件的接触。
+#      bindings:
+#        # exchange1
+#        message_output:
+##          destination: dic_version_topic
+##          content-type: application/json
+#          producer:
+#            group: 'fasp2_group'
+#            sync: true
+#        #自定义的名称
+#        #exchange2
+#        message_input:
+#          destination: dic_version_topic # 订阅的topic
+##          content-type: application/json # content是将对象以json方式显示在RabbitMQ管理控制台
+#          group: 'group_${spring.application.name}'    #group 服务分组
+#          consumer:
+#            concurrency: 20
+#            maxAttempts: 1
+#            orderly: false  # 是否按顺序消费
+#            tags: Basicdata_version
 
 logging:
   level:

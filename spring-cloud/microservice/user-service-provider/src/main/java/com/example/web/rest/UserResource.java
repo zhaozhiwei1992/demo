@@ -2,6 +2,7 @@ package com.example.web.rest;
 
 import com.example.api.UserService;
 import com.example.domain.User;
+import com.example.stream.DicStreamSender;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import lombok.extern.slf4j.Slf4j;
@@ -33,6 +34,12 @@ public class UserResource{
     }
 
     /**
+     * 测试异步接口
+     */
+    @Autowired
+    DicStreamSender dicStreamSender;
+
+    /**
      * 保存用户
      * curl -X POST http://127.0.0.1:9090/users -H "Content-Type:application/json;charset=utf8" -d '{"id":66,"name":"zhangsan"}'
      * @param user
@@ -40,6 +47,8 @@ public class UserResource{
      */
     @PostMapping("/users")
     public boolean createUser(@RequestBody User user) {
+        dicStreamSender.sendMessage("{'code':'0000', 'msg':'用户增加'}");
+
         return userService.createUser(user);
     }
 
