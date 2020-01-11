@@ -1,6 +1,6 @@
-management:
-  security:
-    enabled: false
+#management:
+#  security:
+#    enabled: false
 server:
   port: ${port:8761}
 # Tomcat
