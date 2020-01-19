@@ -1,18 +1,18 @@
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://user:password@peer1:8761/eureka,http://user:password@peer2:8762/eureka #高可用配置
-#      defaultZone: http://user:password@${eureka.instance.hostname}:${eureka.instance.port}/eureka
+#      defaultZone: http://user:password@peer1:8761/eureka,http://user:password@peer2:8762/eureka #高可用配置
+      defaultZone: http://user:password@${eureka.instance.hostname}:${eureka.instance.port}/eureka
   instance:
-#    hostname: localhost
-#    port: 8761
+    hostname: localhost
+    port: 8761
     preferIpAddress: true
     # 自定义元数据
     metadataMap:
       my-metadata: hello
-management:
-  security:
-    enabled: false
+#management:
+#  security:
+#    enabled: false
 server:
   port: ${port:7070}
 
@@ -40,6 +40,7 @@ rabbitmq:
   password: guest
 ---
 
+# 请求方式 http://127.0.0.1:7070/zuul/default
 spring:
   profiles: git
   cloud:
@@ -49,12 +50,12 @@ spring:
           enabled: true
       server:
         git:
-          basedir: /tmp/data
+          basedir: /tmp/data #配置下载路径
           search-paths: '{application}'
           force-pull: true
-          uri: https://github.com/microzhao/cloud-config-repo
-          username: xxx #账号密码写真实的快一些我觉得，不使用也能访问有点慢
-          password: '{cipher}AIAC6nB/V+0UxnIrBj4pv0xUEdPog9GxklYpMtp3K7dLflI+u64aFv60xG37LyiqYjEQ6yXaNni9IvxNKUdLlUV7k8FwGLaarc9EF+uPhVewcZ1JnIXBXhDsyj4A9BKl0DbmwZX1issCvnoerTv5Ee4Va03zm6esVgN+pvqqG84DnXpUHzJUZ8IamWK7/H2hAsm4XAqMUQTgOxFZU+TWZ75i'
+          uri: https://github.com/p205/cloud-config-repo
+          username: xxxx #账号密码写真实的快一些我觉得，不使用也能访问有点慢
+          password: HxxxRnI
 
 ---
 
