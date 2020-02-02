@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="60 seconds">
+    <!-- 日志级别从低到高分为TRACE < DEBUG < INFO < WARN < ERROR < FATAL，如果设置为WARN，则低于WARN的信息都不会输出 -->
+    <!-- scan:当此属性设置为true时，配置文档如果发生改变，将会被重新加载，默认值为true -->
+    <!-- scanPeriod:设置监测配置文档是否有修改的时间间隔，如果没有给出时间单位，默认单位是毫秒。
+                     当scan为true时，此属性生效。默认的时间间隔为1分钟。 -->
+    <!-- debug:当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值为false。 -->
 
     <!-- 定义参数 -->
+    <!-- name的值是变量的名称，value的值时变量定义的值。通过定义的值会被插入到logger上下文中。定义后，可以使“${}”来使用变量。 -->
     <property name="log.lever" value="debug" />
-    <property name="log.maxHistory" value="365" />
-    <property name="log.filePath" value="${catalina.base}/logs/webapp"></property>
+<!--    日志保留天数-->
+    <property name="log.maxHistory" value="15" />
+<!--    日志文件路径, 没有会自己创建-->
+    <property name="log.filePath" value="${catalina.base}/logs/webapp"/>
+<!--    日志格式 -->
     <property name="log.pattern" value="%-12(%d{yyyy-MM-dd HH:mm:ss.SSS}) |-%-5level [%thread] %c [%L] -| %msg%n" />
 
     <!-- 控制台设置 -->
@@ -28,6 +37,7 @@
         <encoder>
             <pattern>${log.pattern}</pattern>
         </encoder>
+<!--        使用filter可以把不同的日志做区分,放到不同文件下-->
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>DEBUG</level>
             <onMatch>ACCEPT</onMatch>
@@ -77,17 +87,61 @@
         </filter>
     </appender>
 
-    <!-- 生产环境用info -->
-    <logger name="com.lx.demo.springbootlog.web.rest.IndexResource" level="${log.lever}">
-        <appender-ref ref="debugAppender" />
-        <appender-ref ref="infoAppender" />
-        <appender-ref ref="errorAppender" />
-    </logger>
+    <!--
+        <logger>用来设置某一个包或者具体的某一个类的日志打印级别、
+        以及指定<appender>。<logger>仅有一个name属性，
+        一个可选的level和一个可选的addtivity属性。
+        name:用来指定受此logger约束的某一个包或者具体的某一个类。
+        level:用来设置打印级别，大小写无关：TRACE, DEBUG, INFO, WARN, ERROR, ALL 和 OFF，
+              还有一个特俗值INHERITED或者同义词NULL，代表强制执行上级的级别。
+              如果未设置此属性，那么当前logger将会继承上级的级别。
+        addtivity:是否向上级logger传递打印信息。默认是true。
+        <logger name="org.springframework.web" level="info"/>
+        <logger name="org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor" level="INFO"/>
+    -->
 
+    <!--
+        使用mybatis的时候，sql语句是debug下才会打印，而这里我们只配置了info，所以想要查看sql语句的话，有以下两种操作：
+        第一种把<root level="info">改成<root level="DEBUG">这样就会打印sql，不过这样日志那边会出现很多其他消息
+        第二种就是单独给dao下目录配置debug模式，代码如下，这样配置sql语句会打印，其他还是正常info级别：
+        【logging.level.org.mybatis=debug logging.level.dao=debug】
+     -->
+
+    <!--
+        root节点是必选节点，用来指定最基础的日志输出级别，只有一个level属性
+        level:用来设置打印级别，大小写无关：TRACE, DEBUG, INFO, WARN, ERROR, ALL 和 OFF，
+        不能设置为INHERITED或者同义词NULL。默认是DEBUG
+        可以包含零个或多个元素，标识这个appender将会添加到这个logger。
+    -->
+
+    <!-- 4.1 开发环境:打印控制台-->
+<!--    <springProfile name="dev">-->
+<!--        <logger name="com.lx.demo.springbootlog.web.rest" level="debug"/>-->
+<!--    </springProfile>-->
+
+    <!-- 生产环境用info -->
+<!--    <logger name="com.lx.demo.springbootlog.web.rest.IndexResource" level="${log.lever}">-->
+<!--        这里配置也是可选的, 没有以root为主-->
+<!--        <appender-ref ref="debugAppender" />-->
+<!--        <appender-ref ref="infoAppender" />-->
+<!--        <appender-ref ref="errorAppender" />-->
+<!--    </logger>-->
+
+<!--    info或者info级别以上的都会根据下面配置分门别类放入不同文件中-->
     <root level="info">
         <appender-ref ref="consoleAppender" />
         <appender-ref ref="debugAppender" />
         <appender-ref ref="infoAppender" />
         <appender-ref ref="errorAppender" />
     </root>
+    <!-- 4.2 生产环境:输出到文档
+    <springProfile name="pro">
+        <root level="info">
+            <appender-ref ref="CONSOLE" />
+            <appender-ref ref="DEBUG_FILE" />
+            <appender-ref ref="INFO_FILE" />
+            <appender-ref ref="ERROR_FILE" />
+            <appender-ref ref="WARN_FILE" />
+        </root>
+    </springProfile> -->
 </configuration>
