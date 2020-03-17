@@ -2,7 +2,11 @@ eureka:
   client:
     serviceUrl:
 #      defaultZone: http://user:password@peer1:8761/eureka,http://user:password@peer2:8762/eureka #高可用配置
+<<<<<<< HEAD
       defaultZone: http://user:password@${eureka.instance.hostname}:${eureka.instance.port}/eureka
+=======
+      defaultZone: http://user:password@localhost:8761/eureka
+>>>>>>> d26604d8e5ad5317ccf4e8537c42784d11a49227
   instance:
     hostname: localhost
     port: 8761
@@ -10,9 +14,13 @@ eureka:
     # 自定义元数据
     metadataMap:
       my-metadata: hello
+<<<<<<< HEAD
 #management:
 #  security:
 #    enabled: false
+=======
+
+>>>>>>> d26604d8e5ad5317ccf4e8537c42784d11a49227
 server:
   port: ${port:7070}
 
@@ -66,7 +74,7 @@ spring:
       server:
         native:
           # 访问http://host:port/zuul/dev 就会到xxx/zuul/目录下去找
-          search-locations: ${CONFIGSPATH:${user.dir}/config-server/src/main/home/configs}/{application}
+          search-locations: ${CONFIGSPATH:${user.dir}/config-server/src/main/resources/configs}/{application}
       allowOverride: false
       overrideNone: false
       overrideSystemProperties: false
