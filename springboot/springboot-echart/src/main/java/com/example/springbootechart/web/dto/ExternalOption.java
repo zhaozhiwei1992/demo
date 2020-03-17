@@ -42,4 +42,15 @@ public class ExternalOption extends Option {
     public String exportToHtml(String filePath, String fileName) {
         return OptionUtil.exportToHtml(this, filePath, fileName);
     }
+
+    private RadiusAxis radiusAxis;
+
+    public RadiusAxis radiusAxis() {
+
+        if(this.radiusAxis == null){
+            this.radiusAxis = new RadiusAxis();
+        }
+
+        return this.radiusAxis;
+    }
 }

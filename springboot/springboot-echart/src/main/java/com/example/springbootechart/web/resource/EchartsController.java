@@ -100,31 +100,36 @@ public class EchartsController {
      * };
      */
     @GetMapping(value = "/project1")
-    public Option test1(){
+    public String test1(){
 
         String[] cities = {"扶贫", "农业生产发展", "就业补贴", "医疗补助", "退耕还林还草", "林业和草原", "水利"};
 
         ExternalOption option = new ExternalOption();
 
         // 大标题、小标题、位置
-        option.title().text("惠民惠农财政补贴项目").subtext("按项目大类统计资金分配情况").x("left");
+        option.title().text("惠民惠农财政补贴项目").subtext("按项目大类统计资金分配情况");
         option.legend().show(true).data("金额范围", "均值");
         option.grid().setTop(100);
         option.angleAxis().type("category").data(cities);
 
         //显示工具提示,设置提示格式
         option.tooltip().show(true).formatter("{a} <br/>{b} : {c}");
+        option.polar();
+        option.radiusAxis();
 
         Bar[] bars = new Bar[cities.length];
         // 循环数据
+        // 这里如果数据全部一致，肯定不能画图
         for (int i = 0; i < cities.length; i++) {
             // 图类别(柱状图)
             Bar bar = new Bar();
-            // 类目对应的柱状图
-            Map<String, Object> map = new HashMap<>(2);
-//            map.put("value", 1);
-//            map.put("itemStyle", new ItemStyle().normal(new Normal().color("transparent")));
-            bar.data("test");
+            bar.data(10000 + i*1000,
+                    10000 + i*1000,
+                    6500 + i*1000,
+                    5600 + i*1000,
+                    4000 + i*1000,
+                    4000 + i*1000,
+                    4000 + i*1000);
             bar.itemStyle(new ItemStyle().normal(new Normal().color("transparent")));
             bar.coordinateSystem("polar");
             bar.name("均值");
@@ -136,7 +141,7 @@ public class EchartsController {
 
         option.series(bars);
         logger.info(option.toPrettyString());
-        return option;
+        return option.toString();
     }
     /**
      * 柱状图
