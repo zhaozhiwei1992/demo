@@ -19,30 +19,54 @@
     <finalName>servlet</finalName>
     <plugins>
 
-      <plugin>
-        <groupId>org.eclipse.jetty</groupId>
-        <artifactId>jetty-maven-plugin</artifactId>
-        <version>9.3.0.M1</version>
-      </plugin>
+<!--      <plugin>-->
+<!--        <groupId>org.eclipse.jetty</groupId>-->
+<!--        <artifactId>jetty-maven-plugin</artifactId>-->
+<!--        <version>9.3.0.M1</version>-->
+<!--      </plugin>-->
 
+<!--      <plugin>-->
+<!--        <groupId>org.apache.tomcat.maven</groupId>-->
+<!--        <artifactId>tomcat7-maven-plugin</artifactId>-->
+<!--        <version>2.1</version>-->
+<!--        <executions>-->
+<!--          <execution>-->
+<!--            <id>tomcat-run</id>-->
+<!--            <goals>-->
+<!--              <goal>exec-war-only</goal>-->
+<!--            </goals>-->
+<!--            <phase>package</phase>-->
+<!--            <configuration>-->
+<!--              &lt;!&ndash; ServletContext path &ndash;&gt;-->
+<!--              <path>/</path>-->
+<!--            </configuration>-->
+<!--          </execution>-->
+<!--        </executions>-->
+<!--      </plugin>-->
       <plugin>
         <groupId>org.apache.tomcat.maven</groupId>
-        <artifactId>tomcat7-maven-plugin</artifactId>
-        <version>2.1</version>
-        <executions>
-          <execution>
-            <id>tomcat-run</id>
-            <goals>
-              <goal>exec-war-only</goal>
-            </goals>
-            <phase>package</phase>
-            <configuration>
-              <!-- ServletContext path -->
-              <path>/</path>
-            </configuration>
-          </execution>
-        </executions>
+        <artifactId>tomcat8-maven-plugin</artifactId>
+        <version>3.0-r1655215</version>
       </plugin>
     </plugins>
   </build>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>alfresco-public</id>
+      <url>https://artifacts.alfresco.com/nexus/content/groups/public</url>
+    </pluginRepository>
+    <pluginRepository>
+      <id>alfresco-public-snapshots</id>
+      <url>https://artifacts.alfresco.com/nexus/content/groups/public-snapshots</url>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>daily</updatePolicy>
+      </snapshots>
+    </pluginRepository>
+    <pluginRepository>
+      <id>beardedgeeks-releases</id>
+      <url>http://beardedgeeks.googlecode.com/svn/repository/releases</url>
+    </pluginRepository>
+  </pluginRepositories>
 </project>
