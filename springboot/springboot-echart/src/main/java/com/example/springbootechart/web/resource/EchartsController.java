@@ -99,15 +99,18 @@ public class EchartsController {
      *     }]
      * };
      */
+
     @GetMapping(value = "/project1")
     public String test1(){
 
-        String[] cities = {"扶贫", "农业生产发展", "就业补贴", "医疗补助", "退耕还林还草", "林业和草原", "水利"};
+        // 后台生成这种方式不能用
+
+        String[] cities = {"扶贫", "农业生产发展", "就业补贴", "医疗补助", "退耕还林还草", "林业和草原xxx", "水利"};
 
         ExternalOption option = new ExternalOption();
 
         // 大标题、小标题、位置
-        option.title().text("惠民惠农财政补贴项目").subtext("按项目大类统计资金分配情况");
+        option.title().text("惠民惠农财政补贴项目controller").subtext("按项目大类统计资金分配情况xxxx");
         option.legend().show(true).data("金额范围", "均值");
         option.grid().setTop(100);
         option.angleAxis().type("category").data(cities);
