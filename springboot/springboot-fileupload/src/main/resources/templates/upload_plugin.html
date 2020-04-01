@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <!--    upload插件-->
+    <script type="text/javascript" src="https://cdn.staticfile.org/webuploader/0.1.1/webuploader.js"></script>
+<!--     工具类-->
+    <script type="text/javascript" src="/js/webUploadUtil.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.staticfile.org/webuploader/0.1.1/webuploader.css">
+</head>
+<body>
+<h1>Spring Boot 测试带插件上传</h1>
+<!--<form method="POST" action="/upload" enctype="multipart/form-data">-->
+<!--    <input type="file" name="file"/><br/><br/>-->
+<!--    <input type="submit" value="Submit"/>-->
+<!--</form>-->
+<!-- BEGIN FORM-->
+<form id="add_form" class="form-horizontal" method="post" action="/upload/plugin">
+    <input type="hidden" id="fileIds" name="fileIds" data-ids="file_fileIds"/>
+    <input type="hidden" id="file_fileIds" name="file_fileIds"/>
+
+    <section>
+        <div id="upload"></div>
+
+<!--        <a class="btn btn-info">开始上传</a>-->
+<!--        <a class="btn btn-warning">停止上传</a>-->
+<!--        <a class="btn btn-default">取消上传</a>-->
+<!--        <div id="ceshi" class="file_upload"-->
+<!--             style="border:1px dashed lightgray;height:60px;line-height:60px;margin-top:10px;text-align:center;color:lightgray;">-->
+<!--            点击选择文件，或者把文件拖拽到这里-->
+<!--        </div>-->
+<!--        <div style="margin-top: 10px;height:230px;" id="proAddFile"></div>-->
+<!--        <div id="fileQueue" style="overflow: auto;clear:both;"></div>-->
+    </section>
+</form>
+<!-- END FORM-->
+<script type="text/javascript">
+    (function () {
+        var fileParam = {
+            accept: {
+                extensions: '*',
+            },
+            //数量
+            fileNumLimit: 10,
+            //全部文件大小上限 单位b
+            fileSizeLimit: 2000000000,
+            //单文件大小上限 单位b
+            fileSingleSizeLimit: 200000000,
+            uploadBeforeSend: function (obj, data) {//data上传文件给后台传的数据
+                data.fileType = '1';
+            },
+            uploadComplete: function (file) {
+                //toastr.success("上传成功！");
+            },
+            fileQueuedFlag: true
+        };
+
+        WebUploadUtil.init('upload', fileParam);
+    })();
+
+</script>
+
+</body>
+</html>
