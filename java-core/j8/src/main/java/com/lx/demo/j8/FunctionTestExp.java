@@ -1,5 +1,9 @@
 package com.lx.demo.j8;
 
+import com.lx.demo.j8.lambada4userinterface.User;
+import com.lx.demo.j8.lambada4userinterface.UserDTO;
+
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -53,6 +57,18 @@ public class FunctionTestExp {
         //String::length == (String s) -> s.length()
 //        map(Arrays.asList("zhangsan", "lisi", "wangwu", "zhaoliu"), (String s) -> s.length()).forEach(System.out::println);
         map(Arrays.asList("zhangsan", "lisi", "wangwu", "zhaoliu"), String::length).forEach(System.out::println);
+
+        // 用户信息转userdto
+        final User user = new User();
+        user.setAge(18);
+        Function<User, UserDTO> transDTO = user1 -> {
+            final UserDTO userDTO = new UserDTO();
+            userDTO.setAge(user1.getAge());
+            return userDTO;
+        };
+        final UserDTO apply = transDTO.apply(user);
+        System.out.println("dto转换" + apply);
+
     }
 
     /**
