@@ -6,6 +6,8 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import java.net.URL;
+
 /**
  *curl -X GET http://localhost:8080/test.txt
  * 优先级顺序为：META/resources > resources > static > public
