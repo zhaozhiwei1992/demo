@@ -4,16 +4,30 @@ import com.lx.demo.springbootfileupload.domain.FileEntity;
 import com.lx.demo.springbootfileupload.web.dto.AjaxJson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.*;
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -26,6 +40,32 @@ import java.util.Map;
 public class FileUploadController {
 
     private static final Logger logger = LoggerFactory.getLogger(FileUploadController.class);
+
+    @Autowired
+    private RestTemplate restTemplate;
+
+    /**
+     * curl -X POST http://127.0.0.1:8080/send -F 'url="http://127.0.0.1:8080/upload"' -F 'path=/tmp/test/1.txt'
+     * 指定文件转发到上传服务里
+     * 查看上传目录下存在1.txt即可
+     * @param url
+     * @param path
+     * @return
+     */
+    @PostMapping("/send")
+    public String send(String url,String path) {
+
+        HttpHeaders headers = new HttpHeaders();
+        MediaType type = MediaType.parseMediaType("multipart/form-data");
+        // 设置请求的格式类型
+        headers.setContentType(type);
+        FileSystemResource fileSystemResource = new FileSystemResource(path);
+        MultiValueMap<String, Object> form = new LinkedMultiValueMap<>();
+        form.add("file", fileSystemResource);
+        HttpEntity<MultiValueMap<String, Object>> files = new HttpEntity<>(form, headers);
+        ResponseEntity<String> responseResponseEntity = restTemplate.postForEntity(url, files, String.class);
+        return responseResponseEntity.getBody();
+    }
 
     /**
      * 跳转到upload plugin页面

@@ -3,6 +3,7 @@ package com.lx.demo.springbootfileupload.config;
 import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.MultipartConfigElement;
 
@@ -23,5 +24,10 @@ public class FileUploadConfiguration {
         // 不起作用
         factory.setLocation("/tmp");
         return factory.createMultipartConfig();
+    }
+
+    @Bean
+    public RestTemplate restTemplate(){
+        return new RestTemplate();
     }
 }
