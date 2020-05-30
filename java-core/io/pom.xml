@@ -1,0 +1,133 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.lx.demo</groupId>
+    <artifactId>java-core</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <groupId>com.example</groupId>
+  <artifactId>io</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <name>io</name>
+  <url>http://maven.apache.org</url>
+  <properties>
+    <package.db>db/**</package.db>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+
+    <plugins>
+      <!-- The configuration of maven-jar-plugin -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.4</version>
+        <!-- 对要打的jar包进行配置 -->
+        <configuration>
+          <!-- Configuration of the archiver -->
+          <archive>
+            <!--生成的jar中，不要包含pom.xml和pom.properties这两个文件-->
+            <addMavenDescriptor>false</addMavenDescriptor>
+
+            <!-- Manifest specific configuration -->
+            <manifest>
+              <mainClass>com.example.App</mainClass>
+
+              <!-- 打包时 MANIFEST.MF文件不记录的时间戳版本 -->
+              <useUniqueVersions>false</useUniqueVersions>
+
+              <!--是否要把第三方jar放到manifest的classpath中-->
+              <addClasspath>true</addClasspath>
+
+              <!--
+              生成的manifest中classpath的前缀，
+              因为要把第三方jar放到lib目录下，
+              所以classpath的前缀是lib/
+              -->
+              <classpathPrefix>lib/</classpathPrefix>
+            </manifest>
+          </archive>
+          <!--过滤掉不希望包含在jar中的文件-->
+          <excludes>
+            <!-- 排除不需要的文件夹(路径是jar包内部的路径) -->
+            <exclude>**/assembly/</exclude>
+<!--            <exclude>db/**</exclude>-->
+          </excludes>
+
+        </configuration>
+      </plugin>
+
+<!--        可执行jar包-->
+        <plugin>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <version>3.1.0</version>
+          <configuration>
+            <descriptors>
+              <descriptor>src/main/resources/assembly.xml</descriptor>
+            </descriptors>
+          </configuration>
+          <executions>
+            <execution>
+              <id>make-assembly</id> <!-- this is used for inheritance merges -->
+              <phase>package</phase> <!-- bind to the packaging phase -->
+              <goals>
+                <goal>single</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+
+        <!-- 指定多个源代码目录、多个资源文件目录 -->
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>build-helper-maven-plugin</artifactId>
+          <executions>
+            <execution>
+              <id>add-source</id>
+              <phase>generate-sources</phase>
+              <goals>
+                <goal>add-source</goal>
+              </goals>
+              <configuration>
+                <sources>
+                  <source>src/main/sql</source>
+                  <source>src/main/java</source>
+                </sources>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+
+    <resources>
+
+      <resource>
+        <targetPath>${project.build.directory}/classes</targetPath>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+        <includes>
+          <include>${package.db}</include>
+        </includes>
+      </resource>
+
+      <!-- 将db文件复制到与jar包同一级 -->
+      <resource>
+        <targetPath>${project.build.directory}</targetPath>
+        <directory>src/main/resources</directory>
+        <includes>
+          <include>${package.db}</include>
+        </includes>
+      </resource>
+    </resources>
+  </build>
+</project>

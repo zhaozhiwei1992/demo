@@ -20,6 +20,7 @@
     <module>mutithreading</module>
     <module>process</module>
     <module>datetimeapi</module>
+    <module>io</module>
   </modules>
     <build>
         <plugins>
