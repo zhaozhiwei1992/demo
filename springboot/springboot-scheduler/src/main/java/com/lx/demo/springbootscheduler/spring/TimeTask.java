@@ -47,6 +47,14 @@ public class TimeTask extends ScheduledTaskRegistrar implements BeanFactoryPostP
     }
 
     /**
+     * 5秒执行
+     */
+    @Scheduled(cron = "${spring.text.time:* */3 * * * ?}")
+    public void dynamicFixedRateTask(){
+        log.info("{}, 当前时间: {}", Thread.currentThread().getStackTrace()[1].getMethodName(), new Date());
+    }
+
+    /**
      * 销毁当前bean
      * 通过继承org.springframework.scheduling.config.ScheduledTaskRegistrar的方式
      */
