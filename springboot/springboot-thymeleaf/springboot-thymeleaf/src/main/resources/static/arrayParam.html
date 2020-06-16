@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试数组参数传递</title>
+    <script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+
+<h1>URL</h1>
+<a  id="del1">del1</a>
+<br/>
+<a  id="del2">del2</a>
+<br/>
+<a  id="del3">del3</a>
+<br/>
+
+<script>
+
+    $("#del1").click(function (e) {
+
+        var path = "http://127.0.0.1:8080"
+        var ids = ["1", "2"];
+        $.ajax({
+            type : 'POST',
+            url: path + '/arrays/delete1',
+            contentType : "application/json" ,
+            data : JSON.stringify(ids),
+            success : function(data) {
+
+            }
+        });
+
+        $.ajax({
+            type : 'POST',
+            url: path + '/arrays/delete2',
+            contentType: "application/x-www-form-urlencoded",
+            data: {"ids": ids},
+            success : function(data) {
+            }
+        });
+
+        $.ajax({
+            url: path + "/arrays/delete3",
+            type: 'POST',
+            cache: false,
+            traditional:true,
+            dataType: 'json',
+            data: {ids: ids},
+            success: function (data) {
+                if (data.success) {
+                } else {
+                }
+            },
+            error: function () {
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
