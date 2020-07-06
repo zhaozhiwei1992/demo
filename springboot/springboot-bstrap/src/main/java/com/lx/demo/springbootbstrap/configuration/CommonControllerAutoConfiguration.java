@@ -7,8 +7,8 @@ import org.springframework.context.annotation.Bean;
 @ConditionalOnWebApplication
 public class CommonControllerAutoConfiguration {
 
-    @Bean
-    public CommonController commonController(){
-        return new CommonController();
-    }
+//    @Bean
+//    public CommonController commonController(){
+//        return new CommonController();
+//    }
 }
