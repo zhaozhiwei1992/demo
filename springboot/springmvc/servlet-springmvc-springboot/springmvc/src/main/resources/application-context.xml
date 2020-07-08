@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-3.2.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+">
 
     <import resource="classpath:application-common.xml"/>
     <import resource="classpath:application-web.xml"/>
+
+    <!-- 读入配置属性文件 可以通过@value注解获取，注意变量需要是对象属性，不能是static-->
+    <context:property-placeholder location="classpath:config.properties" file-encoding="UTF-8"/>
+
+    <bean id="springContextHolder" class="com.lx.demo.util.SpringContextHolder"/>
+
+    <!-- proxy-target-class默认"false",更改为"ture"使用CGLib动态代理 	-->
+<!--    <aop:aspectj-autoproxy proxy-target-class="true"/>-->
+
 
 </beans>
