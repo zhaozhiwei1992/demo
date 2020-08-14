@@ -3,8 +3,6 @@ package com.lx.demo.springbootscheduler.spring.dynamic;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.scheduling.Trigger;
-import org.springframework.scheduling.TriggerContext;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.SchedulingConfigurer;
 import org.springframework.scheduling.config.ScheduledTaskRegistrar;
@@ -40,6 +38,12 @@ public class DynamicTimeTask implements SchedulingConfigurer {
         return Executors.newScheduledThreadPool(20);
     }
 
+    /**
+     * 定时任务配置信息mapper
+     */
+//    @Autowired
+//    CronMapper cronMapper;
+
     @Override
     public void configureTasks(ScheduledTaskRegistrar scheduledTaskRegistrar) {
         //用于设置定时任务线程数，默认不设置的话为单线程
@@ -50,6 +54,10 @@ public class DynamicTimeTask implements SchedulingConfigurer {
                 triggerContext -> {
                     // 任务触发，可修改任务的执行周期
                     log.info("task trigger, new cron {}", cron);
+
+//                    这里的cron可以读取数据库配置
+//                    String cron = cronMapper.getCron();
+
                     CronTrigger trigger = new CronTrigger(cron);
                     Date nextExec = trigger.nextExecutionTime(triggerContext);
                     return nextExec;
