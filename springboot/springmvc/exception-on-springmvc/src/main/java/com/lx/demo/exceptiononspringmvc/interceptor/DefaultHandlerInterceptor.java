@@ -46,20 +46,20 @@ public class DefaultHandlerInterceptor implements HandlerInterceptor {
      * @author SHANSHAN
      */
     public static String getValue(HttpServletRequest request){
-        String value = "";
+        StringBuilder value = new StringBuilder();
         Enumeration enu = request.getParameterNames();
         while(enu.hasMoreElements()){
             String paraName = (String)enu.nextElement();
             if (!"_dc".equals(paraName) && !"node".equals(paraName)){//_dc的参数不要
                 String [] arr = request.getParameterValues(paraName);
                 if (arr != null && arr.length > 1){
-                    value += paraName+"="+ConvertObjectArrToStr(arr)+";";
+                    value.append(paraName).append("=").append(ConvertObjectArrToStr(arr)).append(";");
                 }else{
-                    value += paraName+"="+request.getParameter(paraName)+";";
+                    value.append(paraName).append("=").append(request.getParameter(paraName)).append(";");
                 }
             }
         }
-        return value;
+        return value.toString();
     }
 
     /**
@@ -67,18 +67,18 @@ public class DefaultHandlerInterceptor implements HandlerInterceptor {
      * @author SHANSHAN
      */
     public static String ConvertObjectArrToStr(Object [] arr) {
-        String result = "";
+        StringBuilder result = new StringBuilder();
         if (arr != null && arr.length > 0) {
             for (int i = 0; i < arr.length; i++) {
                 if (!"".equals(String.valueOf(arr[i]))) {
-                    result += String.valueOf(arr[i]) + ",";
+                    result.append(arr[i]).append(",");
                 }
             }
-            if (!"".equals(result)) {
-                result = result.substring(0, result.length() - 1);
+            if (!"".equals(result.toString())) {
+                result = new StringBuilder(result.substring(0, result.length() - 1));
             }
         }
-        return result;
+        return result.toString();
     }
 
 }
