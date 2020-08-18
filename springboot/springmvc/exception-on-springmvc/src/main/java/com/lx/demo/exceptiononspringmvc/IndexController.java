@@ -1,5 +1,6 @@
 package com.lx.demo.exceptiononspringmvc;
 
+import com.lx.demo.exceptiononspringmvc.dto.BussinessException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -34,6 +35,16 @@ public class IndexController {
     @RequestMapping("/npe")
     public String npe(){
         throw new NullPointerException("故意抛异常！");
+    }
+
+    /**
+     * curl -x 127.0.0.1/exp/bus
+     * ResultVO(msg=业务异常, result=故意抛业务异常！, code=000000, time=Tue Aug 18 21:02:48 CST 2020)
+     * @return
+     */
+    @RequestMapping("/exp/bus")
+    public String bus(){
+        throw new BussinessException("故意抛业务异常！");
     }
 
     /**
