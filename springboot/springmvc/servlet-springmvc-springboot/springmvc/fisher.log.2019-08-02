@@ -1,0 +1,515 @@
+2019-08-02 09:38:48 INFO main org.springframework.web.context.ContextLoader 304 - Root WebApplicationContext: initialization started
+2019-08-02 09:38:48 INFO main org.springframework.web.context.support.XmlWebApplicationContext 582 - Refreshing Root WebApplicationContext: startup date [Fri Aug 02 09:38:48 CST 2019]; root of context hierarchy
+2019-08-02 09:38:48 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-context.xml]
+2019-08-02 09:38:48 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-common.xml]
+2019-08-02 09:38:48 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-web.xml]
+2019-08-02 09:38:48 INFO main org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor 155 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2019-08-02 09:38:48 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/]}" onto public java.lang.String com.lx.demo.controller.IndexController.index(org.springframework.ui.Model)
+2019-08-02 09:38:48 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello/{name}]}" onto public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String)
+2019-08-02 09:38:49 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Aug 02 09:38:48 CST 2019]; root of context hierarchy
+2019-08-02 09:38:49 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Aug 02 09:38:48 CST 2019]; root of context hierarchy
+2019-08-02 09:38:49 INFO main org.springframework.web.servlet.handler.SimpleUrlHandlerMapping 362 - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+2019-08-02 09:38:49 INFO main org.springframework.web.context.ContextLoader 344 - Root WebApplicationContext: initialization completed in 846 ms
+2019-08-02 09:39:01 INFO qtp1987707214-21 org.springframework.web.servlet.DispatcherServlet 489 - FrameworkServlet 'spring-dispatcher': initialization started
+2019-08-02 09:39:01 INFO qtp1987707214-21 org.springframework.web.context.support.XmlWebApplicationContext 582 - Refreshing WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Aug 02 09:39:01 CST 2019]; parent: Root WebApplicationContext
+2019-08-02 09:39:01 INFO qtp1987707214-21 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-context.xml]
+2019-08-02 09:39:01 INFO qtp1987707214-21 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-common.xml]
+2019-08-02 09:39:01 INFO qtp1987707214-21 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-web.xml]
+2019-08-02 09:39:01 INFO qtp1987707214-21 org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor 155 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2019-08-02 09:39:01 INFO qtp1987707214-21 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/]}" onto public java.lang.String com.lx.demo.controller.IndexController.index(org.springframework.ui.Model)
+2019-08-02 09:39:01 INFO qtp1987707214-21 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello/{name}]}" onto public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String)
+2019-08-02 09:39:01 INFO qtp1987707214-21 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Aug 02 09:39:01 CST 2019]; parent: Root WebApplicationContext
+2019-08-02 09:39:01 INFO qtp1987707214-21 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Aug 02 09:39:01 CST 2019]; parent: Root WebApplicationContext
+2019-08-02 09:39:01 INFO qtp1987707214-21 org.springframework.web.servlet.handler.SimpleUrlHandlerMapping 362 - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+2019-08-02 09:39:01 INFO qtp1987707214-21 org.springframework.web.servlet.DispatcherServlet 508 - FrameworkServlet 'spring-dispatcher': initialization completed in 246 ms
+2019-08-02 09:42:07 INFO main org.springframework.web.context.ContextLoader 304 - Root WebApplicationContext: initialization started
+2019-08-02 09:42:07 INFO main org.springframework.web.context.support.XmlWebApplicationContext 582 - Refreshing Root WebApplicationContext: startup date [Fri Aug 02 09:42:07 CST 2019]; root of context hierarchy
+2019-08-02 09:42:07 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-context.xml]
+2019-08-02 09:42:07 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-common.xml]
+2019-08-02 09:42:08 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-web.xml]
+2019-08-02 09:42:08 INFO main org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor 155 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2019-08-02 09:42:08 WARN main org.springframework.web.context.support.XmlWebApplicationContext 550 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping': Initialization of bean failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.web.servlet.handler.MappedInterceptor#1': Cannot create inner bean 'com.lx.demo.interceptor.*#0' of type [com.lx.demo.interceptor.*] while setting constructor argument; nested exception is org.springframework.beans.factory.CannotLoadBeanClassException: Cannot find class [com.lx.demo.interceptor.*] for bean with name 'com.lx.demo.interceptor.*#0' defined in class path resource [application-web.xml]; nested exception is java.lang.ClassNotFoundException: com.lx.demo.interceptor.*
+2019-08-02 09:42:08 ERROR main org.springframework.web.context.ContextLoader 350 - Context initialization failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping': Initialization of bean failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.web.servlet.handler.MappedInterceptor#1': Cannot create inner bean 'com.lx.demo.interceptor.*#0' of type [com.lx.demo.interceptor.*] while setting constructor argument; nested exception is org.springframework.beans.factory.CannotLoadBeanClassException: Cannot find class [com.lx.demo.interceptor.*] for bean with name 'com.lx.demo.interceptor.*#0' defined in class path resource [application-web.xml]; nested exception is java.lang.ClassNotFoundException: com.lx.demo.interceptor.*
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:564)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:483)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:761)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:866)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:542)
+	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:443)
+	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:325)
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:107)
+	at org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized(ContextHandler.java:799)
+	at org.eclipse.jetty.servlet.ServletContextHandler.callContextInitialized(ServletContextHandler.java:499)
+	at org.eclipse.jetty.server.handler.ContextHandler.startContext(ContextHandler.java:790)
+	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:337)
+	at org.eclipse.jetty.webapp.WebAppContext.startWebapp(WebAppContext.java:1343)
+	at org.eclipse.jetty.maven.plugin.JettyWebAppContext.startWebapp(JettyWebAppContext.java:296)
+	at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1336)
+	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:742)
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:499)
+	at org.eclipse.jetty.maven.plugin.JettyWebAppContext.doStart(JettyWebAppContext.java:365)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:132)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:114)
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:61)
+	at org.eclipse.jetty.server.handler.ContextHandlerCollection.doStart(ContextHandlerCollection.java:163)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:132)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:114)
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:61)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:132)
+	at org.eclipse.jetty.server.Server.start(Server.java:399)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:114)
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:61)
+	at org.eclipse.jetty.server.Server.doStart(Server.java:366)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
+	at org.eclipse.jetty.maven.plugin.AbstractJettyMojo.startJetty(AbstractJettyMojo.java:516)
+	at org.eclipse.jetty.maven.plugin.AbstractJettyMojo.execute(AbstractJettyMojo.java:359)
+	at org.eclipse.jetty.maven.plugin.JettyRunMojo.execute(JettyRunMojo.java:167)
+	at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:137)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:210)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:156)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:148)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:117)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:81)
+	at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build(SingleThreadedBuilder.java:56)
+	at org.apache.maven.lifecycle.internal.LifecycleStarter.execute(LifecycleStarter.java:128)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:305)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:192)
+	at org.apache.maven.DefaultMaven.execute(DefaultMaven.java:105)
+	at org.apache.maven.cli.MavenCli.execute(MavenCli.java:956)
+	at org.apache.maven.cli.MavenCli.doMain(MavenCli.java:288)
+	at org.apache.maven.cli.MavenCli.main(MavenCli.java:192)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced(Launcher.java:282)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launch(Launcher.java:225)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode(Launcher.java:406)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.main(Launcher.java:347)
+	at org.codehaus.classworlds.Launcher.main(Launcher.java:47)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.web.servlet.handler.MappedInterceptor#1': Cannot create inner bean 'com.lx.demo.interceptor.*#0' of type [com.lx.demo.interceptor.*] while setting constructor argument; nested exception is org.springframework.beans.factory.CannotLoadBeanClassException: Cannot find class [com.lx.demo.interceptor.*] for bean with name 'com.lx.demo.interceptor.*#0' defined in class path resource [application-web.xml]; nested exception is java.lang.ClassNotFoundException: com.lx.demo.interceptor.*
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveInnerBean(BeanDefinitionValueResolver.java:313)
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:122)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveConstructorArguments(ConstructorResolver.java:634)
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:145)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1193)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1095)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:513)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:483)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeansOfType(DefaultListableBeanFactory.java:519)
+	at org.springframework.context.support.AbstractApplicationContext.getBeansOfType(AbstractApplicationContext.java:1197)
+	at org.springframework.beans.factory.BeanFactoryUtils.beansOfTypeIncludingAncestors(BeanFactoryUtils.java:310)
+	at org.springframework.web.servlet.handler.AbstractHandlerMapping.detectMappedInterceptors(AbstractHandlerMapping.java:272)
+	at org.springframework.web.servlet.handler.AbstractHandlerMapping.initApplicationContext(AbstractHandlerMapping.java:247)
+	at org.springframework.context.support.ApplicationObjectSupport.initApplicationContext(ApplicationObjectSupport.java:120)
+	at org.springframework.web.context.support.WebApplicationObjectSupport.initApplicationContext(WebApplicationObjectSupport.java:76)
+	at org.springframework.context.support.ApplicationObjectSupport.setApplicationContext(ApplicationObjectSupport.java:74)
+	at org.springframework.context.support.ApplicationContextAwareProcessor.invokeAwareInterfaces(ApplicationContextAwareProcessor.java:121)
+	at org.springframework.context.support.ApplicationContextAwareProcessor.postProcessBeforeInitialization(ApplicationContextAwareProcessor.java:97)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyBeanPostProcessorsBeforeInitialization(AbstractAutowireCapableBeanFactory.java:409)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1620)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:555)
+	... 63 more
+Caused by: org.springframework.beans.factory.CannotLoadBeanClassException: Cannot find class [com.lx.demo.interceptor.*] for bean with name 'com.lx.demo.interceptor.*#0' defined in class path resource [application-web.xml]; nested exception is java.lang.ClassNotFoundException: com.lx.demo.interceptor.*
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveBeanClass(AbstractBeanFactory.java:1385)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:456)
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveInnerBean(BeanDefinitionValueResolver.java:299)
+	... 87 more
+Caused by: java.lang.ClassNotFoundException: com.lx.demo.interceptor.*
+	at org.codehaus.plexus.classworlds.strategy.SelfFirstStrategy.loadClass(SelfFirstStrategy.java:50)
+	at org.codehaus.plexus.classworlds.realm.ClassRealm.unsynchronizedLoadClass(ClassRealm.java:271)
+	at org.codehaus.plexus.classworlds.realm.ClassRealm.loadClass(ClassRealm.java:247)
+	at org.codehaus.plexus.classworlds.realm.ClassRealm.loadClass(ClassRealm.java:239)
+	at org.eclipse.jetty.webapp.WebAppClassLoader.loadClass(WebAppClassLoader.java:450)
+	at org.eclipse.jetty.webapp.WebAppClassLoader.loadClass(WebAppClassLoader.java:403)
+	at org.springframework.util.ClassUtils.forName(ClassUtils.java:250)
+	at org.springframework.beans.factory.support.AbstractBeanDefinition.resolveBeanClass(AbstractBeanDefinition.java:401)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doResolveBeanClass(AbstractBeanFactory.java:1432)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveBeanClass(AbstractBeanFactory.java:1377)
+	... 89 more
+2019-08-02 09:42:27 INFO main org.springframework.web.context.ContextLoader 304 - Root WebApplicationContext: initialization started
+2019-08-02 09:42:27 INFO main org.springframework.web.context.support.XmlWebApplicationContext 582 - Refreshing Root WebApplicationContext: startup date [Fri Aug 02 09:42:27 CST 2019]; root of context hierarchy
+2019-08-02 09:42:27 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-context.xml]
+2019-08-02 09:42:27 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-common.xml]
+2019-08-02 09:42:27 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-web.xml]
+2019-08-02 09:42:28 INFO main org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor 155 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2019-08-02 09:42:28 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/]}" onto public java.lang.String com.lx.demo.controller.IndexController.index(org.springframework.ui.Model)
+2019-08-02 09:42:28 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello/{name}]}" onto public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String)
+2019-08-02 09:42:28 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Aug 02 09:42:27 CST 2019]; root of context hierarchy
+2019-08-02 09:42:28 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Aug 02 09:42:27 CST 2019]; root of context hierarchy
+2019-08-02 09:42:28 INFO main org.springframework.web.servlet.handler.SimpleUrlHandlerMapping 362 - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+2019-08-02 09:42:28 INFO main org.springframework.web.context.ContextLoader 344 - Root WebApplicationContext: initialization completed in 975 ms
+2019-08-02 09:42:40 INFO qtp790851040-21 org.springframework.web.servlet.DispatcherServlet 489 - FrameworkServlet 'spring-dispatcher': initialization started
+2019-08-02 09:42:40 INFO qtp790851040-21 org.springframework.web.context.support.XmlWebApplicationContext 582 - Refreshing WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Aug 02 09:42:40 CST 2019]; parent: Root WebApplicationContext
+2019-08-02 09:42:40 INFO qtp790851040-21 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-context.xml]
+2019-08-02 09:42:40 INFO qtp790851040-21 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-common.xml]
+2019-08-02 09:42:40 INFO qtp790851040-21 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-web.xml]
+2019-08-02 09:42:40 INFO qtp790851040-21 org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor 155 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2019-08-02 09:42:40 INFO qtp790851040-21 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/]}" onto public java.lang.String com.lx.demo.controller.IndexController.index(org.springframework.ui.Model)
+2019-08-02 09:42:40 INFO qtp790851040-21 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello/{name}]}" onto public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String)
+2019-08-02 09:42:40 INFO qtp790851040-21 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Aug 02 09:42:40 CST 2019]; parent: Root WebApplicationContext
+2019-08-02 09:42:40 INFO qtp790851040-21 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Aug 02 09:42:40 CST 2019]; parent: Root WebApplicationContext
+2019-08-02 09:42:40 INFO qtp790851040-21 org.springframework.web.servlet.handler.SimpleUrlHandlerMapping 362 - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+2019-08-02 09:42:40 INFO qtp790851040-21 org.springframework.web.servlet.DispatcherServlet 508 - FrameworkServlet 'spring-dispatcher': initialization completed in 359 ms
+2019-08-02 09:44:09 INFO main org.springframework.web.context.ContextLoader 304 - Root WebApplicationContext: initialization started
+2019-08-02 09:44:10 INFO main org.springframework.web.context.support.XmlWebApplicationContext 582 - Refreshing Root WebApplicationContext: startup date [Fri Aug 02 09:44:10 CST 2019]; root of context hierarchy
+2019-08-02 09:44:10 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-context.xml]
+2019-08-02 09:44:10 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-common.xml]
+2019-08-02 09:44:10 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-web.xml]
+2019-08-02 09:44:10 INFO main org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor 155 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2019-08-02 09:44:10 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello/{name}]}" onto public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String)
+2019-08-02 09:44:10 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/]}" onto public java.lang.String com.lx.demo.controller.IndexController.index(org.springframework.ui.Model)
+2019-08-02 09:44:10 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Aug 02 09:44:10 CST 2019]; root of context hierarchy
+2019-08-02 09:44:10 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Aug 02 09:44:10 CST 2019]; root of context hierarchy
+2019-08-02 09:44:10 INFO main org.springframework.web.servlet.handler.SimpleUrlHandlerMapping 362 - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+2019-08-02 09:44:10 INFO main org.springframework.web.context.ContextLoader 344 - Root WebApplicationContext: initialization completed in 949 ms
+2019-08-02 09:44:18 INFO qtp156855528-21 org.springframework.web.servlet.DispatcherServlet 489 - FrameworkServlet 'spring-dispatcher': initialization started
+2019-08-02 09:44:18 INFO qtp156855528-21 org.springframework.web.context.support.XmlWebApplicationContext 582 - Refreshing WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Aug 02 09:44:18 CST 2019]; parent: Root WebApplicationContext
+2019-08-02 09:44:18 INFO qtp156855528-21 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-context.xml]
+2019-08-02 09:44:18 INFO qtp156855528-21 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-common.xml]
+2019-08-02 09:44:18 INFO qtp156855528-21 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-web.xml]
+2019-08-02 09:44:18 INFO qtp156855528-21 org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor 155 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2019-08-02 09:44:18 INFO qtp156855528-21 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello/{name}]}" onto public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String)
+2019-08-02 09:44:18 INFO qtp156855528-21 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/]}" onto public java.lang.String com.lx.demo.controller.IndexController.index(org.springframework.ui.Model)
+2019-08-02 09:44:18 INFO qtp156855528-21 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Aug 02 09:44:18 CST 2019]; parent: Root WebApplicationContext
+2019-08-02 09:44:18 INFO qtp156855528-21 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Aug 02 09:44:18 CST 2019]; parent: Root WebApplicationContext
+2019-08-02 09:44:18 INFO qtp156855528-21 org.springframework.web.servlet.handler.SimpleUrlHandlerMapping 362 - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+2019-08-02 09:44:18 INFO qtp156855528-21 org.springframework.web.servlet.DispatcherServlet 508 - FrameworkServlet 'spring-dispatcher': initialization completed in 287 ms
+2019-08-02 09:46:36 INFO main org.springframework.web.context.ContextLoader 304 - Root WebApplicationContext: initialization started
+2019-08-02 09:46:36 INFO main org.springframework.web.context.support.XmlWebApplicationContext 582 - Refreshing Root WebApplicationContext: startup date [Fri Aug 02 09:46:36 CST 2019]; root of context hierarchy
+2019-08-02 09:46:36 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-context.xml]
+2019-08-02 09:46:36 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-common.xml]
+2019-08-02 09:46:36 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-web.xml]
+2019-08-02 09:46:36 INFO main org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor 155 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2019-08-02 09:46:36 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/]}" onto public java.lang.String com.lx.demo.controller.IndexController.index(org.springframework.ui.Model)
+2019-08-02 09:46:36 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello/{name}]}" onto public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String)
+2019-08-02 09:46:36 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Aug 02 09:46:36 CST 2019]; root of context hierarchy
+2019-08-02 09:46:36 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Aug 02 09:46:36 CST 2019]; root of context hierarchy
+2019-08-02 09:46:37 INFO main org.springframework.web.servlet.handler.SimpleUrlHandlerMapping 362 - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+2019-08-02 09:46:37 INFO main org.springframework.web.context.ContextLoader 344 - Root WebApplicationContext: initialization completed in 1122 ms
+2019-08-02 09:46:40 INFO qtp653553574-21 org.springframework.web.servlet.DispatcherServlet 489 - FrameworkServlet 'spring-dispatcher': initialization started
+2019-08-02 09:46:40 INFO qtp653553574-21 org.springframework.web.context.support.XmlWebApplicationContext 582 - Refreshing WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Aug 02 09:46:40 CST 2019]; parent: Root WebApplicationContext
+2019-08-02 09:46:40 INFO qtp653553574-21 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-context.xml]
+2019-08-02 09:46:40 INFO qtp653553574-21 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-common.xml]
+2019-08-02 09:46:40 INFO qtp653553574-21 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-web.xml]
+2019-08-02 09:46:40 INFO qtp653553574-21 org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor 155 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2019-08-02 09:46:41 INFO qtp653553574-21 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/]}" onto public java.lang.String com.lx.demo.controller.IndexController.index(org.springframework.ui.Model)
+2019-08-02 09:46:41 INFO qtp653553574-21 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello/{name}]}" onto public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String)
+2019-08-02 09:46:41 INFO qtp653553574-21 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Aug 02 09:46:40 CST 2019]; parent: Root WebApplicationContext
+2019-08-02 09:46:41 INFO qtp653553574-21 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Aug 02 09:46:40 CST 2019]; parent: Root WebApplicationContext
+2019-08-02 09:46:41 INFO qtp653553574-21 org.springframework.web.servlet.handler.SimpleUrlHandlerMapping 362 - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+2019-08-02 09:46:41 INFO qtp653553574-21 org.springframework.web.servlet.DispatcherServlet 508 - FrameworkServlet 'spring-dispatcher': initialization completed in 450 ms
+2019-08-02 09:46:41 INFO qtp653553574-21 com.lx.demo.interceptor.DefaultHandlerInterceptor 37 - 
+2019-08-02 09:46:41 INFO qtp653553574-21 com.lx.demo.interceptor.DefaultHandlerInterceptor 39 - handler method : public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String) 
+
+2019-08-02 09:46:41 INFO qtp653553574-21 com.lx.demo.interceptor.DefaultHandlerInterceptor 41 - handler object : public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String) 
+
+2019-08-02 09:49:31 INFO main org.springframework.web.context.ContextLoader 304 - Root WebApplicationContext: initialization started
+2019-08-02 09:49:31 INFO main org.springframework.web.context.support.XmlWebApplicationContext 582 - Refreshing Root WebApplicationContext: startup date [Fri Aug 02 09:49:31 CST 2019]; root of context hierarchy
+2019-08-02 09:49:31 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-context.xml]
+2019-08-02 09:49:31 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-common.xml]
+2019-08-02 09:49:31 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-web.xml]
+2019-08-02 09:49:31 INFO main org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor 155 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2019-08-02 09:49:32 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello/{name}/{msg}]}" onto public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String,java.lang.String)
+2019-08-02 09:49:32 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/]}" onto public java.lang.String com.lx.demo.controller.IndexController.index(org.springframework.ui.Model)
+2019-08-02 09:49:32 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Aug 02 09:49:31 CST 2019]; root of context hierarchy
+2019-08-02 09:49:32 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Aug 02 09:49:31 CST 2019]; root of context hierarchy
+2019-08-02 09:49:32 INFO main org.springframework.web.servlet.handler.SimpleUrlHandlerMapping 362 - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+2019-08-02 09:49:32 INFO main org.springframework.web.context.ContextLoader 344 - Root WebApplicationContext: initialization completed in 1288 ms
+2019-08-02 09:49:33 INFO qtp2118482375-21 org.springframework.web.servlet.DispatcherServlet 489 - FrameworkServlet 'spring-dispatcher': initialization started
+2019-08-02 09:49:33 INFO qtp2118482375-21 org.springframework.web.context.support.XmlWebApplicationContext 582 - Refreshing WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Aug 02 09:49:33 CST 2019]; parent: Root WebApplicationContext
+2019-08-02 09:49:33 INFO qtp2118482375-21 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-context.xml]
+2019-08-02 09:49:33 INFO qtp2118482375-21 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-common.xml]
+2019-08-02 09:49:33 INFO qtp2118482375-21 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-web.xml]
+2019-08-02 09:49:33 INFO qtp2118482375-21 org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor 155 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2019-08-02 09:49:34 INFO qtp2118482375-21 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello/{name}/{msg}]}" onto public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String,java.lang.String)
+2019-08-02 09:49:34 INFO qtp2118482375-21 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/]}" onto public java.lang.String com.lx.demo.controller.IndexController.index(org.springframework.ui.Model)
+2019-08-02 09:49:34 INFO qtp2118482375-21 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Aug 02 09:49:33 CST 2019]; parent: Root WebApplicationContext
+2019-08-02 09:49:34 INFO qtp2118482375-21 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Aug 02 09:49:33 CST 2019]; parent: Root WebApplicationContext
+2019-08-02 09:49:34 INFO qtp2118482375-21 org.springframework.web.servlet.handler.SimpleUrlHandlerMapping 362 - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+2019-08-02 09:49:34 INFO qtp2118482375-21 org.springframework.web.servlet.DispatcherServlet 508 - FrameworkServlet 'spring-dispatcher': initialization completed in 260 ms
+2019-08-02 09:49:34 INFO qtp2118482375-21 com.lx.demo.interceptor.DefaultHandlerInterceptor 41 - handler object : org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler@6d003c82 
+
+2019-08-02 09:49:40 INFO qtp2118482375-21 com.lx.demo.interceptor.DefaultHandlerInterceptor 37 - 
+2019-08-02 09:49:40 INFO qtp2118482375-21 com.lx.demo.interceptor.DefaultHandlerInterceptor 37 - 
+2019-08-02 09:49:40 INFO qtp2118482375-21 com.lx.demo.interceptor.DefaultHandlerInterceptor 39 - handler method : public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String,java.lang.String) 
+
+2019-08-02 09:49:40 INFO qtp2118482375-21 com.lx.demo.interceptor.DefaultHandlerInterceptor 41 - handler object : public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String,java.lang.String) 
+
+2019-08-02 09:51:50 INFO main org.springframework.web.context.ContextLoader 304 - Root WebApplicationContext: initialization started
+2019-08-02 09:51:50 INFO main org.springframework.web.context.support.XmlWebApplicationContext 582 - Refreshing Root WebApplicationContext: startup date [Fri Aug 02 09:51:50 CST 2019]; root of context hierarchy
+2019-08-02 09:51:50 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-context.xml]
+2019-08-02 09:51:50 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-common.xml]
+2019-08-02 09:51:51 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-web.xml]
+2019-08-02 09:51:51 INFO main org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor 155 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2019-08-02 09:51:51 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/]}" onto public java.lang.String com.lx.demo.controller.IndexController.index(org.springframework.ui.Model)
+2019-08-02 09:51:51 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello/{name}/{msg}]}" onto public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String,java.lang.String)
+2019-08-02 09:51:51 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Aug 02 09:51:50 CST 2019]; root of context hierarchy
+2019-08-02 09:51:51 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Aug 02 09:51:50 CST 2019]; root of context hierarchy
+2019-08-02 09:51:51 INFO main org.springframework.web.servlet.handler.SimpleUrlHandlerMapping 362 - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+2019-08-02 09:51:51 INFO main org.springframework.web.context.ContextLoader 344 - Root WebApplicationContext: initialization completed in 1165 ms
+2019-08-02 09:52:08 INFO qtp1216863787-21 org.springframework.web.servlet.DispatcherServlet 489 - FrameworkServlet 'spring-dispatcher': initialization started
+2019-08-02 09:52:08 INFO qtp1216863787-21 org.springframework.web.context.support.XmlWebApplicationContext 582 - Refreshing WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Aug 02 09:52:08 CST 2019]; parent: Root WebApplicationContext
+2019-08-02 09:52:08 INFO qtp1216863787-21 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-context.xml]
+2019-08-02 09:52:08 INFO qtp1216863787-21 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-common.xml]
+2019-08-02 09:52:08 INFO qtp1216863787-21 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-web.xml]
+2019-08-02 09:52:08 INFO qtp1216863787-21 org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor 155 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2019-08-02 09:52:08 INFO qtp1216863787-21 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/]}" onto public java.lang.String com.lx.demo.controller.IndexController.index(org.springframework.ui.Model)
+2019-08-02 09:52:08 INFO qtp1216863787-21 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello/{name}/{msg}]}" onto public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String,java.lang.String)
+2019-08-02 09:52:08 INFO qtp1216863787-21 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Aug 02 09:52:08 CST 2019]; parent: Root WebApplicationContext
+2019-08-02 09:52:08 INFO qtp1216863787-21 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Aug 02 09:52:08 CST 2019]; parent: Root WebApplicationContext
+2019-08-02 09:52:08 INFO qtp1216863787-21 org.springframework.web.servlet.handler.SimpleUrlHandlerMapping 362 - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+2019-08-02 09:52:08 INFO qtp1216863787-21 org.springframework.web.servlet.DispatcherServlet 508 - FrameworkServlet 'spring-dispatcher': initialization completed in 253 ms
+2019-08-02 09:55:05 INFO qtp1216863787-21 com.lx.demo.interceptor.DefaultHandlerInterceptor 37 - 
+2019-08-02 09:55:10 INFO qtp1216863787-21 com.lx.demo.interceptor.DefaultHandlerInterceptor 37 - 
+2019-08-02 09:55:13 INFO qtp1216863787-21 com.lx.demo.interceptor.DefaultHandlerInterceptor 39 - handler method : public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String,java.lang.String) 
+
+2019-08-02 09:55:13 INFO qtp1216863787-21 com.lx.demo.interceptor.DefaultHandlerInterceptor 41 - handler object : public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String,java.lang.String) 
+
+2019-08-02 09:55:13 INFO qtp1216863787-21 com.lx.demo.controller.IndexController 35 - hello zhangsan gun
+2019-08-02 10:02:45 INFO main org.springframework.web.context.ContextLoader 304 - Root WebApplicationContext: initialization started
+2019-08-02 10:02:45 INFO main org.springframework.web.context.support.XmlWebApplicationContext 582 - Refreshing Root WebApplicationContext: startup date [Fri Aug 02 10:02:45 CST 2019]; root of context hierarchy
+2019-08-02 10:02:46 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-context.xml]
+2019-08-02 10:02:46 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-common.xml]
+2019-08-02 10:02:46 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-web.xml]
+2019-08-02 10:02:46 INFO main org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor 155 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2019-08-02 10:02:46 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello/{name}/{msg}]}" onto public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String,java.lang.String)
+2019-08-02 10:02:46 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/]}" onto public java.lang.String com.lx.demo.controller.IndexController.index(org.springframework.ui.Model)
+2019-08-02 10:02:46 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Aug 02 10:02:45 CST 2019]; root of context hierarchy
+2019-08-02 10:02:47 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Aug 02 10:02:45 CST 2019]; root of context hierarchy
+2019-08-02 10:02:47 INFO main org.springframework.web.servlet.handler.SimpleUrlHandlerMapping 362 - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+2019-08-02 10:02:47 INFO main org.springframework.web.context.ContextLoader 344 - Root WebApplicationContext: initialization completed in 1212 ms
+2019-08-02 10:02:51 INFO qtp658781536-21 org.springframework.web.servlet.DispatcherServlet 489 - FrameworkServlet 'spring-dispatcher': initialization started
+2019-08-02 10:02:51 INFO qtp658781536-21 org.springframework.web.context.support.XmlWebApplicationContext 582 - Refreshing WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Aug 02 10:02:51 CST 2019]; parent: Root WebApplicationContext
+2019-08-02 10:02:51 INFO qtp658781536-21 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-context.xml]
+2019-08-02 10:02:51 INFO qtp658781536-21 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-common.xml]
+2019-08-02 10:02:51 INFO qtp658781536-21 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-web.xml]
+2019-08-02 10:02:52 INFO qtp658781536-21 org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor 155 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2019-08-02 10:02:52 INFO qtp658781536-21 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello/{name}/{msg}]}" onto public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String,java.lang.String)
+2019-08-02 10:02:52 INFO qtp658781536-21 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/]}" onto public java.lang.String com.lx.demo.controller.IndexController.index(org.springframework.ui.Model)
+2019-08-02 10:02:52 INFO qtp658781536-21 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Aug 02 10:02:51 CST 2019]; parent: Root WebApplicationContext
+2019-08-02 10:02:52 INFO qtp658781536-21 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Aug 02 10:02:51 CST 2019]; parent: Root WebApplicationContext
+2019-08-02 10:02:52 INFO qtp658781536-21 org.springframework.web.servlet.handler.SimpleUrlHandlerMapping 362 - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+2019-08-02 10:02:52 INFO qtp658781536-21 org.springframework.web.servlet.DispatcherServlet 508 - FrameworkServlet 'spring-dispatcher': initialization completed in 217 ms
+2019-08-02 10:02:52 INFO qtp658781536-21 com.lx.demo.interceptor.DefaultHandlerInterceptor 37 - 
+2019-08-02 10:02:52 INFO qtp658781536-21 com.lx.demo.interceptor.DefaultHandlerInterceptor 37 - 
+2019-08-02 10:02:52 INFO qtp658781536-21 com.lx.demo.interceptor.DefaultHandlerInterceptor 39 - handler method : public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String,java.lang.String) 
+
+2019-08-02 10:02:52 INFO qtp658781536-21 com.lx.demo.interceptor.DefaultHandlerInterceptor 41 - handler object : public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String,java.lang.String) 
+
+2019-08-02 10:02:52 INFO qtp658781536-21 com.lx.demo.interceptor.DefaultHandlerInterceptor 42 - request values:  
+
+2019-08-02 10:02:52 INFO qtp658781536-21 com.lx.demo.controller.IndexController 35 - hello zhangsan gun
+2019-08-02 10:05:16 INFO main org.springframework.web.context.ContextLoader 304 - Root WebApplicationContext: initialization started
+2019-08-02 10:05:16 INFO main org.springframework.web.context.support.XmlWebApplicationContext 582 - Refreshing Root WebApplicationContext: startup date [Fri Aug 02 10:05:16 CST 2019]; root of context hierarchy
+2019-08-02 10:05:16 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-context.xml]
+2019-08-02 10:05:16 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-common.xml]
+2019-08-02 10:05:16 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-web.xml]
+2019-08-02 10:05:16 INFO main org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor 155 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2019-08-02 10:05:17 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello/{name}/{msg}]}" onto public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String,java.lang.String)
+2019-08-02 10:05:17 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/]}" onto public java.lang.String com.lx.demo.controller.IndexController.index(org.springframework.ui.Model)
+2019-08-02 10:05:17 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Aug 02 10:05:16 CST 2019]; root of context hierarchy
+2019-08-02 10:05:17 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Aug 02 10:05:16 CST 2019]; root of context hierarchy
+2019-08-02 10:05:17 INFO main org.springframework.web.servlet.handler.SimpleUrlHandlerMapping 362 - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+2019-08-02 10:05:17 INFO main org.springframework.web.context.ContextLoader 344 - Root WebApplicationContext: initialization completed in 1036 ms
+2019-08-02 10:05:19 INFO qtp1352743983-21 org.springframework.web.servlet.DispatcherServlet 489 - FrameworkServlet 'spring-dispatcher': initialization started
+2019-08-02 10:05:19 INFO qtp1352743983-21 org.springframework.web.context.support.XmlWebApplicationContext 582 - Refreshing WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Aug 02 10:05:19 CST 2019]; parent: Root WebApplicationContext
+2019-08-02 10:05:19 INFO qtp1352743983-21 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-context.xml]
+2019-08-02 10:05:19 INFO qtp1352743983-21 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-common.xml]
+2019-08-02 10:05:19 INFO qtp1352743983-21 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-web.xml]
+2019-08-02 10:05:19 INFO qtp1352743983-21 org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor 155 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2019-08-02 10:05:19 INFO qtp1352743983-21 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello/{name}/{msg}]}" onto public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String,java.lang.String)
+2019-08-02 10:05:19 INFO qtp1352743983-21 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/]}" onto public java.lang.String com.lx.demo.controller.IndexController.index(org.springframework.ui.Model)
+2019-08-02 10:05:19 INFO qtp1352743983-21 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Aug 02 10:05:19 CST 2019]; parent: Root WebApplicationContext
+2019-08-02 10:05:19 INFO qtp1352743983-21 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Aug 02 10:05:19 CST 2019]; parent: Root WebApplicationContext
+2019-08-02 10:05:19 INFO qtp1352743983-21 org.springframework.web.servlet.handler.SimpleUrlHandlerMapping 362 - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+2019-08-02 10:05:19 INFO qtp1352743983-21 org.springframework.web.servlet.DispatcherServlet 508 - FrameworkServlet 'spring-dispatcher': initialization completed in 216 ms
+2019-08-02 10:05:19 INFO qtp1352743983-21 com.lx.demo.interceptor.DefaultHandlerInterceptor 38 - request param: null 
+
+2019-08-02 10:05:19 INFO qtp1352743983-21 com.lx.demo.interceptor.DefaultHandlerInterceptor 39 - request values: null 
+
+2019-08-02 10:05:19 INFO qtp1352743983-21 com.lx.demo.interceptor.DefaultHandlerInterceptor 38 - request param: null 
+
+2019-08-02 10:05:19 INFO qtp1352743983-21 com.lx.demo.interceptor.DefaultHandlerInterceptor 39 - request values: null 
+
+2019-08-02 10:05:19 INFO qtp1352743983-21 com.lx.demo.interceptor.DefaultHandlerInterceptor 43 - handler method : public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String,java.lang.String) 
+
+2019-08-02 10:05:19 INFO qtp1352743983-21 com.lx.demo.interceptor.DefaultHandlerInterceptor 45 - handler object : public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String,java.lang.String) 
+
+2019-08-02 10:05:19 INFO qtp1352743983-21 com.lx.demo.controller.IndexController 35 - hello zhangsan gun
+2019-08-02 10:06:26 INFO main org.springframework.web.context.ContextLoader 304 - Root WebApplicationContext: initialization started
+2019-08-02 10:06:26 INFO main org.springframework.web.context.support.XmlWebApplicationContext 582 - Refreshing Root WebApplicationContext: startup date [Fri Aug 02 10:06:26 CST 2019]; root of context hierarchy
+2019-08-02 10:06:26 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-context.xml]
+2019-08-02 10:06:27 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-common.xml]
+2019-08-02 10:06:27 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-web.xml]
+2019-08-02 10:06:27 INFO main org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor 155 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2019-08-02 10:06:27 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/]}" onto public java.lang.String com.lx.demo.controller.IndexController.index(org.springframework.ui.Model)
+2019-08-02 10:06:27 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello/{name}/{msg}]}" onto public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String,java.lang.String)
+2019-08-02 10:06:27 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Aug 02 10:06:26 CST 2019]; root of context hierarchy
+2019-08-02 10:06:27 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Aug 02 10:06:26 CST 2019]; root of context hierarchy
+2019-08-02 10:06:27 INFO main org.springframework.web.servlet.handler.SimpleUrlHandlerMapping 362 - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+2019-08-02 10:06:27 INFO main org.springframework.web.context.ContextLoader 344 - Root WebApplicationContext: initialization completed in 1119 ms
+2019-08-02 10:06:31 INFO qtp13950734-17 org.springframework.web.servlet.DispatcherServlet 489 - FrameworkServlet 'spring-dispatcher': initialization started
+2019-08-02 10:06:31 INFO qtp13950734-17 org.springframework.web.context.support.XmlWebApplicationContext 582 - Refreshing WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Aug 02 10:06:31 CST 2019]; parent: Root WebApplicationContext
+2019-08-02 10:06:31 INFO qtp13950734-17 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-context.xml]
+2019-08-02 10:06:31 INFO qtp13950734-17 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-common.xml]
+2019-08-02 10:06:31 INFO qtp13950734-17 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-web.xml]
+2019-08-02 10:06:31 INFO qtp13950734-17 org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor 155 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2019-08-02 10:06:31 INFO qtp13950734-17 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/]}" onto public java.lang.String com.lx.demo.controller.IndexController.index(org.springframework.ui.Model)
+2019-08-02 10:06:31 INFO qtp13950734-17 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello/{name}/{msg}]}" onto public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String,java.lang.String)
+2019-08-02 10:06:31 INFO qtp13950734-17 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Aug 02 10:06:31 CST 2019]; parent: Root WebApplicationContext
+2019-08-02 10:06:31 INFO qtp13950734-17 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Aug 02 10:06:31 CST 2019]; parent: Root WebApplicationContext
+2019-08-02 10:06:31 INFO qtp13950734-17 org.springframework.web.servlet.handler.SimpleUrlHandlerMapping 362 - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+2019-08-02 10:06:31 INFO qtp13950734-17 org.springframework.web.servlet.DispatcherServlet 508 - FrameworkServlet 'spring-dispatcher': initialization completed in 273 ms
+2019-08-02 10:06:31 INFO qtp13950734-17 com.lx.demo.interceptor.DefaultHandlerInterceptor 38 - request param: null 
+
+2019-08-02 10:06:31 INFO qtp13950734-17 com.lx.demo.interceptor.DefaultHandlerInterceptor 39 - request values: null 
+
+2019-08-02 10:06:31 INFO qtp13950734-17 com.lx.demo.interceptor.DefaultHandlerInterceptor 41 - request param: java.util.Collections$3@3368b7be 
+
+2019-08-02 10:06:31 INFO qtp13950734-17 com.lx.demo.interceptor.DefaultHandlerInterceptor 38 - request param: null 
+
+2019-08-02 10:06:31 INFO qtp13950734-17 com.lx.demo.interceptor.DefaultHandlerInterceptor 39 - request values: null 
+
+2019-08-02 10:06:31 INFO qtp13950734-17 com.lx.demo.interceptor.DefaultHandlerInterceptor 41 - request param: java.util.Collections$3@7ebb860b 
+
+2019-08-02 10:06:31 INFO qtp13950734-17 com.lx.demo.interceptor.DefaultHandlerInterceptor 45 - handler method : public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String,java.lang.String) 
+
+2019-08-02 10:06:31 INFO qtp13950734-17 com.lx.demo.interceptor.DefaultHandlerInterceptor 47 - handler object : public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String,java.lang.String) 
+
+2019-08-02 10:06:31 INFO qtp13950734-17 com.lx.demo.controller.IndexController 35 - hello zhangsan gun
+2019-08-02 10:08:25 INFO main org.springframework.web.context.ContextLoader 304 - Root WebApplicationContext: initialization started
+2019-08-02 10:08:25 INFO main org.springframework.web.context.support.XmlWebApplicationContext 582 - Refreshing Root WebApplicationContext: startup date [Fri Aug 02 10:08:25 CST 2019]; root of context hierarchy
+2019-08-02 10:08:25 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-context.xml]
+2019-08-02 10:08:25 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-common.xml]
+2019-08-02 10:08:25 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-web.xml]
+2019-08-02 10:08:25 INFO main org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor 155 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2019-08-02 10:08:25 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello/{name}/{msg}]}" onto public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String,java.lang.String)
+2019-08-02 10:08:25 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/]}" onto public java.lang.String com.lx.demo.controller.IndexController.index(org.springframework.ui.Model)
+2019-08-02 10:08:25 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Aug 02 10:08:25 CST 2019]; root of context hierarchy
+2019-08-02 10:08:26 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Aug 02 10:08:25 CST 2019]; root of context hierarchy
+2019-08-02 10:08:26 INFO main org.springframework.web.servlet.handler.SimpleUrlHandlerMapping 362 - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+2019-08-02 10:08:26 INFO main org.springframework.web.context.ContextLoader 344 - Root WebApplicationContext: initialization completed in 1130 ms
+2019-08-02 10:08:30 INFO qtp13950734-21 org.springframework.web.servlet.DispatcherServlet 489 - FrameworkServlet 'spring-dispatcher': initialization started
+2019-08-02 10:08:30 INFO qtp13950734-21 org.springframework.web.context.support.XmlWebApplicationContext 582 - Refreshing WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Aug 02 10:08:30 CST 2019]; parent: Root WebApplicationContext
+2019-08-02 10:08:30 INFO qtp13950734-21 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-context.xml]
+2019-08-02 10:08:30 INFO qtp13950734-21 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-common.xml]
+2019-08-02 10:08:30 INFO qtp13950734-21 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-web.xml]
+2019-08-02 10:08:30 INFO qtp13950734-21 org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor 155 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2019-08-02 10:08:30 INFO qtp13950734-21 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello/{name}/{msg}]}" onto public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String,java.lang.String)
+2019-08-02 10:08:30 INFO qtp13950734-21 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/]}" onto public java.lang.String com.lx.demo.controller.IndexController.index(org.springframework.ui.Model)
+2019-08-02 10:08:30 INFO qtp13950734-21 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Aug 02 10:08:30 CST 2019]; parent: Root WebApplicationContext
+2019-08-02 10:08:30 INFO qtp13950734-21 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Aug 02 10:08:30 CST 2019]; parent: Root WebApplicationContext
+2019-08-02 10:08:30 INFO qtp13950734-21 org.springframework.web.servlet.handler.SimpleUrlHandlerMapping 362 - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+2019-08-02 10:08:30 INFO qtp13950734-21 org.springframework.web.servlet.DispatcherServlet 508 - FrameworkServlet 'spring-dispatcher': initialization completed in 260 ms
+2019-08-02 10:08:30 INFO qtp13950734-21 com.lx.demo.interceptor.DefaultHandlerInterceptor 38 - request param: null 
+
+2019-08-02 10:08:30 INFO qtp13950734-21 com.lx.demo.interceptor.DefaultHandlerInterceptor 39 - request values: null 
+
+2019-08-02 10:08:30 INFO qtp13950734-21 com.lx.demo.interceptor.DefaultHandlerInterceptor 41 - request param: java.util.Collections$3@24e17512 
+
+2019-08-02 10:08:30 INFO qtp13950734-21 com.lx.demo.interceptor.DefaultHandlerInterceptor 38 - request param: null 
+
+2019-08-02 10:08:30 INFO qtp13950734-21 com.lx.demo.interceptor.DefaultHandlerInterceptor 39 - request values: null 
+
+2019-08-02 10:08:30 INFO qtp13950734-21 com.lx.demo.interceptor.DefaultHandlerInterceptor 41 - request param: java.util.Collections$3@13e22143 
+
+2019-08-02 10:08:30 INFO qtp13950734-21 com.lx.demo.interceptor.DefaultHandlerInterceptor 45 - handler method : public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String,java.lang.String) 
+
+2019-08-02 10:08:30 INFO qtp13950734-21 com.lx.demo.interceptor.DefaultHandlerInterceptor 47 - handler object : public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String,java.lang.String) 
+
+2019-08-02 10:08:30 INFO qtp13950734-21 com.lx.demo.controller.IndexController 35 - hello zhangsan gun
+2019-08-02 10:09:48 INFO main org.springframework.web.context.ContextLoader 304 - Root WebApplicationContext: initialization started
+2019-08-02 10:09:48 INFO main org.springframework.web.context.support.XmlWebApplicationContext 582 - Refreshing Root WebApplicationContext: startup date [Fri Aug 02 10:09:48 CST 2019]; root of context hierarchy
+2019-08-02 10:09:48 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-context.xml]
+2019-08-02 10:09:49 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-common.xml]
+2019-08-02 10:09:49 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-web.xml]
+2019-08-02 10:09:49 INFO main org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor 155 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2019-08-02 10:09:49 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/]}" onto public java.lang.String com.lx.demo.controller.IndexController.index(org.springframework.ui.Model)
+2019-08-02 10:09:49 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello/{name}/{msg}]}" onto public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String,java.lang.String)
+2019-08-02 10:09:49 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello]}" onto public java.lang.String com.lx.demo.controller.IndexController.helloParam(java.lang.String,java.lang.String)
+2019-08-02 10:09:49 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Aug 02 10:09:48 CST 2019]; root of context hierarchy
+2019-08-02 10:09:49 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Aug 02 10:09:48 CST 2019]; root of context hierarchy
+2019-08-02 10:09:49 INFO main org.springframework.web.servlet.handler.SimpleUrlHandlerMapping 362 - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+2019-08-02 10:09:49 INFO main org.springframework.web.context.ContextLoader 344 - Root WebApplicationContext: initialization completed in 1155 ms
+2019-08-02 10:10:04 INFO qtp400216879-21 org.springframework.web.servlet.DispatcherServlet 489 - FrameworkServlet 'spring-dispatcher': initialization started
+2019-08-02 10:10:04 INFO qtp400216879-21 org.springframework.web.context.support.XmlWebApplicationContext 582 - Refreshing WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Aug 02 10:10:04 CST 2019]; parent: Root WebApplicationContext
+2019-08-02 10:10:04 INFO qtp400216879-21 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-context.xml]
+2019-08-02 10:10:04 INFO qtp400216879-21 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-common.xml]
+2019-08-02 10:10:04 INFO qtp400216879-21 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-web.xml]
+2019-08-02 10:10:04 INFO qtp400216879-21 org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor 155 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2019-08-02 10:10:04 INFO qtp400216879-21 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/]}" onto public java.lang.String com.lx.demo.controller.IndexController.index(org.springframework.ui.Model)
+2019-08-02 10:10:04 INFO qtp400216879-21 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello/{name}/{msg}]}" onto public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String,java.lang.String)
+2019-08-02 10:10:04 INFO qtp400216879-21 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello]}" onto public java.lang.String com.lx.demo.controller.IndexController.helloParam(java.lang.String,java.lang.String)
+2019-08-02 10:10:04 INFO qtp400216879-21 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Aug 02 10:10:04 CST 2019]; parent: Root WebApplicationContext
+2019-08-02 10:10:04 INFO qtp400216879-21 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Aug 02 10:10:04 CST 2019]; parent: Root WebApplicationContext
+2019-08-02 10:10:04 INFO qtp400216879-21 org.springframework.web.servlet.handler.SimpleUrlHandlerMapping 362 - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+2019-08-02 10:10:04 INFO qtp400216879-21 org.springframework.web.servlet.DispatcherServlet 508 - FrameworkServlet 'spring-dispatcher': initialization completed in 232 ms
+2019-08-02 10:10:04 INFO qtp400216879-21 com.lx.demo.interceptor.DefaultHandlerInterceptor 38 - request param: null 
+
+2019-08-02 10:10:04 INFO qtp400216879-21 com.lx.demo.interceptor.DefaultHandlerInterceptor 39 - request values: zhangsan 
+
+2019-08-02 10:10:04 INFO qtp400216879-21 com.lx.demo.interceptor.DefaultHandlerInterceptor 41 - request param: java.util.Collections$3@25f07ac9 
+
+2019-08-02 10:10:04 INFO qtp400216879-21 com.lx.demo.interceptor.DefaultHandlerInterceptor 38 - request param: null 
+
+2019-08-02 10:10:04 INFO qtp400216879-21 com.lx.demo.interceptor.DefaultHandlerInterceptor 39 - request values: zhangsan 
+
+2019-08-02 10:10:04 INFO qtp400216879-21 com.lx.demo.interceptor.DefaultHandlerInterceptor 41 - request param: java.util.Collections$3@134387cb 
+
+2019-08-02 10:10:04 INFO qtp400216879-21 com.lx.demo.interceptor.DefaultHandlerInterceptor 45 - handler method : public java.lang.String com.lx.demo.controller.IndexController.helloParam(java.lang.String,java.lang.String) 
+
+2019-08-02 10:10:04 INFO qtp400216879-21 com.lx.demo.interceptor.DefaultHandlerInterceptor 47 - handler object : public java.lang.String com.lx.demo.controller.IndexController.helloParam(java.lang.String,java.lang.String) 
+
+2019-08-02 10:10:04 INFO qtp400216879-21 com.lx.demo.controller.IndexController 43 - hello zhangsan gun
+2019-08-02 10:16:47 INFO main org.springframework.web.context.ContextLoader 304 - Root WebApplicationContext: initialization started
+2019-08-02 10:16:47 INFO main org.springframework.web.context.support.XmlWebApplicationContext 582 - Refreshing Root WebApplicationContext: startup date [Fri Aug 02 10:16:47 CST 2019]; root of context hierarchy
+2019-08-02 10:16:47 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-context.xml]
+2019-08-02 10:16:48 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-common.xml]
+2019-08-02 10:16:48 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-web.xml]
+2019-08-02 10:16:48 INFO main org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor 155 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2019-08-02 10:16:48 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello/{name}/{msg}]}" onto public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String,java.lang.String)
+2019-08-02 10:16:48 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello]}" onto public java.lang.String com.lx.demo.controller.IndexController.helloParam(java.lang.String,java.lang.String)
+2019-08-02 10:16:48 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/]}" onto public java.lang.String com.lx.demo.controller.IndexController.index(org.springframework.ui.Model)
+2019-08-02 10:16:48 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Aug 02 10:16:47 CST 2019]; root of context hierarchy
+2019-08-02 10:16:48 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Aug 02 10:16:47 CST 2019]; root of context hierarchy
+2019-08-02 10:16:48 INFO main org.springframework.web.servlet.handler.SimpleUrlHandlerMapping 362 - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+2019-08-02 10:16:49 INFO main org.springframework.web.context.ContextLoader 344 - Root WebApplicationContext: initialization completed in 1158 ms
+2019-08-02 10:16:50 INFO qtp1336953458-21 org.springframework.web.servlet.DispatcherServlet 489 - FrameworkServlet 'spring-dispatcher': initialization started
+2019-08-02 10:16:50 INFO qtp1336953458-21 org.springframework.web.context.support.XmlWebApplicationContext 582 - Refreshing WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Aug 02 10:16:50 CST 2019]; parent: Root WebApplicationContext
+2019-08-02 10:16:50 INFO qtp1336953458-21 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-context.xml]
+2019-08-02 10:16:50 INFO qtp1336953458-21 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-common.xml]
+2019-08-02 10:16:50 INFO qtp1336953458-21 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-web.xml]
+2019-08-02 10:16:50 INFO qtp1336953458-21 org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor 155 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2019-08-02 10:16:50 INFO qtp1336953458-21 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello/{name}/{msg}]}" onto public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String,java.lang.String)
+2019-08-02 10:16:50 INFO qtp1336953458-21 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello]}" onto public java.lang.String com.lx.demo.controller.IndexController.helloParam(java.lang.String,java.lang.String)
+2019-08-02 10:16:50 INFO qtp1336953458-21 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/]}" onto public java.lang.String com.lx.demo.controller.IndexController.index(org.springframework.ui.Model)
+2019-08-02 10:16:50 INFO qtp1336953458-21 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Aug 02 10:16:50 CST 2019]; parent: Root WebApplicationContext
+2019-08-02 10:16:50 INFO qtp1336953458-21 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Aug 02 10:16:50 CST 2019]; parent: Root WebApplicationContext
+2019-08-02 10:16:50 INFO qtp1336953458-21 org.springframework.web.servlet.handler.SimpleUrlHandlerMapping 362 - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+2019-08-02 10:16:50 INFO qtp1336953458-21 org.springframework.web.servlet.DispatcherServlet 508 - FrameworkServlet 'spring-dispatcher': initialization completed in 252 ms
+2019-08-02 10:16:50 INFO qtp1336953458-21 com.lx.demo.interceptor.DefaultHandlerInterceptor 39 - request param: null 
+
+2019-08-02 10:16:50 INFO qtp1336953458-21 com.lx.demo.interceptor.DefaultHandlerInterceptor 41 - request values: null 
+
+2019-08-02 10:16:50 INFO qtp1336953458-21 com.lx.demo.interceptor.DefaultHandlerInterceptor 39 - request param: null 
+
+2019-08-02 10:16:50 INFO qtp1336953458-21 com.lx.demo.interceptor.DefaultHandlerInterceptor 41 - request values: null 
+
+2019-08-02 10:16:50 INFO qtp1336953458-21 com.lx.demo.interceptor.DefaultHandlerInterceptor 45 - handler method : public java.lang.String com.lx.demo.controller.IndexController.helloParam(java.lang.String,java.lang.String) 
+
+2019-08-02 10:16:50 INFO qtp1336953458-21 com.lx.demo.interceptor.DefaultHandlerInterceptor 47 - handler object : public java.lang.String com.lx.demo.controller.IndexController.helloParam(java.lang.String,java.lang.String) 
+
+2019-08-02 10:16:50 INFO qtp1336953458-21 com.lx.demo.controller.IndexController 43 - hello zhangsan gun
