@@ -21,6 +21,7 @@
     <module>process</module>
     <module>datetimeapi</module>
     <module>io</module>
+    <module>pattern</module>
   </modules>
     <build>
         <plugins>
