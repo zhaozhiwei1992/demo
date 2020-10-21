@@ -11,7 +11,7 @@ import java.util.Map;
  */
 @Configuration
 @ConfigurationProperties(prefix = "transfer")
-public class PersonConfiguration {
+public class TableConfiguration {
 
     private Map<String, Object> tables = new HashMap<>();
 
