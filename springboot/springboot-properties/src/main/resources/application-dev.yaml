@@ -1,0 +1,5 @@
+msg: old_msg
+transfer:
+  tables:
+    table1: xx-dev
+    table2: xx22-dev

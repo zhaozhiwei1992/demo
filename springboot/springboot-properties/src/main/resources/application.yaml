@@ -1,0 +1,5 @@
+msg: old_msg
+transfer:
+  tables:
+    table1: xx
+    table2: xx22
