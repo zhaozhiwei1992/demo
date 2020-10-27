@@ -107,7 +107,7 @@ public class UserRepository {
      * @param record
      * @return
      */
-    private int saveByJDBC(User record){
+    public int saveByJDBC(User record){
         try {
             Connection connection = dataSource.getConnection();
             connection.setAutoCommit(false);

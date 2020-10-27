@@ -14,10 +14,16 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * curl http://127.0.0.1:8080/user/add\?name\=zhangsan
+     * @param name
+     * @return
+     */
     @GetMapping("/user/add")
     public boolean register(@RequestParam String name){
         User user = new User();
         user.setName(name);
+        userRepository.saveByJDBC(user);
         return userRepository.insert(user);
     }
 
@@ -25,4 +31,5 @@ public class UserController {
     public boolean register(@RequestBody User user){
         return userRepository.insert(user);
     }
+
 }

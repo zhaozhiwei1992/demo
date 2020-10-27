@@ -24,10 +24,10 @@ public class MultiDataSourceConfiguration {
     @Primary
     public DataSource masterDataSource(){
         return DataSourceBuilder.create()
-                .driverClassName("com.mysql.jdbc.Driver")
-                .url("jdbc:mysql://localhost:3306/test1")
-                .username("root")
-                .password("root").build();
+                .driverClassName("oracle.jdbc.OracleDriver")
+                .url("jdbc:oracle:thin:@192.168.100.10:1521/pdb19")
+                .username("mid_ox")
+                .password("1").build();
     }
 
     /**
@@ -37,10 +37,10 @@ public class MultiDataSourceConfiguration {
     @Bean
     public DataSource slaveDataSource(){
         return DataSourceBuilder.create()
-                .driverClassName("com.mysql.jdbc.Driver")
-                .url("jdbc:mysql://localhost:3306/test2")
-                .username("root")
-                .password("root")
+                .driverClassName("oracle.jdbc.OracleDriver")
+                .url("jdbc:oracle:thin:@192.168.100.10:1521/pdb19")
+                .username("mid_ox")
+                .password("1")
                 .build();
     }
 }
