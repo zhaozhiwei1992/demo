@@ -120,4 +120,5 @@ public class RestTemplateController {
         log.info("headers: {}, statuscode: {}, body: {}", headers, code, body);
         return user;
     }
+
 }
