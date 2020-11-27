@@ -4,6 +4,11 @@ import com.lx.demo.restonspringmvc.model.Person;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Pattern;
+import java.util.Date;
+import java.util.List;
+
 @RestController
 public class PersonRestController {
 
@@ -51,5 +56,14 @@ public class PersonRestController {
         // @RequestBody 的内容是 Properties
         // 响应的内容是 JSON
         return person;
+    }
+
+    @PostMapping("/bdg-server/oadata")
+    public List<Person> oa(
+            @Pattern(regexp = "^[0-9]{4,6}", message = "请传入正确区划") @RequestParam("admDivCode") String admDivCode,
+            @Pattern(regexp = "^\\d{4}$", message = "请传入正确年度") @RequestParam("year") String year,
+            @Valid @RequestBody List<Person> personList){
+        System.out.println(personList);
+        return personList;
     }
 }
