@@ -30,5 +30,20 @@ el username : ${username}
 <br/>
 <c:out value="${username}"></c:out>
 
+<table border="1" align="center" width="50%">
+    <tr>
+        <th>用户编号</th>
+        <th>用户账号</th>
+        <th>用户年龄</th>
+    </tr>
+    <c:forEach items="${users}" var="user">
+        <tr border="1" align="center" width="50%">
+            <td>${user.id }</td>
+            <td>${user.name }</td>
+            <td>${user.age }</td>
+        </tr>
+    </c:forEach>
+</table>
+
 </body>
 </html>
