@@ -2,7 +2,6 @@ package com.example.springbootresttemplate.web.controller;
 
 import com.example.springbootresttemplate.domain.User;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -11,9 +10,9 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
 
+@Slf4j
 @RestController
 @RequestMapping("/rest")
-@Slf4j
 public class RestTemplateController {
 
     private RestTemplate restTemplate = new RestTemplate();
