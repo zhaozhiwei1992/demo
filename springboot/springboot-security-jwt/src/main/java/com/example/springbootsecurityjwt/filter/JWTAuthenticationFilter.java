@@ -120,24 +120,14 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
                 if (StringUtils.isNotBlank(userName)) {
                     return new UsernamePasswordAuthenticationToken(userName, null, new ArrayList<>());
                 }
-            }catch (ExpiredJwtException e) {
-                throw e;
-                //throw new TokenException("Token已过期");
-            } catch (UnsupportedJwtException e) {
-                throw e;
-                //throw new TokenException("Token格式错误");
-            } catch (MalformedJwtException e) {
-                throw e;
-                //throw new TokenException("Token没有被正确构造");
-            } catch (SignatureException e) {
-                throw e;
-                //throw new TokenException("签名失败");
-            } catch (IllegalArgumentException e) {
-                throw e;
-                //throw new TokenException("非法参数异常");
-            }catch (Exception e){
+            } //throw new TokenException("Token格式错误");
+            //throw new TokenException("Token没有被正确构造");
+            //throw new TokenException("签名失败");
+            //throw new TokenException("非法参数异常");
+            catch (Exception e) {
                 throw e;
                 //throw new IllegalStateException("Invalid Token. "+e.getMessage());
+                //throw new TokenException("Token已过期");
             }
             return null;
         }
