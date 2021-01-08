@@ -25,6 +25,15 @@ public class CarController {
     @Autowired
     private CarMapper carMapper;
 
+    /**
+     * @data: 2021/1/8-下午3:27
+     * @User: zhaozhiwei
+     * @method: carDtoList
+
+     * @return: java.util.List<com.lx.demo.springbootmapstruct.service.dto.CarDto>
+     * @Description: 将一堆car转成cardtos
+     * curl -X GET http://127.0.0.1:8080/cardtos
+     */
     @GetMapping("/cardtos")
     public List<CarDto> carDtoList(){
         final List<CarDto> carDtos = carMapper.carsToCarDtos(cars);
