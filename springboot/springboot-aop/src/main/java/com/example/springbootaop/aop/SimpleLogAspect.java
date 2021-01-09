@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 
 import java.math.BigInteger;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 /**
@@ -35,7 +36,7 @@ public class SimpleLogAspect {
      * @param joinPoint
      */
     @Before("execution(* com.example.springbootaop.controller..*.showLog2())")
-    public void around(JoinPoint joinPoint){
+    public void before(JoinPoint joinPoint){
         // 记录请求到达时间
         beginTime.set(System.currentTimeMillis());
         logger.info(String.format("当前请求: %s, 开始时间: %s", joinPoint.toString(), beginTime.get()));
@@ -43,7 +44,9 @@ public class SimpleLogAspect {
 
     @After("execution(* com.example.springbootaop.controller..*.showLog2())")
     public void after(JoinPoint joinPoint){
-        logger.info(String.format("当前请求: %s, 耗时: %s", joinPoint.toString(), System.currentTimeMillis()-beginTime.get()));
+        final String format = String.format("当前请求: %s, 耗时: %s", joinPoint.toString(),
+                System.currentTimeMillis() - (Objects.isNull(beginTime.get())? 0:beginTime.get()));
+        System.out.println(format);
     }
 
     @Around("execution(* com.example.springbootaop.controller..*.showLog2())")
