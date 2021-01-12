@@ -5,17 +5,15 @@ spring:
   cloud:
     nacos:
       config:
-        # 是否开启配置中心 默认true
-        enabled: true
         server-addr: 192.168.1.5:8848
 #        shared-dataids: test2.yaml,test3.yaml
 #        shard
         sharedConfigs[0]:
-          data-id: test2.yaml # 配置文件名-Data Id
+          data-id: test2.yaml # 配置文件名-Data Id, data_id包含后面的扩展名(yaml)
           group: DEFAULT_GROUP   # 默认为DEFAULT_GROUP
           refresh: true   # 是否动态刷新，默认为false
         sharedConfigs[1]:
-          data-id: test3.yaml
+          data-id: test3.properties
           group: DEFAULT_GROUP
           refresh: true
       discovery:

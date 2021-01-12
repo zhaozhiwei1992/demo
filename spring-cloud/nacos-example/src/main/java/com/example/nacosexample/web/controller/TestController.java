@@ -41,4 +41,12 @@ public class TestController {
     public String test2(){
         return test2;
     }
+
+    @Value("${ifmis.test3:def-test3}")
+    private String test3;
+
+    @RequestMapping("/test3")
+    public String test3(){
+        return test2;
+    }
 }
