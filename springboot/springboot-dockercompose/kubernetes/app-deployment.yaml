@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yaml
+    kompose.version: 1.22.0 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: app
+  name: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: app
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose.yaml
+        kompose.version: 1.22.0 (HEAD)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: app
+    spec:
+      containers:
+        - args:
+            - mvn
+            - clean
+            - spring-boot:run
+            - -Dspring-boot.run.profiles=docker
+          image: app
+          name: app
+          ports:
+            - containerPort: 8080
+          resources: {}
+          volumeMounts:
+            - mountPath: /app
+              name: app-claim0
+            - mountPath: /root/.m2
+              name: app-claim1
+          workingDir: /app
+      hostname: app
+      restartPolicy: Always
+      volumes:
+        - name: app-claim0
+          persistentVolumeClaim:
+            claimName: app-claim0
+        - name: app-claim1
+          persistentVolumeClaim:
+            claimName: app-claim1
+status: {}

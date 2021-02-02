@@ -87,6 +87,23 @@
         </filter>
     </appender>
 
+    <!--logstash输出-->
+    <appender name="STASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <destination>192.168.1.5:5000</destination>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <!-- 打印行号、方法名，官方不建议在生产环境开启此配置，默认为false(关闭)，具网友测试开启后的耗时是未开启的大约360倍的时间（业务量小的时候可以忽略） -->
+            <includeCallerData>true</includeCallerData>
+            <!-- 设置时区-->
+            <timeZone>UTC</timeZone>
+            <!-- 日期格式化-->
+            <!-- <timestampPattern>yyyy-MM-dd'T'HH:mm:ss.SSS</timestampPattern>-->
+            <!-- 添加自定义属性，这里的springboot-log是服务名-->
+            <customFields>{"server_name":"springboot-log"}</customFields>
+        </encoder>
+        <!-- 设置超时时间， 默认没有，使用集群的时候可以加上-->
+        <!--<writeTimeout>30 seconds</writeTimeout>-->
+    </appender>
+
     <!--
         <logger>用来设置某一个包或者具体的某一个类的日志打印级别、
         以及指定<appender>。<logger>仅有一个name属性，
@@ -133,6 +150,9 @@
         <appender-ref ref="debugAppender" />
         <appender-ref ref="infoAppender" />
         <appender-ref ref="errorAppender" />
+
+<!--        所有都会到stash-->
+        <appender-ref ref="STASH"/>
     </root>
     <!-- 4.2 生产环境:输出到文档
     <springProfile name="pro">
