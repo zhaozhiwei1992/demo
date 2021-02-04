@@ -53,4 +53,17 @@ public class EchoController {
         log.debug("参数列表 datas:{}, param1:{}, param2:{}", datas, param1, param2);
         return datas;
     }
+
+    /**
+     * @data: 2021/2/4-上午11:38
+     * @User: zhaozhiwei
+     * @method: regexEcho
+     * @param id :
+     * @return: java.lang.String
+     * @Description: id只能传入数字，但是提示不够优雅，应该使用@Valid注解进行参数校验
+     */
+    @GetMapping("/echo/regex/{id:[0-9]+}")
+    public String regexEcho(@PathVariable String id){
+        return "传入id: "  + id;
+    }
 }
