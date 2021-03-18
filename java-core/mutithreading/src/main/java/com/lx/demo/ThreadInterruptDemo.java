@@ -1,5 +1,8 @@
 package com.lx.demo;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class ThreadInterruptDemo {
 
     public static void main(String[] args) throws InterruptedException {
@@ -12,6 +15,20 @@ public class ThreadInterruptDemo {
         // Waits for this thread to die /TERMINATED
         thread.join();
         System.out.println("exec in mainthread"); // exec after join
+
+        //
+        final ExecutorService executorService = Executors.newCachedThreadPool();
+        executorService.execute(() -> {
+            try {
+                Thread.sleep(2000);
+                System.out.println("Thread Running");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        //调用 Executor 的 shutdown() 方法会等待线程都执行完毕之后再关闭，但是如果调用的是 shutdownNow() 方法，则相当于调用每个线程的 interrupt() 方法。
+        executorService.shutdownNow();
+        System.out.println("Main Run"); // exec after join
     }
 
     /**
