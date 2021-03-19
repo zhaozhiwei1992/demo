@@ -102,6 +102,8 @@ public class WaitNotifyDemo {
             synchronized (obj){
                 try {
                     obj.wait();
+//                    可以设置wait 1500ms,超过就不等了
+//                    obj.wait(1500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
