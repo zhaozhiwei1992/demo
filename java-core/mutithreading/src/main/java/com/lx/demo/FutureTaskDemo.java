@@ -18,6 +18,7 @@ public class FutureTaskDemo {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
 
+        // 在支线流程中处理，最后返回结果
         final FutureTask<Integer> integerFutureTask = new FutureTask<>(() -> {
             int result = 0;
             for (int i = 0; i < 10; i++) {
@@ -39,6 +40,7 @@ public class FutureTaskDemo {
             }
         }).start();
 
+        // 主流程走完找integerFutureTask获取结果
         System.out.println(integerFutureTask.get());
     }
 }

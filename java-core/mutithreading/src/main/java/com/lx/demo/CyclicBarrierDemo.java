@@ -20,17 +20,19 @@ public class CyclicBarrierDemo {
         int threadTotal = 10;
         final ExecutorService executorService = Executors.newCachedThreadPool();
         final CyclicBarrier cyclicBarrier = new CyclicBarrier(threadTotal);
+        System.out.println("线程开始执行..");
         for (int i = 0; i <threadTotal; i++) {
            executorService.execute(() -> {
                try {
-                   System.out.println("线程开始执行..");
+                   System.out.println("睡1s");
+                   // 这里不睡觉，保证不了顺序执行
+                   Thread.sleep(1000);
+                   // 控制减1
                    cyclicBarrier.await();
-               } catch (InterruptedException e) {
-                   e.printStackTrace();
-               } catch (BrokenBarrierException e) {
+               } catch (InterruptedException | BrokenBarrierException e) {
                    e.printStackTrace();
                }
-               System.out.println("线程执行结束..");
+//               System.out.println("线程执行结束..");
            });
         }
 //        cyclicBarrier.await();

@@ -14,6 +14,12 @@ import java.util.concurrent.Future;
  *
  * 涨姿势:
  * 这里一定要注意wait和notify的用法，是针对monitor的，意思现在锁谁脑门上就得用锁对象进行wait或者notify
+ * java.util.concurrent.BlockingQueue 接口有以下阻塞队列的实现：
+ *
+ *     FIFO 队列 ：LinkedBlockingQueue、ArrayBlockingQueue（固定长度）
+ *     优先级队列 ：PriorityBlockingQueue
+ *
+ * 提供了阻塞的 take() 和 put() 方法：如果队列为空 take() 将阻塞，直到队列中有内容；如果队列为满 put() 将阻塞，直到队列有空闲位置。
  */
 public class ProducerAndConsumerDemo {
 
