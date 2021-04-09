@@ -39,7 +39,7 @@ import java.util.concurrent.locks.ReentrantLock;
 除非需要使用 ReentrantLock 的高级功能，否则优先使用 synchronized。这是因为 synchronized 是 JVM 实现的一种锁机制，JVM 原生地支持它，而 ReentrantLock 不是所有的 JDK 版本都支持。并且使用 synchronized 不用担心没有释放锁而导致死锁问题，因为 JVM 会确保锁的释放。*
  * @date 2021/3/18 上午9:34
  */
-public class LockDemo {
+public class ReentrantLockDemo {
 
     private Lock lock = new ReentrantLock();
 
@@ -57,7 +57,7 @@ public class LockDemo {
 
     public static void main(String[] args) {
         final ExecutorService executorService = Executors.newCachedThreadPool();
-        final LockDemo lockDemo = new LockDemo();
+        final ReentrantLockDemo lockDemo = new ReentrantLockDemo();
         executorService.execute(() -> {
             lockDemo.func();
         });
