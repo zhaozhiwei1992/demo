@@ -2,6 +2,7 @@ package com.lx.demo.springbootmybatis.mapper;
 
 import com.lx.demo.springbootmybatis.contrant.SexEnum;
 import com.lx.demo.springbootmybatis.domain.User;
+import com.lx.demo.springbootmybatis.handler.LongToDateTypeHandler;
 import com.lx.demo.springbootmybatis.handler.StringTypeHandler;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
@@ -41,7 +42,8 @@ public interface UserMapperAnnotation {
     @Select("SELECT * FROM t_user")
     @Results({
             @Result(property = "sex",  column = "sex", javaType = SexEnum.class),
-            @Result(property = "realname", column = "real_name")
+            @Result(property = "realname", column = "real_name"),
+            @Result(property = "createTime", column = "create_time", typeHandler= LongToDateTypeHandler.class)
     })
     List<User> getAll();
 

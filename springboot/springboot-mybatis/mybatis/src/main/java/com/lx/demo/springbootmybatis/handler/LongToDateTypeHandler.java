@@ -14,14 +14,15 @@ import java.util.Date;
 /**
  * @Title: DateTypeHandler
  * @Package com/lx/demo/springbootmybatis/handler/DateTypeHandler.java
- * @Description: mysql加载数据转换为java Date类型
+ * @Description: mysql加载数据转换为java Date类型, 数据库时间戳为long类型
+ * https://blog.csdn.net/jokeMqc/article/details/81326109
  * @author zhaozhiwei
  * @date 2021/4/14 下午7:36
  * @version V1.0
  */
 @MappedJdbcTypes(JdbcType.BIGINT)
 @MappedTypes(Date.class)
-public class DateTypeHandler implements TypeHandler<Date> {
+public class LongToDateTypeHandler implements TypeHandler<Date> {
 
     @Override
     public void setParameter(PreparedStatement ps, int i, Date parameter, JdbcType jdbcType) throws SQLException {
@@ -32,7 +33,7 @@ public class DateTypeHandler implements TypeHandler<Date> {
     @Override
     public Date getResult(ResultSet rs, String columnName) throws SQLException {
         System.out.printf("com.lx.demo.springbootmybatis.handler.DateTypeHandler: " + columnName);
-        long time = rs.getLong("createTime");
+        long time = rs.getLong(columnName);
         return new Date(time);
     }
 

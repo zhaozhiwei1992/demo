@@ -23,6 +23,8 @@ import java.util.Date;
  *   constraint t_user_id_uindex
  *   unique (id)
  * );
+ *
+ * org.apache.ibatis.type.TypeHandlerRegistry  mybatis默认定义的TypeHandler
  * @author zhaozhiwei
  * @date 2021/4/15 上午9:06
  * @version V1.0
