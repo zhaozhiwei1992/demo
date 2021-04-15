@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.List;
 import java.util.Properties;
 
 /**
@@ -33,8 +34,10 @@ public class MybatisAnnotationDemo {
 
         //业务部分 begin
         UserMapperAnnotation mapper = sqlSession.getMapper(UserMapperAnnotation.class);
-        User user = mapper.selectByID(2);
-        System.out.println(user);
+//        User user = mapper.selectByID(2);
+//        System.out.println(user);
+        final List<User> all = mapper.getAll();
+        System.out.println(all);
 
         // end
         sqlSession.close();

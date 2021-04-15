@@ -4,6 +4,29 @@ import com.lx.demo.springbootmybatis.contrant.SexEnum;
 
 import java.util.Date;
 
+/**
+ * @Title: User
+ * @Package com/lx/demo/springbootmybatis/domain/User.java
+ * @Description: create table t_user
+ * (
+ *   id          int auto_increment
+ *     primary key,
+ *   name        varchar(20)                         null,
+ *   password    varchar(50)                         null,
+ *   realname    varchar(20)                         null,
+ *   avatar      varchar(20)                         null,
+ *   mobile      varchar(20)                         null,
+ *   sex         varchar(5)                          null,
+ *   status      int                                 null,
+ *   create_time timestamp default CURRENT_TIMESTAMP not null
+ *   on update CURRENT_TIMESTAMP,
+ *   constraint t_user_id_uindex
+ *   unique (id)
+ * );
+ * @author zhaozhiwei
+ * @date 2021/4/15 上午9:06
+ * @version V1.0
+ */
 public class User {
     private Integer id;
 

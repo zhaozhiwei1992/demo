@@ -25,6 +25,8 @@
     <mappers>
         <mapper resource="mappers/UserMapper.xml"/>
         <!--注解方式引入, 这里springboot项目已经＠Mapper引进去了,不需要这个了-->
-<!--        <mapper class="com.lx.demo.springbootmybatis.mapper.UserMapperAnnotation"/>-->
+<!--        https://blog.csdn.net/u012488504/article/details/52939712-->
+<!--        Type interface com.lx.demo.springbootmybatis.mapper.UserMapperAnnotation is not known to the MapperRegistry-->
+        <mapper class="com.lx.demo.springbootmybatis.mapper.UserMapperAnnotation"/>
     </mappers>
 </configuration>

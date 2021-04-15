@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
-    <classPathEntry location="/home/lx7ly/.m2/repository/mysql/mysql-connector-java/5.1.14/mysql-connector-java-5.1.14.jar"/>
+    <classPathEntry location="/home/zhaozhiwei/.m2/repository/mysql/mysql-connector-java/5.1.14/mysql-connector-java-5.1.14.jar"/>
     <context id="MysqlTables" targetRuntime="MyBatis3">
         <!--增加generator插件， 将Javabean使用lombok形式-->
         <!--<plugin type="javax.core.common.plugin.MapperAnnotationPlugin"></plugin>-->
