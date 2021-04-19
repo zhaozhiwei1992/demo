@@ -151,6 +151,12 @@ public class StreamExp {
         System.out.println("列表中最小的数 : " + stats.getMin());
         System.out.println("所有数之和 : " + stats.getSum());
         System.out.println("平均数 : " + stats.getAverage());
+
+//        输出1 ... 10的和
+        Stream.iterate(BigInteger.ZERO, n -> n.add(BigInteger.ONE)).limit(10)
+                .map(bigInteger -> bigInteger.intValue())
+                .reduce(Integer::sum).ifPresent(System.out::println);
+
     }
 
     private static Stream<Character> characterStream(String s) {

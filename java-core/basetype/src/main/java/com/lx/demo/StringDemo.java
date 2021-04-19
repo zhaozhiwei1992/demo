@@ -1,6 +1,7 @@
 package com.lx.demo;
 
 import java.lang.reflect.Field;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Hello world!
@@ -9,6 +10,14 @@ import java.lang.reflect.Field;
  */
 public class StringDemo {
     public static void main(String[] args) throws NoSuchFieldException, IllegalAccessException {
+
+        //编码就是把字符转换为字节，而解码是把字节重新组合成字符。
+        String str1 = "中文";
+        //编码
+        final byte[] bytes = str1.getBytes(StandardCharsets.UTF_8);
+        // 解码
+        final String s = new String(bytes, StandardCharsets.UTF_8);
+        System.out.println(s);
 
         //针对999 补0
         String str = String.format("%6d", 999).replace(" ", "0");
