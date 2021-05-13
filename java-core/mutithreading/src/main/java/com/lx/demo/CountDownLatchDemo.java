@@ -23,6 +23,7 @@ public class CountDownLatchDemo {
         final CountDownLatch countDownLatch = new CountDownLatch(totalThread);
         final ExecutorService executorService = Executors.newCachedThreadPool();
         System.out.println("线程开始执行..");
+        final long l = System.currentTimeMillis();
         for (int i = 0; i < totalThread; i++) {
             executorService.execute(() -> {
                 try {
@@ -39,6 +40,7 @@ public class CountDownLatchDemo {
         countDownLatch.await();
 
         System.out.println("线程执行结束..");
+        System.out.println(System.currentTimeMillis() - l);
         executorService.shutdown();
     }
 }

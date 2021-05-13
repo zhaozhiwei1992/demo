@@ -11,6 +11,7 @@ import java.util.concurrent.Executors;
 public class ThreadPoolDemo {
 
     public static void main(String[] args) {
+        final long l = System.currentTimeMillis();
         final ExecutorService threads5 = Executors.newFixedThreadPool(5);
 
         //从5个线程池中创建十个线程操作，　这样肯定某些时候线程复用
@@ -30,11 +31,13 @@ public class ThreadPoolDemo {
                 // 输出线程信息
                 System.out.printf("当前线程 [%s]\n", Thread.currentThread().getName());
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             });
         }
+        // 主线程只管分配，不管调度
+        System.out.println(System.currentTimeMillis() - l);
     }
 }
