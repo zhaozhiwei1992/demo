@@ -37,7 +37,7 @@ public class ThreadPoolDemo {
                 }
             });
         }
-        // 主线程只管分配，不管调度
+        // 主线程只管分配，分配完就玩事儿，线程自己玩自己的
         System.out.println(System.currentTimeMillis() - l);
     }
 }
