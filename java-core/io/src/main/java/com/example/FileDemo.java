@@ -12,10 +12,41 @@ import java.util.Objects;
  * @date 2021/4/10 下午4:54
  */
 public class FileDemo {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 //        System.out.println(System.getProperty("user.home"));
 //       listAllFiles(new File(System.getProperty("user.home") + File.separator +"Documents"));
-        copyFile("/tmp/11.txt", "/tmp/22.txt");
+//        copyFile("/tmp/11.txt", "/tmp/22.txt");
+        createFile();
+    }
+
+    private static void createFile() throws IOException {
+        String fileName = "test.txt";
+        System.out.println("File.separator:" + File.separator);
+        File testFile = new File("/tmp/test" + File.separator + fileName);
+        //返回的是File类型,可以调用exsit()等方法
+        File fileParent = testFile.getParentFile();
+        //返回的是String类型
+        String fileParentPath = testFile.getParent();
+        System.out.println("fileParent:" + fileParent);
+        System.out.println("fileParentPath:" + fileParentPath);
+        if (!fileParent.exists()) {
+            // 创建多级目录, 有目录才能创建文件
+            fileParent.mkdirs();
+        }
+        if (!testFile.exists()) {
+            //文件不存在时创建文件
+            testFile.createNewFile();
+        }
+        System.out.println(testFile);
+
+        String path = testFile.getPath();
+        //得到文件/文件夹的绝对路径
+        String absolutePath = testFile.getAbsolutePath();
+        //得到文件/文件夹的名字
+        String getFileName = testFile.getName();
+        System.out.println("path:"+path);
+        System.out.println("absolutePath:"+absolutePath);
+        System.out.println("getFileName:"+getFileName);
     }
 
     /**

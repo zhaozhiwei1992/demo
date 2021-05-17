@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springbootpolardb.mapper.BpmnMapper">
+  <resultMap id="bpmnTemplateDefMap" type="com.example.springbootpolardb.domain.BpmnTemplateDef">
+    <id column="ID" property="id" jdbcType="VARCHAR"/>
+    <result column="NAME" property="name" jdbcType="VARCHAR"/>
+    <result column="CATEGORY" property="category" jdbcType="VARCHAR"/>
+    <result column="VERSION" property="version" jdbcType="INTEGER"/>
+    <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR"/>
+    <result column="MODIFY_BY" property="modifyBy" jdbcType="VARCHAR"/>
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+    <result column="CREATE_TIME_STR" property="createTimeStr" jdbcType="VARCHAR"/>
+    <result column="MODIFY_TIME" property="modifyTime" jdbcType="TIMESTAMP"/>
+    <result column="MODIFY_TIME_STR" property="modifyTimeStr" jdbcType="VARCHAR"/>
+    <result column="DEPLOY_STATE" property="deployState" jdbcType="INTEGER"/>
+    <result column="DEPLOY_STATE_STR" property="deployStateStr" jdbcType="VARCHAR"/>
+    <result column="VERSION_STATE" property="versionState" jdbcType="INTEGER"/>
+    <result column="VERSION_STATE_STR" property="versionStateStr" jdbcType="VARCHAR"/>
+    <result column="DEPLOYMENT_ID" property="deploymentId" jdbcType="VARCHAR"/>
+    <result column="CONTENT_BYTES" property="contentBytes" jdbcType="BLOB"
+            typeHandler="com.example.springbootpolardb.handler.PolarDbBlobTypeHandler"/>
+    <result column="CONTENT_BYTES_STR" property="contentBytesStr" jdbcType="VARCHAR"/>
+    <result column="INIT_NUM" property="initNum" jdbcType="INTEGER"/>
+    <result column="CANVASWIDTH" property="canvasWidth" jdbcType="VARCHAR"/>
+    <result column="CANVASHEIGHT" property="canvasHeight" jdbcType="VARCHAR"/>
+    <result column="TABLE_IDS" property="tableIds" jdbcType="VARCHAR"/>
+    <result column="TABLE_NAMES" property="tableNames" jdbcType="VARCHAR"/>
+  </resultMap>
+
+  <select id="selectTemplateDefByCategoryAndState" parameterType="map" resultMap="bpmnTemplateDefMap">
+    select * from act_hq_tem_def where deploy_state=1
+  </select>
+</mapper>
