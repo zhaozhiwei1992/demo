@@ -36,7 +36,7 @@ public class PolarDBJdbcDemo {
             connect = DriverManager.getConnection(url, props);
 
             /**
-             * create table foo(id int, name varchar(20));
+             * create table foo(id int, name varchar(20), amt number(18,2));
              */
             String sql = "select * from act_hq_tem_def where deploy_state=1";
             statement = connect.createStatement();
