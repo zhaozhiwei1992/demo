@@ -49,7 +49,7 @@ public class ExampleRepository {
         String sql = "SELECT  'false' AS ISFREQUENTLYUSED, M.*  FROM SYS_MENU M";
 //        final Query query = entityManager.createNativeQuery(sql);
 //        final List<Map> resultList = query.getResultList();
-        Query query = getSession().createSQLQuery(sql);
+        Query query = getSession().createSQLQuery(sql).setResultTransformer(HibernateAliasToEntityMapResultTransformer.INSTANCE);
         final List<Map> resultList = query.list();
 
         System.out.println(resultList);
