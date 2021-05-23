@@ -1,0 +1,7 @@
+#线程池配置参数
+task:
+  pool:
+    corePoolSize: 2 #设置核心线程数
+    maxPoolSize: 3  #设置最大线程数
+    keepAliveSeconds: 300 #设置线程活跃时间（秒）
+    queueCapacity: 50 #设置队列容量
