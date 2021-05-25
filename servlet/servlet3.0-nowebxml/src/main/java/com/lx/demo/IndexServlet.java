@@ -38,6 +38,15 @@ public class IndexServlet extends HttpServlet {
         super();
     }
 
+    /**
+     * @data: 2021/5/25-下午4:56
+     * @User: zhaozhiwei
+     * @method: doGet
+      * @param request :
+ * @param response :
+     * @return: void
+     * @Description: contextpath就是server.xml中设置的<context path="getContextPath()"></context>
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.getWriter().append("Served at: ").append(request.getContextPath());
