@@ -31,6 +31,10 @@ public class EchoServlet extends HttpServlet {
      * Content-Type: text/html;charset=utf-8
      * Content-Length: 13
      * Server: Jetty(9.3.0.M1)
+     *
+     * jetty插件: http://127.0.0.1:8080/jetty/echo
+     * tomcat war only:  http://127.0.0.1:8080/tomcat/echo
+     * tomcat run: Running war on http://localhost:8080/servlet
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
