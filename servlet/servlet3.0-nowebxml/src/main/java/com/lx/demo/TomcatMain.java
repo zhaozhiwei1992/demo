@@ -6,11 +6,15 @@ import org.apache.catalina.LifecycleException;
 import org.apache.catalina.Wrapper;
 import org.apache.catalina.connector.Connector;
 import org.apache.catalina.core.StandardContext;
-import org.apache.catalina.startup.ContextConfig;
 import org.apache.catalina.startup.Tomcat;
 
+import javax.servlet.Servlet;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * @author zhaozhiwei
@@ -64,6 +68,10 @@ public class TomcatMain {
             // 设置class目录, 标准web项目目录，CLASS编译后放到了WEB-INF/classes下，硬启动class和web分离，需独立制定
             final Wrapper echoServlet = tomcat.addServlet(contextPath, "EchoServlet", new EchoServlet());
             echoServlet.addMapping("/echo");
+
+            // 通过扫描注解引入servlet
+            initServlet(contextPath, tomcat);
+
         }
 
         // web.xml中基本所有项都可以硬编码, 下述操作，可以使web同时支持8080 /8081请求
@@ -93,9 +101,100 @@ public class TomcatMain {
         });
 
 //       hode住防止主线程释放
-//        tomcatMain.waitIndefinitely();
+//       tomcatMain.waitIndefinitely();
         tomcat.getServer().await();
 
+    }
+
+    /**
+     * @data: 2021/5/27-上午10:37
+     * @User: zhaozhiwei
+     * @method: initServlet
+      * @param tomcat :
+     * @return: void
+     * @Description: 通过反射给tom里加其它servlet
+     */
+    private static void initServlet(String contextPath, Tomcat tomcat) {
+        try {
+
+            // 获取指定目录下所有servlet
+            List<String> servlets = findServlets();
+            for (String servletClass : servlets) {
+                // 加载类
+//                final Class<?> indexServletClass = Class.forName("com.lx.demo.AsyncDemoServlet");
+                final Class<?> indexServletClass = Class.forName(servletClass);
+
+                // 获取注解url
+                final WebServlet webServlet = indexServletClass.getAnnotation(WebServlet.class);
+                final String[] servletPath = webServlet.value().length == 0? webServlet.urlPatterns() : webServlet.value();
+
+                // 实例化
+                Servlet servlet = (Servlet) indexServletClass.newInstance();
+
+                final Wrapper wrapper = tomcat.addServlet(contextPath, servletPath[0],
+                        servlet);
+
+//              输出映射信息  mapping /echo, servlet: com.lx.demo.EchoServlet@1dfe2924
+                System.err.printf("mapping %s, servlet: %s \n", servletPath[0], servlet);
+                wrapper.addMapping(servletPath[0]);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    /**
+     * @data: 2021/5/27-上午11:28
+     * @User: zhaozhiwei
+     * @method: findServlets
+
+     * @return: java.util.List<java.lang.String>
+     * @Description: 找到编译目录下所有servlet
+     */
+    private static List<String> findServlets() {
+
+        final String path = Objects.requireNonNull(Thread.currentThread().getClass().getResource("/")).getPath();
+        final List<String> servlets = new ArrayList<>();
+        queryServletFile(new File(path), servlets);
+        return servlets;
+    }
+
+    /**
+     * @data: 2021/5/27-上午11:33
+     * @User: zhaozhiwei
+     * @method: queryServletFile
+      * @param file :
+     * @return: java.lang.String
+     * @Description: 返回满足条件servlet
+     */
+    private static String queryServletFile(File file, List<String> servlets) {
+        if(Objects.isNull(file) || !file.exists()){
+            return null;
+        }
+
+        if(file.isFile()){
+            // 筛选符合条件文件返回
+//            System.out.println(file);
+            if(file.getName().contains("Servlet.class")){
+                final String absolutePath = file.getAbsolutePath();
+                // 获取类全路径
+                servlets.add(absolutePath
+//                        去掉后缀
+                        .substring(0, absolutePath.lastIndexOf("."))
+//                        只留完整包路径，去掉 target/class及之前
+                        .substring(absolutePath.indexOf("classes/") + 8)
+//                        文件系统分割符变成包分割符
+                        .replace("/", "."));
+            }
+            return null;
+        }
+
+        for (File listFile : file.listFiles()) {
+            queryServletFile(listFile, servlets);
+        }
+        return null;
     }
 
     private void waitIndefinitely() {
