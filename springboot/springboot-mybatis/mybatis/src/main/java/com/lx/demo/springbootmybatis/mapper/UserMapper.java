@@ -32,4 +32,8 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+    int batchDeleteByUserId(List<Integer> ids);
+
+    int batchUpdateByUserId(List<User> users);
 }

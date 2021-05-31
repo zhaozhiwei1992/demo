@@ -97,6 +97,28 @@
     delete from t_user
     where id = #{id,jdbcType=INTEGER}
   </delete>
+  <update id="batchUpdateByUserId" parameterType="java.util.List">
+<!--    oracle 需要有begin end-->
+    begin
+    <foreach collection="list" item="record" index="index" separator=";" >
+      update t_user
+      <set>
+        name = #{record.name,jdbcType=VARCHAR},
+        realname = #{record.realname,jdbcType=VARCHAR},
+      </set>
+      where id = #{record.id}
+    </foreach>
+    ;end;
+  </update>
+
+  <delete id="batchDeleteByUserId" parameterType="java.util.List">
+    delete from t_user
+    where id in
+    <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+      #{item.id}
+    </foreach>
+  </delete>
+
   <delete id="deleteByExample" parameterType="com.lx.demo.springbootmybatis.domain.UserExample">
     delete from t_user
     <if test="_parameter != null">
