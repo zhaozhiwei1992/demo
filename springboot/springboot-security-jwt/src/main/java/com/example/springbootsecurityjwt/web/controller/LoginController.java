@@ -50,7 +50,7 @@ public class LoginController {
             user.setId(0L);
             user.setName(userName);
             user.setAge(0);
-            user.setPassword(encode);
+            user.setPassword("11");
             user.setActivated(true);
 
             if (user1!=null) {

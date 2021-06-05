@@ -3,6 +3,7 @@ package com.example.springbootsecurityjwt.service;
 import com.example.springbootsecurityjwt.domain.Authority;
 import com.example.springbootsecurityjwt.domain.User;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -23,15 +24,26 @@ public class CustomUserDetailService implements UserDetailsService {
      * {@see https://docs.spring.io/spring-boot/docs/2.0.8.RELEASE/reference/htmlsingle/#howto-change-the-user-details-service-and-add-user-accounts}
      *
      * 这里设置好的用户名密码，　security内部会进行比对
-     * @param s
+     *
+     * 可以继承user, 然后初始化更多属性
+     * @param username
      * @return
      * @throws UsernameNotFoundException
      */
     @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+//        User user = userService.findByCode(username);
+//        if (user == null) {
+//            logger.error("找不到该用户，用户名：" + username);
+//            throw new UsernameNotFoundException("用户:" + username + ",不存在!");
+//        }
+
+        // 懒得读库，直接写死先
         User user = new User();
         String userName = "admin";
         user.setAuthorities(new HashSet(Arrays.asList(new Authority("ADMIN1"), new Authority("USER"))));
+//        user.setAuthorities(new HashSet(AuthorityUtils.createAuthorityList("ADMIN1", "USER")));
         user.setId(0L);
         user.setName(userName);
         user.setAge(0);

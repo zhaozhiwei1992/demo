@@ -46,7 +46,7 @@ public class JwtUtil {
     /**
      *
      * @author: xxm
-     * 功能描述:创建Token
+     * 功能描述:创建Token, 生成方式和解析方式一定是配套
      * @date: 2020/5/28 16:09
      * @param: 
      * @return: 
@@ -89,6 +89,7 @@ public class JwtUtil {
             // parse the token.
             Map<String, Object> body = Jwts.parser()
                     .setSigningKey(key)
+                    // 去掉前缀解析, 或者token传入前就处理掉
                     .parseClaimsJws(token.replace(TOKEN_PREFIX, ""))
                     .getBody();
             String userName = body.get("userName").toString();
@@ -101,6 +102,8 @@ public class JwtUtil {
     public static void main(String[] args) {
         final String admin = generateToken("admin");
         System.out.println(admin);
+
+        //JWT expired at 2021-01-05T09:10:09Z. Current time: 2021-06-02T02:08:12Z, a difference of 12761883519 milliseconds.
         final String s = validateToken("Bearer eyJhbGciOiJIUzI1NiJ9" +
                 ".eyJ1c2VyTmFtZSI6ImFkbWluIiwiaWF0IjoxNjA5NzUxNDA5LCJleHAiOjE2MDk4Mzc4MDl9" +
                 ".aj1w2HHTandb4weKohJyNtDm-z64TuPXmXsFyOLcfZ4");

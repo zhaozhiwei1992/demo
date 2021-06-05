@@ -2,8 +2,10 @@ package com.example.springbootsecurityjwt.configuration;
 
 import com.example.springbootsecurityjwt.filter.JWTAuthenticationFilter;
 import com.example.springbootsecurityjwt.service.CustomUserDetailService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -12,6 +14,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  *
@@ -31,15 +35,37 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
             // other public endpoints of your API may be appended to this array
     };
 
+    /**
+     * 配置这个bean会在做AuthorizationServerConfigurer配置的时候使用
+     *
+     * @return
+     * @throws Exception
+     */
     @Bean
-    UserDetailsService customUserService() {
-        // 注册UserDetailsService 的bean
-        return new CustomUserDetailService();
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        AuthenticationManager manager = super.authenticationManagerBean();
+        return manager;
     }
+
+//    @Bean
+//    UserDetailsService customUserService() {
+//        // 注册UserDetailsService 的bean
+//        return new CustomUserDetailService();
+//    }
+
+    PasswordEncoder passwordEncoder() {
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
+
+    @Autowired
+    private UserDetailsService userDetailsService;
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(customUserService()).passwordEncoder(new BCryptPasswordEncoder());
+        auth.userDetailsService(userDetailsService)
+//                .passwordEncoder(new BCryptPasswordEncoder());
+                .passwordEncoder(passwordEncoder());
     }
 
     /**
@@ -58,6 +84,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 //其他所有请求需要身份认证
                 .anyRequest().authenticated()
                 .and()
-                .addFilter(new JWTAuthenticationFilter(authenticationManager()));
+                .addFilter(new JWTAuthenticationFilter(authenticationManager(), userDetailsService));
     }
+
 }
