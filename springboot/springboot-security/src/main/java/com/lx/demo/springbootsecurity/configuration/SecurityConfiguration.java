@@ -1,6 +1,7 @@
 package com.lx.demo.springbootsecurity.configuration;
 
 import com.lx.demo.springbootsecurity.filter.ImageValidateCodeFilter;
+import com.lx.demo.springbootsecurity.filter.SmsValidateCodeFilter;
 import com.lx.demo.springbootsecurity.handler.CustomAuthenticationFailureHandler;
 import com.lx.demo.springbootsecurity.handler.CustomAuthenticationSuccessHandler;
 import com.lx.demo.springbootsecurity.handler.CustomExpiredSessionStrategy;
@@ -149,6 +150,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         final ImageValidateCodeFilter imageValidateCodeFilter = new ImageValidateCodeFilter();
         imageValidateCodeFilter.setAuthenticationFailureHandler(customAuthenticationFailureHandler);
 
+        SmsValidateCodeFilter smsValidateCodeFilter = new SmsValidateCodeFilter();
+        smsValidateCodeFilter.setAuthenticationFailureHandler(customAuthenticationFailureHandler);
+
         http
 //                认证配置
                 .authorizeRequests()
@@ -158,7 +162,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
 
 //                登录表单相关配置
+//                验证码登录
                 .addFilterBefore(imageValidateCodeFilter, UsernamePasswordAuthenticationFilter.class)
+//               短信码登录
+//                .addFilterBefore(smsValidateCodeFilter, UsernamePasswordAuthenticationFilter.class)
                 .formLogin()
                 .loginPage("/login")
                 .successHandler(customAuthenticationSuccessHandler)
