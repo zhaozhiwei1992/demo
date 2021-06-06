@@ -42,5 +42,19 @@ public class ResourceController {
         log.info("resource: user {} has role ROLE_ADMIN", authentication);
         return "sayhello:"+ authentication.getName();
     }
+
+    /**
+     * @data: 2021/6/6-下午11:15
+     * @User: zhaozhiwei
+     * @method: sayHello2
+      * @param authentication :
+     * @return: java.lang.String
+     * @Description: 只让admin_0访问, 其他人要403
+     */
+    @GetMapping("/sayhello2")
+    public String sayHello2(Authentication authentication){
+        log.info("resource: user {} access by RbacServiceImpl.hasPermission", authentication);
+        return "sayhello:"+ authentication.getName();
+    }
 }
 

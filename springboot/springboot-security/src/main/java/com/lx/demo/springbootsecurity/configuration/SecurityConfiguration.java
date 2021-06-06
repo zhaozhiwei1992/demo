@@ -161,11 +161,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                认证配置
                 .authorizeRequests()
                 // 验证码等跳过
-                .antMatchers("/", "/home", "/hello", "/code/image","/logout", "/signOut").permitAll()
+                .antMatchers("/", "/home", "/hello", "/code/image","/login", "/logout", "/signOut").permitAll()
                 .anyRequest().authenticated()
-                .and()
+//                自定义权限认证方式，可与数据库配置结合,设计
+//        其它任意请求都会调用RbacServiceImpl#hasPermission方法来判断用户有没有权限访问
+                .anyRequest().access("@rbacServiceImpl.hasPermission(request, authentication)")
 
 //                登录表单相关配置
+                .and()
 //                验证码登录
                 .addFilterBefore(imageValidateCodeFilter, UsernamePasswordAuthenticationFilter.class)
 //               短信码登录
@@ -194,7 +197,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 //        会话设置
         http.sessionManagement()
-                // 会话超时到hello页面
+                // 会话超时到login页面
                 .invalidSessionUrl("/login")
 //               一个用户只能一个会话
                 .maximumSessions(1)
