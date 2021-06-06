@@ -3,11 +3,9 @@ package com.lx.demo.springbootsecurity.filter;
 import com.lx.demo.springbootsecurity.controller.ValidateCodeController;
 import com.lx.demo.springbootsecurity.domain.ImageCode;
 import com.lx.demo.springbootsecurity.exception.ValidateCodeException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.social.connect.web.HttpSessionSessionStrategy;
 import org.springframework.social.connect.web.SessionStrategy;
-import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.ServletRequestUtils;
@@ -24,7 +22,6 @@ public class ImageValidateCodeFilter extends OncePerRequestFilter {
 
     private AuthenticationFailureHandler authenticationFailureHandler;
 
-    // spring-social-web
     private SessionStrategy sessionStrategy = new HttpSessionSessionStrategy();
 
     @Override

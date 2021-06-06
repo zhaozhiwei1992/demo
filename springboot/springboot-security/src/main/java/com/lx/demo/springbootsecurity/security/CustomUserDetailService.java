@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public class CustomUserDetailService implements UserDetailsService {
 
     /**
-     *
+     * 数据库中的用户信息
      */
     private List<User> users = new ArrayList<>();
 

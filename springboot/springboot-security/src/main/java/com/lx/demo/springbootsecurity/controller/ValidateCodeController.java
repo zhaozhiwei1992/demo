@@ -15,6 +15,14 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Random;
 
+/**
+ * @Title: ValidateCodeController
+ * @Package com/lx/demo/springbootsecurity/controller/ValidateCodeController.java
+ * @Description: 提供前端获取验证码使用
+ * @author zhaozhiwei
+ * @date 2021/6/6 下午6:16
+ * @version V1.0
+ */
 @RestController
 public class ValidateCodeController {
 

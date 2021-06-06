@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
@@ -20,12 +21,15 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.header.writers.frameoptions.AllowFromStrategy;
 import org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.sql.DataSource;
 
 /**
  * 实现安全控制 首先挤成 {@link WebSecurityConfigurerAdapter}
@@ -96,6 +100,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
 
+    @Autowired
+    private UserDetailsService userDetailsService;
+
     /**
      * @param http
      * @throws Exception
@@ -156,9 +163,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .successHandler(customAuthenticationSuccessHandler)
                 .permitAll()
+
+                // remember me相关
                 .and()
+                .rememberMe()
+                .userDetailsService(userDetailsService)
+//                令牌仓库
+                .tokenRepository(persistentTokenRepository())
+//        tokenValiditySeconds token保存时间，单位秒
+                .tokenValiditySeconds(60 * 60 * 60 * 30)
 
 //                退处相关配置
+                .and()
                 .logout()
                 .permitAll();
 
@@ -172,6 +188,38 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                当达到maximumSessions设置的最大会话个数时阻止登录
 //                阻止后默认会一直提示用户密码错误
                 .maxSessionsPreventsLogin(true);
+    }
+
+    @Autowired
+    private DataSource dataSource;
+
+    /**
+     * @data: 2021/6/6-下午9:18
+     * @User: zhaozhiwei
+     * @method: persistentTokenRepository
+     * @return: org.springframework.security.web.authentication.rememberme.PersistentTokenRepository
+     * @Description: remember me
+     * {@see org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl#initDao()}
+     *
+     * 持久化用户登录的信息。
+     * create table persistent_logins (
+     *   username  varchar(64) not null,
+     *   series    varchar(64) primary key,
+     *   token     varchar(64) not null,
+     *   last_used timestamp   not null
+     * );
+     *
+     *  首次response会写入到客户端cookie, 下次请求request会带有remember-me信息
+     * Set-Cookie
+     * 	remember-me=NVdGQzNGJTJCaVRhbU5RJTJCazZJQ3JLaHclM0QlM0Q6TmtGVzIwZmxxeGZpbjJjUiUyRkE1R1V3JTNEJTNE;
+     * 	Max-Age=6480000; Expires=Fri, 20-Aug-2021 13:23:30 GMT; Path=/; HttpOnly
+     */
+    @Bean
+    public PersistentTokenRepository persistentTokenRepository() {
+        JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
+        tokenRepository.setDataSource(dataSource);
+
+        return tokenRepository;
     }
 
     /**
