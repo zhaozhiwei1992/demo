@@ -1,10 +1,16 @@
 package com.lx.demo.springbootsecurity.configuration;
 
+import com.lx.demo.springbootsecurity.filter.ImageValidateCodeFilter;
+import com.lx.demo.springbootsecurity.handler.CustomAuthenticationFailureHandler;
+import com.lx.demo.springbootsecurity.handler.CustomAuthenticationSuccessHandler;
+import com.lx.demo.springbootsecurity.handler.CustomExpiredSessionStrategy;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -13,22 +19,25 @@ import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.header.writers.frameoptions.AllowFromStrategy;
 import org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 
 import javax.servlet.http.HttpServletRequest;
 
 /**
  * 实现安全控制 首先挤成 {@link WebSecurityConfigurerAdapter}
- *
+ * <p>
  * springboot 2.1.3密码必须有加密策略，否则报错,这里是俩种处理方式,
  * 一种采用spring官方demo中的方式，InMemoryUserDetailsManager
  * 另一种初始化一个passwordencoder
- * {@see https://github.com/spring-projects/spring-boot/blob/master/spring-boot-samples/spring-boot-sample-actuator-custom-security/src/main/java/sample/actuator/customsecurity/SecurityConfiguration.java}
+ * {@see https://github.com/spring-projects/spring-boot/blob/master/spring-boot-samples/spring-boot-sample-actuator
+ * -custom-security/src/main/java/sample/actuator/customsecurity/SecurityConfiguration.java}
  * {@see https://docs.spring.io/spring-boot/docs/2.0.8.RELEASE/reference/htmlsingle/#boot-features-security-mvc}
  * org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
- *
+ * <p>
  * 下面的方式是spring默认初始化方式，可以重写
  * org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
  * org.springframework.boot.autoconfigure.security.SecurityProperties.User 这个里面会默认初始化user， 密码为随机数
@@ -36,6 +45,7 @@ import javax.servlet.http.HttpServletRequest;
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
 
 //    @Bean
 //    public InMemoryUserDetailsManager inMemoryUserDetailsManager() {
@@ -51,17 +61,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     /**
      * https://www.harinathk.com/spring/no-passwordencoder-mapped-id-null/
+     *
      * @return
      */
     @SuppressWarnings("deprecation")
     @Bean
-    public static NoOpPasswordEncoder passwordEncoder() {
-        return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
+    public static PasswordEncoder passwordEncoder() {
+        return NoOpPasswordEncoder.getInstance();
     }
 
     /**
      * 配置登录用户
-     * {@see https://github.com/mercyblitz/segmentfault-lessons/blob/master/spring-boot/lesson-15/spring-boot-lesson-15/src/main/java/com/segmentfault/springbootlesson15/security/WebSecurityConfiguration.java}
+     * {@see https://github.com/mercyblitz/segmentfault-lessons/blob/master/spring-boot/lesson-15/spring-boot-lesson
+     * -15/src/main/java/com/segmentfault/springbootlesson15/security/WebSecurityConfiguration.java}
      *
      * @param auth
      * @throws Exception
@@ -76,6 +88,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //            .inMemoryAuthentication()
 //                .withUser("admin").password("11").roles("USER");
 //    }
+
+
+    @Autowired
+    private CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
+
+    @Autowired
+    private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
 
     /**
      * @param http
@@ -120,16 +139,51 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                .failureForwardUrl("/error") // 登录失败后的页面URI
 //                .permitAll()
 //                .and().logout().permitAll();
+        final ImageValidateCodeFilter imageValidateCodeFilter = new ImageValidateCodeFilter();
+        imageValidateCodeFilter.setAuthenticationFailureHandler(customAuthenticationFailureHandler);
+
         http
-            .authorizeRequests()
-                .antMatchers("/", "/home").permitAll()
+//                认证配置
+                .authorizeRequests()
+                // 验证码等跳过
+                .antMatchers("/", "/home", "/hello", "/code/image").permitAll()
                 .anyRequest().authenticated()
                 .and()
+
+//                登录表单相关配置
+                .addFilterBefore(imageValidateCodeFilter, UsernamePasswordAuthenticationFilter.class)
                 .formLogin()
                 .loginPage("/login")
+                .successHandler(customAuthenticationSuccessHandler)
                 .permitAll()
                 .and()
+
+//                退处相关配置
                 .logout()
                 .permitAll();
+
+//        会话设置
+        http.sessionManagement()
+                // 会话超时到hello页面
+                .invalidSessionUrl("/login")
+//               一个用户只能一个会话
+                .maximumSessions(1)
+                .expiredSessionStrategy(new CustomExpiredSessionStrategy())
+//                当达到maximumSessions设置的最大会话个数时阻止登录
+//                阻止后默认会一直提示用户密码错误
+                .maxSessionsPreventsLogin(true);
+    }
+
+    /**
+     * @data: 2021/6/6-下午4:57
+     * @User: zhaozhiwei
+     * @method: configure
+      * @param web :
+     * @return: void
+     * @Description: 忽略静态文件
+     */
+    @Override
+    public void configure(WebSecurity web) {
+        web.ignoring().antMatchers("/static/**");
     }
 }

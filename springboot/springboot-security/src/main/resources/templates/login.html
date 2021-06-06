@@ -18,6 +18,12 @@
         <form th:action="@{/login}" method="post">
             <div><label> User Name : <input type="text" name="username"/> </label></div>
             <div><label> Password: <input type="password" name="password"/> </label></div>
+            <div>
+                <label for="imageCode">图形验证码</label>
+                <input type="input" id="imageCode" name="imageCode" required>
+<!--                请求后端获取图片-->
+                <img src="/code/image"/>
+            </div>
             <div><input type="submit" value="Sign In"/></div>
         </form>
 <!--        <form id="form" method="post" th:action="@{/login}">-->

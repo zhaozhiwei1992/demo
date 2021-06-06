@@ -1,0 +1,16 @@
+#security.basic.enabled = false
+
+#management.security.enabled = false
+logging:
+  level:
+    root: info
+
+spring:
+  thymeleaf:
+    cache: false
+
+# 设置session 超时时间
+server:
+  servlet:
+    session:
+      timeout: 600

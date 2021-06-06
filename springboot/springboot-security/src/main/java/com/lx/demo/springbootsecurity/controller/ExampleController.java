@@ -1,11 +1,20 @@
 package com.lx.demo.springbootsecurity.controller;
 
+import com.lx.demo.springbootsecurity.configuration.SecurityConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.Date;
 import java.util.Map;
 
+/**
+ * @Title: ExampleController
+ * @Package com/lx/demo/springbootsecurity/controller/ExampleController.java
+ * @Description: 不需要登录的都放到这里, 需要在{@link SecurityConfiguration} 放开权限
+ * @author zhaozhiwei
+ * @date 2021/6/5 下午9:38
+ * @version V1.0
+ */
 @Controller
 public class ExampleController {
 
@@ -22,15 +31,14 @@ public class ExampleController {
         return "index";
     }
 
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
+//    @GetMapping("/login")
+//    public String login() {
+//        return "login";
+//    }
 
     @GetMapping("/hello")
     public String hello() {
         return "hello";
     }
-
 
 }

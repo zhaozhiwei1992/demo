@@ -23,20 +23,23 @@ public class ResourceController {
     }
 
     @GetMapping("/sayhello")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String sayhello(Authentication authentication){
-        log.info("resource: user {}", authentication);
+        log.info("resource: user {} has role ROLE_USER", authentication);
         return "sayhello:"+ authentication.getName();
     }
 
     /**
      * @EnableGlobalMethodSecurity(prePostEnabled = true) 需要打开
+     * There was an unexpected error (type=Forbidden, status=403).
+     * Forbidden
      * @param authentication
      * @return
      */
     @GetMapping("/sayhello1")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String sayhello1(Authentication authentication){
-        log.info("resource: user {}", authentication);
+        log.info("resource: user {} has role ROLE_ADMIN", authentication);
         return "sayhello:"+ authentication.getName();
     }
 }

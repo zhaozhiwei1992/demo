@@ -1,12 +1,19 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <title>Hello World!</title>
 </head>
 <body>
 <h1>Hello world!</h1>
 <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+<p>Click <a th:href="@{/rest/hello}">here</a> to /rest/hello</p>
+<p>Click <a th:href="@{/rest/sayhello}">here</a> to /rest/sayhello</p>
+<p>Click <a th:href="@{/rest/sayhello1}">here</a> to /rest/sayhello1 need admin to use</p>
+
+<!-- 通过标签库，前端控制属性显示-->
+<p sec:authorize="hasRole('ROLE_ADMIN')">Click <a th:href="@{/rest/sayhello1}">here</a> to /rest/sayhello1 need admin to show</p>
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Sign Out"/>
 </form>
