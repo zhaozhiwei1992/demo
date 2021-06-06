@@ -5,6 +5,7 @@ import com.lx.demo.springbootsecurity.filter.SmsValidateCodeFilter;
 import com.lx.demo.springbootsecurity.handler.CustomAuthenticationFailureHandler;
 import com.lx.demo.springbootsecurity.handler.CustomAuthenticationSuccessHandler;
 import com.lx.demo.springbootsecurity.handler.CustomExpiredSessionStrategy;
+import com.lx.demo.springbootsecurity.handler.CustomLogoutSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -104,6 +105,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsService userDetailsService;
 
+    @Autowired
+    private CustomLogoutSuccessHandler customLogoutSuccessHandler;
+
     /**
      * @param http
      * @throws Exception
@@ -157,7 +161,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                认证配置
                 .authorizeRequests()
                 // 验证码等跳过
-                .antMatchers("/", "/home", "/hello", "/code/image").permitAll()
+                .antMatchers("/", "/home", "/hello", "/code/image","/logout", "/signOut").permitAll()
                 .anyRequest().authenticated()
                 .and()
 
@@ -183,6 +187,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                退处相关配置
                 .and()
                 .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessHandler(customLogoutSuccessHandler)
+                .deleteCookies("JSESSIONID")
                 .permitAll();
 
 //        会话设置

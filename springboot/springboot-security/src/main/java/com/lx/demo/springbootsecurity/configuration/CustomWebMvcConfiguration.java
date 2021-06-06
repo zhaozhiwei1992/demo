@@ -20,5 +20,6 @@ public class CustomWebMvcConfiguration implements WebMvcConfigurer {
         registry.addViewController("/login").setViewName("login");
         registry.addViewController("/access").setViewName("hello");
         registry.addViewController("/index").setViewName("index");
+        registry.addViewController("/signOut").setViewName("signOut");
     }
 }

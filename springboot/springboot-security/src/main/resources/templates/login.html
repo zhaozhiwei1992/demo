@@ -25,10 +25,18 @@
                 <img src="/code/image"/>
             </div>
 
+<!-- 模拟短信验证登录-->
+<!--            <div>-->
+<!--                <label for="smsCode">短信验证码</label>-->
+<!--                <input type="input" id="smsCode" name="smsCode" >-->
+<!--                <button onclick="getSmsCode()">获取验证码</button>-->
+<!--            </div>-->
+
 <!--            *增加记住我复选框，注意name必须为"remember-me"*-->
             <input type="checkbox" name="remember-me"/>记住我<br>
             <div><input type="submit" value="Sign In"/></div>
         </form>
+
 <!--        <form id="form" method="post" th:action="@{/login}">-->
 <!--            <label>用户名：</label><input type="text" name="name" value=""/>-->
 <!--            <label>密码：</label><input type="text" name="pwd" value=""/>-->
@@ -38,5 +46,14 @@
 <!--        </form>-->
     </div>
 </center>
+<script >
+
+function getSmsCode() {
+    var ajax = new XMLHttpRequest();
+    ajax.open('get','/code/sms');
+    ajax.send();
+}
+
+</script>
 </body>
 </html>
