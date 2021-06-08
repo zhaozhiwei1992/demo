@@ -1,3 +1,7 @@
 logging:
   level:
     org.springframework: debug
+
+# 白名单设置
+auth_whitelist: /,/home,/hello,/code/image,/login,/logout,/signOut,/oauth/authorize
+

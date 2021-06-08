@@ -23,7 +23,7 @@ public class AuthServerConfiguration extends AuthorizationServerConfigurerAdapte
      * .secret可以设置为明文。
      *
      * 需要使用restclient插件, 使用basicauthorization自动生成authorization信息
-     * curl -X POST -H 'Content-Type: application/x-www-form-urlencoded' -H 'Authorization: Basic Y2xpZW50SWQ6Y2xpZW50U2VjcmV0' -i http://localhost:8080/oauth/token --data 'grant_type=authorization_code&code=INMk3D&scopes=all&redirect_uri=http%3A%2F%2Fwww.baidu.com&client_id=clientId&client_secret=clientSecret'
+     * curl -X POST -H 'Content-Type: application/x-www-form-urlencoded' -H 'Authorization: Basic Y2xpZW50SWQ6Y2xpZW50U2VjcmV0' -i http://localhost:8080/authentication/form --data 'username=admin&password=11'
      *返回:
      * {"access_token":"95446e5f-1b5f-46a6-bff6-2404b0648dfd","token_type":"bearer","expires_in":43199,"scope":"all"}
      */

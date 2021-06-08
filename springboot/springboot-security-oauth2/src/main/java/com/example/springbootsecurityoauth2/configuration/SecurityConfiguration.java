@@ -1,6 +1,9 @@
 package com.example.springbootsecurityoauth2.configuration;
 
+import com.example.springbootsecurityoauth2.handler.CustomAuthenticationFailureHandler;
+import com.example.springbootsecurityoauth2.handler.CustomAuthenticationSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -11,6 +14,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.util.List;
 
 /**
  * 实现安全控制 首先挤成 {@link WebSecurityConfigurerAdapter}
@@ -39,6 +44,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
+    @Autowired
+    private CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
+
+    @Autowired
+    private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
+
+    @Value("#{'${auth_whitelist}'.split(',')}")
+    private List<String> authWhitelist;
+
     /**
      * @param http
      * @throws Exception
@@ -46,7 +60,34 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.formLogin().and().csrf().disable();
+//        只打开下边这行可以使用授权方式
+//        http.formLogin().and().csrf().disable();
+
+        http
+//                认证配置
+                .authorizeRequests()
+                // 验证码等跳过
+                .antMatchers(authWhitelist.toArray(new String[0])).permitAll()
+                .anyRequest().authenticated()
+
+//                登录表单相关配置
+                .and()
+                .formLogin()
+                .loginPage("/authentication/form")
+                .successHandler(customAuthenticationSuccessHandler)
+                .permitAll()
+
+                // remember me相关
+                .and()
+                .rememberMe()
+                .userDetailsService(userDetailsService)
+
+//                退处相关配置
+                .and()
+                .logout()
+                .logoutUrl("/logout")
+                .permitAll();
+
 
     }
 
