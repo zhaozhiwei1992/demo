@@ -53,6 +53,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Value("#{'${auth_whitelist}'.split(',')}")
     private List<String> authWhitelist;
 
+    @Autowired
+    private SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
+
     /**
      * @param http
      * @throws Exception
@@ -64,7 +67,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //        http.formLogin().and().csrf().disable();
 
         http
+                .apply(smsCodeAuthenticationSecurityConfig)
+
 //                认证配置
+                .and()
                 .authorizeRequests()
                 // 验证码等跳过
                 .antMatchers(authWhitelist.toArray(new String[0])).permitAll()
@@ -75,19 +81,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/authentication/form")
                 .successHandler(customAuthenticationSuccessHandler)
-                .permitAll()
-
-                // remember me相关
-                .and()
-                .rememberMe()
-                .userDetailsService(userDetailsService)
-
-//                退处相关配置
-                .and()
-                .logout()
-                .logoutUrl("/logout")
+                .failureHandler(customAuthenticationFailureHandler)
                 .permitAll();
-
 
     }
 

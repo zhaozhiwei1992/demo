@@ -35,16 +35,26 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
     @Autowired
     private CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
 
+    @Autowired
+    private SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
+
+
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.formLogin()
+        http
+                .apply(smsCodeAuthenticationSecurityConfig)
+                .and()
+                .formLogin()
                 .loginPage("/authentication/form")
                 .successHandler(customAuthenticationSuccessHandler)
                 .failureHandler(customAuthenticationFailureHandler);
 
         http.authorizeRequests()
                 .antMatchers(authWhitelist.toArray(new String[0])).permitAll()
+//                .antMatchers("/login", "/authentication/form", "/authentication/mobile", "/code/sms").permitAll()
                 .anyRequest().authenticated()
-                .and().csrf().disable();
+                .and()
+                .csrf().disable();
+
     }
 }

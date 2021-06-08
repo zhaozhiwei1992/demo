@@ -2,6 +2,7 @@ logging:
   level:
     org.springframework: debug
 
-# 白名单设置
-auth_whitelist: /,/home,/hello,/code/image,/login,/logout,/signOut,/oauth/authorize
+# 白名单设置, 后边配置一定不要有空格,不然贼鸡巴难排查
+auth_whitelist: /,/home,/hello,/code/image,/login,/logout,/signOut,/oauth/authorize,/authentication/form,/authentication/mobile,/code/sms
+
 
