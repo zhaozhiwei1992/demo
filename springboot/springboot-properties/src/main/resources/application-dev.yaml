@@ -3,3 +3,4 @@ transfer:
   tables:
     table1: xx-dev
     table2: xx22-dev
+auth_whitelist: /,/home,/hello,/code/image,/login,/logout,/signOut

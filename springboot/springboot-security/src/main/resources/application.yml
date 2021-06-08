@@ -20,3 +20,6 @@ server:
   servlet:
     session:
       timeout: 600
+
+# 白名单设置
+auth_whitelist: /,/home,/hello,/code/image,/login,/logout,/signOut

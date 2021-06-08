@@ -7,6 +7,7 @@ import com.lx.demo.springbootsecurity.handler.CustomAuthenticationSuccessHandler
 import com.lx.demo.springbootsecurity.handler.CustomExpiredSessionStrategy;
 import com.lx.demo.springbootsecurity.handler.CustomLogoutSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -32,6 +33,7 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
+import java.util.List;
 
 /**
  * 实现安全控制 首先挤成 {@link WebSecurityConfigurerAdapter}
@@ -108,6 +110,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private CustomLogoutSuccessHandler customLogoutSuccessHandler;
 
+
+    @Value("#{'${auth_whitelist}'.split(',')}")
+    private List<String> authWhitelist;
+
     /**
      * @param http
      * @throws Exception
@@ -161,7 +167,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                认证配置
                 .authorizeRequests()
                 // 验证码等跳过
-                .antMatchers("/", "/home", "/hello", "/code/image","/login", "/logout", "/signOut").permitAll()
+                .antMatchers(authWhitelist.toArray(new String[0])).permitAll()
                 .anyRequest().authenticated()
 //                自定义权限认证方式，可与数据库配置结合,设计
 //        其它任意请求都会调用RbacServiceImpl#hasPermission方法来判断用户有没有权限访问
