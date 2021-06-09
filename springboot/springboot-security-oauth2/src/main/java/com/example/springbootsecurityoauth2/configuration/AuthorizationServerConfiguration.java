@@ -87,7 +87,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints
                 .tokenStore(tokenStore())
-//                .authenticationManager(authenticationManager)
+                .authenticationManager(authenticationManager)
                 .userDetailsService(userDetailsService);
 
         // jwt增强器
