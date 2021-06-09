@@ -2,6 +2,7 @@ package com.example.springbootsecurityoauth2.configuration;
 
 import com.example.springbootsecurityoauth2.filter.SmsCodeAuthenticationFilter;
 import com.example.springbootsecurityoauth2.provider.SmsCodeAuthenticationProvider;
+import com.github.benmanes.caffeine.cache.Cache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
@@ -25,6 +26,9 @@ public class SmsCodeAuthenticationSecurityConfig extends SecurityConfigurerAdapt
     @Autowired
     private UserDetailsService userDetailsService;
 
+    @Autowired
+    Cache<String, Object> caffeineCache;
+
     @Override
     public void configure(HttpSecurity http) throws Exception {
         SmsCodeAuthenticationFilter smsCodeAuthenticationFilter = new SmsCodeAuthenticationFilter("/authentication/mobile");
@@ -34,6 +38,7 @@ public class SmsCodeAuthenticationSecurityConfig extends SecurityConfigurerAdapt
 
         SmsCodeAuthenticationProvider provider = new SmsCodeAuthenticationProvider();
         provider.setUserDetailsService(userDetailsService);
+        provider.setCaffeineCache(caffeineCache);
 
         // 将SmsCodeAuthenticationFilter放到过滤器链的UsernamePasswordAuthenticationFilter的后面
         http

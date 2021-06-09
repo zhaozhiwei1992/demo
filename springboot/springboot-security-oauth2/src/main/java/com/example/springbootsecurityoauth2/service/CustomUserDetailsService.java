@@ -17,6 +17,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//        每次new新的，不管什么样都可以通过，实际都是与存储中拿到的进行比对
         return new User(username, passwordEncoder.encode("11"),
                 AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_ADMIN,ROLE_USER"));
     }
