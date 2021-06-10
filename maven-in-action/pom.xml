@@ -1,0 +1,62 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.example</groupId>
+    <artifactId>maven-in-action</artifactId>
+    <packaging>jar</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <name>maven-in-action</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+        <ifmis.provice>33</ifmis.provice>
+    </properties>
+
+    <dependencies>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.0.2</version>
+                <configuration>
+                    <!--一下分别是排除源文件目录，资源文件， 资源文件目录 根目录是target/classes-->
+                    <excludes>
+                        <exclude>bdg/script/ext/**</exclude>
+                        <exclude>META-INF/resources/bdg/ext/**</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+
+        <resources>
+            <!--        指定资源目录-->
+            <resource>
+                <directory>src/main/sql</directory>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+            <resource>
+                <directory>src/main/webapp</directory>
+                <targetPath>META-INF/resources</targetPath>
+            </resource>
+
+
+            <!--        扩展脚本目录迁移-->
+            <resource>
+                <directory>src/main/sql/bdg/script/ext/${ifmis.provice}</directory>
+                <targetPath>${project.build.directory}/classes/bdg/script/</targetPath>
+            </resource>
+
+            <!--        js扩展迁移-->
+            <resource>
+                <directory>src/main/webapp/bdg/ext/${ifmis.provice}</directory>
+                <targetPath>${project.build.directory}/classes/META-INF/resources/bdg/</targetPath>
+            </resource>
+
+        </resources>
+    </build>
+</project>
