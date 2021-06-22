@@ -16,10 +16,10 @@
 <!--    日志格式 -->
     <property name="log.pattern" value="%-12(%d{yyyy-MM-dd HH:mm:ss.SSS}) |-%-5level [%thread] %c [%L] -| %msg%n" />
 
-    <!-- 控制台设置 -->
+    <!-- 控制台设置 自定义日志格式-->
     <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>${log.pattern}</pattern>
+        <encoder class="com.lx.demo.springbootlog.logback.ThreadUserPatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %bususerinfo - %msg%n</pattern>
         </encoder>
     </appender>
 
@@ -56,7 +56,8 @@
             <!-- 文件最大保存历史数量 -->
             <MaxHistory>${log.maxHistory}</MaxHistory>
         </rollingPolicy>
-        <encoder>
+<!--        默认class可以省略-->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>${log.pattern}</pattern>
         </encoder>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
@@ -81,6 +82,7 @@
             <pattern>${log.pattern}</pattern>
         </encoder>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
+<!--            只保留error级别-->
             <level>ERROR</level>
             <onMatch>ACCEPT</onMatch>
             <onMismatch>DENY</onMismatch>

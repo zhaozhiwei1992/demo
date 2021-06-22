@@ -35,6 +35,10 @@
             <!--        指定资源目录-->
             <resource>
                 <directory>src/main/sql</directory>
+                <excludes>
+<!--                    编译目录不要下属目录-->
+                    <exclude>bdg/script/ext/**</exclude>
+                </excludes>
             </resource>
             <resource>
                 <directory>src/main/resources</directory>

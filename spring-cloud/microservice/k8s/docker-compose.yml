@@ -1,0 +1,111 @@
+version: "3"
+services:
+  # 默认情况下，其他服务可以使用服务名称连接到该服务。因此，对于peer2的节点，它需要连接http://${REGISTRY_SERVER1:127.0.0.1}:${REGISTRY_SERVER1_PORT:8761}/eureka/，因此需要配置该服务的名称是peer1。
+  # 注册中心 peer1 peer2
+  peer1:
+    image: microservice-cloud/eureka-server:0.0.1-SNAPSHOT
+    hostname: eureka_master
+    networks:
+      - eureka-net
+    env_file:
+      - .env
+    ports:
+      - "8761:8761"
+    # restart: always
+    environment:
+      - spring.profiles.active=peer1
+  peer2:
+    image: microservice-cloud/eureka-server:0.0.1-SNAPSHOT
+    hostname: eureka_backup
+    networks:
+      - eureka-net
+    env_file:
+      - .env
+    ports:
+      - "8762:8762"
+    # restart: always
+    environment:
+      - spring.profiles.active=peer2
+# config-server
+  config-server:
+    image: microservice-cloud/config-server:0.0.1-SNAPSHOT
+    hostname: config
+    networks:
+      - eureka-net
+    env_file:
+      - .env
+    ports:
+      - "7070-7075"
+    # restart: always
+    depends_on:
+      - peer1
+      - peer2
+    volumes:
+     - "/home/lx7ly/workspace/demo/spring-cloud/microservice/config-server/src/main/resources/configs:/home/configs"
+    environment:
+      - spring.profiles.active=native
+# file-upload
+  file-upload:
+    image: microservice-cloud/file-upload:0.0.1-SNAPSHOT
+    hostname: file-upload
+    networks:
+      - eureka-net
+    env_file:
+      - .env
+    ports:
+      - "9997-9999"
+    # restart: always
+    depends_on:
+      - peer1
+      - peer2
+# zuul 网管, 系统入口
+  zuul-proxy:
+    image: microservice-cloud/zuul-proxy:0.0.1-SNAPSHOT
+    hostname: zuul-proxy
+    networks:
+      - eureka-net
+    env_file:
+      - .env
+    ports:
+      - "10086:10086"
+    # restart: always
+    depends_on:
+      - peer1
+      - peer2
+# dashboard 微服务运行指标看板
+  hystrix-dashboard:
+    image: microservice-cloud/hystrix-dashboard:0.0.1-SNAPSHOT
+    hostname: hystrix-dashboard
+    networks:
+      - eureka-net
+    ports:
+      - "9000:9000"
+    # restart: always
+# turbine 聚合多个微服务运行指标
+  netflix-turbine:
+    image: microservice-cloud/netflix-turbine:0.0.1-SNAPSHOT
+    hostname: netflix-turbine
+    networks:
+      - eureka-net
+    env_file:
+      - .env
+    ports:
+      - "9001:9001"
+    # restart: always
+# zipkin-server 链路跟踪
+  zipkin-server:
+    image: microservice-cloud/zipkin-server:0.0.1-SNAPSHOT
+    networks:
+      - eureka-net
+    env_file:
+      - .env
+    ports:
+      - "9411:9411"
+    # restart: always
+    depends_on:
+      - peer1
+      - peer2
+networks:
+  eureka-net:
+    driver: bridge
+#docker network create eureka-net

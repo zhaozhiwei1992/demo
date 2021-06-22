@@ -1,0 +1,108 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yml
+    kompose.version: 1.22.0 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: file-upload
+  name: file-upload
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: file-upload
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose.yml
+        kompose.version: 1.22.0 (HEAD)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/eureka-net: "true"
+        io.kompose.service: file-upload
+    spec:
+      containers:
+        - env:
+            - name: CONFIGSPATH
+              valueFrom:
+                configMapKeyRef:
+                  key: CONFIGSPATH
+                  name: env
+            - name: CONFIG_SERVER_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  key: CONFIG_SERVER_PASSWORD
+                  name: env
+            - name: CONFIG_SERVER_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  key: CONFIG_SERVER_USERNAME
+                  name: env
+            - name: RABBITMQ_SERVER
+              valueFrom:
+                configMapKeyRef:
+                  key: RABBITMQ_SERVER
+                  name: env
+            - name: RABBITMQ_SERVER_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  key: RABBITMQ_SERVER_PASSWORD
+                  name: env
+            - name: RABBITMQ_SERVER_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: RABBITMQ_SERVER_PORT
+                  name: env
+            - name: RABBITMQ_SERVER_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  key: RABBITMQ_SERVER_USERNAME
+                  name: env
+            - name: REDIS_SERVER
+              valueFrom:
+                configMapKeyRef:
+                  key: REDIS_SERVER
+                  name: env
+            - name: REGISTRY_SERVER1
+              valueFrom:
+                configMapKeyRef:
+                  key: REGISTRY_SERVER1
+                  name: env
+            - name: REGISTRY_SERVER1_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: REGISTRY_SERVER1_PORT
+                  name: env
+            - name: REGISTRY_SERVER2
+              valueFrom:
+                configMapKeyRef:
+                  key: REGISTRY_SERVER2
+                  name: env
+            - name: REGISTRY_SERVER2_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: REGISTRY_SERVER2_PORT
+                  name: env
+            - name: REGISTRY_SERVER_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  key: REGISTRY_SERVER_PASSWORD
+                  name: env
+            - name: REGISTRY_SERVER_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  key: REGISTRY_SERVER_USERNAME
+                  name: env
+          image: microservice-cloud/file-upload:0.0.1-SNAPSHOT
+          name: file-upload
+          ports:
+            - containerPort: 9997
+            - containerPort: 9998
+            - containerPort: 9999
+          resources: {}
+      hostname: file-upload
+      restartPolicy: Always
+status: {}

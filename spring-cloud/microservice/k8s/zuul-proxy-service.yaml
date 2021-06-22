@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yml
+    kompose.version: 1.22.0 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: zuul-proxy
+  name: zuul-proxy
+spec:
+  ports:
+    - name: "10086"
+      port: 10086
+      targetPort: 10086
+  selector:
+    io.kompose.service: zuul-proxy
+status:
+  loadBalancer: {}
