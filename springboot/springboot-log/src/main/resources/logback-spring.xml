@@ -11,8 +11,10 @@
     <property name="log.lever" value="debug" />
 <!--    日志保留天数-->
     <property name="log.maxHistory" value="15" />
-<!--    日志文件路径, 没有会自己创建-->
-    <property name="log.filePath" value="${catalina.base}/logs/webapp"/>
+<!--    application.properties中定义的变量，在logback的xml文件中无法直接读取，必须要增加springProperty属性中转一下，增加如下两行-->
+    <springProperty scope="context" name="catalina.base" source="server.tomcat.basedir"/>
+    <!--    日志文件路径, 没有会自己创建-->
+    <property name="log.filePath" value="${catalina.base}/logs"/>
 <!--    日志格式 -->
     <property name="log.pattern" value="%-12(%d{yyyy-MM-dd HH:mm:ss.SSS}) |-%-5level [%thread] %c [%L] -| %msg%n" />
 
