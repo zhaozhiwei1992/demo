@@ -1,0 +1,33 @@
+#NACOS_NAMESPACE: f4d92ae7-ace2-4df7-a0a9-26b296293d1d
+spring:
+  application:
+    name: springcloud-nacos
+  cloud:
+    nacos:
+      config:
+#         dataid 默认后缀
+        file-extension: yml
+        group: DEFAULT_GROUP
+        #server-addr: 192.168.7.6:8848
+        server-addr: ${CONFIG_SERVER:192.168.7.6}:${CONFIG_SERVER_PORT:8848}
+        enabled: true
+        #使用这个，需要把group设置为DEFAULT_GROUP, 默认的${prefix}-${profile}-${ext}会加载到最后，所以优先级更高
+        shared-dataids: common.yml,environment.yml,fasp2datasource.yml
+        #refreshable-dataids: common.yml,environment.yml,common-admin.yml,common-redis.yml,fasp2datasource.yml,ifmis-framework-zuul.yml
+#        public是一个公共空间，命名空间id是空串。
+#        这块需要传入命名空间id。 请稍微注意一下~
+#        https://github:
+#          com/alibaba/nacos/issues/297#issuecomment-448907208:
+        namespace: ${NACOS_NAMESPACE:}
+        #用这种比较好，推荐用法，数字大的优先级较高
+#        ext-config[0]:
+#          data-id: common.yml
+#          group: ${NACOS_GROUP:DEFAULT_GROUP}
+#        ext-config[1]:
+#          data-id: environment.yml
+#          group: ${NACOS_GROUP:DEFAULT_GROUP}
+#        ext-config[2]:
+#          data-id: fasp2datasource.yml
+#          group: ${NACOS_GROUP:DEFAULT_GROUP}
+      discovery:
+        server-addr: ${CONFIG_SERVER:192.168.7.6}:${CONFIG_SERVER_PORT:8848}
