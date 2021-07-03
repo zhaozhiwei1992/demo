@@ -55,6 +55,8 @@ public class LoadStartEnvironment implements SpringApplicationRunListener {
         envMap.put("tomcat.util.http.parser.HttpParser.requestTargetAllow","|{}");
         try {
 //            if (StringUtils.isEmpty(SystemEnvironment.getProperty("CONFIG_SERVER"))) {
+            final String[] activeProfiles = environment.getActiveProfiles();
+            logger.info("当前加载的profile配置 {}", activeProfiles);
                 Properties envProperties = new Properties();
                 String[] files = new String[]{".env"};
                 for (String filename : files) {

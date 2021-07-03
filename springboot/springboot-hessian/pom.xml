@@ -6,7 +6,7 @@
     <modules>
         <module>springboot-hessian-client</module>
 		<module>springboot-hessian-server</module>
-		<module>springboot-hessian-server2</module>
+<!--		<module>springboot-hessian-server2</module>-->
 	</modules>
     <parent>
 		<groupId>org.springframework.boot</groupId>
