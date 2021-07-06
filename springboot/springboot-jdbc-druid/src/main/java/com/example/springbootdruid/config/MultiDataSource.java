@@ -1,4 +1,4 @@
-package com.lx.demo.datasourcerouting;
+package com.example.springbootdruid.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +11,13 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- *
+ * @Title: MultiDataSource
+ * @Package com/example/springbootdruid/config/MultiDataSource.java
+ * @Description: 利用threadlocal和spring jdbc能力，动态切换数据源
+ * {@see com.lx.demo.datasourcerouting.MasterSlaverDataSource}
+ * @author zhaozhiwei
+ * @date 2021/7/5 下午9:43
+ * @version V1.0
  */
 public class MultiDataSource extends AbstractRoutingDataSource {
 
@@ -23,9 +29,9 @@ public class MultiDataSource extends AbstractRoutingDataSource {
      */
     private final static ThreadLocal<String> contextHolder = new ThreadLocal<>();
 
-    /*
+    /**
     * 所有数据源的key集合
-     */
+    */
     private final static  Set<Object> keySet = new LinkedHashSet<>();
 
     public static void setKey(String key) {
@@ -53,8 +59,7 @@ public class MultiDataSource extends AbstractRoutingDataSource {
     }
 
     public static void addDatasource(DataSource dataSource, String key,  DataSource parse) {
-        if(dataSource!=null && dataSource instanceof AbstractRoutingDataSource){
-            //((AbstractRoutingDataSource)dataSource)
+        if(dataSource instanceof AbstractRoutingDataSource){
             try {
                 Field sourceMapField = AbstractRoutingDataSource.class.getDeclaredField("resolvedDataSources");
                 sourceMapField.setAccessible(true);

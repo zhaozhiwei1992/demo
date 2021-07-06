@@ -12,7 +12,12 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
- *
+ * @Title: UserRepository
+ * @Package com/example/springbootdruid/repository/UserRepository.java
+ * @Description: 使用jdbcTemplate持久化数据
+ * @author zhaozhiwei
+ * @date 2021/7/5 下午9:08
+ * @version V1.0
  */
 @Repository
 public class UserRepository {
