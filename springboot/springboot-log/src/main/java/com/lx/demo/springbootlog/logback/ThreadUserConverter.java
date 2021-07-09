@@ -8,7 +8,9 @@ import ch.qos.logback.classic.spi.ILoggingEvent;
  * @version V1.0
  * @Title: ThreadUserConverter
  * @Package com/lx/demo/springbootlog/logback/ThreadUserConverter.java
- * @Description: 自定义输出信息, 如果可以获取全局信息可以写入
+ * @Description:
+ * 自定义输出信息, 如果可以获取全局信息可以写入
+ * 可以通过thread local获取线程下信息
  * @date 2021/6/22 上午11:42
  */
 public class ThreadUserConverter extends ClassicConverter {
