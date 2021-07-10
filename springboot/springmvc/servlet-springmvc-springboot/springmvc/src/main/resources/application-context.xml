@@ -22,6 +22,45 @@
 
     <!-- proxy-target-class默认"false",更改为"ture"使用CGLib动态代理 	-->
 <!--    <aop:aspectj-autoproxy proxy-target-class="true"/>-->
+<!--    测试jdk 动态代理和cglib是否可以在容器中同时存在-->
+    <!--4.AOP的XML配置方式,false是使用默认的java代理，true是使用CGLIB代理-->
+    <!--实例化那个类，在切面引用的时候好用-->
+    <bean id="logger" class="com.lx.demo.aop.Logger"/>
+    <bean id="logger111" class="com.lx.demo.aop.Logger"/>
 
+<!--    <aop:config proxy-target-class="true">-->
+<!--        &lt;!&ndash;定义切点，可以把切点放在外面作为公共的，注意pointcut aspect的顺序，对应注解版的@PointCut(value = "execution(* com.hs..service.*Service.*(..))")&ndash;&gt;-->
+<!--        <aop:pointcut id="controllercg" expression="execution(* com.lx.demo..controller.IndexController.*(..))"/>-->
+
+<!--        &lt;!&ndash;定义切面，对应注解版的@Aspect,order,定义切面的执行顺序，不写默认为从上到下执行&ndash;&gt;-->
+<!--        <aop:aspect ref="logger111" order="2">-->
+<!--            <aop:before method="before1" pointcut-ref="controllercg"/>-->
+<!--        </aop:aspect>-->
+<!--    </aop:config>-->
+
+<!--    <aop:config>-->
+<!--&lt;!&ndash;        PlaceHolderController走logger.before, 并且代理理论应为jdk代理-->
+<!--            实际中如果这么配置，并且PlaceHolderController实现接口，该类的无法初始化-->
+<!--&ndash;&gt;-->
+<!--        <aop:pointcut id="controller1" expression="execution(* com.lx.demo..controller.PlaceHolderController.*(..))"/>-->
+<!--        &lt;!&ndash;定义切面，对应注解版的@Aspect&ndash;&gt;-->
+<!--        <aop:aspect ref="logger" order="1">-->
+<!--&lt;!&ndash;            访问到controller1前, 执行logger.before2&ndash;&gt;-->
+<!--            <aop:before method="before2" pointcut-ref="controller1"/>-->
+<!--        </aop:aspect>-->
+<!--    </aop:config>-->
+
+    <bean id="logger222" class="com.lx.demo.aop.Logger"/>
+    <aop:config>
+        <!--  PlaceHolderService走logger.before, 并且应为jdk代理
+        但是上述aop如果任何一个开启proxy-target-class=true, 那么这里也会变成cglib代理
+        -->
+        <aop:pointcut id="service1" expression="execution(* com.lx.demo.service.PlaceHolderService.*(..))"/>
+        <!--定义切面，对应注解版的@Aspect-->
+        <aop:aspect ref="logger222" order="1">
+            <!--            访问到controller1前, 执行logger.before2-->
+            <aop:after method="before2" pointcut-ref="service1"/>
+        </aop:aspect>
+    </aop:config>
 
 </beans>
