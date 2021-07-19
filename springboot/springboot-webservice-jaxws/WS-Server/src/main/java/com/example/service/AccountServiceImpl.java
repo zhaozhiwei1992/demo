@@ -18,6 +18,16 @@ import java.util.List;
  * 在此类的@WebService注解里面添加了一个属性endpointInterface，表示的是服务接口全路径,
  * 指定为SEI（Service EndPoint Interface）服务端点接口，此处是AccountService所在的全路径。
  * https://docs.spring.io/spring-framework/docs/current/reference/html/integration.html#remoting-web-services
+ *
+ * servicename 作为url一部分，所以可以写export/xx/xx等
+ * {@see org.springframework.remoting.jaxws.SimpleJaxWsServiceExporter#calculateEndpointAddress(javax.xml.ws.Endpoint, java.lang.String)}
+ * 	protected String calculateEndpointAddress(Endpoint endpoint, String serviceName) {
+ * 		String fullAddress = this.baseAddress + serviceName;
+ * 		if (endpoint.getClass().getName().startsWith("weblogic.")) {
+ * 			// Workaround for WebLogic 10.3
+ * 			fullAddress = fullAddress + "/";
+ *                }
+ * 		return fullAddress;    * 	}
  * @author zhaozhiwei
  * @date 2021/6/29 下午9:45
  * @version V1.0

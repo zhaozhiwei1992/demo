@@ -1,5 +1,6 @@
 package com.example;
 
+import com.example.listener.PublishWsByEndpoint;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
@@ -14,6 +15,11 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(basePackages="com.example")
 public class App {
     public static void main( String[] args ) {
-        SpringApplication.run(App.class, args);
+
+        final SpringApplication springApplication = new SpringApplication(App.class);
+        // 通过@Component初始化更方便
+//        springApplication.addListeners(new PublishWsByEndpoint());
+        springApplication.run(args);
+//        SpringApplication.run(App.class, args);
     }
 }
