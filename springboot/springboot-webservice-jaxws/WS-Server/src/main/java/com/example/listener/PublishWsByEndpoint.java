@@ -13,7 +13,7 @@ import javax.xml.ws.Endpoint;
 /**
  * @Title: PublishWsByEndpoint
  * @Package com/example/listener/PublishWsByEndpoint.java
- * @Description:
+ * @Description: 手动创建ws的一个入口, 建议直接使用SimpleJaxWsServiceExporter即可，不需要这种实现方式，除非url很特殊
  * 也可以通过下述方式在启动类注册
 springApplication.addListeners(new PublishWsByEndpoint());
 
