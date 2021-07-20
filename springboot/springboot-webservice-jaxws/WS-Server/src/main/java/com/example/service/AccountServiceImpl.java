@@ -34,6 +34,8 @@ import java.util.List;
  */
 @Service
 @WebService(endpointInterface="com.example.service.AccountService",serviceName="AccountService",targetNamespace="http://soa.example.com/service",name="AccountServiceSoap",portName="AccountServiceSoap")
+// 如果只有name, 则在解析时随便写地址都可以访问
+//@WebService(name="AccountService")
 public class AccountServiceImpl implements AccountService {
 
     private static final Logger logger = LoggerFactory.getLogger(AccountServiceImpl.class);
