@@ -3,5 +3,6 @@ remote:
     remoteinfo:
       enabled: false
     zzding:
+      access-key: ceshiaccesskey
       enabled: true
 

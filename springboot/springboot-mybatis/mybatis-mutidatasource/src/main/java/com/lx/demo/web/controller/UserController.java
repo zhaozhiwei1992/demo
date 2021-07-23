@@ -58,6 +58,8 @@ public class UserController {
 
     /**
      * 增加动态主从数据源注解，　配置后自动切换数据源
+     * {@see org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource#determineTargetDataSource()}
+     * {@see com.lx.demo.datasourcerouting.MasterSlaverDataSource#determineCurrentLookupKey()}
      * @param user
      */
     @DS("slaver")

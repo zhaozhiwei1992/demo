@@ -1,0 +1,664 @@
+2021-07-09 11:29:04 INFO main org.springframework.web.context.ContextLoader 304 - Root WebApplicationContext: initialization started
+2021-07-09 11:29:04 INFO main org.springframework.web.context.support.XmlWebApplicationContext 582 - Refreshing Root WebApplicationContext: startup date [Fri Jul 09 11:29:04 CST 2021]; root of context hierarchy
+2021-07-09 11:29:05 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-context.xml]
+2021-07-09 11:29:05 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-common.xml]
+2021-07-09 11:29:05 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-web.xml]
+2021-07-09 11:29:05 INFO main org.springframework.beans.factory.support.DefaultListableBeanFactory 828 - Overriding bean definition for bean 'restApiRequestInfo' with a different definition: replacing [Generic bean: class [com.lx.demo.aop.RestApiRequestInfo]; scope=; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null; defined in class path resource [application-context.xml]] with [Root bean: class [org.springframework.aop.aspectj.AspectJExpressionPointcut]; scope=prototype; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null]
+2021-07-09 11:29:05 INFO main org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor 155 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2021-07-09 11:29:05 WARN main org.springframework.web.context.support.XmlWebApplicationContext 550 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'indexController' defined in file [/home/zhaozhiwei/workspace/demo/springboot/springmvc/servlet-springmvc-springboot/springmvc/target/classes/com/lx/demo/controller/IndexController.class]: BeanPostProcessor before instantiation of bean failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.aop.aspectj.AspectJPointcutAdvisor#0': Bean instantiation via constructor failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.springframework.aop.aspectj.AspectJPointcutAdvisor]: Constructor threw exception; nested exception is java.lang.IllegalArgumentException: error at ::0 formal unbound in pointcut 
+2021-07-09 11:29:05 ERROR main org.springframework.web.context.ContextLoader 350 - Context initialization failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'indexController' defined in file [/home/zhaozhiwei/workspace/demo/springboot/springmvc/servlet-springmvc-springboot/springmvc/target/classes/com/lx/demo/controller/IndexController.class]: BeanPostProcessor before instantiation of bean failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.aop.aspectj.AspectJPointcutAdvisor#0': Bean instantiation via constructor failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.springframework.aop.aspectj.AspectJPointcutAdvisor]: Constructor threw exception; nested exception is java.lang.IllegalArgumentException: error at ::0 formal unbound in pointcut 
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:479)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:761)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:866)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:542)
+	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:443)
+	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:325)
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:107)
+	at org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized(ContextHandler.java:799)
+	at org.eclipse.jetty.servlet.ServletContextHandler.callContextInitialized(ServletContextHandler.java:499)
+	at org.eclipse.jetty.server.handler.ContextHandler.startContext(ContextHandler.java:790)
+	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:337)
+	at org.eclipse.jetty.webapp.WebAppContext.startWebapp(WebAppContext.java:1343)
+	at org.eclipse.jetty.maven.plugin.JettyWebAppContext.startWebapp(JettyWebAppContext.java:296)
+	at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1336)
+	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:742)
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:499)
+	at org.eclipse.jetty.maven.plugin.JettyWebAppContext.doStart(JettyWebAppContext.java:365)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:132)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:114)
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:61)
+	at org.eclipse.jetty.server.handler.ContextHandlerCollection.doStart(ContextHandlerCollection.java:163)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:132)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:114)
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:61)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:132)
+	at org.eclipse.jetty.server.Server.start(Server.java:399)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:114)
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:61)
+	at org.eclipse.jetty.server.Server.doStart(Server.java:366)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
+	at org.eclipse.jetty.maven.plugin.AbstractJettyMojo.startJetty(AbstractJettyMojo.java:516)
+	at org.eclipse.jetty.maven.plugin.AbstractJettyMojo.execute(AbstractJettyMojo.java:359)
+	at org.eclipse.jetty.maven.plugin.JettyRunMojo.execute(JettyRunMojo.java:167)
+	at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:137)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:210)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:156)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:148)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:117)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:81)
+	at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build(SingleThreadedBuilder.java:56)
+	at org.apache.maven.lifecycle.internal.LifecycleStarter.execute(LifecycleStarter.java:128)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:305)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:192)
+	at org.apache.maven.DefaultMaven.execute(DefaultMaven.java:105)
+	at org.apache.maven.cli.MavenCli.execute(MavenCli.java:957)
+	at org.apache.maven.cli.MavenCli.doMain(MavenCli.java:289)
+	at org.apache.maven.cli.MavenCli.main(MavenCli.java:193)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced(Launcher.java:282)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launch(Launcher.java:225)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode(Launcher.java:406)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.main(Launcher.java:347)
+	at org.codehaus.classworlds.Launcher.main(Launcher.java:47)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.aop.aspectj.AspectJPointcutAdvisor#0': Bean instantiation via constructor failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.springframework.aop.aspectj.AspectJPointcutAdvisor]: Constructor threw exception; nested exception is java.lang.IllegalArgumentException: error at ::0 formal unbound in pointcut 
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:279)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1193)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1095)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:513)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:483)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.aop.framework.autoproxy.BeanFactoryAdvisorRetrievalHelper.findAdvisorBeans(BeanFactoryAdvisorRetrievalHelper.java:92)
+	at org.springframework.aop.framework.autoproxy.AbstractAdvisorAutoProxyCreator.findCandidateAdvisors(AbstractAdvisorAutoProxyCreator.java:102)
+	at org.springframework.aop.aspectj.autoproxy.AspectJAwareAdvisorAutoProxyCreator.shouldSkip(AspectJAwareAdvisorAutoProxyCreator.java:103)
+	at org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator.postProcessBeforeInstantiation(AbstractAutoProxyCreator.java:248)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyBeanPostProcessorsBeforeInstantiation(AbstractAutowireCapableBeanFactory.java:1037)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.resolveBeforeInstantiation(AbstractAutowireCapableBeanFactory.java:1011)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:473)
+	... 62 more
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.springframework.aop.aspectj.AspectJPointcutAdvisor]: Constructor threw exception; nested exception is java.lang.IllegalArgumentException: error at ::0 formal unbound in pointcut 
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:154)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:122)
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:271)
+	... 77 more
+Caused by: java.lang.IllegalArgumentException: error at ::0 formal unbound in pointcut 
+	at org.aspectj.weaver.tools.PointcutParser.parsePointcutExpression(PointcutParser.java:319)
+	at org.springframework.aop.aspectj.AspectJExpressionPointcut.buildPointcutExpression(AspectJExpressionPointcut.java:217)
+	at org.springframework.aop.aspectj.AspectJExpressionPointcut.checkReadyToMatch(AspectJExpressionPointcut.java:190)
+	at org.springframework.aop.aspectj.AspectJExpressionPointcut.getMethodMatcher(AspectJExpressionPointcut.java:175)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.buildSafePointcut(AbstractAspectJAdvice.java:196)
+	at org.springframework.aop.aspectj.AspectJPointcutAdvisor.<init>(AspectJPointcutAdvisor.java:51)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:142)
+	... 79 more
+2021-07-09 11:30:29 INFO main org.springframework.web.context.ContextLoader 304 - Root WebApplicationContext: initialization started
+2021-07-09 11:30:29 INFO main org.springframework.web.context.support.XmlWebApplicationContext 582 - Refreshing Root WebApplicationContext: startup date [Fri Jul 09 11:30:29 CST 2021]; root of context hierarchy
+2021-07-09 11:30:29 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-context.xml]
+2021-07-09 11:30:29 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-common.xml]
+2021-07-09 11:30:30 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-web.xml]
+2021-07-09 11:30:30 INFO main org.springframework.beans.factory.support.DefaultListableBeanFactory 828 - Overriding bean definition for bean 'restApiRequestInfo' with a different definition: replacing [Generic bean: class [com.lx.demo.aop.RestApiRequestInfo]; scope=; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null; defined in class path resource [application-context.xml]] with [Root bean: class [org.springframework.aop.aspectj.AspectJExpressionPointcut]; scope=prototype; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null]
+2021-07-09 11:30:30 INFO main org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor 155 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2021-07-09 11:30:30 WARN main org.springframework.web.context.support.XmlWebApplicationContext 550 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'indexController' defined in file [/home/zhaozhiwei/workspace/demo/springboot/springmvc/servlet-springmvc-springboot/springmvc/target/classes/com/lx/demo/controller/IndexController.class]: BeanPostProcessor before instantiation of bean failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.aop.aspectj.AspectJPointcutAdvisor#0': Bean instantiation via constructor failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.springframework.aop.aspectj.AspectJPointcutAdvisor]: Constructor threw exception; nested exception is java.lang.IllegalArgumentException: error at ::0 formal unbound in pointcut 
+2021-07-09 11:30:30 ERROR main org.springframework.web.context.ContextLoader 350 - Context initialization failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'indexController' defined in file [/home/zhaozhiwei/workspace/demo/springboot/springmvc/servlet-springmvc-springboot/springmvc/target/classes/com/lx/demo/controller/IndexController.class]: BeanPostProcessor before instantiation of bean failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.aop.aspectj.AspectJPointcutAdvisor#0': Bean instantiation via constructor failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.springframework.aop.aspectj.AspectJPointcutAdvisor]: Constructor threw exception; nested exception is java.lang.IllegalArgumentException: error at ::0 formal unbound in pointcut 
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:479)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:761)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:866)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:542)
+	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:443)
+	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:325)
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:107)
+	at org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized(ContextHandler.java:799)
+	at org.eclipse.jetty.servlet.ServletContextHandler.callContextInitialized(ServletContextHandler.java:499)
+	at org.eclipse.jetty.server.handler.ContextHandler.startContext(ContextHandler.java:790)
+	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:337)
+	at org.eclipse.jetty.webapp.WebAppContext.startWebapp(WebAppContext.java:1343)
+	at org.eclipse.jetty.maven.plugin.JettyWebAppContext.startWebapp(JettyWebAppContext.java:296)
+	at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1336)
+	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:742)
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:499)
+	at org.eclipse.jetty.maven.plugin.JettyWebAppContext.doStart(JettyWebAppContext.java:365)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:132)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:114)
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:61)
+	at org.eclipse.jetty.server.handler.ContextHandlerCollection.doStart(ContextHandlerCollection.java:163)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:132)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:114)
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:61)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:132)
+	at org.eclipse.jetty.server.Server.start(Server.java:399)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:114)
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:61)
+	at org.eclipse.jetty.server.Server.doStart(Server.java:366)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
+	at org.eclipse.jetty.maven.plugin.AbstractJettyMojo.startJetty(AbstractJettyMojo.java:516)
+	at org.eclipse.jetty.maven.plugin.AbstractJettyMojo.execute(AbstractJettyMojo.java:359)
+	at org.eclipse.jetty.maven.plugin.JettyRunMojo.execute(JettyRunMojo.java:167)
+	at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:137)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:210)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:156)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:148)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:117)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:81)
+	at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build(SingleThreadedBuilder.java:56)
+	at org.apache.maven.lifecycle.internal.LifecycleStarter.execute(LifecycleStarter.java:128)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:305)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:192)
+	at org.apache.maven.DefaultMaven.execute(DefaultMaven.java:105)
+	at org.apache.maven.cli.MavenCli.execute(MavenCli.java:957)
+	at org.apache.maven.cli.MavenCli.doMain(MavenCli.java:289)
+	at org.apache.maven.cli.MavenCli.main(MavenCli.java:193)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced(Launcher.java:282)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launch(Launcher.java:225)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode(Launcher.java:406)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.main(Launcher.java:347)
+	at org.codehaus.classworlds.Launcher.main(Launcher.java:47)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.aop.aspectj.AspectJPointcutAdvisor#0': Bean instantiation via constructor failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.springframework.aop.aspectj.AspectJPointcutAdvisor]: Constructor threw exception; nested exception is java.lang.IllegalArgumentException: error at ::0 formal unbound in pointcut 
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:279)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1193)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1095)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:513)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:483)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.aop.framework.autoproxy.BeanFactoryAdvisorRetrievalHelper.findAdvisorBeans(BeanFactoryAdvisorRetrievalHelper.java:92)
+	at org.springframework.aop.framework.autoproxy.AbstractAdvisorAutoProxyCreator.findCandidateAdvisors(AbstractAdvisorAutoProxyCreator.java:102)
+	at org.springframework.aop.aspectj.autoproxy.AspectJAwareAdvisorAutoProxyCreator.shouldSkip(AspectJAwareAdvisorAutoProxyCreator.java:103)
+	at org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator.postProcessBeforeInstantiation(AbstractAutoProxyCreator.java:248)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyBeanPostProcessorsBeforeInstantiation(AbstractAutowireCapableBeanFactory.java:1037)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.resolveBeforeInstantiation(AbstractAutowireCapableBeanFactory.java:1011)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:473)
+	... 62 more
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.springframework.aop.aspectj.AspectJPointcutAdvisor]: Constructor threw exception; nested exception is java.lang.IllegalArgumentException: error at ::0 formal unbound in pointcut 
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:154)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:122)
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:271)
+	... 77 more
+Caused by: java.lang.IllegalArgumentException: error at ::0 formal unbound in pointcut 
+	at org.aspectj.weaver.tools.PointcutParser.parsePointcutExpression(PointcutParser.java:319)
+	at org.springframework.aop.aspectj.AspectJExpressionPointcut.buildPointcutExpression(AspectJExpressionPointcut.java:217)
+	at org.springframework.aop.aspectj.AspectJExpressionPointcut.checkReadyToMatch(AspectJExpressionPointcut.java:190)
+	at org.springframework.aop.aspectj.AspectJExpressionPointcut.getMethodMatcher(AspectJExpressionPointcut.java:175)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.buildSafePointcut(AbstractAspectJAdvice.java:196)
+	at org.springframework.aop.aspectj.AspectJPointcutAdvisor.<init>(AspectJPointcutAdvisor.java:51)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:142)
+	... 79 more
+2021-07-09 11:31:07 INFO main org.springframework.web.context.ContextLoader 304 - Root WebApplicationContext: initialization started
+2021-07-09 11:31:07 INFO main org.springframework.web.context.support.XmlWebApplicationContext 582 - Refreshing Root WebApplicationContext: startup date [Fri Jul 09 11:31:07 CST 2021]; root of context hierarchy
+2021-07-09 11:31:07 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-context.xml]
+2021-07-09 11:31:07 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-common.xml]
+2021-07-09 11:31:07 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-web.xml]
+2021-07-09 11:31:07 INFO main org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor 155 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2021-07-09 11:31:08 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/]}" onto public java.lang.String com.lx.demo.controller.IndexController.index(org.springframework.ui.Model)
+2021-07-09 11:31:08 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello]}" onto public java.lang.String com.lx.demo.controller.IndexController.helloParam(java.lang.String,java.lang.String)
+2021-07-09 11:31:08 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello/{name}/{msg}]}" onto public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String,java.lang.String)
+2021-07-09 11:31:08 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/echo],methods=[GET],produces=[application/json;charset=UTF-8]}" onto public java.lang.String com.lx.demo.controller.PlaceHolderController.echo()
+2021-07-09 11:31:08 WARN main org.springframework.web.context.support.XmlWebApplicationContext 550 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping': Invocation of init method failed; nested exception is java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'indexController1' method 
+public java.lang.String com.lx.demo.controller.IndexController.index(org.springframework.ui.Model)
+to {[/]}: There is already 'indexController' bean method
+public java.lang.String com.lx.demo.controller.IndexController.index(org.springframework.ui.Model) mapped.
+2021-07-09 11:31:08 ERROR main org.springframework.web.context.ContextLoader 350 - Context initialization failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping': Invocation of init method failed; nested exception is java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'indexController1' method 
+public java.lang.String com.lx.demo.controller.IndexController.index(org.springframework.ui.Model)
+to {[/]}: There is already 'indexController' bean method
+public java.lang.String com.lx.demo.controller.IndexController.index(org.springframework.ui.Model) mapped.
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1628)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:555)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:483)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:761)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:866)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:542)
+	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:443)
+	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:325)
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:107)
+	at org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized(ContextHandler.java:799)
+	at org.eclipse.jetty.servlet.ServletContextHandler.callContextInitialized(ServletContextHandler.java:499)
+	at org.eclipse.jetty.server.handler.ContextHandler.startContext(ContextHandler.java:790)
+	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:337)
+	at org.eclipse.jetty.webapp.WebAppContext.startWebapp(WebAppContext.java:1343)
+	at org.eclipse.jetty.maven.plugin.JettyWebAppContext.startWebapp(JettyWebAppContext.java:296)
+	at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1336)
+	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:742)
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:499)
+	at org.eclipse.jetty.maven.plugin.JettyWebAppContext.doStart(JettyWebAppContext.java:365)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:132)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:114)
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:61)
+	at org.eclipse.jetty.server.handler.ContextHandlerCollection.doStart(ContextHandlerCollection.java:163)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:132)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:114)
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:61)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:132)
+	at org.eclipse.jetty.server.Server.start(Server.java:399)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:114)
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:61)
+	at org.eclipse.jetty.server.Server.doStart(Server.java:366)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
+	at org.eclipse.jetty.maven.plugin.AbstractJettyMojo.startJetty(AbstractJettyMojo.java:516)
+	at org.eclipse.jetty.maven.plugin.AbstractJettyMojo.execute(AbstractJettyMojo.java:359)
+	at org.eclipse.jetty.maven.plugin.JettyRunMojo.execute(JettyRunMojo.java:167)
+	at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:137)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:210)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:156)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:148)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:117)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:81)
+	at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build(SingleThreadedBuilder.java:56)
+	at org.apache.maven.lifecycle.internal.LifecycleStarter.execute(LifecycleStarter.java:128)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:305)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:192)
+	at org.apache.maven.DefaultMaven.execute(DefaultMaven.java:105)
+	at org.apache.maven.cli.MavenCli.execute(MavenCli.java:957)
+	at org.apache.maven.cli.MavenCli.doMain(MavenCli.java:289)
+	at org.apache.maven.cli.MavenCli.main(MavenCli.java:193)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced(Launcher.java:282)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launch(Launcher.java:225)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode(Launcher.java:406)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.main(Launcher.java:347)
+	at org.codehaus.classworlds.Launcher.main(Launcher.java:47)
+Caused by: java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'indexController1' method 
+public java.lang.String com.lx.demo.controller.IndexController.index(org.springframework.ui.Model)
+to {[/]}: There is already 'indexController' bean method
+public java.lang.String com.lx.demo.controller.IndexController.index(org.springframework.ui.Model) mapped.
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.assertUniqueMethodMapping(AbstractHandlerMethodMapping.java:576)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register(AbstractHandlerMethodMapping.java:540)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.registerHandlerMethod(AbstractHandlerMethodMapping.java:264)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.detectHandlerMethods(AbstractHandlerMethodMapping.java:250)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.initHandlerMethods(AbstractHandlerMethodMapping.java:214)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.afterPropertiesSet(AbstractHandlerMethodMapping.java:184)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping.afterPropertiesSet(RequestMappingHandlerMapping.java:127)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1687)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1624)
+	... 64 more
+2021-07-09 11:36:13 INFO main org.springframework.web.context.ContextLoader 304 - Root WebApplicationContext: initialization started
+2021-07-09 11:36:13 INFO main org.springframework.web.context.support.XmlWebApplicationContext 582 - Refreshing Root WebApplicationContext: startup date [Fri Jul 09 11:36:13 CST 2021]; root of context hierarchy
+2021-07-09 11:36:13 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-context.xml]
+2021-07-09 11:36:13 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-common.xml]
+2021-07-09 11:36:13 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-web.xml]
+2021-07-09 11:36:13 INFO main org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor 155 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2021-07-09 11:36:14 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello]}" onto public java.lang.String com.lx.demo.controller.IndexController.helloParam(java.lang.String,java.lang.String)
+2021-07-09 11:36:14 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello/{name}/{msg}]}" onto public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String,java.lang.String)
+2021-07-09 11:36:14 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/]}" onto public java.lang.String com.lx.demo.controller.IndexController.index(org.springframework.ui.Model)
+2021-07-09 11:36:14 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/echo],methods=[GET],produces=[application/json;charset=UTF-8]}" onto public java.lang.String com.lx.demo.controller.PlaceHolderController.echo()
+2021-07-09 11:36:14 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Jul 09 11:36:13 CST 2021]; root of context hierarchy
+2021-07-09 11:36:14 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Jul 09 11:36:13 CST 2021]; root of context hierarchy
+2021-07-09 11:36:14 INFO main org.springframework.web.servlet.handler.SimpleUrlHandlerMapping 362 - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+2021-07-09 11:36:14 INFO main org.springframework.web.context.ContextLoader 344 - Root WebApplicationContext: initialization completed in 1315 ms
+2021-07-09 11:36:58 INFO main org.springframework.web.context.ContextLoader 304 - Root WebApplicationContext: initialization started
+2021-07-09 11:36:58 INFO main org.springframework.web.context.support.XmlWebApplicationContext 582 - Refreshing Root WebApplicationContext: startup date [Fri Jul 09 11:36:58 CST 2021]; root of context hierarchy
+2021-07-09 11:36:58 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-context.xml]
+2021-07-09 11:36:58 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-common.xml]
+2021-07-09 11:36:58 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-web.xml]
+2021-07-09 11:36:58 INFO main org.springframework.beans.factory.support.DefaultListableBeanFactory 828 - Overriding bean definition for bean 'restApiRequestInfo' with a different definition: replacing [Generic bean: class [com.lx.demo.aop.RestApiRequestInfo]; scope=; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null; defined in class path resource [application-context.xml]] with [Root bean: class [org.springframework.aop.aspectj.AspectJExpressionPointcut]; scope=prototype; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null]
+2021-07-09 11:36:59 INFO main org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor 155 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2021-07-09 11:36:59 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello]}" onto public java.lang.String com.lx.demo.controller.IndexController.helloParam(java.lang.String,java.lang.String)
+2021-07-09 11:36:59 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello/{name}/{msg}]}" onto public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String,java.lang.String)
+2021-07-09 11:36:59 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/]}" onto public java.lang.String com.lx.demo.controller.IndexController.index(org.springframework.ui.Model)
+2021-07-09 11:36:59 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/echo],methods=[GET],produces=[application/json;charset=UTF-8]}" onto public java.lang.String com.lx.demo.controller.PlaceHolderController.echo()
+2021-07-09 11:36:59 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Jul 09 11:36:58 CST 2021]; root of context hierarchy
+2021-07-09 11:36:59 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Jul 09 11:36:58 CST 2021]; root of context hierarchy
+2021-07-09 11:37:00 INFO main org.springframework.web.servlet.handler.SimpleUrlHandlerMapping 362 - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+2021-07-09 11:37:00 INFO main org.springframework.web.context.ContextLoader 344 - Root WebApplicationContext: initialization completed in 1681 ms
+2021-07-09 11:38:22 INFO Thread-2 org.springframework.web.context.support.XmlWebApplicationContext 987 - Closing Root WebApplicationContext: startup date [Fri Jul 09 11:36:58 CST 2021]; root of context hierarchy
+2021-07-09 11:38:27 INFO main org.springframework.web.context.ContextLoader 304 - Root WebApplicationContext: initialization started
+2021-07-09 11:38:27 INFO main org.springframework.web.context.support.XmlWebApplicationContext 582 - Refreshing Root WebApplicationContext: startup date [Fri Jul 09 11:38:27 CST 2021]; root of context hierarchy
+2021-07-09 11:38:27 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-context.xml]
+2021-07-09 11:38:27 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-common.xml]
+2021-07-09 11:38:27 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-web.xml]
+2021-07-09 11:38:27 INFO main org.springframework.beans.factory.support.DefaultListableBeanFactory 828 - Overriding bean definition for bean 'restApiRequestInfo' with a different definition: replacing [Generic bean: class [com.lx.demo.aop.RestApiRequestInfo]; scope=; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null; defined in class path resource [application-context.xml]] with [Root bean: class [org.springframework.aop.aspectj.AspectJExpressionPointcut]; scope=prototype; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null]
+2021-07-09 11:38:27 INFO main org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor 155 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2021-07-09 11:38:28 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/]}" onto public java.lang.String com.lx.demo.controller.IndexController.index(org.springframework.ui.Model)
+2021-07-09 11:38:28 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello]}" onto public java.lang.String com.lx.demo.controller.IndexController.helloParam(java.lang.String,java.lang.String)
+2021-07-09 11:38:28 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello/{name}/{msg}]}" onto public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String,java.lang.String)
+2021-07-09 11:38:28 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/echo],methods=[GET],produces=[application/json;charset=UTF-8]}" onto public java.lang.String com.lx.demo.controller.PlaceHolderController.echo()
+2021-07-09 11:38:28 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Jul 09 11:38:27 CST 2021]; root of context hierarchy
+2021-07-09 11:38:28 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Jul 09 11:38:27 CST 2021]; root of context hierarchy
+2021-07-09 11:38:29 INFO main org.springframework.web.servlet.handler.SimpleUrlHandlerMapping 362 - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+2021-07-09 11:38:29 INFO main org.springframework.web.context.ContextLoader 344 - Root WebApplicationContext: initialization completed in 1850 ms
+2021-07-09 11:44:52 INFO main org.springframework.web.context.ContextLoader 304 - Root WebApplicationContext: initialization started
+2021-07-09 11:44:52 INFO main org.springframework.web.context.support.XmlWebApplicationContext 582 - Refreshing Root WebApplicationContext: startup date [Fri Jul 09 11:44:52 CST 2021]; root of context hierarchy
+2021-07-09 11:44:52 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-context.xml]
+2021-07-09 11:44:52 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-common.xml]
+2021-07-09 11:44:52 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-web.xml]
+2021-07-09 11:44:52 INFO main org.springframework.beans.factory.support.DefaultListableBeanFactory 828 - Overriding bean definition for bean 'restApiRequestInfo' with a different definition: replacing [Generic bean: class [com.lx.demo.aop.RestApiRequestInfo]; scope=; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null; defined in class path resource [application-context.xml]] with [Root bean: class [org.springframework.aop.aspectj.AspectJExpressionPointcut]; scope=prototype; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null]
+2021-07-09 11:44:53 INFO main org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor 155 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2021-07-09 11:44:53 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/]}" onto public java.lang.String com.lx.demo.controller.IndexController.index(org.springframework.ui.Model)
+2021-07-09 11:44:53 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello]}" onto public java.lang.String com.lx.demo.controller.IndexController.helloParam(java.lang.String,java.lang.String)
+2021-07-09 11:44:53 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello/{name}/{msg}]}" onto public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String,java.lang.String)
+2021-07-09 11:44:53 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/echo],methods=[GET],produces=[application/json;charset=UTF-8]}" onto public java.lang.String com.lx.demo.controller.PlaceHolderController.echo()
+2021-07-09 11:44:54 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Jul 09 11:44:52 CST 2021]; root of context hierarchy
+2021-07-09 11:44:54 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Jul 09 11:44:52 CST 2021]; root of context hierarchy
+2021-07-09 11:44:54 INFO main org.springframework.web.servlet.handler.SimpleUrlHandlerMapping 362 - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+2021-07-09 11:44:54 INFO main org.springframework.web.context.ContextLoader 344 - Root WebApplicationContext: initialization completed in 2133 ms
+2021-07-09 11:45:30 INFO qtp728236551-19 org.springframework.web.servlet.DispatcherServlet 489 - FrameworkServlet 'spring-dispatcher': initialization started
+2021-07-09 11:45:30 INFO qtp728236551-19 org.springframework.web.context.support.XmlWebApplicationContext 582 - Refreshing WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Jul 09 11:45:30 CST 2021]; parent: Root WebApplicationContext
+2021-07-09 11:45:30 INFO qtp728236551-19 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-context.xml]
+2021-07-09 11:45:30 INFO qtp728236551-19 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-common.xml]
+2021-07-09 11:45:30 INFO qtp728236551-19 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-web.xml]
+2021-07-09 11:45:30 INFO qtp728236551-19 org.springframework.beans.factory.support.DefaultListableBeanFactory 828 - Overriding bean definition for bean 'restApiRequestInfo' with a different definition: replacing [Generic bean: class [com.lx.demo.aop.RestApiRequestInfo]; scope=; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null; defined in class path resource [application-context.xml]] with [Root bean: class [org.springframework.aop.aspectj.AspectJExpressionPointcut]; scope=prototype; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null]
+2021-07-09 11:45:30 INFO qtp728236551-19 org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor 155 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2021-07-09 11:45:30 INFO qtp728236551-19 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/]}" onto public java.lang.String com.lx.demo.controller.IndexController.index(org.springframework.ui.Model)
+2021-07-09 11:45:30 INFO qtp728236551-19 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello]}" onto public java.lang.String com.lx.demo.controller.IndexController.helloParam(java.lang.String,java.lang.String)
+2021-07-09 11:45:30 INFO qtp728236551-19 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello/{name}/{msg}]}" onto public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String,java.lang.String)
+2021-07-09 11:45:30 INFO qtp728236551-19 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/echo],methods=[GET],produces=[application/json;charset=UTF-8]}" onto public java.lang.String com.lx.demo.controller.PlaceHolderController.echo()
+2021-07-09 11:45:30 INFO qtp728236551-19 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Jul 09 11:45:30 CST 2021]; parent: Root WebApplicationContext
+2021-07-09 11:45:30 INFO qtp728236551-19 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Jul 09 11:45:30 CST 2021]; parent: Root WebApplicationContext
+2021-07-09 11:45:30 INFO qtp728236551-19 org.springframework.web.servlet.handler.SimpleUrlHandlerMapping 362 - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+2021-07-09 11:45:30 INFO qtp728236551-19 org.springframework.web.servlet.DispatcherServlet 508 - FrameworkServlet 'spring-dispatcher': initialization completed in 410 ms
+2021-07-09 11:45:30 INFO qtp728236551-19 com.lx.demo.interceptor.DefaultHandlerInterceptor 39 - request param: null 
+
+2021-07-09 11:45:30 INFO qtp728236551-19 com.lx.demo.interceptor.DefaultHandlerInterceptor 41 - request values: null 
+
+2021-07-09 11:45:30 INFO qtp728236551-19 com.lx.demo.interceptor.DefaultHandlerInterceptor 39 - request param: null 
+
+2021-07-09 11:45:30 INFO qtp728236551-19 com.lx.demo.interceptor.DefaultHandlerInterceptor 41 - request values: null 
+
+2021-07-09 11:45:30 INFO qtp728236551-19 com.lx.demo.interceptor.DefaultHandlerInterceptor 45 - handler method : public java.lang.String com.lx.demo.controller.IndexController.helloParam(java.lang.String,java.lang.String) 
+
+2021-07-09 11:45:30 INFO qtp728236551-19 com.lx.demo.interceptor.DefaultHandlerInterceptor 47 - handler object : public java.lang.String com.lx.demo.controller.IndexController.helloParam(java.lang.String,java.lang.String) 
+
+2021-07-09 11:45:49 INFO qtp728236551-20 com.lx.demo.interceptor.DefaultHandlerInterceptor 39 - request param: name 
+
+2021-07-09 11:45:49 INFO qtp728236551-20 com.lx.demo.interceptor.DefaultHandlerInterceptor 41 - request values: zhangsan 
+
+2021-07-09 11:45:49 INFO qtp728236551-20 com.lx.demo.interceptor.DefaultHandlerInterceptor 39 - request param: msg 
+
+2021-07-09 11:45:49 INFO qtp728236551-20 com.lx.demo.interceptor.DefaultHandlerInterceptor 41 - request values: null 
+
+2021-07-09 11:45:49 INFO qtp728236551-20 com.lx.demo.interceptor.DefaultHandlerInterceptor 45 - handler method : public java.lang.String com.lx.demo.controller.IndexController.helloParam(java.lang.String,java.lang.String) 
+
+2021-07-09 11:45:49 INFO qtp728236551-20 com.lx.demo.interceptor.DefaultHandlerInterceptor 47 - handler object : public java.lang.String com.lx.demo.controller.IndexController.helloParam(java.lang.String,java.lang.String) 
+
+2021-07-09 11:46:18 INFO qtp728236551-23 com.lx.demo.interceptor.DefaultHandlerInterceptor 39 - request param: name 
+
+2021-07-09 11:46:18 INFO qtp728236551-23 com.lx.demo.interceptor.DefaultHandlerInterceptor 41 - request values: zhangsan 
+
+2021-07-09 11:46:18 INFO qtp728236551-23 com.lx.demo.interceptor.DefaultHandlerInterceptor 39 - request param: msg 
+
+2021-07-09 11:46:18 INFO qtp728236551-23 com.lx.demo.interceptor.DefaultHandlerInterceptor 41 - request values: null 
+
+2021-07-09 11:46:18 INFO qtp728236551-23 com.lx.demo.interceptor.DefaultHandlerInterceptor 45 - handler method : public java.lang.String com.lx.demo.controller.IndexController.helloParam(java.lang.String,java.lang.String) 
+
+2021-07-09 11:46:18 INFO qtp728236551-23 com.lx.demo.interceptor.DefaultHandlerInterceptor 47 - handler object : public java.lang.String com.lx.demo.controller.IndexController.helloParam(java.lang.String,java.lang.String) 
+
+2021-07-09 11:46:36 INFO qtp728236551-19 com.lx.demo.interceptor.DefaultHandlerInterceptor 39 - request param: null 
+
+2021-07-09 11:46:36 INFO qtp728236551-19 com.lx.demo.interceptor.DefaultHandlerInterceptor 41 - request values: null 
+
+2021-07-09 11:46:36 INFO qtp728236551-19 com.lx.demo.interceptor.DefaultHandlerInterceptor 39 - request param: null 
+
+2021-07-09 11:46:36 INFO qtp728236551-19 com.lx.demo.interceptor.DefaultHandlerInterceptor 41 - request values: null 
+
+2021-07-09 11:46:36 INFO qtp728236551-19 com.lx.demo.interceptor.DefaultHandlerInterceptor 45 - handler method : public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String,java.lang.String) 
+
+2021-07-09 11:46:36 INFO qtp728236551-19 com.lx.demo.interceptor.DefaultHandlerInterceptor 47 - handler object : public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String,java.lang.String) 
+
+2021-07-09 11:46:36 INFO qtp728236551-19 com.lx.demo.controller.IndexController 35 - hello zhansa xx
+2021-07-09 11:49:44 INFO Thread-2 org.springframework.web.context.support.XmlWebApplicationContext 987 - Closing WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Jul 09 11:45:30 CST 2021]; parent: Root WebApplicationContext
+2021-07-09 11:49:44 INFO Thread-2 org.springframework.web.context.support.XmlWebApplicationContext 987 - Closing Root WebApplicationContext: startup date [Fri Jul 09 11:44:52 CST 2021]; root of context hierarchy
+2021-07-09 11:49:51 INFO main org.springframework.web.context.ContextLoader 304 - Root WebApplicationContext: initialization started
+2021-07-09 11:49:51 INFO main org.springframework.web.context.support.XmlWebApplicationContext 582 - Refreshing Root WebApplicationContext: startup date [Fri Jul 09 11:49:51 CST 2021]; root of context hierarchy
+2021-07-09 11:49:51 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-context.xml]
+2021-07-09 11:49:51 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-common.xml]
+2021-07-09 11:49:51 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-web.xml]
+2021-07-09 11:49:51 INFO main org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor 155 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2021-07-09 11:49:52 WARN main org.springframework.web.context.support.XmlWebApplicationContext 550 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'indexController' defined in file [/home/zhaozhiwei/workspace/demo/springboot/springmvc/servlet-springmvc-springboot/springmvc/target/classes/com/lx/demo/controller/IndexController.class]: BeanPostProcessor before instantiation of bean failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.aop.aspectj.AspectJPointcutAdvisor#0': Cannot create inner bean '(inner bean)#779228dc' of type [org.springframework.aop.aspectj.AspectJMethodBeforeAdvice] while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#779228dc': Cannot resolve reference to bean 'restApiRequestInfo' while setting constructor argument; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'restApiRequestInfo' available
+2021-07-09 11:49:52 ERROR main org.springframework.web.context.ContextLoader 350 - Context initialization failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'indexController' defined in file [/home/zhaozhiwei/workspace/demo/springboot/springmvc/servlet-springmvc-springboot/springmvc/target/classes/com/lx/demo/controller/IndexController.class]: BeanPostProcessor before instantiation of bean failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.aop.aspectj.AspectJPointcutAdvisor#0': Cannot create inner bean '(inner bean)#779228dc' of type [org.springframework.aop.aspectj.AspectJMethodBeforeAdvice] while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#779228dc': Cannot resolve reference to bean 'restApiRequestInfo' while setting constructor argument; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'restApiRequestInfo' available
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:479)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:761)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:866)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:542)
+	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:443)
+	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:325)
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:107)
+	at org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized(ContextHandler.java:799)
+	at org.eclipse.jetty.servlet.ServletContextHandler.callContextInitialized(ServletContextHandler.java:499)
+	at org.eclipse.jetty.server.handler.ContextHandler.startContext(ContextHandler.java:790)
+	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:337)
+	at org.eclipse.jetty.webapp.WebAppContext.startWebapp(WebAppContext.java:1343)
+	at org.eclipse.jetty.maven.plugin.JettyWebAppContext.startWebapp(JettyWebAppContext.java:296)
+	at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1336)
+	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:742)
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:499)
+	at org.eclipse.jetty.maven.plugin.JettyWebAppContext.doStart(JettyWebAppContext.java:365)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:132)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:114)
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:61)
+	at org.eclipse.jetty.server.handler.ContextHandlerCollection.doStart(ContextHandlerCollection.java:163)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:132)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:114)
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:61)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:132)
+	at org.eclipse.jetty.server.Server.start(Server.java:399)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:114)
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:61)
+	at org.eclipse.jetty.server.Server.doStart(Server.java:366)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
+	at org.eclipse.jetty.maven.plugin.AbstractJettyMojo.startJetty(AbstractJettyMojo.java:516)
+	at org.eclipse.jetty.maven.plugin.AbstractJettyMojo.execute(AbstractJettyMojo.java:359)
+	at org.eclipse.jetty.maven.plugin.JettyRunMojo.execute(JettyRunMojo.java:167)
+	at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:137)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:210)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:156)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:148)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:117)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:81)
+	at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build(SingleThreadedBuilder.java:56)
+	at org.apache.maven.lifecycle.internal.LifecycleStarter.execute(LifecycleStarter.java:128)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:305)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:192)
+	at org.apache.maven.DefaultMaven.execute(DefaultMaven.java:105)
+	at org.apache.maven.cli.MavenCli.execute(MavenCli.java:957)
+	at org.apache.maven.cli.MavenCli.doMain(MavenCli.java:289)
+	at org.apache.maven.cli.MavenCli.main(MavenCli.java:193)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced(Launcher.java:282)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launch(Launcher.java:225)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode(Launcher.java:406)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.main(Launcher.java:347)
+	at org.codehaus.classworlds.Launcher.main(Launcher.java:47)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.aop.aspectj.AspectJPointcutAdvisor#0': Cannot create inner bean '(inner bean)#779228dc' of type [org.springframework.aop.aspectj.AspectJMethodBeforeAdvice] while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#779228dc': Cannot resolve reference to bean 'restApiRequestInfo' while setting constructor argument; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'restApiRequestInfo' available
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveInnerBean(BeanDefinitionValueResolver.java:313)
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:129)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveConstructorArguments(ConstructorResolver.java:648)
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:145)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1193)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1095)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:513)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:483)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.aop.framework.autoproxy.BeanFactoryAdvisorRetrievalHelper.findAdvisorBeans(BeanFactoryAdvisorRetrievalHelper.java:92)
+	at org.springframework.aop.framework.autoproxy.AbstractAdvisorAutoProxyCreator.findCandidateAdvisors(AbstractAdvisorAutoProxyCreator.java:102)
+	at org.springframework.aop.aspectj.autoproxy.AspectJAwareAdvisorAutoProxyCreator.shouldSkip(AspectJAwareAdvisorAutoProxyCreator.java:103)
+	at org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator.postProcessBeforeInstantiation(AbstractAutoProxyCreator.java:248)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyBeanPostProcessorsBeforeInstantiation(AbstractAutowireCapableBeanFactory.java:1037)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.resolveBeforeInstantiation(AbstractAutowireCapableBeanFactory.java:1011)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:473)
+	... 62 more
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#779228dc': Cannot resolve reference to bean 'restApiRequestInfo' while setting constructor argument; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'restApiRequestInfo' available
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:359)
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:108)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveConstructorArguments(ConstructorResolver.java:634)
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:145)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1193)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1095)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:513)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:483)
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveInnerBean(BeanDefinitionValueResolver.java:299)
+	... 80 more
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'restApiRequestInfo' available
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeanDefinition(DefaultListableBeanFactory.java:687)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getMergedLocalBeanDefinition(AbstractBeanFactory.java:1207)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:284)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:351)
+	... 88 more
+2021-07-09 11:51:20 INFO main org.springframework.web.context.ContextLoader 304 - Root WebApplicationContext: initialization started
+2021-07-09 11:51:20 INFO main org.springframework.web.context.support.XmlWebApplicationContext 582 - Refreshing Root WebApplicationContext: startup date [Fri Jul 09 11:51:20 CST 2021]; root of context hierarchy
+2021-07-09 11:51:20 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-context.xml]
+2021-07-09 11:51:20 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-common.xml]
+2021-07-09 11:51:20 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-web.xml]
+2021-07-09 11:51:21 INFO main org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor 155 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2021-07-09 11:51:21 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello]}" onto public java.lang.String com.lx.demo.controller.IndexController.helloParam(java.lang.String,java.lang.String)
+2021-07-09 11:51:21 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello/{name}/{msg}]}" onto public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String,java.lang.String)
+2021-07-09 11:51:21 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/]}" onto public java.lang.String com.lx.demo.controller.IndexController.index(org.springframework.ui.Model)
+2021-07-09 11:51:21 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/echo],methods=[GET],produces=[application/json;charset=UTF-8]}" onto public java.lang.String com.lx.demo.controller.PlaceHolderController.echo()
+2021-07-09 11:51:22 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Jul 09 11:51:20 CST 2021]; root of context hierarchy
+2021-07-09 11:51:22 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Jul 09 11:51:20 CST 2021]; root of context hierarchy
+2021-07-09 11:51:22 INFO main org.springframework.web.servlet.handler.SimpleUrlHandlerMapping 362 - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+2021-07-09 11:51:22 INFO main org.springframework.web.context.ContextLoader 344 - Root WebApplicationContext: initialization completed in 1836 ms
+2021-07-09 11:51:25 INFO qtp1887991591-19 org.springframework.web.servlet.DispatcherServlet 489 - FrameworkServlet 'spring-dispatcher': initialization started
+2021-07-09 11:51:25 INFO qtp1887991591-19 org.springframework.web.context.support.XmlWebApplicationContext 582 - Refreshing WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Jul 09 11:51:25 CST 2021]; parent: Root WebApplicationContext
+2021-07-09 11:51:25 INFO qtp1887991591-19 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-context.xml]
+2021-07-09 11:51:25 INFO qtp1887991591-19 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-common.xml]
+2021-07-09 11:51:25 INFO qtp1887991591-19 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-web.xml]
+2021-07-09 11:51:25 INFO qtp1887991591-19 org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor 155 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2021-07-09 11:51:26 INFO qtp1887991591-19 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello]}" onto public java.lang.String com.lx.demo.controller.IndexController.helloParam(java.lang.String,java.lang.String)
+2021-07-09 11:51:26 INFO qtp1887991591-19 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello/{name}/{msg}]}" onto public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String,java.lang.String)
+2021-07-09 11:51:26 INFO qtp1887991591-19 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/]}" onto public java.lang.String com.lx.demo.controller.IndexController.index(org.springframework.ui.Model)
+2021-07-09 11:51:26 INFO qtp1887991591-19 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/echo],methods=[GET],produces=[application/json;charset=UTF-8]}" onto public java.lang.String com.lx.demo.controller.PlaceHolderController.echo()
+2021-07-09 11:51:26 INFO qtp1887991591-19 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Jul 09 11:51:25 CST 2021]; parent: Root WebApplicationContext
+2021-07-09 11:51:26 INFO qtp1887991591-19 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Jul 09 11:51:25 CST 2021]; parent: Root WebApplicationContext
+2021-07-09 11:51:26 INFO qtp1887991591-19 org.springframework.web.servlet.handler.SimpleUrlHandlerMapping 362 - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+2021-07-09 11:51:26 INFO qtp1887991591-19 org.springframework.web.servlet.DispatcherServlet 508 - FrameworkServlet 'spring-dispatcher': initialization completed in 510 ms
+2021-07-09 11:51:26 INFO qtp1887991591-19 com.lx.demo.interceptor.DefaultHandlerInterceptor 39 - request param: null 
+
+2021-07-09 11:51:26 INFO qtp1887991591-19 com.lx.demo.interceptor.DefaultHandlerInterceptor 41 - request values: null 
+
+2021-07-09 11:51:26 INFO qtp1887991591-19 com.lx.demo.interceptor.DefaultHandlerInterceptor 39 - request param: null 
+
+2021-07-09 11:51:26 INFO qtp1887991591-19 com.lx.demo.interceptor.DefaultHandlerInterceptor 41 - request values: null 
+
+2021-07-09 11:51:26 INFO qtp1887991591-19 com.lx.demo.interceptor.DefaultHandlerInterceptor 45 - handler method : public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String,java.lang.String) 
+
+2021-07-09 11:51:26 INFO qtp1887991591-19 com.lx.demo.interceptor.DefaultHandlerInterceptor 47 - handler object : public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String,java.lang.String) 
+
+2021-07-09 11:51:26 INFO qtp1887991591-19 com.lx.demo.controller.IndexController 35 - hello zhansa xx
+2021-07-09 11:51:45 INFO qtp1887991591-19 com.lx.demo.interceptor.DefaultHandlerInterceptor 45 - handler method : public java.lang.String com.lx.demo.controller.PlaceHolderController.echo() 
+
+2021-07-09 11:51:45 INFO qtp1887991591-19 com.lx.demo.interceptor.DefaultHandlerInterceptor 47 - handler object : public java.lang.String com.lx.demo.controller.PlaceHolderController.echo() 
+
+2021-07-09 11:53:50 INFO Thread-2 org.springframework.web.context.support.XmlWebApplicationContext 987 - Closing WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Jul 09 11:51:25 CST 2021]; parent: Root WebApplicationContext
+2021-07-09 11:53:50 INFO Thread-2 org.springframework.web.context.support.XmlWebApplicationContext 987 - Closing Root WebApplicationContext: startup date [Fri Jul 09 11:51:20 CST 2021]; root of context hierarchy
+2021-07-09 11:53:56 INFO main org.springframework.web.context.ContextLoader 304 - Root WebApplicationContext: initialization started
+2021-07-09 11:53:56 INFO main org.springframework.web.context.support.XmlWebApplicationContext 582 - Refreshing Root WebApplicationContext: startup date [Fri Jul 09 11:53:56 CST 2021]; root of context hierarchy
+2021-07-09 11:53:56 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-context.xml]
+2021-07-09 11:53:57 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-common.xml]
+2021-07-09 11:53:57 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-web.xml]
+2021-07-09 11:53:57 INFO main org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor 155 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2021-07-09 11:53:58 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/]}" onto public java.lang.String com.lx.demo.controller.IndexController.index(org.springframework.ui.Model)
+2021-07-09 11:53:58 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello]}" onto public java.lang.String com.lx.demo.controller.IndexController.helloParam(java.lang.String,java.lang.String)
+2021-07-09 11:53:58 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello/{name}/{msg}]}" onto public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String,java.lang.String)
+2021-07-09 11:53:58 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/echo],methods=[GET],produces=[application/json;charset=UTF-8]}" onto public java.lang.String com.lx.demo.controller.PlaceHolderController.echo()
+2021-07-09 11:53:58 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Jul 09 11:53:56 CST 2021]; root of context hierarchy
+2021-07-09 11:53:58 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Jul 09 11:53:56 CST 2021]; root of context hierarchy
+2021-07-09 11:53:58 INFO main org.springframework.web.servlet.handler.SimpleUrlHandlerMapping 362 - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+2021-07-09 11:53:58 INFO main org.springframework.web.context.ContextLoader 344 - Root WebApplicationContext: initialization completed in 1971 ms
+2021-07-09 11:54:01 INFO qtp1501790806-19 org.springframework.web.servlet.DispatcherServlet 489 - FrameworkServlet 'spring-dispatcher': initialization started
+2021-07-09 11:54:01 INFO qtp1501790806-19 org.springframework.web.context.support.XmlWebApplicationContext 582 - Refreshing WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Jul 09 11:54:01 CST 2021]; parent: Root WebApplicationContext
+2021-07-09 11:54:01 INFO qtp1501790806-19 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-context.xml]
+2021-07-09 11:54:01 INFO qtp1501790806-19 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-common.xml]
+2021-07-09 11:54:01 INFO qtp1501790806-19 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-web.xml]
+2021-07-09 11:54:01 INFO qtp1501790806-19 org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor 155 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2021-07-09 11:54:01 INFO qtp1501790806-19 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/]}" onto public java.lang.String com.lx.demo.controller.IndexController.index(org.springframework.ui.Model)
+2021-07-09 11:54:01 INFO qtp1501790806-19 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello]}" onto public java.lang.String com.lx.demo.controller.IndexController.helloParam(java.lang.String,java.lang.String)
+2021-07-09 11:54:01 INFO qtp1501790806-19 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello/{name}/{msg}]}" onto public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String,java.lang.String)
+2021-07-09 11:54:01 INFO qtp1501790806-19 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/echo],methods=[GET],produces=[application/json;charset=UTF-8]}" onto public java.lang.String com.lx.demo.controller.PlaceHolderController.echo()
+2021-07-09 11:54:02 INFO qtp1501790806-19 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Jul 09 11:54:01 CST 2021]; parent: Root WebApplicationContext
+2021-07-09 11:54:02 INFO qtp1501790806-19 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Jul 09 11:54:01 CST 2021]; parent: Root WebApplicationContext
+2021-07-09 11:54:02 INFO qtp1501790806-19 org.springframework.web.servlet.handler.SimpleUrlHandlerMapping 362 - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+2021-07-09 11:54:02 INFO qtp1501790806-19 org.springframework.web.servlet.DispatcherServlet 508 - FrameworkServlet 'spring-dispatcher': initialization completed in 614 ms
+2021-07-09 11:54:02 INFO qtp1501790806-19 com.lx.demo.interceptor.DefaultHandlerInterceptor 45 - handler method : public java.lang.String com.lx.demo.controller.PlaceHolderController.echo() 
+
+2021-07-09 11:54:02 INFO qtp1501790806-19 com.lx.demo.interceptor.DefaultHandlerInterceptor 47 - handler object : public java.lang.String com.lx.demo.controller.PlaceHolderController.echo() 
+
+2021-07-09 14:39:52 INFO main org.springframework.web.context.ContextLoader 304 - Root WebApplicationContext: initialization started
+2021-07-09 14:39:52 INFO main org.springframework.web.context.support.XmlWebApplicationContext 582 - Refreshing Root WebApplicationContext: startup date [Fri Jul 09 14:39:52 CST 2021]; root of context hierarchy
+2021-07-09 14:39:52 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-context.xml]
+2021-07-09 14:39:52 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-common.xml]
+2021-07-09 14:39:53 INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-web.xml]
+2021-07-09 14:39:53 INFO main org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor 155 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2021-07-09 14:39:54 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/]}" onto public java.lang.String com.lx.demo.controller.IndexController.index(org.springframework.ui.Model)
+2021-07-09 14:39:54 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello]}" onto public java.lang.String com.lx.demo.controller.IndexController.helloParam(java.lang.String,java.lang.String)
+2021-07-09 14:39:54 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello/{name}/{msg}]}" onto public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String,java.lang.String)
+2021-07-09 14:39:54 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/echo],methods=[GET],produces=[application/json;charset=UTF-8]}" onto public java.lang.String com.lx.demo.controller.PlaceHolderController.echo()
+2021-07-09 14:39:54 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Jul 09 14:39:52 CST 2021]; root of context hierarchy
+2021-07-09 14:39:54 INFO main org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Jul 09 14:39:52 CST 2021]; root of context hierarchy
+2021-07-09 14:39:54 INFO main org.springframework.web.servlet.handler.SimpleUrlHandlerMapping 362 - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+2021-07-09 14:39:54 INFO main org.springframework.web.context.ContextLoader 344 - Root WebApplicationContext: initialization completed in 2015 ms
+2021-07-09 14:40:17 INFO qtp1296450832-20 org.springframework.web.servlet.DispatcherServlet 489 - FrameworkServlet 'spring-dispatcher': initialization started
+2021-07-09 14:40:17 INFO qtp1296450832-20 org.springframework.web.context.support.XmlWebApplicationContext 582 - Refreshing WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Jul 09 14:40:17 CST 2021]; parent: Root WebApplicationContext
+2021-07-09 14:40:17 INFO qtp1296450832-20 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-context.xml]
+2021-07-09 14:40:17 INFO qtp1296450832-20 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-common.xml]
+2021-07-09 14:40:17 INFO qtp1296450832-20 org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 - Loading XML bean definitions from class path resource [application-web.xml]
+2021-07-09 14:40:17 INFO qtp1296450832-20 org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor 155 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2021-07-09 14:40:17 INFO qtp1296450832-20 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/]}" onto public java.lang.String com.lx.demo.controller.IndexController.index(org.springframework.ui.Model)
+2021-07-09 14:40:17 INFO qtp1296450832-20 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello]}" onto public java.lang.String com.lx.demo.controller.IndexController.helloParam(java.lang.String,java.lang.String)
+2021-07-09 14:40:17 INFO qtp1296450832-20 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/hello/{name}/{msg}]}" onto public java.lang.String com.lx.demo.controller.IndexController.hello(java.lang.String,java.lang.String)
+2021-07-09 14:40:17 INFO qtp1296450832-20 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 543 - Mapped "{[/echo],methods=[GET],produces=[application/json;charset=UTF-8]}" onto public java.lang.String com.lx.demo.controller.PlaceHolderController.echo()
+2021-07-09 14:40:17 INFO qtp1296450832-20 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Jul 09 14:40:17 CST 2021]; parent: Root WebApplicationContext
+2021-07-09 14:40:17 INFO qtp1296450832-20 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 534 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'spring-dispatcher-servlet': startup date [Fri Jul 09 14:40:17 CST 2021]; parent: Root WebApplicationContext
+2021-07-09 14:40:17 INFO qtp1296450832-20 org.springframework.web.servlet.handler.SimpleUrlHandlerMapping 362 - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+2021-07-09 14:40:17 INFO qtp1296450832-20 org.springframework.web.servlet.DispatcherServlet 508 - FrameworkServlet 'spring-dispatcher': initialization completed in 759 ms
+2021-07-09 14:40:17 INFO qtp1296450832-20 com.lx.demo.interceptor.DefaultHandlerInterceptor 45 - handler method : public java.lang.String com.lx.demo.controller.PlaceHolderController.echo() 
+
+2021-07-09 14:40:17 INFO qtp1296450832-20 com.lx.demo.interceptor.DefaultHandlerInterceptor 47 - handler object : public java.lang.String com.lx.demo.controller.PlaceHolderController.echo() 
+

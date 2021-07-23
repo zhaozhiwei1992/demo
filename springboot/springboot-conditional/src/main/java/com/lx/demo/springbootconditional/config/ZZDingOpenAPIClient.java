@@ -1,6 +1,9 @@
 package com.lx.demo.springbootconditional.config;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Map;
 
 /**
@@ -13,6 +16,18 @@ import java.util.Map;
  * @date 2021/7/16 下午4:40
  */
 public class ZZDingOpenAPIClient {
+
+    private static final Logger logger = LoggerFactory.getLogger(ZZDingOpenAPIClient.class);
+
+    private String accessKey = "theone01-xxxx";
+
+    private String secretKey = "xxxx";
+
+    public ZZDingOpenAPIClient(String accessKey, String secretKey) {
+        this.accessKey = accessKey;
+        this.secretKey = secretKey;
+        logger.info("zzding init {}", accessKey);
+    }
 
     public ZZDingOpenAPIClient() {
         System.out.println("zzding init ...");
