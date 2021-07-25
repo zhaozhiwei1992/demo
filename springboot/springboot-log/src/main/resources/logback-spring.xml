@@ -19,25 +19,25 @@
     <property name="log.pattern" value="%-12(%d{yyyy-MM-dd HH:mm:ss.SSS}) |-%-5level [%thread] %c [%L] -| %msg%n" />
 
 <!-- 通过自定义encoder方式重写日志输出-->
-    <property name="log.pattern.bususerinfo" value="%-12(%d{yyyy-MM-dd HH:mm:ss.SSS}) |-%-5level [%thread] %c [%L] -| %msg%n" />
+    <property name="log.pattern.bususerinfo" value="%-12(%d{yyyy-MM-dd HH:mm:ss.SSS}) |-%-5level [%thread] %c [%L] - %bususerinfo -| %msg%n" />
 
     <!-- 文件输出格式  可以使用 [%X{Key}] 进行输出的自定义 然后使用MDC.set(Key,"value") 设置对应的值-->
     <property name="log.pattern.MDC"
               value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%X{IP}] [%X{RequestId}] [%X{RequestURI}] [%thread] [%X{ThreadId}] %-5level %logger{36} - %msg%n"/>
 
     <!-- 控制台设置 自定义日志格式-->
-<!--    <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">-->
-<!--        <encoder class="com.lx.demo.springbootlog.logback.ThreadUserPatternLayoutEncoder">-->
-<!--            <pattern>${log.pattern.bususerinfo}</pattern>-->
-<!--        </encoder>-->
-<!--    </appender>-->
-
     <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>${log.pattern.MDC}</pattern>
-            <charset>UTF-8</charset>
+        <encoder class="com.lx.demo.springbootlog.logback.ThreadUserPatternLayoutEncoder">
+            <pattern>${log.pattern.bususerinfo}</pattern>
         </encoder>
     </appender>
+
+<!--    <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">-->
+<!--        <encoder>-->
+<!--            <pattern>${log.pattern.MDC}</pattern>-->
+<!--            <charset>UTF-8</charset>-->
+<!--        </encoder>-->
+<!--    </appender>-->
 
     <!-- DEBUG -->
     <appender name="debugAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -165,12 +165,12 @@
 <!--    info或者info级别以上的都会根据下面配置分门别类放入不同文件中-->
     <root level="info">
         <appender-ref ref="consoleAppender" />
-        <appender-ref ref="debugAppender" />
-        <appender-ref ref="infoAppender" />
-        <appender-ref ref="errorAppender" />
+<!--        <appender-ref ref="debugAppender" />-->
+<!--        <appender-ref ref="infoAppender" />-->
+<!--        <appender-ref ref="errorAppender" />-->
 
 <!--        所有都会到stash-->
-        <appender-ref ref="STASH"/>
+<!--        <appender-ref ref="STASH"/>-->
     </root>
     <!-- 4.2 生产环境:输出到文档
     <springProfile name="pro">

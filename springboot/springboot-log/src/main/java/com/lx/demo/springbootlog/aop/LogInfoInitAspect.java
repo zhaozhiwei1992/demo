@@ -1,5 +1,6 @@
 package com.lx.demo.springbootlog.aop;
 
+import com.lx.demo.springbootlog.service.TraceInfo;
 import net.logstash.logback.encoder.org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -11,6 +12,8 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import static org.springframework.web.context.request.RequestContextHolder.getRequestAttributes;
@@ -19,6 +22,8 @@ import static org.springframework.web.context.request.RequestContextHolder.getRe
 @Component
 @Order(0) // 切面的顺序，越小越优先，对于多个切面Spring是使用责任链的模式 为了一开始将日志相关的参数初始化好，这里设置为最优先执行
 public class LogInfoInitAspect {
+
+
     // 请求唯一ID
     private final String RequestId = "RequestId";
     // 请求的地址
@@ -66,12 +71,17 @@ public class LogInfoInitAspect {
         // 设置请求地址
         MDC.put(RequestURI, requestURI);
 
-        // 生成当前请求的一个唯一UUID
+        // 生成当前请求的一个唯一UUID, 也可作为请求traceid, 最终进行链路追踪
         String requestId = UUID.randomUUID().toString();
         // 设置请求的唯一ID
         MDC.put(RequestId, requestId);
         // 将次唯一ID设置为响应头
         response.setHeader(RequestId, requestId);
+
+        final Map<String, Object> requestInfo = new HashMap<>();
+        requestInfo.put("requestid", requestId);
+        requestInfo.put("threadid", String.valueOf(thread.getId()));
+        TraceInfo.setTraceInfo(requestInfo);
 
         Object object = null;
         try {
