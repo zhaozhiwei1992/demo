@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:busgtx="http://www.springframework.org/schema/bus/busgtx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+        http://www.springframework.org/schema/bus/busgtx
+        http://www.springframework.org/schema/bus/busgtx/busgtx.xsd
+">
+
+<!--    事务, 事务管理器, 数据源这三个要一起初始化才起作用, 否则可能出现下述报错-->
+<!--    No qualifying bean of type 'org.springframework.transaction.PlatformTransactionManager' available-->
+<!--    com.example.springbootdruid.config.DataSourceConfig.primaryJdbcTemplate-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="datasource"/>
+    </bean>
+
+    <!-- 事务 -->
+    <bean id="fasp2TxProxy" abstract="true" lazy-init="true"
+          class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionAttributes">
+            <props>
+                <prop key="find*">PROPAGATION_SUPPORTS,readOnly</prop>
+                <prop key="*">
+                    PROPAGATION_REQUIRED,+NoRollbackException,-Exception
+                </prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="transactionService" class="com.example.springbootdruid.service.TransactionService" />
+    <busgtx:transaction id="transactionServiceTx" refbeanid="transactionService"/>
+
+</beans>

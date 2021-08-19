@@ -4,7 +4,6 @@ public class User {
     private long id;
     private String name;
     private String password;
-    private int age;
 
     public long getId() {
         return id;
@@ -30,21 +29,12 @@ public class User {
         this.password = password;
     }
 
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
-                ", age=" + age +
                 '}';
     }
 }

@@ -40,7 +40,8 @@ public class MultiDataSourceRegister implements EnvironmentAware, ImportBeanDefi
 
     private static final Logger logger = LoggerFactory.getLogger(MultiDataSourceRegister.class);
 
-    private final static ConfigurationPropertyNameAliases aliases = new ConfigurationPropertyNameAliases(); //别名
+    //别名
+    private final static ConfigurationPropertyNameAliases aliases = new ConfigurationPropertyNameAliases();
 
     static {
         //由于部分数据源配置不同，所以在此处添加别名，避免切换数据源出现某些参数无法注入的情况

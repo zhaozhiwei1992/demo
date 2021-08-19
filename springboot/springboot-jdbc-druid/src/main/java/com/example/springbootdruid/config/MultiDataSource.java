@@ -112,4 +112,15 @@ public class MultiDataSource extends AbstractRoutingDataSource {
             e.printStackTrace();
         }
     }
+
+    /**
+     * @Description: 公司环境出过事务无法回滚的情况, 神奇
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if(obj.getClass().toString().contains("com.sun.proxy")) {
+            return true;
+        }
+        return super.equals(obj);
+    }
 }

@@ -26,13 +26,13 @@ public class UserRepository {
     private JdbcTemplate jdbcTemplate;
 
     public int save(User user) {
-        return jdbcTemplate.update("INSERT INTO t_user(name, password, age) values(?, ?, ?)",
-                user.getName(), user.getPassword(), user.getAge());
+        return jdbcTemplate.update("INSERT INTO t_user(name, password) values(?, ?)",
+                user.getName(), user.getPassword());
     }
 
     public int update(User user) {
-        return jdbcTemplate.update("UPDATE t_user SET name = ? , password = ? , age = ? WHERE id=?",
-                user.getName(), user.getPassword(), user.getAge(), user.getId());
+        return jdbcTemplate.update("UPDATE t_user SET name = ? , password = ? WHERE id=?",
+                user.getName(), user.getPassword(), user.getId());
     }
 
     public int delete(long id) {
@@ -55,8 +55,8 @@ public class UserRepository {
             user.setId(rs.getLong("id"));
             user.setName(rs.getString("name"));
             user.setPassword(rs.getString("password"));
-            user.setAge(rs.getInt("age"));
             return user;
         }
     }
+
 }
