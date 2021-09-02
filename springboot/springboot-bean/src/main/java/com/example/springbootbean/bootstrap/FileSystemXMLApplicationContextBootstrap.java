@@ -1,12 +1,19 @@
 package com.example.springbootbean.bootstrap;
 
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.util.FileCopyUtils;
+
+import java.io.File;
+import java.io.IOException;
 
 /**
  * {@see https://docs.spring.io/spring/docs/4.3.23.RELEASE/spring-framework-reference/htmlsingle/#beans}
  * {@see https://github.com/mercyblitz/thinking-in-spring-boot-samples/blob/master/spring-framework-samples/spring-framework-2.0.x-sample/src/main/java/thinking/in/spring/boot/samples/spring2/bootstrap/XMLApplicationContextBootstrap.java}
  */
-public class XMLApplicationContextBootstrap {
+public class FileSystemXMLApplicationContextBootstrap {
 
     static{
         // 调整系统属性 "env"，实现 "name" bean 的定义切换
@@ -23,26 +30,26 @@ public class XMLApplicationContextBootstrap {
     /**
      *
      * @param args
+     * org.springframework.core.env.EnvironmentSystemIntegrationTests#fileSystemXmlApplicationContext
      */
-    public static void main(String[] args) {
-        //打开上下文 方法1, 直接构造,内部刷新
-        //public ClassPathXmlApplicationContext(String configLocation) throws BeansException {
-        //        this(new String[]{configLocation}, true, (ApplicationContext)null);
-        //    }
-//        ClassPathXmlApplicationContext classPathXmlApplicationContext = new ClassPathXmlApplicationContext("META-INF/configurable-context.xml");
-
-        //方法2 需要设置并刷新
+    public static void main(String[] args) throws IOException {
+        //需要设置并刷新
         // 构建 XML 配置驱动 Spring 上下文
-        ClassPathXmlApplicationContext classPathXmlApplicationContext = new ClassPathXmlApplicationContext();
-        // 设置 XML 配置文件的位置
-        classPathXmlApplicationContext.setConfigLocation("classpath:/META-INF/configurable-context.xml");
-        // 启动上下文
-        classPathXmlApplicationContext.refresh();
+        final ClassPathResource classPathResource = new ClassPathResource("META-INF/configurable-context.xml");
+        File tmpFile = File.createTempFile("test", "xml");
+        FileCopyUtils.copy(classPathResource.getFile(), tmpFile);
 
-        String name = String.valueOf(classPathXmlApplicationContext.getBean("name"));
+        // strange - FSXAC strips leading '/' unless prefixed with 'file:'
+        ConfigurableApplicationContext ctx =
+                new FileSystemXmlApplicationContext(new String[] {"file:" + tmpFile.getPath()}, false);
+        ctx.refresh();
+        // 启动上下文
+        ctx.refresh();
+
+        String name = String.valueOf(ctx.getBean("name"));
         System.out.println(name);
 
         //关闭上下文
-        classPathXmlApplicationContext.close();
+        ctx.close();
     }
 }
