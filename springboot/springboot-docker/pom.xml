@@ -56,7 +56,9 @@
                     <!--<dockerDirectory>${project.basedir}/</dockerDirectory>-->
                     <forceTags>true</forceTags>
                     <maintainer>zhaozhiweishanxi@gmail.com</maintainer>
-                    <baseImage>java:8</baseImage>
+<!--                    <baseImage>java:8</baseImage>-->
+<!--                    依赖较少-->
+                    <baseImage>frolvlad/alpine-oraclejdk8</baseImage>
                     <volumes>/tmp</volumes>
                     <!--					<workdir>/root</workdir>-->
                     <!--"${JAVA_OPTS}",-->

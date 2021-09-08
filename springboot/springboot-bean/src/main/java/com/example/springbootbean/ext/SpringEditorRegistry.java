@@ -1,4 +1,4 @@
-package com.lx.demo.javabeans;
+package com.example.springbootbean.ext;
 
 import org.springframework.beans.PropertyEditorRegistrar;
 import org.springframework.beans.PropertyEditorRegistry;

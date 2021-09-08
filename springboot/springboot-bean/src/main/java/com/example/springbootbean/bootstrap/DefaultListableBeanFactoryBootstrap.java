@@ -19,11 +19,16 @@ public class DefaultListableBeanFactoryBootstrap {
     }
 
     public static void main(String[] args) {
+
+        //根据Xml配置文件创建Resource资源对象，该对象中包含了BeanDefinition的信息
         final ClassPathResource classPathResource = new ClassPathResource("META-INF/configurable-context.xml");
 //        实现了BeanDefinitionRegistry接口
         final DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
-//        BeanDefinitionRegistry -> DefaultListableBeanFactory
+//        BeanDefinitionRegistry -> DefaultListableBeanFactory, 使用基础的ioc容器需要自己制定reader
         final XmlBeanDefinitionReader xmlBeanDefinitionReader = new XmlBeanDefinitionReader(factory);
+
+        //XmlBeanDefinitionReader执行载入BeanDefinition的方法，最后会完成Bean的载入和注册。
+        //完成后Bean就成功的放置到IOC容器当中，以后我们就可以从中取得Bean来使用
         xmlBeanDefinitionReader.loadBeanDefinitions(classPathResource);
         String name = String.valueOf(factory.getBean("name"));
         System.out.println(name);

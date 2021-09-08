@@ -8,6 +8,7 @@ import org.springframework.util.FileCopyUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 /**
  * {@see https://docs.spring.io/spring/docs/4.3.23.RELEASE/spring-framework-reference/htmlsingle/#beans}
@@ -41,10 +42,24 @@ public class FileSystemXMLApplicationContextBootstrap {
 
         // strange - FSXAC strips leading '/' unless prefixed with 'file:'
         ConfigurableApplicationContext ctx =
-                new FileSystemXmlApplicationContext(new String[] {"file:" + tmpFile.getPath()}, false);
+//                new FileSystemXmlApplicationContext(new String[] {tmpFile.getPath()}, false);
+
+//        org.springframework.core.io.DefaultResourceLoader.getResource
+//        if (location.startsWith("/")) {
+//            return this.getResourceByPath(location);
+//        }
+//
+//        if (location.startsWith("classpath:")) {
+//            return new ClassPathResource(location.substring("classpath:".length()), this.getClassLoader());
+//        }
+//
+//        try {
+//            URL url = new URL(location);
+//        下述方式使用url
+        new FileSystemXmlApplicationContext(new String[] {"file:" + tmpFile.getPath()}, false);
         ctx.refresh();
         // 启动上下文
-        ctx.refresh();
+//        ctx.refresh();
 
         String name = String.valueOf(ctx.getBean("name"));
         System.out.println(name);

@@ -32,7 +32,7 @@ public class ConfigController {
         return useLocalCache;
     }
 
-    @Value("${spring.datasource.url}")
+    @Value("${spring.datasource.url:123}")
     private String url;
 
     @GetMapping("/url")

@@ -1,25 +1,23 @@
-package com.lx.demo.javabeans;
+package com.example.springbootbean.bootstrap;
 
+import com.example.springbootbean.domain.User;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
-import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.core.io.ClassPathResource;
 
-import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-public class SpringBeanGetDemo {
+public class SpringBeanRegisAndLoadDemo {
     public static void main(String[] args) throws NamingException {
 
-        //spring bean获取方式1
+        //spring bean获取方式1, 并且数据类型被editor转换
         ClassPathXmlApplicationContext classPathXmlApplicationContext = new ClassPathXmlApplicationContext();
-        classPathXmlApplicationContext.setConfigLocation("context.xml");
+        classPathXmlApplicationContext.setConfigLocation("classpath:/META-INF/dev-context.xml");
         classPathXmlApplicationContext.refresh();
         User user = classPathXmlApplicationContext.getBean("user", User.class);
-//        System.out.println(user);
+        System.out.println(user);
 
         /**
          *
