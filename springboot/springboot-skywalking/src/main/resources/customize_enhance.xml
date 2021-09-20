@@ -2,7 +2,8 @@
 <enhanced>
     <class class_name="com.example.springbootskywalking.service.TestService1">
         <method method="staticMethod()" operation_name="/is_static_method" static="true"/>
-        <method method="staticMethod(java.lang.String,int.class,java.util.Map,java.util.List,[Ljava.lang.Object;)" operation_name="/is_static_method_args" static="true">
+        <method method="staticMethod(java.lang.String,int.class,java.util.Map,java.util.List,[Ljava.lang.Object;)"
+                operation_name="/is_static_method_args" static="true">
             <operation_name_suffix>arg[0]</operation_name_suffix>
             <operation_name_suffix>arg[1]</operation_name_suffix>
             <operation_name_suffix>arg[3].[0]</operation_name_suffix>
@@ -16,7 +17,8 @@
             <tag key="tag_1">arg[0]</tag>
             <log key="log_1">arg[1]</log>
         </method>
-        <method method="method(com.example.springbootskywalking.domain.User,java.lang.String,int.class)" operation_name="/method_3" static="false">
+        <method method="method(com.example.springbootskywalking.domain.User,java.lang.String,int.class)"
+                operation_name="/method_3" static="false">
             <operation_name_suffix>arg[0].id</operation_name_suffix>
             <operation_name_suffix>arg[0].model1.name</operation_name_suffix>
             <operation_name_suffix>arg[0].model1.getId()</operation_name_suffix>
@@ -36,5 +38,11 @@
             <tag key="tag_5_1">arg[0].[0]</tag>
             <log key="log_5_1">arg[1]</log>
         </method>
+    </class>
+
+    <!-- 所有方法, 测试么的卵用-->
+    <!--        <method method=".*(.*)" static="false"/>-->
+    <class class_name="com.example.springbootskywalking.service.TestService3">
+        <method method=".*(.*)" static="false"/>
     </class>
 </enhanced>

@@ -2,6 +2,7 @@ package com.example.springbootskywalking.controller;
 
 import com.example.springbootskywalking.service.TestService1;
 import com.example.springbootskywalking.service.TestService2;
+import com.example.springbootskywalking.service.TestService3;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,4 +37,16 @@ public class TestController {
         return "success";
     }
 
+    @Autowired
+    private TestService3 testService3;
+
+    @GetMapping("/test3")
+    public String test3(){
+        try {
+            testService3.method1();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return "success";
+    }
 }
