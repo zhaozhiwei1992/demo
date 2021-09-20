@@ -6,6 +6,7 @@ import com.lx.demo.springbootsecurity.handler.CustomAuthenticationFailureHandler
 import com.lx.demo.springbootsecurity.handler.CustomAuthenticationSuccessHandler;
 import com.lx.demo.springbootsecurity.handler.CustomExpiredSessionStrategy;
 import com.lx.demo.springbootsecurity.handler.CustomLogoutSuccessHandler;
+import com.lx.demo.springbootsecurity.provicer.CustomLoginAuthenticationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -15,23 +16,13 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
-import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
-import org.springframework.security.web.header.writers.frameoptions.AllowFromStrategy;
-import org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 import java.util.List;
 
@@ -86,16 +77,45 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
      * @param auth
      * @throws Exception
      */
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-////        auth.inMemoryAuthentication()
-////                .withUser("zhangsan").password("11").roles("ADMIN")
-////                .and()
-////                .withUser("lisi").password("11").roles("USER");
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+
+//        配置登录用户
+//        auth.inMemoryAuthentication()
+//                .withUser("zhangsan").password("11").roles("ADMIN")
+//                .and()
+//                .withUser("lisi").password("11").roles("USER");
 //        auth
 //            .inMemoryAuthentication()
 //                .withUser("admin").password("11").roles("USER");
-//    }
+
+//        扩展认证provider
+        auth.authenticationProvider(customLoginAuthenticationProvider());
+        auth.eraseCredentials(false);
+    }
+
+
+    @Override
+    protected UserDetailsService userDetailsService() {
+        return userDetailsService;
+    }
+
+    /**
+     * 自定义密码验证, 使用userdetailcache
+     *
+     * @return
+     */
+    @Bean
+    public CustomLoginAuthenticationProvider customLoginAuthenticationProvider() {
+        CustomLoginAuthenticationProvider provider = new CustomLoginAuthenticationProvider();
+        // 设置userDetailsService
+        provider.setUserDetailsService(userDetailsService());
+        // 禁止隐藏用户未找到异常
+        provider.setHideUserNotFoundExceptions(false);
+        provider.setPasswordEncoder(passwordEncoder());
+        return provider;
+    }
+
 
 
     @Autowired

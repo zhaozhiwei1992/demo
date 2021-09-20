@@ -12,7 +12,8 @@ import org.springframework.stereotype.Component;
 import java.util.*;
 import java.util.stream.Collectors;
 
-@Component("userDetailService")
+@Component
+//@Component("userDetailService")
 public class CustomUserDetailService implements UserDetailsService {
 
     /**
@@ -47,6 +48,7 @@ public class CustomUserDetailService implements UserDetailsService {
      * {@see https://docs.spring.io/spring-boot/docs/2.0.8.RELEASE/reference/htmlsingle/#howto-change-the-user-details-service-and-add-user-accounts}
      *
      * 这里设置好的用户名密码，　security内部会进行比对
+     * {@see org.springframework.security.authentication.dao.DaoAuthenticationProvider#retrieveUser(java.lang.String, org.springframework.security.authentication.UsernamePasswordAuthenticationToken)}
      * @param username
      * @return
      * @throws UsernameNotFoundException
