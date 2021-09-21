@@ -21,6 +21,16 @@ public class CacheController {
 
     // private Map map2 = new HashMap();
 
+    /**
+     * @data: 2021/9/22-上午12:08
+     * @User: zhaozhiwei
+     * @method: cacheData
+      * @param key :
+ * @param value :
+     * @return: java.util.Map<java.lang.String,java.lang.Object>
+     * @Description: 描述
+     *curl -X POST http://127.0.0.1:8888/cache/save\?key\=1\&value\=xx
+     */
     @PostMapping(value = "/save")
     public Map<String, Object> cacheData(@RequestParam String key, @RequestParam String value) {
         Cache cache = simpleCacheManager.getCache("cache-1");
@@ -33,6 +43,15 @@ public class CacheController {
         return map;
     }
 
+    /**
+     * @data: 2021/9/22-上午12:09
+     * @User: zhaozhiwei
+     * @method: findByKey
+      * @param key :
+     * @return: java.util.Map<java.lang.String,java.lang.Object>
+     * @Description: 描述
+     * curl -X GET http://127.0.0.1:8888/cache/find/1
+     */
     @GetMapping(value = "/find/{key}")
     public Map<String, Object> findByKey(@PathVariable String key) {
         Cache cache = simpleCacheManager.getCache("cache-1");
