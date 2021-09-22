@@ -1,5 +1,6 @@
 package com.example.springbootjpa.service;
 
+import com.example.springbootjpa.domain.User;
 import com.example.springbootjpa.repository.ExampleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,5 +21,13 @@ public class ExampleService {
 
     public String query(){
         return exampleRepository.query();
+    }
+
+    public String saveOrUpdate(User user){
+        return exampleRepository.saveOrUpdate(user);
+    }
+
+    public String merge(User user) {
+        return exampleRepository.merge(user);
     }
 }

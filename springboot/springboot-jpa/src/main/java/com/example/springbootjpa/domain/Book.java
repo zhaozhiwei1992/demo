@@ -12,7 +12,7 @@ import java.util.Collections;
  */
 @Entity
 @EntityListeners(CustomListener.class)
-public class Book implements Serializable {
+public class Book extends BaseEntity implements Serializable {
     private static final long serialVersionUID = 230883684204974285L;
 
     @Id

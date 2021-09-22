@@ -8,7 +8,7 @@ import java.util.Collection;
  * 这里实体是否有get，set方法很重要， 如果没get， controller解析json时候就不会加入这个属性
  */
 @Entity
-public class User implements Serializable {
+public class User extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 5482161605591549178L;
 

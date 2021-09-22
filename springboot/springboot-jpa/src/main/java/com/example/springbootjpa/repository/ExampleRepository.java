@@ -1,5 +1,6 @@
 package com.example.springbootjpa.repository;
 
+import com.example.springbootjpa.domain.User;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -54,5 +55,36 @@ public class ExampleRepository {
 
         System.out.println(resultList);
         return resultList.toString();
+    }
+
+    /**
+     * @data: 2021/9/22-下午8:02
+     * @User: zhaozhiwei
+     * @method: saveOrUpdate
+      * @param user : 
+     * @return: java.lang.String
+     * @Description:
+     * hibernate的saveOrUpdate，返回void，而merge是返回一个对象。
+     * saveOrUpdate，会根据id判断是否持久化过，来Save或者update。之后对象就成为持久化状态。
+     * 而merge只是将对象保存到数据库，并没有成为持久化状态。
+     * jpa的persist ，必须配合@version 版本来使用。如果没有而直接persist，那么会报detached entity pass to persist。这个异常一般是id生成策略的问题。
+     */
+    public String saveOrUpdate(User user){
+        getSession().saveOrUpdate(user);
+        return "success";
+    }
+
+    /**
+     * @data: 2021/9/22-下午8:10
+     * @User: zhaozhiwei
+     * @method: merge
+      * @param user :
+     * @return: java.lang.String
+     * @Description: 基本等价hibernate中saveorupdate
+     */
+    public String merge(User user){
+        final User merge = entityManager.merge(user);
+        System.out.println(merge);
+        return "success";
     }
 }
