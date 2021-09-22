@@ -28,6 +28,12 @@
     <!--使用hessian协议接口暴露服务， 兼容第三方系统可能使用hessian协议-->
     <dubbo:service id="orderServiceHessian" interface="com.lx.demo.IOrderService" ref="orderService" protocol="hessian"/>
 
+<!--    使用rest暴露服务,
+    server使用了jetty，这里是可选的（netty、tomcat、servlet等），需要添加pom依赖
+-->
+<!--    <dubbo:protocol name="rest" port="8090" server="jetty"/>-->
+<!--    <dubbo:service id="orderServiceRest" interface="com.lx.demo.IOrderService" ref="orderService" protocol="rest"/>-->
+
     <!--多个版本注册， 解决开发新功能时兼容旧版本-->
     <!--<dubbo:service interface="com.lx.demo.IOrderService" ref="orderService2" version="1.0.1"/>-->
     <!--<bean id="orderService2" class="com.lx.demo.OrderServiceImplV2"/>-->
