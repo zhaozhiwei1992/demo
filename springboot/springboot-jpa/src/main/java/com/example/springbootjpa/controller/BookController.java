@@ -30,4 +30,9 @@ public class BookController {
     public Collection<Book> findAll(){
         return bookService.findAll();
     }
+
+    @GetMapping(value = "/book/find")
+    public Collection<Book> findOne(){
+        return bookService.findOne();
+    }
 }
