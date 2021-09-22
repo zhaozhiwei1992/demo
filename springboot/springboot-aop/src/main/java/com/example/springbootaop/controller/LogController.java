@@ -1,6 +1,7 @@
 package com.example.springbootaop.controller;
 
 import com.example.springbootaop.annotation.CustomLogAnnotation;
+import com.example.springbootaop.service.InnerMethodAspectService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +42,14 @@ public class LogController {
     @GetMapping("/showlog2/sub")
     public String showLogSub2(){
         return logControllerSub.showLog2();
+    }
+
+    @Autowired
+    private InnerMethodAspectService innerMethodAspectService;
+
+    @GetMapping("/showlog/inner")
+    public String innerMethodLog(){
+        innerMethodAspectService.someMethod();
+        return "success";
     }
 }
