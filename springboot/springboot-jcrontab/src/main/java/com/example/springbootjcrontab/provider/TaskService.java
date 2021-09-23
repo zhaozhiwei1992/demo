@@ -20,6 +20,9 @@ public class TaskService implements ITaskService {
     /**
      * 执行定时任务
      * @param args 参数
+     * 手动触发:
+     *  curl -X POST -H "Content-Type=application/json;charset=utf-8" http://127.0.0.1:8080/buscommon/task/executeTask\?args\=1,bdg,bdg.timertask.SyncIndexDataTask,com.example.springbootjcrontab.business.BdgCommonTask%23execute
+     *  这里请求#要编码 %23, 否则无法解析
      * @return
      */
     @PostMapping("/executeTask")

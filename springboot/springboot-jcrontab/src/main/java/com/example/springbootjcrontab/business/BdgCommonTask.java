@@ -34,6 +34,7 @@ public class BdgCommonTask {
         String beanStr = args[2];
         logger.info(beanStr + ":开始时间" + s1);
         // 加锁执行
+        Thread.sleep(1000);
         logger.info(beanStr + ":结束时间" + System.currentTimeMillis() + ",用时：" + (System.currentTimeMillis() - s1));
     }
 }
