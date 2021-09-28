@@ -2,10 +2,12 @@ package com.example.springbootjpa.service;
 
 import com.example.springbootjpa.domain.Book;
 import com.example.springbootjpa.repository.BookRepository;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
+import java.util.Collections;
 
 @Service
 public class BookService {
@@ -27,5 +29,10 @@ public class BookService {
     @Transactional(readOnly = true)
     public Collection<Book> findAll(){
         return bookRepository.findAll();
+    }
+
+    public Collection<Book> findOne() {
+        final Example<Book> example = Example.of(new Book());
+        return Collections.singleton(bookRepository.findOne(example).get());
     }
 }

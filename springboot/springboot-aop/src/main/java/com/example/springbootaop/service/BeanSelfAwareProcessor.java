@@ -15,6 +15,7 @@ public class BeanSelfAwareProcessor implements BeanPostProcessor {
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         if (bean instanceof BeanSelfAware) {
+//        该类被拦截了，所以一定会创建为代理类
             System.out.println("inject proxy：" + bean.getClass());
             BeanSelfAware myBean = (BeanSelfAware)bean;
             myBean.setSelf(bean);

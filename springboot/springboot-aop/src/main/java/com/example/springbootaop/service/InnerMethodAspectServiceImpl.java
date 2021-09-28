@@ -1,5 +1,6 @@
 package com.example.springbootaop.service;
 
+import org.springframework.aop.framework.AopContext;
 import org.springframework.stereotype.Service;
 
 /**
@@ -23,9 +24,11 @@ public class InnerMethodAspectServiceImpl implements InnerMethodAspectService, B
     }
 
     public void someMethod() {
-//        someInnerMethod();
-        //注意这句，通过self这个对象，而不是直接调用的
-        self.someInnerMethod();
+        //方法1: 配合 @EnableAspectJAutoProxy(exposeProxy = true)使用
+        ((InnerMethodAspectService)AopContext.currentProxy()).someInnerMethod();
+
+        //方法2: 直接注入proxy对象, 注意这句，通过self这个对象，而不是直接调用的
+//        self.someInnerMethod();
     }
 
     public void someInnerMethod() {
