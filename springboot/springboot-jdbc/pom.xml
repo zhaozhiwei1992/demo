@@ -58,6 +58,19 @@
 			<artifactId>reactor-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<!--Apache PropertyUtils、Apache BeanUtils-->
+
+		<dependency>
+
+			<groupId>commons-beanutils</groupId>
+
+			<artifactId>commons-beanutils</artifactId>
+
+			<version>1.9.4</version>
+
+		</dependency>
+
 	</dependencies>
 
 	<build>
