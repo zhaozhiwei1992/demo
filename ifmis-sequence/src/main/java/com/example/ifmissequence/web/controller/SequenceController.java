@@ -16,7 +16,11 @@ import java.util.*;
  * @version V1.0
  * @Title: null.java
  * @Package com.example.ifmissequence.web.controller
- * @Description: TODO
+ * @Description: 一体化系统流水号产生方式 province+year+agency+code+序号
+ * 1. 获取数据库最大值
+ * 2. 最大号码表
+ * 3. redis+号码表
+ *
  * @date 2021/7/23 上午11:45
  */
 @RestController
