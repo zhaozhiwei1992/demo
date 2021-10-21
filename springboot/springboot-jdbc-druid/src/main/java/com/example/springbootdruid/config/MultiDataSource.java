@@ -58,6 +58,23 @@ public class MultiDataSource extends AbstractRoutingDataSource {
         return keySet.contains(key);
     }
 
+    /**
+     * @data: 2021/10/21-下午11:50
+     * @User: zhaozhiwei
+     * @method: addDatasource
+      * @param dataSource :
+ * @param key :
+ * @param parse :
+     * @return: void
+     * @Description: 可以通过数据库配置数据源信息, 加载多个数据源
+     *
+    for (Map dsinfo : dsinfos) {
+    String year = (String) dsinfo.get("year");
+    if (!MultiDataSource.containsKey(year)) {
+    MultiDataSource.addDatasource(getDataSource(), year, DruidDataSourceUtil.instance().parse(dsinfo));
+    }
+    }
+     */
     public static void addDatasource(DataSource dataSource, String key,  DataSource parse) {
         if(dataSource instanceof AbstractRoutingDataSource){
             try {

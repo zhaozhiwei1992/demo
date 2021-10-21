@@ -65,9 +65,9 @@ public class RequestPaySubTaskDemo {
      * @Description: 描述
      */
     private static Map<String, List<String>> constractRequestListMap() {
-        // 状态切换标志, 只要出现金额大于0小于0变化就切换
         // 根据申请构建数据
-        int currentInt = requestDatas.size()/2 + 1;
+//        下标值, 应该从当前接近最大整数开始, 防止排序错误, 直接使用1000开始
+        int currentInt =  1001;
         final Map<String, List<String>> map = new TreeMap<>();
         for (int i = 0, requestDatasSize = requestDatas.size(); i < requestDatasSize; i++) {
             Map<String, Object> requestData = requestDatas.get(i);
@@ -78,6 +78,7 @@ public class RequestPaySubTaskDemo {
                 Map<String, Object> preRequestData = requestDatas.get(i - 1);
                 final Object preAmt = preRequestData.get("amt");
                 final BigDecimal preBigDecimal = new BigDecimal(String.valueOf(preAmt));
+                // 状态切换标志, 只要出现金额大于0小于0变化就切换, 下标+1
 //                flag变化, key增加, 本次为正数，上次为负数,或者上次为负数,本次为正数(包含0)
                 if (
                         (bigDecimal.compareTo(BigDecimal.ZERO) >= 0 && preBigDecimal.compareTo(BigDecimal.ZERO) < 0)

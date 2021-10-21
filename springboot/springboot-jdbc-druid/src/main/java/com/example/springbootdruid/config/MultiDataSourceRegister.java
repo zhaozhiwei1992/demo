@@ -32,6 +32,13 @@ import java.util.Map;
  * @Package com/example/springbootdruid/config/MultiDataSourceRegister.java
  * @Description: 多数据源支持, 自定义方式注入到spring容器中, 使用时根据key动态使用
  * {@see org.springframework.boot.jdbc.DataSourceBuilder}
+ *
+ * <dependency>
+ *                         <groupId>com.baomidou</groupId>
+ *                         <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
+ *                         <version>3.3.1</version>
+ *                 </dependency>
+ *                 上述pom开源处理1主多从, 可以参考
  * @author zhaozhiwei
  * @date 2021/7/5 下午9:35
  * @version V1.0
@@ -74,6 +81,7 @@ public class MultiDataSourceRegister implements EnvironmentAware, ImportBeanDefi
      *
      * @param annotationMetadata
      * @param beanDefinitionRegistry
+     * {@see com.lx.demo.config.DataSourceConfigDynamic#dataSource}
      */
     @Override
     public void registerBeanDefinitions(AnnotationMetadata annotationMetadata, BeanDefinitionRegistry beanDefinitionRegistry) {
@@ -140,7 +148,12 @@ public class MultiDataSourceRegister implements EnvironmentAware, ImportBeanDefi
         MutablePropertyValues mpv = define.getPropertyValues();
         //添加默认数据源，避免key不存在的情况没有数据源可用
         mpv.add("defaultTargetDataSource", defaultDatasource);
-        //添加其他数据源
+        //添加其他数据源, 可以增加多个从数据源, 利用反射直接塞到父类
+//        com.example.springbootdruid.config.MultiDataSource
+//        |
+//        |
+//        \/
+        //org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource
         mpv.add("targetDataSources", customDataSources);
         //将该bean注册为datasource，不使用springboot自动生成的datasource
         beanDefinitionRegistry.registerBeanDefinition("datasource", define);

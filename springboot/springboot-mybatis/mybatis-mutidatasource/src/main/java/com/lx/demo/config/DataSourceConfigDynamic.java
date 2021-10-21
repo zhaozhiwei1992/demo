@@ -49,6 +49,9 @@ public class DataSourceConfigDynamic {
 
     /**
      * 动态数据源: 通过AOP在不同数据源之间动态切换
+     * {@see com.example.springbootdruid.config.MultiDataSourceRegister}
+     * {@see com.example.springbootdruid.config.MultiDataSourceRegister#registerBeanDefinitions}
+     * 可以对照jdbc_druid demo中来看
      * @return
      */
     @Bean(name = "dynamicDataSource")
@@ -61,6 +64,9 @@ public class DataSourceConfigDynamic {
         Map<Object, Object> dsMap = new HashMap(5);
         dsMap.put("master", dataSource1());
         dsMap.put("slaver", dataSource2());
+//        这里也可以增加任意多个, 如果很多, 建议使用jdbc-druid的方式通过spring的binder来构建
+//        dsMap.put("slaver3", dataSource3());
+
         dynamicDataSource.setTargetDataSources(dsMap);
 
         return dynamicDataSource;
