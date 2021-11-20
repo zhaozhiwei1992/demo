@@ -42,8 +42,10 @@ public class CollectDemo {
         final Map<Long, User> mapIdUser = Stream.of(
                 new User(1L, 18, "zhangsan"),
                 new User(2L, 19, "lisi"),
+                new User(1L, 19, "goudan"),
                 new User(3L, 20, "wangwu")
-        ).collect(Collectors.toMap(User::getId, Function.identity()));
+//        ).collect(Collectors.toMap(User::getId, Function.identity()));
+        ).collect(Collectors.toMap(User::getId, Function.identity(), (k1, k2) -> k1));
         System.out.println(mapIdUser);
 
         //语言环境

@@ -3,6 +3,14 @@
          xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd ">
 
+<servlet>
+  <servlet-name>IndexServlet</servlet-name>
+  <servlet-class>com.lx.demo.IndexServlet</servlet-class>
+</servlet>
+  <servlet-mapping>
+    <servlet-name>IndexServlet</servlet-name>
+    <url-pattern>/indexServlet</url-pattern>
+  </servlet-mapping>
 
 <servlet>
   <servlet-name>PageNotFoundServlet</servlet-name>

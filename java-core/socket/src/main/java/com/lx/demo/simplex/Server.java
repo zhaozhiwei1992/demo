@@ -32,7 +32,7 @@ public class Server {
                 System.out.println("客户端消息: " + s);
 
                 PrintWriter printWriter = new PrintWriter(accept.getOutputStream(), true);
-                printWriter.println("hello mm");
+                printWriter.println("hello mm, " + s);
 
 //                printWriter.close();
 //                bufferedReader.close();

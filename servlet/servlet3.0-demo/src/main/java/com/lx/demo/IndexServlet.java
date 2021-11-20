@@ -1,5 +1,7 @@
 package com.lx.demo;
 
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,8 +33,10 @@ import java.io.IOException;
  *
  *
  * web3.0 与在web.xml中加入servletmapping效果一样
+ * tomcat8 maven插件启动
+ * 请求地址, http://127.0.0.1:8080/servlet/indexServlet
  */
-@WebServlet("/indexServlet")
+//@WebServlet("/indexServlet")
 public class IndexServlet extends HttpServlet {
     public IndexServlet() {
         super();
@@ -40,7 +44,12 @@ public class IndexServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.getWriter().append("Served at: ").append(request.getContextPath());
+        final ServletConfig servletConfig = getServletConfig();
+        response.getWriter()
+                .append("Served at: ")
+                .append(request.getContextPath())
+                .append("servlet config \r\n")
+                .append(servletConfig.getServletName());
     }
 
     @Override

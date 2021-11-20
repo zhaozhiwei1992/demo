@@ -1,6 +1,8 @@
 package com.lx.demo;
 
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -14,7 +16,10 @@ import java.util.stream.Collectors;
  * 谁说string不可变
  */
 public class StringDemo {
-    public static void main(String[] args) throws NoSuchFieldException, IllegalAccessException {
+    public static void main(String[] args) throws NoSuchFieldException, IllegalAccessException,
+            UnsupportedEncodingException {
+
+        cNEncodeTest();
 
 //        计算hashcode冲突
 //        hashCodes();
@@ -22,12 +27,100 @@ public class StringDemo {
 //        encodeDecodeTest();
 
         //针对999 补0
-        String str = String.format("%6d", 999).replace(" ", "0");
-        final String format = String.format("%06d", 99);//其中0表示补零而不是补空格，6表示至少6位
-        System.out.println("补0 : " + str);
-        System.out.println("补0 : " +format);
+//        String str = String.format("%6d", 999).replace(" ", "0");
+//        final String format = String.format("%06d", 99);//其中0表示补零而不是补空格，6表示至少6位
+//        System.out.println("补0 : " + str);
+//        System.out.println("补0 : " +format);
 
 //        changeStr();
+    }
+
+    /**
+     * @data: 2021/11/20-下午9:04
+     * @User: zhaozhiwei
+     * @method: utf8ToGBK
+
+     * @return: void
+     * @Description: 测试汉字编码解码
+     * 结论: 可以通过iso-8859-1作为中转, 仍然可以转换回原值不丢数据
+     * 不用gbk
+     *
+     * 作为中间转存方案，ISO-8859-1 是安全的。
+     * UTF-8 字节流，用GBK字符集中转是不安全的；反过来也是同样的道理。
+     */
+    private static void cNEncodeTest() throws UnsupportedEncodingException {
+        String str = "凭证状态";
+        String str2 = "凭证状态态";
+        System.out.println("Default Charset=" + Charset.defaultCharset());
+//        转换utf8字节流
+        iconv(str, "UTF-8", "ISO-8859-1");
+        iconv(str2, "UTF-8", "ISO-8859-1");
+
+        iconv(str, "UTF-8", "GBK");
+        iconv(str2, "UTF-8", "GBK");
+
+        System.out.println("gkb结果: " + toGBKEncode(str));
+    }
+
+    /**
+     * @data: 2021/11/20-下午9:49
+     * @User: zhaozhiwei
+     * @method: toGBK
+      * @param source :
+     * @return: java.lang.String
+     * @Description: 描述
+     *  java默认用Unicode存储String，所以直接转成某种编码的byte的同时，就已经转成了该编码的encoding。
+     */
+    public static String toGBKEncode(String source) throws UnsupportedEncodingException {
+        StringBuilder sb = new StringBuilder();
+        byte[] bytes = source.getBytes("GBK");
+        for(byte b : bytes) {
+            sb.append("%" + Integer.toHexString((b & 0xff)).toUpperCase());
+        }
+
+//        gbk decode
+        System.out.println(new String(bytes, "GBK"));
+        return sb.toString();
+    }
+
+    private static void iconv(String str, String from, String to) throws UnsupportedEncodingException {
+        final byte[] bytes = str.getBytes(from);
+        System.out.printf("%s byte长度 %s \n", from, bytes.length);
+
+        final String iso885 = new String(bytes, to);
+        System.out.printf("转成 %s %s \n", to, iso885);
+        System.out.printf("重新用 %s 解码, %s \n", from,
+                new String(iso885.getBytes(to), from));
+    }
+
+    public static String getUTF8StringFromGBKString(String gbkStr) {
+        try {
+            return new String(getUTF8BytesFromGBKString(gbkStr), "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            throw new InternalError();
+        }
+    }
+
+    public static byte[] getUTF8BytesFromGBKString(String gbkStr) {
+        int n = gbkStr.length();
+        byte[] utfBytes = new byte[3 * n];
+        int k = 0;
+        for (int i = 0; i < n; i++) {
+            int m = gbkStr.charAt(i);
+            if (m < 128 && m >= 0) {
+                utfBytes[k++] = (byte) m;
+                continue;
+            }
+            utfBytes[k++] = (byte) (0xe0 | (m >> 12));
+            utfBytes[k++] = (byte) (0x80 | ((m >> 6) & 0x3f));
+            utfBytes[k++] = (byte) (0x80 | (m & 0x3f));
+        }
+        if (k < utfBytes.length) {
+            byte[] tmp = new byte[k];
+            System.arraycopy(utfBytes, 0, tmp, 0, k);
+            return tmp;
+        }
+        return utfBytes;
     }
 
     /**
