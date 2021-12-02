@@ -31,7 +31,7 @@ public class TaskClient {
     }
 
     private static String getServerAddress(String appid) {
-        String serverAddress = "";
+        String serverAddress = "127.0.0.1:8080";
         return serverAddress;
     }
 

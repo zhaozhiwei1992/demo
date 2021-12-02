@@ -111,6 +111,7 @@ public class JcrontabDataSource implements DataSource {
             ceb.setSeconds("0");
             ceb.setBusinessDays(true);
 
+            cebs.add(ceb);
         } catch (CrontabEntryException e) {
             logger.error("", e);
         }

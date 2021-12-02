@@ -20,7 +20,7 @@ public class TaskManagerInit implements ITaskManagerInit {
     private static void process() {
         Properties propObj = new Properties();
         propObj.setProperty("org.jcrontab.data.datasource", "com.example.springbootjcrontab.jcrontab.data.JcrontabDataSource");
-//        propObj.setProperty("org.jcrontab.log.Logger", "gov.mof.fasp2.task.jcrontab.log.JdbcLogger");
+        propObj.setProperty("org.jcrontab.log.Logger", "com.example.springbootjcrontab.jcrontab.log.JdbcLogger");
         propObj.setProperty("org.jcrontab.Crontab.refreshFrequency", "1");
 
         try {
