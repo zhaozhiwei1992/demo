@@ -1,5 +1,6 @@
 package com.lx.demo.springbootlog.aop;
 
+import com.lx.demo.springbootlog.appender.LogService;
 import com.lx.demo.springbootlog.service.TraceInfo;
 import net.logstash.logback.encoder.org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -18,9 +19,18 @@ import java.util.UUID;
 
 import static org.springframework.web.context.request.RequestContextHolder.getRequestAttributes;
 
+/**
+ * @Title: LogInfoInitAspect
+ * @Package com/lx/demo/springbootlog/aop/LogInfoInitAspect.java
+ * @Description:
+// 切面的顺序，越小越优先，对于多个切面Spring是使用责任链的模式 为了一开始将日志相关的参数初始化好，这里设置为最优先执行
+ * @author zhaozhiwei
+ * @date 2021/12/6 下午3:54
+ * @version V1.0
+ */
 @Aspect
 @Component
-@Order(0) // 切面的顺序，越小越优先，对于多个切面Spring是使用责任链的模式 为了一开始将日志相关的参数初始化好，这里设置为最优先执行
+@Order(0)
 public class LogInfoInitAspect {
 
 
@@ -72,7 +82,9 @@ public class LogInfoInitAspect {
         MDC.put(RequestURI, requestURI);
 
         // 生成当前请求的一个唯一UUID, 也可作为请求traceid, 最终进行链路追踪
-        String requestId = UUID.randomUUID().toString();
+//        也可以用时间戳
+//        String requestId = UUID.randomUUID().toString();
+        final String requestId = LogService.startJob();
         // 设置请求的唯一ID
         MDC.put(RequestId, requestId);
         // 将次唯一ID设置为响应头

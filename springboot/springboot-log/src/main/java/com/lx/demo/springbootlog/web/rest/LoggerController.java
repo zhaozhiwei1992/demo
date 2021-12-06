@@ -1,6 +1,5 @@
 package com.lx.demo.springbootlog.web.rest;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,7 +12,6 @@ import java.io.Writer;
  * 动态修改log4j日志级别
  * springboot 默认使用logback, 待测试
  */
-@Controller
 public class LoggerController {
 
     /**
