@@ -2,6 +2,7 @@ package com.example.springbootresttemplate.web.controller;
 
 import com.example.springbootresttemplate.domain.User;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -15,7 +16,8 @@ import java.util.HashMap;
 @RequestMapping("/rest")
 public class RestTemplateController {
 
-    private RestTemplate restTemplate = new RestTemplate();
+    @Autowired
+    private RestTemplate restTemplate;
 
     private String host = "http://127.0.0.1:8080";
 
