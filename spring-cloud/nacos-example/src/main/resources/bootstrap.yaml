@@ -5,7 +5,7 @@ spring:
   cloud:
     nacos:
       config:
-        server-addr: 192.168.7.76:8848
+        server-addr: 192.168.7.6:8848
 #        shared-dataids: test2.yaml,test3.yaml
 #        shard
         sharedConfigs[0]:
@@ -17,6 +17,6 @@ spring:
           group: DEFAULT_GROUP
           refresh: true
       discovery:
-        server-addr: 192.168.7.76:8848
+        server-addr: 192.168.7.6:8848
 server:
   port: 0
