@@ -10,5 +10,6 @@
   <modules>
     <module>exception-on-springmvc</module>
     <module>rest-on-springmvc</module>
+    <module>how-springmvc-work</module>
   </modules>
 </project>
