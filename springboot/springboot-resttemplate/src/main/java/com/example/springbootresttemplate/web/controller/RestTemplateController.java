@@ -1,5 +1,6 @@
 package com.example.springbootresttemplate.web.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.example.springbootresttemplate.domain.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -120,6 +121,43 @@ public class RestTemplateController {
         final User body = userResponseEntity.getBody();
         log.info("headers: {}, statuscode: {}, body: {}", headers, code, body);
         return user;
+    }
+
+    /**
+     * @data: 2021/12/29-上午9:20
+     * @User: zhaozhiwei
+     * @method: testTokenid
+     * @return: void
+     * @Description: 测试resttemplate传输 tokenid, 统一post测试
+     */
+    @GetMapping("/echo/token")
+    public void testTokenid(){
+
+        String tokenid = "";
+        JSONObject objectHashMap = new JSONObject();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.valueOf("application/json; charset=UTF-8"));
+        HttpEntity<String> formEntity = new HttpEntity<>(objectHashMap.toString(), headers);
+        String url = host + "/test/token";
+
+        //1. url传参
+        tokenid = "fromurl111";
+        String result = restTemplate.postForObject(url + "?tokenid="+tokenid, formEntity, String.class);
+        log.info("传入token {}, 返回结果 {}", tokenid, result);
+
+        //2. header传输
+        tokenid = "fromheader222";
+        headers.set("tokenid", tokenid);
+        result = restTemplate.postForObject(url, formEntity, String.class);
+        log.info("传入token {}, 返回结果 {}", tokenid, result);
+
+        //3. requestbody传输
+        tokenid = "frombody333";
+        objectHashMap.put("tokenid", tokenid);
+        log.info("请求项目库url {}, 参数: {}", url, formEntity);
+        formEntity = new HttpEntity<>(objectHashMap.toString(), headers);
+        result = restTemplate.postForObject(url, formEntity, String.class);
+        log.info("传入token {}, 返回结果 {}", tokenid, result);
     }
 
 }

@@ -2,10 +2,20 @@ package com.example.springbootresttemplate.web.controller;
 
 import com.example.springbootresttemplate.domain.User;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * 通过resttemplate访问该接口
@@ -66,4 +76,32 @@ public class EchoController {
     public String regexEcho(@PathVariable String id){
         return "传入id: "  + id;
     }
+
+    @PostMapping("/test/token")
+    public String tokenid(@RequestBody HashMap paramMap, @RequestHeader HttpHeaders httpHeaders) throws IOException {
+        final HttpServletRequest request =
+                ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        String tokenid = request.getParameter("tokenid");
+        log.info("通过参数获取token {}", tokenid);
+        tokenid = (String) request.getAttribute("tokenid");
+        log.info("通过参数获取token {}", tokenid);
+
+        //header获取
+        final List<String> tokenid1 = httpHeaders.get("tokenid");
+        log.info("通过header获取token {} ", tokenid1);
+        log.info("通过request.header获取token {} ", request.getHeader("tokenid"));
+
+        //body获取
+        final Object tokenid2 = paramMap.get("tokenid");
+        log.info("通过body获取tokenid {}", tokenid2);
+//        final BufferedReader reader = request.getReader();
+//        final String s = reader.readLine();
+//        while (!StringUtils.isEmpty(s)){
+//           log.info("通过body获取参数 {} ", s);
+//        }
+//        reader.close();
+
+        return tokenid;
+    }
+
 }
