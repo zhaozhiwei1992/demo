@@ -2,6 +2,7 @@ package com.example.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.remoting.jaxws.SimpleJaxWsServiceExporter;
@@ -26,7 +27,16 @@ public class WsServiceConfiguration {
 
     private static final Logger logger = LoggerFactory.getLogger(WsServiceConfiguration.class);
 
+    /**
+     * @data: 2022/1/2-下午5:06
+     * @User: zhaozhiwei
+     * @method: jaxWsExporter
+
+     * @return: org.springframework.remoting.jaxws.SimpleJaxWsServiceExporter
+     * @Description: 默认为true  初始化
+     */
     @Bean
+    @ConditionalOnProperty(prefix = "ifmis.pay.webservice", name = "enabled", havingValue = "true", matchIfMissing=true)
     public SimpleJaxWsServiceExporter jaxWsExporter() {
         SimpleJaxWsServiceExporter exporter = new SimpleJaxWsServiceExporter();
 //         端口不能与业务端口冲突
