@@ -97,7 +97,7 @@ public class JcrontabDataSource implements DataSource {
         boolean[] bYears = new boolean[years];
         try {
 
-            String line = "0 */1 * * * * *" + " " + "com.example.springbootjcrontab.consumer.TaskClient#executeTask" + " " +
+            String line = "0 51 10 * * * *" + " " + "com.example.springbootjcrontab.consumer.TaskClient#executeTask" + " " +
                     "定时任务测试" + " " + "bdg" + " " + "bdg.timertask.SyncIndexDataTask" + " " + "com.example.springbootjcrontab.business.BdgCommonTask#execute";
 
             ceb = cp.marshall(line);

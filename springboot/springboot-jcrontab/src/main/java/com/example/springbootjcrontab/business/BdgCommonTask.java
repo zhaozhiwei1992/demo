@@ -3,6 +3,8 @@ package com.example.springbootjcrontab.business;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Date;
+
 /**
  * 指标定时任务配置入口
  * jobclass gov.mof.fasp2.bdg.timertask.BdgCommonTask#executeTimer
@@ -32,7 +34,7 @@ public class BdgCommonTask {
     public static void execute(String args[]) throws Throwable {
         long s1 = System.currentTimeMillis();
         String beanStr = args[2];
-        logger.info(beanStr + ":开始时间" + s1);
+        logger.info(beanStr + ":开始时间: {}", new Date());
         // 加锁执行
         Thread.sleep(1000);
         logger.info(beanStr + ":结束时间" + System.currentTimeMillis() + ",用时：" + (System.currentTimeMillis() - s1));
