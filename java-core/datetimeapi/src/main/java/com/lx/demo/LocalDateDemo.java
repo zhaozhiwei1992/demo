@@ -1,6 +1,7 @@
 package com.lx.demo;
 
 import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 public class LocalDateDemo {
@@ -8,6 +9,10 @@ public class LocalDateDemo {
         final LocalDate now = LocalDate.now();
         System.out.printf("当前日期, %s\n", now.getDayOfMonth());
         System.out.println(now);
+
+        System.out.printf("当前月, %s \n", now.getMonthValue());
+//        自动补0
+        System.out.printf("当前月补0, %s \n", DateTimeFormatter.ofPattern("MM").format(now));
 
         final LocalDate ttangBirthDay = LocalDate.of(1990, Month.AUGUST, 07);
         System.out.printf("birthday, %s \n", ttangBirthDay);
