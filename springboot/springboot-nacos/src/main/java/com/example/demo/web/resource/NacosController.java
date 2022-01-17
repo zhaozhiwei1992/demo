@@ -5,6 +5,8 @@ import com.alibaba.nacos.api.config.annotation.NacosValue;
 import com.alibaba.nacos.api.exception.NacosException;
 import com.alibaba.nacos.api.naming.NamingService;
 import com.alibaba.nacos.api.naming.pojo.Instance;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,11 +15,20 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 public class NacosController {
 
+    private static final Logger logger = LoggerFactory.getLogger(NacosController.class);
+
     /**
      * 在nacos中配置键值对即可
+     * 注: 格式必须是properties
      */
     @NacosValue(value = "${nacos.test.propertie:123}", autoRefreshed = true)
     private String testProperties;
+
+    public void setTestProperties(String testProperties) {
+        logger.info("before set {}", testProperties);
+        this.testProperties = testProperties;
+        logger.info("after set {}", testProperties);
+    }
 
     /**
      * 测试nacos配置中心

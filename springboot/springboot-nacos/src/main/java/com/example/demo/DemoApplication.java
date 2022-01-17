@@ -15,7 +15,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
  */
 @SpringBootApplication
-@NacosPropertySource(dataId = "springboot-nacos-config", autoRefreshed = true)
+@NacosPropertySource(dataId = "springboot-nacos-config.yml", autoRefreshed = true)
 public class DemoApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
@@ -34,6 +34,6 @@ public class DemoApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		// 通过Naming服务注册实例到注册中心
-		namingService.registerInstance(applicationName, "127.0.0.1", serverPort);
+		namingService.registerInstance(applicationName, "192.168.7.6", serverPort);
 	}
 }
