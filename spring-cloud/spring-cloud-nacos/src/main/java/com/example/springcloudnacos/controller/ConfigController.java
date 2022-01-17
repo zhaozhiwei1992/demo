@@ -1,5 +1,7 @@
 package com.example.springcloudnacos.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +26,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RefreshScope
 public class ConfigController {
 
+    private static final Logger logger = LoggerFactory.getLogger(ConfigController.class);
+
     @Value("${useLocalCache:false}")
     private boolean useLocalCache;
 
@@ -34,6 +38,12 @@ public class ConfigController {
 
     @Value("${spring.datasource.url:123}")
     private String url;
+
+    public void setUrl(String url) {
+        logger.info("before set {}", url);
+        this.url = url;
+        logger.info("after set {}", url);
+    }
 
     @GetMapping("/url")
     public String url(){
