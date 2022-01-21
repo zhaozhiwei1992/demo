@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import java.util.stream.Stream;
 
 //@SpringBootApplication
-@Configuration("annotationBeanInit")
+//@Configuration("annotationBeanInit")
 @ComponentScan(basePackages = "com.example.springbootbean.bootstrap")
 public class AnnotationBeanInitBootstrap {
 

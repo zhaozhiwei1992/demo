@@ -1,4 +1,5 @@
 msg: old_msg
+name: old_name
 transfer:
   tables:
     table1: xx
