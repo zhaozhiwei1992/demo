@@ -2,7 +2,6 @@ package com.lx.demo;
 
 import java.math.BigDecimal;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class DataGroupUtil {
 
@@ -54,63 +53,11 @@ public class DataGroupUtil {
 //       两层分组并限制上层明细条数, 先根据id分组，在根据name分组，并且每个id下根据name汇总不能超过两个
         int perPageNum = 2; //500
         for (Map.Entry<String, List<Map>> listEntry : stringListMap.entrySet()) {
-
-            // 存放拆分结果
-            final Map<String, List<Map>> resultMap = new HashMap<>();
 //            主单信息json格式, 通知单根据汇总规则汇总后主单信息
             final String mainJsonInfo = listEntry.getKey();
 //            明细信息
             final List<Map> value = listEntry.getValue();
-            if(value.size() <= perPageNum){
-                // 明细条数小于限制条数，则汇总肯定小于500,不需要汇总拆分
-                resultMap.put(mainJsonInfo + "-0", value);
-            }else{
-//            明细按照汇总条数不能超过指定条数分割, 即resultMap.keysize超过perPageNum则分割
-                Map<String, List<Map>> groupMap = new HashMap<>();
-                int pageIdx=0;
-                for (int i = 0; i < value.size(); i++) {
-                    Map dataItem = value.get(i);
-                    StringBuilder key = new StringBuilder();
-//                    功能科目/单位
-                    for (String packReg : Arrays.asList("name")) {
-                        String dataStr = String.valueOf(dataItem.get(packReg.toLowerCase()));
-                        key.append(",").append(dataStr).append(",");
-                    }
-                    if (groupMap.containsKey(key.toString())) {
-                        final List<Map> list = groupMap.get(key.toString());
-                        list.add(dataItem);
-                    } else {
-                        List<Map> list = new ArrayList();
-                        list.add(dataItem);
-                        groupMap.put(key.toString(), list);
-                        if (groupMap.keySet().size() % perPageNum == 0) {
-                            // 汇总条数不能超过perpagenum, 每次到临界点放一次
-                            final List<Map> arrayList = new ArrayList<>();
-                            for (List<Map> mapList : groupMap.values()) {
-                                arrayList.addAll(mapList);
-                            }
-                            resultMap.put(mainJsonInfo + "-" + pageIdx++, arrayList);
-                            groupMap.clear();
-                        }else if((groupMap.keySet().size() + (value.size() - i)) < perPageNum){
-//                        汇总的条数不足以达到临界点, (剩余数据条数+groupMap.keysize)小于perPageNum, 则汇总更不可能达到perPageNum
-                            final List<Map> arrayList = new ArrayList<>();
-                            for (List<Map> mapList : groupMap.values()) {
-                                arrayList.addAll(mapList);
-                            }
-                            // 已汇总数据和剩余数据打包,放入集合中
-                            for (int j = i; j < value.size(); j++) {
-                                arrayList.add(value.get(j));
-                            }
-                            resultMap.put(mainJsonInfo + "-" + pageIdx++, arrayList);
-                            groupMap.clear();
-                            break;
-                        }
-                    }
-                }
-            }
-
-            System.out.println("每个主单分组结果");
-            System.out.println(resultMap);
+            splitGroupPaging(value, mainJsonInfo, perPageNum);
         }
 
         //j8分组
@@ -121,6 +68,72 @@ public class DataGroupUtil {
 //        final Map<String, List<Map>> groupByAmt = groupByAmt(maps);
 //        System.out.println("根据金额分组: " + groupByAmt);
 
+    }
+
+    /**
+     * @data: 2022/1/22-下午1:47
+     * @User: zhaozhiwei
+     * @method: splitGroupPaging
+      * @param value :
+     * @param mainJsonInfo :
+     * @param perPageNum :
+     * @return: java.util.Map<java.lang.String,java.util.List<java.util.Map>>
+     * @Description: 返回结果带有-index游标, 如果只有0则说明不需要拆分, 存在多个说明是拆分的
+     */
+    private static Map<String, List<Map>> splitGroupPaging(List<Map> value, String mainJsonInfo, int perPageNum) {
+        // 存放拆分结果
+        final Map<String, List<Map>> resultMap = new HashMap<>();
+        if(value.size() <= perPageNum){
+            // 明细条数小于限制条数，则汇总肯定小于500,不需要汇总拆分
+            resultMap.put(mainJsonInfo + "-0", value);
+        }else{
+//            明细按照汇总条数不能超过指定条数分割, 即resultMap.keysize超过perPageNum则分割
+            Map<String, List<Map>> groupMap = new HashMap<>();
+            int pageIdx=0;
+            for (int i = 0; i < value.size(); i++) {
+                Map dataItem = value.get(i);
+                StringBuilder key = new StringBuilder();
+//                    功能科目/单位
+                for (String packReg : Arrays.asList("name")) {
+                    String dataStr = String.valueOf(dataItem.get(packReg.toLowerCase()));
+                    key.append(",").append(dataStr).append(",");
+                }
+                if (groupMap.containsKey(key.toString())) {
+                    final List<Map> list = groupMap.get(key.toString());
+                    list.add(dataItem);
+                } else {
+                    List<Map> list = new ArrayList();
+                    list.add(dataItem);
+                    groupMap.put(key.toString(), list);
+                    if (groupMap.keySet().size() % perPageNum == 0) {
+                        // 汇总条数不能超过perpagenum, 每次到临界点放一次
+                        final List<Map> arrayList = new ArrayList<>();
+                        for (List<Map> mapList : groupMap.values()) {
+                            arrayList.addAll(mapList);
+                        }
+                        resultMap.put(mainJsonInfo + "-" + pageIdx++, arrayList);
+                        groupMap.clear();
+                    }else if((groupMap.keySet().size() + (value.size() - i)) < perPageNum){
+//                        汇总的条数不足以达到临界点, (剩余数据条数+groupMap.keysize)小于perPageNum, 则汇总更不可能达到perPageNum
+                        final List<Map> arrayList = new ArrayList<>();
+                        for (List<Map> mapList : groupMap.values()) {
+                            arrayList.addAll(mapList);
+                        }
+                        // 已汇总数据和剩余数据打包,放入集合中
+                        for (int j = i; j < value.size(); j++) {
+                            arrayList.add(value.get(j));
+                        }
+                        resultMap.put(mainJsonInfo + "-" + pageIdx++, arrayList);
+                        groupMap.clear();
+                        break;
+                    }
+                }
+            }
+        }
+
+        System.out.println("每个主单分组结果");
+        System.out.println(resultMap);
+        return resultMap;
     }
 
     /**
