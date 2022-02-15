@@ -26,4 +26,16 @@ public class EchoController {
         return msg;
     }
 
+    /**
+     * @data: 2022/2/15-下午3:15
+     * -Da=xxx -Db=${a}  增加这样参数也是生效的
+     */
+    @Value("${b}")
+    private String b;
+
+    @GetMapping("/echo/b")
+    private String b(){
+        log.info("日志输出 {}", b);
+        return b;
+    }
 }
