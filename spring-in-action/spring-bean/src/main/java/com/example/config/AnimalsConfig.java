@@ -2,10 +2,7 @@ package com.example.config;
 
 import com.example.domain.Cat;
 import com.example.domain.SpeakInterface;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.annotation.*;
 
 /**
  * @author zhaozhiwei
@@ -21,10 +18,12 @@ import org.springframework.context.annotation.ImportResource;
  *
  * @date 2022/2/16 上午9:42
  */
-@Configuration
+//@Configuration
 @ComponentScan(basePackageClasses = SpeakInterface.class)
+// Import注解可以聚合多个配置
+//@Import()
 // 通过ImportResource直接引入xml配置，等价<import></import>
-@ImportResource("classpath:spring-context.xml")
+//@ImportResource("classpath:spring-context.xml")
 public class AnimalsConfig {
 
     /**

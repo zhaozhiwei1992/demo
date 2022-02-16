@@ -2,14 +2,24 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="
         http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <bean id="pig" class="com.example.domain.Pig">
-        <property name="message" value="我是通过xml配置的"></property>
+    <bean id="pig" class="com.example.domain.Pig"
+        c:_0="哼哼" p:message="我是通过xml配置的"
+    >
+<!--        可以通过p schema, p:属性名方式写入属性-->
+<!--        <property name="message" value="我是通过xml配置的"></property>-->
+
+<!--        https://docs.spring.io/spring-framework/docs/4.3.22.RELEASE/spring-framework-reference/htmlsingle/#beans-c-namespace-->
+<!--        参考spring实战第4版, c namespace-->
+<!--        <constructor-arg value="哼哼"></constructor-arg>-->
+<!--            <constructor-arg><null/></constructor-arg>-->
     </bean>
 
 <!--    <context:property-placeholder location="jdbc.properties"/>-->

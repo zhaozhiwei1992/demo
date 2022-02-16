@@ -10,6 +10,12 @@ package com.example.domain;
  */
 public class Pig implements SpeakInterface{
 
+    private String name;
+
+    public Pig(String name) {
+        this.name = name;
+    }
+
     private String message;
 
     public void setMessage(String message) {
@@ -17,6 +23,6 @@ public class Pig implements SpeakInterface{
     }
 
     public void speak() {
-        System.out.println("哼哼: " + message);
+        System.out.println("哼哼: my name is " + name + ", " + message);
     }
 }
