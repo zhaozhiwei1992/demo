@@ -1,10 +1,13 @@
 package com.example;
 
 import com.example.config.AnimalsConfig;
+import com.example.domain.Cat;
 import com.example.domain.Dog;
+import com.example.domain.Pig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
@@ -29,5 +32,27 @@ public class AnimalTest {
     public void dogTest(){
         Assert.notNull(dog, "dog is null");
         dog.speak();
+    }
+
+    private Cat cat;
+
+    @Autowired
+    public void setCat(Cat cat) {
+        this.cat = cat;
+    }
+
+    @Test
+    public void catTest(){
+        Assert.notNull(cat, "cat is null");
+        cat.speak();
+    }
+
+    @Autowired
+    private Pig pig;
+
+    @Test
+    public void pigTest(){
+        Assert.notNull(pig, "pig is null");
+        pig.speak();
     }
 }
