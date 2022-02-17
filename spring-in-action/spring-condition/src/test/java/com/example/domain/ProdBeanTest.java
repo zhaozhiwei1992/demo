@@ -37,7 +37,7 @@ public class ProdBeanTest{
 
         annotationConfigApplicationContext.refresh();
 
-        Assert.isTrue(annotationConfigApplicationContext.containsBean("prodBean"), "prodBean 初始化成功");
+        Assert.isTrue(annotationConfigApplicationContext.containsBean("prodBean"), "prodBean 初始化失败");
 //        final Object prodBean = annotationConfigApplicationContext.getBean("prodBean");
 //        System.out.println(prodBean);
         annotationConfigApplicationContext.close();

@@ -1,5 +1,7 @@
 package com.example.domain;
 
+import com.example.annotation.ProdQualifiter;
+
 /**
  * @author zhaozhiwei
  * @version V1.0
@@ -8,7 +10,8 @@ package com.example.domain;
  * @Description: TODO
  * @date 2022/2/17 上午9:29
  */
-public class ProdBean {
+@ProdQualifiter
+public class ProdBean implements CommonBean{
 
     public ProdBean() {
         System.out.println("This is ProdBean");

@@ -1,5 +1,7 @@
 package com.example.domain;
 
+import com.example.annotation.DevQualifiter;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +15,8 @@ import org.springframework.stereotype.Component;
  */
 @Profile("dev")
 @Component
-public class DevBean {
+@DevQualifiter
+public class DevBean implements CommonBean{
     public DevBean() {
         System.out.println("This is DevBean");
     }

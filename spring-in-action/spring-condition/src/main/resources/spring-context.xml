@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <beans profile="dev">
+<!--        相同类型bean初始化时, autowired引入会报No qualifying bean of type, 需要制定primary-->
+<!--        <bean id="devBean" class="com.example.domain.DevBean" primary="true"/>-->
+        <bean id="devBean" class="com.example.domain.DevBean"/>
+    </beans>
+
+    <beans profile="prod">
+        <bean id="prodBean" class="com.example.domain.ProdBean" />
+    </beans>
+
+</beans>

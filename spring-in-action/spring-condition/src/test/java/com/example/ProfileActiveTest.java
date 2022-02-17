@@ -1,11 +1,18 @@
 package com.example;
 
-import com.example.config.ProfileBeanConfig;
+import com.example.annotation.DevQualifiter;
+import com.example.annotation.ProdQualifiter;
+import com.example.domain.CommonBean;
+import com.example.domain.DevBean;
+import com.example.domain.ProdBean;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.util.Assert;
 
 /**
  * @author zhaozhiwei
@@ -16,11 +23,39 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @date 2022/2/17 上午9:33
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = ProfileBeanConfig.class)
+@ContextConfiguration(locations = "/spring-context.xml")
+@ActiveProfiles(profiles = {"dev", "prod"})
 public class ProfileActiveTest {
 
-    @Test
-    public void devBeanTest(){
+    @Autowired
+    private ProdBean prodBean;
 
+    @Autowired
+    private DevBean devBean;
+
+    @Test
+    public void profileBeanTest(){
+        Assert.notNull(prodBean, "prodBean初始化失败");
+        Assert.notNull(devBean, "devBean初始化失败");
+    }
+
+    /**
+     * @data: 2022/2/17-上午11:26
+     * @User: zhaozhiwei
+     * @method:
+      * @param null :
+     * @return:
+     * @Description:
+     * 相同类型bean, 通过@Primary或者通过Qualifier来指定唯一
+     */
+    @Autowired
+//    @Qualifier("devBean")
+//    @DevQualifiter
+    @ProdQualifiter
+    private CommonBean commonBean;
+
+    @Test
+    public void commonBeanTest(){
+        Assert.notNull(commonBean, "commonBean 初始化失败");
     }
 }
