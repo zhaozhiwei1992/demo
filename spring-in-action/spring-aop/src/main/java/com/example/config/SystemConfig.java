@@ -1,7 +1,9 @@
 package com.example.config;
 
-import com.example.domain.Rabbit;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.ImportResource;
 
 /**
  * @author zhaozhiwei

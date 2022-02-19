@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
 //@Component
 public class RunTimer {
 
-    @Pointcut("execution (** com.example.domain..*.run())")
+    @Pointcut("execution (* com.example.domain..*.run())")
     public void runPoint(){}
 
     @Before("runPoint()")

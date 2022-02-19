@@ -17,12 +17,21 @@
         <aop:aspect ref="runTimer">
 
             <aop:pointcut id="runPoint"
-                          expression="execution (** com.example.domain..*.run())"/>
+                          expression="execution (* com.example.domain..*.run())"/>
 
 <!--            method标识的是用ref指定bean, 哪个方法来走aop:around-->
             <aop:around pointcut-ref="runPoint"
                         method="around"/>
 
+        </aop:aspect>
+
+<!--        扩展方法实现-->
+        <aop:aspect>
+<!--            com.example.aop.JumpIntroducer-->
+            <aop:declare-parents
+                    types-matching="com.example.domain.Run+"
+                    implement-interface="com.example.domain.Jump"
+                    default-impl="com.example.domain.DefaultJump"/>
         </aop:aspect>
     </aop:config>
 

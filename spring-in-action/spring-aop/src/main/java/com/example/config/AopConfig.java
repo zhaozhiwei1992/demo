@@ -1,5 +1,6 @@
 package com.example.config;
 
+import com.example.aop.JumpIntroducer;
 import com.example.aop.RunTimer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -21,4 +22,9 @@ public class AopConfig {
     public RunTimer runTimer(){
         return new RunTimer();
     }
+
+//    @Bean
+//    public JumpIntroducer jumpIntroducer(){
+//        return new JumpIntroducer();
+//    }
 }
