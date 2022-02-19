@@ -10,6 +10,7 @@
   <modules>
       <module>spring-bean</module>
     <module>spring-condition</module>
+    <module>spring-aop</module>
   </modules>
   <properties>
 <!--    java: 错误: 不支持发行版本 5-->
@@ -33,6 +34,7 @@
         <version>4.12</version>
         <scope>test</scope>
       </dependency>
+
     </dependencies>
   </dependencyManagement>
 

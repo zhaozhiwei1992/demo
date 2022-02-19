@@ -1,0 +1,29 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- this is the object that will be proxied by Spring's AOP infrastructure -->
+<!--    com.example.config.SystemConfig  @ComponentScan已经扫描bean-->
+<!--    <bean id="rabbit" class="com.example.domain.Rabbit" />-->
+<!--    <bean id="turtles" class="com.example.domain.Turtles" />-->
+
+    <!-- this is the actual advice itself -->
+    <bean id="runTimer" class="com.example.aop.RunTimer" />
+
+    <aop:config>
+        <aop:aspect ref="runTimer">
+
+            <aop:pointcut id="runPoint"
+                          expression="execution (** com.example.domain..*.run())"/>
+
+<!--            method标识的是用ref指定bean, 哪个方法来走aop:around-->
+            <aop:around pointcut-ref="runPoint"
+                        method="around"/>
+
+        </aop:aspect>
+    </aop:config>
+
+</beans>
