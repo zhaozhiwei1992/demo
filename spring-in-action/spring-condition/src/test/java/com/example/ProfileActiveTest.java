@@ -40,12 +40,6 @@ public class ProfileActiveTest {
     }
 
     /**
-     * @data: 2022/2/17-上午11:26
-     * @User: zhaozhiwei
-     * @method:
-      * @param null :
-     * @return:
-     * @Description:
      * 相同类型bean, 通过@Primary或者通过Qualifier来指定唯一
      */
     @Autowired

@@ -10,8 +10,11 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
+<!--    xml 解析placeholder必须在xml中配置下述标签-->
+    <context:property-placeholder location="app.properties"/>
+
     <bean id="pig" class="com.example.domain.Pig"
-        c:_0="哼哼" p:message="我是通过xml配置的"
+        c:_0="${pig.name}" p:message="我是通过xml配置的"
     >
 <!--        可以通过p schema, p:属性名方式写入属性-->
 <!--        <property name="message" value="我是通过xml配置的"></property>-->
@@ -22,6 +25,5 @@
 <!--            <constructor-arg><null/></constructor-arg>-->
     </bean>
 
-<!--    <context:property-placeholder location="jdbc.properties"/>-->
 
 </beans>

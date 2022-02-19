@@ -1,8 +1,7 @@
 package com.example.config;
 
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.ImportResource;
+import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
+import org.springframework.context.annotation.*;
 
 /**
  * @author zhaozhiwei
@@ -15,5 +14,8 @@ import org.springframework.context.annotation.ImportResource;
 @Configuration
 @Import(value = {AnimalsConfig.class})
 @ImportResource("classpath:spring-context.xml")
+//ConfigurationClassParser.processPropertySource() 解析
+@PropertySource(value = "classpath:app.properties", encoding = "UTF-8")
 public class SystemConfig {
+
 }

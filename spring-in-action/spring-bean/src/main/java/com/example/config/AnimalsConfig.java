@@ -2,7 +2,12 @@ package com.example.config;
 
 import com.example.domain.Cat;
 import com.example.domain.SpeakInterface;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.*;
+import org.springframework.core.env.Environment;
+
+import java.nio.charset.StandardCharsets;
 
 /**
  * @author zhaozhiwei
@@ -26,11 +31,18 @@ import org.springframework.context.annotation.*;
 //@ImportResource("classpath:spring-context.xml")
 public class AnimalsConfig {
 
+    @Autowired
+    private Environment environment;
+
+    @Value("${cat.name}")
+    private String catName;
+
     /**
      * @Description: 通过JavaConfig配置bean, 等价 <bean id="cat" class=xxx><bean/>
      */
     @Bean
     public Cat cat(){
-        return new Cat();
+//        environment.getProperty("cat.name")
+        return new Cat(catName);
     }
 }
