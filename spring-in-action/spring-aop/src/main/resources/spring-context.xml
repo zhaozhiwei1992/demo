@@ -35,4 +35,9 @@
         </aop:aspect>
     </aop:config>
 
+<!--    直接使用原生aspect, 待测试, 先将aspectj编译为class-->
+<!--    <bean id="umpire" class="com/example/aop/Umpire" factory-method="aspectOf">-->
+<!--        <property name="rabbit" ref="rabbit"/>-->
+<!--    </bean>-->
+
 </beans>
