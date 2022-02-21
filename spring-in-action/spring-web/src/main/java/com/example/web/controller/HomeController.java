@@ -2,6 +2,7 @@ package com.example.web.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * @author zhaozhiwei
@@ -13,7 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
  * 需要配置解析器
  * @date 2022/2/21 上午9:10
  */
-@Controller("/")
+@Controller
+@RequestMapping({"/", "homePage"})
 public class HomeController {
 
     @GetMapping

@@ -1,73 +1,115 @@
 <?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>com.example</groupId>
-    <artifactId>spring-in-action</artifactId>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.example</groupId>
+        <artifactId>spring-in-action</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>spring-web</artifactId>
     <version>1.0-SNAPSHOT</version>
-  </parent>
-  <artifactId>spring-web</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <packaging>war</packaging>
-  <name>spring-web</name>
-  <url>http://maven.apache.org</url>
-  <properties>
-    <!--    webxml attribute is required (or pre-existing WEB-INF/web.xml if executing in update mode)-->
-    <failOnMissingWebXml>false</failOnMissingWebXml>
-  </properties>
-  <dependencies>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-beans</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-context</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-webmvc</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-      <scope>provided</scope>
-    </dependency>
+    <packaging>war</packaging>
+    <name>spring-web</name>
+    <url>http://maven.apache.org</url>
+    <properties>
+        <!--    webxml attribute is required (or pre-existing WEB-INF/web.xml if executing in update mode)-->
+        <failOnMissingWebXml>false</failOnMissingWebXml>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
 
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-test</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+            <scope>runtime</scope>
+        </dependency>
 
-  <build>
-    <finalName>spring-web</finalName>
-    <!--这个地方有点bug，nullpointor 只能打包好后通过java -jar执行-->
-    <plugins>
-      <plugin>
-        <groupId>org.apache.tomcat.maven</groupId>
-        <artifactId>tomcat7-maven-plugin</artifactId>
-        <version>2.1</version>
-        <executions>
-          <execution>
-            <id>tomcat-run</id>
-            <goals>
-              <goal>exec-war-only</goal>
-            </goals>
-            <phase>package</phase>
-            <configuration>
-              <!-- ServletContext path -->
-              <path>/</path>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <scope>compile</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <finalName>spring-web</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.1</version>
+                <executions>
+                    <execution>
+                        <id>tomcat-run</id>
+                        <goals>
+                            <goal>exec-war-only</goal>
+                        </goals>
+                        <phase>package</phase>
+                        <configuration>
+                            <!-- ServletContext path -->
+                            <path>/</path>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!--            <plugin>-->
+            <!--            可能跟sevlet3.0兼容有点问题，没有初始化-->
+            <!--                <groupId>org.apache.tomcat.maven</groupId>-->
+            <!--                <artifactId>tomcat8-maven-plugin</artifactId>-->
+            <!--                <version>3.0-r1655215</version>-->
+            <!--&lt;!&ndash;                <configuration>&ndash;&gt;-->
+            <!--&lt;!&ndash;                    <path>/</path>&ndash;&gt;-->
+            <!--&lt;!&ndash;                </configuration>&ndash;&gt;-->
+            <!--            </plugin>-->
+        </plugins>
+    </build>
+
+    <!--    配置tomcat8插件仓库-->
+    <pluginRepositories>
+        <pluginRepository>
+            <id>alfresco-public</id>
+            <url>https://artifacts.alfresco.com/nexus/content/groups/public</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>alfresco-public-snapshots</id>
+            <url>https://artifacts.alfresco.com/nexus/content/groups/public-snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+            </snapshots>
+        </pluginRepository>
+        <pluginRepository>
+            <id>beardedgeeks-releases</id>
+            <url>http://beardedgeeks.googlecode.com/svn/repository/releases</url>
+        </pluginRepository>
+    </pluginRepositories>
 </project>

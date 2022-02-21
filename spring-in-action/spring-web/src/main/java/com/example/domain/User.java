@@ -1,5 +1,7 @@
 package com.example.domain;
 
+import java.util.Date;
+
 /**
  * @author zhaozhiwei
  * @version V1.0
@@ -17,6 +19,8 @@ public class User {
     private String password;
 
     private int age;
+
+    private Date createTime;
 
     public long getId() {
         return id;
@@ -50,10 +54,20 @@ public class User {
         this.age = age;
     }
 
-    public User(long id, String name, String password, int age) {
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public User(long id, String name, String password, int age, Date createTime) {
         this.id = id;
         this.name = name;
         this.password = password;
         this.age = age;
+        this.createTime = createTime;
+    }
+
+    public User(long id, Date createTime) {
+        this.id = id;
+        this.createTime = createTime;
     }
 }
