@@ -11,6 +11,7 @@
       <module>spring-bean</module>
     <module>spring-condition</module>
     <module>spring-aop</module>
+    <module>spring-web</module>
   </modules>
   <properties>
 <!--    java: 错误: 不支持发行版本 5-->
@@ -33,6 +34,13 @@
         <artifactId>junit</artifactId>
         <version>4.12</version>
         <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>javax.servlet-api</artifactId>
+        <version>3.0.1</version>
+        <scope>provided</scope>
       </dependency>
 
     </dependencies>
