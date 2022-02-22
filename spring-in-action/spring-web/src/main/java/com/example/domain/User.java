@@ -1,6 +1,10 @@
 package com.example.domain;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * @author zhaozhiwei
@@ -69,5 +73,24 @@ public class User {
     public User(long id, Date createTime) {
         this.id = id;
         this.createTime = createTime;
+    }
+
+    public User(long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public User() {
+    }
+
+    @Override
+    public boolean equals(Object that) {
+        return EqualsBuilder.reflectionEquals(this, that,"id", "name");
+    }
+
+    @Override
+    public int hashCode() {
+//        return Objects.hash(id, name);
+        return HashCodeBuilder.reflectionHashCode(this, "id", name);
     }
 }

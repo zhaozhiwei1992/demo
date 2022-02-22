@@ -33,6 +33,23 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class UserControllerTest{
 
     @Test
+    public void testUser() throws Exception{
+        final User user = new User(1, new Date());
+        final UserRepository userRepository = mock(UserRepository.class);
+        when(userRepository.findOne(1)).thenReturn(user);
+
+        final UserController userController = new UserController();
+        userController.setUserRepository(userRepository);
+        final MockMvc mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/user/1"))
+                .andExpect(view().name("user"))
+                .andExpect(model().attributeExists("user"))
+                .andExpect(model().attribute("user", user));
+
+    }
+
+    @Test
     public void testUsers() throws Exception {
 
 //        1. 创建集合
@@ -46,11 +63,12 @@ public class UserControllerTest{
         final UserController userController = new UserController();
         userController.setUserRepository(userRepository);
         final MockMvc mockMvc = MockMvcBuilders.standaloneSetup(userController)
-                .setSingleView(new InternalResourceView("/WEB-INF/jsp/user.jsp"))
+//               直接固定view, 否则， 如果请求为/users, 返回也为users时候会冲突
+                .setSingleView(new InternalResourceView("/WEB-INF/jsp/users.jsp"))
                 .build();
 
 //        3. 请求返回结果是否一致
-        mockMvc.perform(MockMvcRequestBuilders.get("/users"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/users?startIndex=1&count=20"))
                 .andExpect(view().name("users"))
                 .andExpect(model().attributeExists("userList"))
                 .andExpect(model().attribute("userList", hasItems(users.toArray())));

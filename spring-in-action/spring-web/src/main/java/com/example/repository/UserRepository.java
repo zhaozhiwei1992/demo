@@ -15,4 +15,8 @@ import java.util.List;
 public interface UserRepository {
 
     List<User> findUsers(int startIndex, int Count);
+
+    User findOne(int id);
+
+    User save(User user);
 }
