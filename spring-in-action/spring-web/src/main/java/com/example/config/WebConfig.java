@@ -12,6 +12,8 @@ import org.springframework.web.servlet.config.annotation.DefaultServletHandlerCo
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
+import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
 import javax.swing.*;
 import javax.validation.Validation;
@@ -41,7 +43,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
      * @return: org.springframework.web.servlet.ViewResolver
      * @Description: 配置jsp视图解析器
      */
-    @Bean
+//    @Bean
     public ViewResolver viewResolver(){
         final InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setPrefix("/WEB-INF/jsp/");
@@ -77,5 +79,18 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         resourceBundleMessageSource.setBasename("message");
         resourceBundleMessageSource.setDefaultEncoding("UTF-8");
         return resourceBundleMessageSource;
+    }
+
+    @Bean
+    public TilesConfigurer tilesConfigurer(){
+        final TilesConfigurer tilesConfigurer = new TilesConfigurer();
+        tilesConfigurer.setDefinitions("/WEB-INF/layout/tiles.xml");
+        tilesConfigurer.setCheckRefresh(true);
+        return tilesConfigurer;
+    }
+
+    @Bean
+    public ViewResolver tilesViewResolver(){
+        return new TilesViewResolver();
     }
 }
