@@ -1,13 +1,20 @@
 package com.example.config;
 
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.validation.Validator;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
+import javax.swing.*;
+import javax.validation.Validation;
 
 /**
  * @author zhaozhiwei
@@ -51,5 +58,24 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 //        器中默认的Servlet上，而不是使用DispatcherServlet本身来处理
 //                此类请求
         configurer.enable();
+    }
+
+//    By default use of @EnableWebMvc or <mvc:annotation-driven> automatically registers Bean Validation support in Spring MVC through the LocalValidatorFactoryBean when a Bean javax.validation.Validation provider such as Hibernate Validator is detected on the classpath.
+//    @Override
+//    public Validator getValidator() {
+//        // return "global" validator
+//        return new LocalValidatorFactoryBean();
+//    }
+
+    /**
+     * @Description: 国际化提示消息
+     */
+    @Bean
+    public MessageSource messageSource(){
+        final ResourceBundleMessageSource resourceBundleMessageSource = new ResourceBundleMessageSource();
+//        这里basename跟文件名有关message_zh.properties
+        resourceBundleMessageSource.setBasename("message");
+        resourceBundleMessageSource.setDefaultEncoding("UTF-8");
+        return resourceBundleMessageSource;
     }
 }

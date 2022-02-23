@@ -3,6 +3,8 @@ package com.example.domain;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.Objects;
 
@@ -18,10 +20,12 @@ public class User {
 
     private long id;
 
+    @NotNull
     private String name;
 
     private String password;
 
+    @Min(value = 18, message = "未成年人不能看片")
     private int age;
 
     private Date createTime;

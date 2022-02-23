@@ -4,9 +4,11 @@ import com.example.domain.User;
 import com.example.repository.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+
+import javax.validation.Valid;
 
 /**
  * @author zhaozhiwei
@@ -26,12 +28,18 @@ public class LoginController {
     }
 
     @GetMapping("/register")
-    public String showRegistrationForm(){
+    public String showRegistrationForm(Model model){
+        model.addAttribute(new User(1, "ttang"));
         return "registerForm";
     }
 
     @PostMapping("/register")
-    public String processRegistration(User user){
+    public String processRegistration(@Valid User user, Errors errors){
+        if(errors.hasErrors()){
+//            如果有异常会直接返回到当前页面, 并且填充错误信息
+            System.out.println("报错了");
+            return "registerForm";
+        }
         userRepository.save(user);
         return "redirect:/user/"+user.getId();
     }

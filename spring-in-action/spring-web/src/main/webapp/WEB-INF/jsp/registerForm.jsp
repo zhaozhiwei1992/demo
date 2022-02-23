@@ -1,18 +1,19 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <html>
   <head>
     <title>RegisterForm</title>
   </head>
   <body bgcolor="white">
     <h2>This is registerForm</h2>
-    <form method="post">
-      姓名: <input type="text" name="name" size="25" /> <br/>
-      密码: <input type="password" name="password" size="25" /><br/>
-      年龄: <input type="text" name="age" size="3" /><br/>
+    <sf:form method="post" modelAttribute="user">
+      统一异常区:  <sf:errors path="*" element="div"/> <br/>
+      姓名: <sf:input type="text" name="name" size="25" path="name"/> <sf:errors path="name"/><br/>
+      密码: <sf:input type="password" name="password" size="25" path="password" /><br/>
+      年龄: <sf:input type="text" name="age" size="3" path="age"/><sf:errors path="age"/><br/>
       <p></p>
       <input type="submit" value="Submit" />
       <input type="reset" value="Reset" />
-    </form>
+    </sf:form>
   </body>
 </html>
