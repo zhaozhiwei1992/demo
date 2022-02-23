@@ -39,6 +39,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         final InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setPrefix("/WEB-INF/jsp/");
         viewResolver.setSuffix(".jsp");
+        viewResolver.setViewClass(org.springframework.web.servlet.view.JstlView.class);
 //        这个配置可以让spring根据类型自动增加属性, 如果类型是User, 则增加map.put("user", new User());
         viewResolver.setExposeContextBeansAsAttributes(true);
         return viewResolver;
