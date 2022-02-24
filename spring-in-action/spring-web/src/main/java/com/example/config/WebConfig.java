@@ -30,8 +30,8 @@ import javax.validation.Validation;
  * <mvc:default-servlet-handler/>
  * @date 2022/2/21 上午9:13
  */
-@Configuration
-@EnableWebMvc
+//@Configuration
+//@EnableWebMvc
 @ComponentScan(basePackages = "com.example.web")
 public class WebConfig extends WebMvcConfigurerAdapter {
 

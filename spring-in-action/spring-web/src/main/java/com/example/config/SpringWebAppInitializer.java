@@ -57,7 +57,10 @@ public class SpringWebAppInitializer extends AbstractAnnotationConfigDispatcherS
     @Override
     protected Class<?>[] getServletConfigClasses() {
         // GolfingWebConfig defines beans that would be in golfing-servlet.xml
-        return new Class<?>[] { WebConfig.class };
+        return new Class<?>[] {
+//                WebConfig.class,
+                ThymeleafWebMvcConfiguration.class
+        };
     }
 
     /**

@@ -105,6 +105,16 @@
             <version>3.0.5</version>
         </dependency>
 
+
+<!--        thymeleaf使用-->
+        <!-- https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf-spring4 -->
+        <dependency>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf-spring4</artifactId>
+            <version>3.0.9.RELEASE</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>

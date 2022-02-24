@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html>
+  <head>
+    <title>RegisterForm</title>
+  </head>
+  <body bgcolor="white">
+    <h2>This is registerForm</h2>
+    <form method="post" th:object="${user}">
+<!--      统一异常区:  <errors path="*" element="div"/> <br/>-->
+      <div th:if="${#fields.errors('*')}">
+        <ul>
+          <li th:each="err : ${#fields.errors('*')}"
+              th:text="${err}">
+              输入有误
+          </li>
+        </ul>
+      </div>
+      姓名: <input type="text" th:field="*{name}" size="25" /> <br/>
+      密码: <input type="password" th:field="*{password}" size="25" /><br/>
+      年龄: <input type="text" th:field="*{age}" size="3" />
+      <p th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Incorrect date</p>
+      <br/>
+      <p></p>
+      <input type="submit" value="Submit" />
+      <input type="reset" value="Reset" />
+    </form>
+  </body>
+</html>
