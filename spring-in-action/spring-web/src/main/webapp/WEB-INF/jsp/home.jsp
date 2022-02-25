@@ -7,5 +7,6 @@
     <body>
         <%-- <h1>This is a HomePage</h1> --%>
         <h1><s:message code="system.welcome"/></h1>
+        <h1>${message}</h1>
     </body>
 </html>

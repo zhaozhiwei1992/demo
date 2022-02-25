@@ -1,6 +1,11 @@
 package com.example.config;
 
+import com.example.filter.ServletIndexFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+
+import javax.servlet.Filter;
+import javax.servlet.MultipartConfigElement;
+import javax.servlet.ServletRegistration;
 
 /**
  * @Title: SpringWebAppInitializer
@@ -58,8 +63,8 @@ public class SpringWebAppInitializer extends AbstractAnnotationConfigDispatcherS
     protected Class<?>[] getServletConfigClasses() {
         // GolfingWebConfig defines beans that would be in golfing-servlet.xml
         return new Class<?>[] {
-//                WebConfig.class,
-                ThymeleafWebMvcConfiguration.class
+                WebConfig.class,
+//                ThymeleafWebMvcConfiguration.class
         };
     }
 
@@ -81,5 +86,30 @@ public class SpringWebAppInitializer extends AbstractAnnotationConfigDispatcherS
     @Override
     protected String[] getServletMappings() {
         return new String[] { "/" };
+    }
+
+    /**
+     * 扩展filter, 下述方式也可以
+     * 通过com.example.config.CustomServletInitializer
+     * springboot中使用org.springframework.boot.web.servlet.FilterRegistrationBean
+     */
+    @Override
+    protected Filter[] getServletFilters() {
+        return new Filter[]{
+//                new ServletIndexFilter()
+        };
+    }
+
+    /**
+     * web.xml中配置
+     * <multipart-config>的默认值与MultipartConfigElement相
+     * 同。与MultipartConfigElement一样，必须要配置的
+     * 是<location>。
+     */
+    @Override
+    protected void customizeRegistration(ServletRegistration.Dynamic registration) {
+//        这里可以通过MultipartConfigElement限制上传目录, 大小之类的
+        // 文件上传，方式2
+        registration.setMultipartConfig(new MultipartConfigElement("/tmp"));
     }
 }

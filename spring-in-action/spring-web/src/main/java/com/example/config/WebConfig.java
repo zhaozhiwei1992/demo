@@ -5,8 +5,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -17,6 +21,7 @@ import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
 import javax.swing.*;
 import javax.validation.Validation;
+import java.io.IOException;
 
 /**
  * @author zhaozhiwei
@@ -30,8 +35,8 @@ import javax.validation.Validation;
  * <mvc:default-servlet-handler/>
  * @date 2022/2/21 上午9:13
  */
-//@Configuration
-//@EnableWebMvc
+@Configuration
+@EnableWebMvc
 @ComponentScan(basePackages = "com.example.web")
 public class WebConfig extends WebMvcConfigurerAdapter {
 
@@ -93,4 +98,19 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     public ViewResolver tilesViewResolver(){
         return new TilesViewResolver();
     }
+
+//    @Bean
+    public MultipartResolver multipartResolver() throws IOException {
+//        final CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver();
+//        commonsMultipartResolver.setUploadTempDir(new FileSystemResource("/tmp"));
+//        commonsMultipartResolver.setMaxUploadSize(2097152);
+//        commonsMultipartResolver.setMaxInMemorySize(0);
+
+//        通过spring提供的通用方案CommonsMultipartResolver 或者 StandardServletMultipartResolver都可以实现上传
+//        CommonsMultipartResolver比较方便
+//        return commonsMultipartResolver;
+        return new StandardServletMultipartResolver();
+    }
+
+
 }
