@@ -1,6 +1,5 @@
 package com.example.config;
 
-import com.example.filter.ServletIndexFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import javax.servlet.Filter;
@@ -63,7 +62,7 @@ public class SpringWebAppInitializer extends AbstractAnnotationConfigDispatcherS
     protected Class<?>[] getServletConfigClasses() {
         // GolfingWebConfig defines beans that would be in golfing-servlet.xml
         return new Class<?>[] {
-                WebConfig.class,
+                WebMvcConfig.class,
 //                ThymeleafWebMvcConfiguration.class
         };
     }

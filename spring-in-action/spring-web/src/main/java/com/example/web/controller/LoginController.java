@@ -59,7 +59,7 @@ public class LoginController {
     @PostMapping("/register")
     public String processRegistration(
 //            @RequestPart("profilePicture") byte[] profilePicture,
-            @RequestPart("profilePicture") MultipartFile profilePicture,
+//            @RequestPart("profilePicture") MultipartFile profilePicture,
 //            @RequestPart("profilePicture") Part profilePicture,
             @Valid User user,
             RedirectAttributes model,
@@ -70,11 +70,16 @@ public class LoginController {
 //            return "registerForm";
             throw new AppException("500001", "请求参数异常");
         }
-        profilePicture.transferTo(new File("/tmp/transferto/" + profilePicture.getOriginalFilename()));
+
+//        文件上传相关
+
+//        profilePicture.transferTo(new File("/tmp/transferto/" + profilePicture.getOriginalFilename()));
 //        debug后可以观察上传过程中, 会在/tmp写入临时文件
 //        这里配置 com.example.config.SpringWebAppInitializer.customizeRegistration
 //        profilePicture.write("/tmp/transferto/" + profilePicture.getName());
-//        userRepository.save(user);
+
+//        数据持久化
+        userRepository.save(user);
 
 //        保存成功后重定向
 //        return "redirect:/user/"+user.getId();
