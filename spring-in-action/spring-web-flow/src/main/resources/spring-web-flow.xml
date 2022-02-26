@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:webflow="http://www.springframework.org/schema/webflow-config"
+       xsi:schemaLocation=" http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+        http://www.springframework.org/schema/webflow-config
+        http://www.springframework.org/schema/webflow-config/spring-webflow-config-2.0.xsd">
+
+    <!-- 装配流程执行器：为用户创建和启动一个流程执行实例，不负责加载流程定义-->
+    <webflow:flow-executor id="flowExecutor" />
+
+    <!-- 配置流程注册表，其功能为：负责加载流程定义-->
+    <!-- 所有 flow的定义文件它的位置在这里进行配置， flow-builder-services 用于配置 flow 的特性 -->
+    <webflow:flow-registry id="flowRegistry" base-path="/WEB-INF/flow/"
+        flow-builder-services="flowBuilderServices"
+    >
+
+        <!--        <webflow:flow-location path="/WEB-INF/flows/shopping.xml" id="index" />-->
+<!--        <webflow:flow-location path="/WEB-INF/flows/test.xml" id="test" />-->
+<!--        <webflow:flow-location path="/WEB-INF/flows/shopping-sub.xml" id="subflow"/>-->
+        <webflow:flow-location-pattern value="*-flow.xml"/>
+        <!-- 在这个声明中，流程注册表会在该path下查找流程定义-->
+    </webflow:flow-registry>
+
+    <!--Web Flow 中的视图通过 MVC 框架的视图技术来呈现 -->
+    <webflow:flow-builder-services id="flowBuilderServices" view-factory-creator="mvcViewFactoryCreator" />
+    <!-- 指明 MVC 框架的 view resolver ，用于通过 view 名查找资源 -->
+    <bean id="mvcViewFactoryCreator" class="org.springframework.webflow.mvc.builder.MvcViewFactoryCreator">
+        <property name="viewResolvers" ref="viewResolver" />
+    </bean>
+</beans>

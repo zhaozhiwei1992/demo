@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <mvc:annotation-driven />
+
+<!--    com.example.config.WebMvcConfig.viewResolver-->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+<!--    DispatcherServlet一般将请求分发给-->
+<!--    控制器。但是对于流程而言，我们需要一个FlowHandlerMapping-->
+<!--    来帮助DispatcherServlet将流程请求发送给Spring Web Flow-->
+    <bean id="flowHandlerMapping" class="org.springframework.webflow.mvc.servlet.FlowHandlerMapping">
+        <property name="flowRegistry" ref="flowRegistry"/>
+        <property name="defaultHandler">
+            <!-- UrlFilenameViewController 会将 "/index" 这样的请求映射成名为 "index" 的视图 -->
+            <bean class="org.springframework.web.servlet.mvc.UrlFilenameViewController" />
+        </property>
+    </bean>
+
+<!--    FlowHandlerMapping的工作仅仅是将流程请求定向到-->
+<!--    Spring Web Flow上，响应请求的-->
+<!--    是FlowHandlerAdapter。FlowHandlerAdapter等同于Spring-->
+<!--    MVC的控制器，它会响应发送的流程请求并对其进行处理-->
+<!--    处理适配器是DispatcherServlet和Spring Web Flow之间的-->
+<!--    桥梁。它会处理流程请求并管理基于这些请求的流程-->
+    <bean id="flowHandlerAdapter" class="org.springframework.webflow.mvc.servlet.FlowHandlerAdapter">
+        <property name="flowExecutor" ref="flowExecutor"/>
+    </bean>
+
+</beans>

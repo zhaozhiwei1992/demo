@@ -11,10 +11,10 @@
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-<!--  等价  com.example.config.WebConfig 配置-->
+<!--  等价  com.example.config.WebMvcConfig 配置-->
     <mvc:annotation-driven />
 
-<!--    com.example.config.WebConfig.viewResolver-->
+<!--    com.example.config.WebMvcConfig.viewResolver-->
     <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
         <property name="prefix" value="/WEB-INF/jsp/"/>

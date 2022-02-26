@@ -12,6 +12,7 @@
     <module>spring-condition</module>
     <module>spring-aop</module>
     <module>spring-web</module>
+    <module>spring-web-flow</module>
   </modules>
   <properties>
 <!--    java: 错误: 不支持发行版本 5-->
@@ -48,6 +49,13 @@
         <artifactId>javax.servlet-api</artifactId>
         <version>3.0.1</version>
         <scope>provided</scope>
+      </dependency>
+
+      <!-- https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf-spring4 -->
+      <dependency>
+        <groupId>org.thymeleaf</groupId>
+        <artifactId>thymeleaf-spring4</artifactId>
+        <version>3.0.9.RELEASE</version>
       </dependency>
 
     </dependencies>

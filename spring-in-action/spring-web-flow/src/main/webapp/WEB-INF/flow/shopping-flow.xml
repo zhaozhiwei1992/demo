@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow
+     http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+    <!-- view-state中的view对应views文件夹中的jsp页面，on是触发事件，to对应state id -->
+    <!-- 流程开始前的初始化工作 -->
+    <on-start>
+        <evaluate expression="initData"></evaluate>
+    </on-start>
+
+<!--    <view-state>用于定义视图状态i, 如果只有id, 同时表示view跟id值相同
+   transition, on表示, 如果在hello.jsp view中触发viewCart, 则to viewCart
+-->
+    <view-state id="hello" view="hello">
+        <transition on="viewCart" to="viewCart"></transition>
+    </view-state>
+
+    <!-- 根据排在第一位的顺序来执行 -->
+    <view-state id="viewCart" view="viewCart">
+        <transition on="submit" to="viewOrder"></transition>
+        <transition on="confirm" to="login"></transition>
+    </view-state>
+
+<!--    行为状态使用<action-state>元素来声明-->
+<!--    <action-state>元素一般都会有一个-->
+<!--    <evaluate>作为子元素。<evaluate>元素给出了行为状态要做的-->
+<!--    事情。expression属性指定了进入这个状态时要评估的表达式-->
+    <action-state id="login" >
+        <evaluate expression="loginAction"/>
+        <transition on="success" to="orderConfirmed"></transition>
+        <transition on="error" to="returnToIndex"></transition>
+    </action-state>
+
+    <view-state id="viewOrder" view="viewOrder">
+        <transition on="confirm" to="orderConfirmed">
+        </transition>
+    </view-state>
+    <view-state id="orderConfirmed" view="orderConfirmed">
+        <transition on="returnToIndex" to="returnToIndex"></transition>
+        <transition on="dataCheck" to="dataCheck"></transition>
+    </view-state>
+    <!-- 本流程中的数据流转 -->
+    <action-state id="dataCheck">
+        <evaluate expression="dataCheck"></evaluate>
+        <transition on="success" to="subflow"></transition>
+    </action-state>
+    <!-- 创建一个子流程 -->
+    <subflow-state id="subflow" subflow="subflow">
+        <transition on="returnshopping" to="returnToIndex"></transition>
+    </subflow-state>
+
+<!--    所有的流程都要结束。这就是当流程转移到结束状态时所做-->
+<!--    的。<end-state>元素指定了流程的结束-->
+    <end-state id="returnToIndex" view="index">
+    </end-state>
+
+    <!-- 全局流程变量 -->
+    <global-transitions>
+        <transition on="returnToIndex" to="returnToIndex"></transition>
+    </global-transitions>
+</flow>

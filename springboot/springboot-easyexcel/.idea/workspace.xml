@@ -5,12 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c811c152-d7cf-4bdd-84b7-5c3c83cbc148" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../spring-in-action/spring-web/src/main/java/com/example/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../spring-in-action/spring-web/src/main/java/com/example/config/WebConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../spring-in-action/spring-web/src/main/java/com/example/web/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../spring-in-action/spring-web/src/main/java/com/example/web/controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../spring-in-action/spring-web/src/main/java/com/example/web/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../spring-in-action/spring-web/src/main/java/com/example/web/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../spring-in-action/spring-web/src/main/webapp/WEB-INF/jsp/registerForm.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../../spring-in-action/spring-web/src/main/webapp/WEB-INF/jsp/registerForm.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../spring-in-action/spring-web/src/main/webapp/WEB-INF/layout/tiles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../spring-in-action/spring-web/src/main/webapp/WEB-INF/layout/tiles.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lx/demo/springbooteasyexcel/domain/DemoData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lx/demo/springbooteasyexcel/domain/DemoData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../spring-in-action/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../spring-in-action/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
