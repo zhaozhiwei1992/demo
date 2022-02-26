@@ -99,6 +99,9 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         return new TilesViewResolver();
     }
 
+    /**
+     * 这里没有主动初始化, multipartResolver照样可以上传文件, 神奇
+     */
 //    @Bean
     public MultipartResolver multipartResolver() throws IOException {
 //        final CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver();

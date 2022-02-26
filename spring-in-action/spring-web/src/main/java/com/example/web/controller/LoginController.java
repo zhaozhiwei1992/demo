@@ -1,6 +1,7 @@
 package com.example.web.controller;
 
 import com.example.domain.User;
+import com.example.exception.AppException;
 import com.example.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.Part;
 import javax.validation.Valid;
@@ -60,18 +62,27 @@ public class LoginController {
             @RequestPart("profilePicture") MultipartFile profilePicture,
 //            @RequestPart("profilePicture") Part profilePicture,
             @Valid User user,
-            Errors errors) throws IOException {
+            RedirectAttributes model,
+            Errors errors) throws IOException, AppException {
         if(errors.hasErrors()){
 //            如果有异常会直接返回到当前页面, 并且填充错误信息
             System.out.println("报错了");
-            return "registerForm";
+//            return "registerForm";
+            throw new AppException("500001", "请求参数异常");
         }
         profilePicture.transferTo(new File("/tmp/transferto/" + profilePicture.getOriginalFilename()));
 //        debug后可以观察上传过程中, 会在/tmp写入临时文件
 //        这里配置 com.example.config.SpringWebAppInitializer.customizeRegistration
 //        profilePicture.write("/tmp/transferto/" + profilePicture.getName());
 //        userRepository.save(user);
-        return "redirect:/user/"+user.getId();
+
+//        保存成功后重定向
+//        return "redirect:/user/"+user.getId();
+//        该方式传参数更优雅， 并且不安全字符都会进行转义
+        model.addAttribute("userid", user.getId());
+//        可以通过flash的方式将整个对象传到下个重定向, 也可以采取将对象保存到session的方式
+        model.addFlashAttribute(user);
+        return "redirect:/user/{userid}";
     }
 
 //    @Autowired

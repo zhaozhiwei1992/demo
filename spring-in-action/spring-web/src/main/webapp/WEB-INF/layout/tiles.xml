@@ -18,4 +18,10 @@
     <definition name="users" extends="base.definition">
         <put-attribute name="body" value="/WEB-INF/jsp/users.jsp" />
     </definition>
+    <definition name="user" extends="base.definition">
+        <put-attribute name="body" value="/WEB-INF/jsp/user.jsp" />
+    </definition>
+    <definition name="errors" extends="base.definition">
+        <put-attribute name="body" value="/WEB-INF/jsp/errors.jsp" />
+    </definition>
 </tiles-definitions>

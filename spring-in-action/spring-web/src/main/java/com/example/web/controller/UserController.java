@@ -62,8 +62,11 @@ public class UserController {
     @GetMapping("user/{id}")
     public String user(Model model
             , @PathVariable(value = "id") int id){
-        final User user = userRepository.findOne(id);
-        model.addAttribute(user);
+
+        if(!model.containsAttribute("user")){
+            final User user = userRepository.findOne(id);
+            model.addAttribute(user);
+        }
         return "user";
     }
 }
