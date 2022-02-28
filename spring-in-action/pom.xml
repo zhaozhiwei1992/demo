@@ -13,6 +13,7 @@
     <module>spring-aop</module>
     <module>spring-web</module>
     <module>spring-web-flow</module>
+    <module>spring-hibernate-jpa</module>
   </modules>
   <properties>
 <!--    java: 错误: 不支持发行版本 5-->
