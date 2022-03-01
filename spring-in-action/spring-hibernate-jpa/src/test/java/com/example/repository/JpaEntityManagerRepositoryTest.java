@@ -2,7 +2,6 @@ package com.example.repository;
 
 import com.example.config.SystemConfig;
 import com.example.domain.User;
-import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 
 import javax.transaction.Transactional;
-import java.util.List;
 
 /**
  * @author zhaozhiwei
@@ -19,27 +17,24 @@ import java.util.List;
  * @Title: JUnit3 Test Class.java.java
  * @Package com.example.repository
  * @Description: TODO
- * @date 2022/2/28 下午2:41
+ * @date 2022/3/1 上午9:35
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {SystemConfig.class})
+@ContextConfiguration(classes = SystemConfig.class)
 @Transactional
-public class HibernateUserRepositoryTest extends TestCase {
+public class JpaEntityManagerRepositoryTest{
 
     @Autowired
-    private HibernateUserRepository hibernateUserRepository;
+    private JpaEntityManagerRepository jpaEntityManagerRepository;
 
-    @Test
+
     public void testFindUsers() {
-        testSave();
-        final List<User> users = hibernateUserRepository.findUsers(1, 20);
-        Assert.isTrue(1 == users.size(), "应该为1条, 结果为" + users.size());
     }
 
     @Test
     public void testFindOne() {
-        testSave();
-        final User one = hibernateUserRepository.findOne(1l);
+        testAdd();
+        final User one = jpaEntityManagerRepository.findOne(1l);
         Assert.notNull(one, "对象为空");
         Assert.isTrue(1 == one.getId(), "数据库数据与实际不符");
     }
@@ -50,7 +45,18 @@ public class HibernateUserRepositoryTest extends TestCase {
         user.setId(1l);
         user.setName("zhangsan");
         user.setAge(18);
-        final User save = hibernateUserRepository.save(user);
+        final User save = jpaEntityManagerRepository.save(user);
         Assert.notNull(save, "保存失败");
+    }
+
+    @Test
+//    @Transactional
+    public void testAdd() {
+        final User user = new User();
+        user.setId(1l);
+        user.setName("zhangsan");
+        user.setAge(18);
+        jpaEntityManagerRepository.add(user);
+        jpaEntityManagerRepository.add(user);
     }
 }

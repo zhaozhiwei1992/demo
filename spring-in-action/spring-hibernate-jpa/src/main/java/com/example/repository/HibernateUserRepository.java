@@ -21,6 +21,7 @@ import java.util.List;
  */
 @Repository
 //com.example.config.HibernateSessionConfig.transactionAutoProxy 使用了这个设置BeanNames可以自动代理
+//但是事务注解一般不会写到Repository上
 //@Transactional
 public class HibernateUserRepository {
 
@@ -31,7 +32,7 @@ public class HibernateUserRepository {
         return sessionFactory.getCurrentSession();
     }
 
-    public List<User> findUsers(int startIndex, int Count) {
+    public List<User> findUsers(long startIndex, int Count) {
         CriteriaQuery<User> criteriaQuery = currentSession().getCriteriaBuilder().createQuery(User.class);
 //criteriaQuery 对象可以添加各种查询条件和关联条件等等
         criteriaQuery.from(User.class);

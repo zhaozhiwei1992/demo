@@ -1,7 +1,11 @@
 package com.example.repository;
 
 import com.example.domain.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -9,14 +13,23 @@ import java.util.List;
  * @version V1.0
  * @Title: null.java
  * @Package com.example.repository
- * @Description: TODO
+ * @Description:
+ *
+ * jpa需要打开transactionManager, 否则事务不生效
+ * com.example.config.JpaEntityManagerConfig#transactionManager(javax.persistence.EntityManagerFactory)
  * @date 2022/2/21 上午11:05
  */
-public interface UserRepository {
+@Repository
+public interface UserRepository extends JpaRepository<User, Long> {
 
-    List<User> findUsers(int startIndex, int Count);
+//    @Query("select t1.id, t1.name, t1.age, t1.password from User t1 ")
+//    List<User> findUsers(long startIndex, int Count);
 
-    User findOne(int id);
+//    @Query("select t1.id, t1.name, t1.age, t1.password from User t1 where id = ?1")
+//    User findOne(Long id);
 
-    User save(User user);
+    User findByName(String name);
+
+//    User save(User user);
+
 }

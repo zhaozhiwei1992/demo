@@ -18,28 +18,39 @@ import java.util.List;
  * @version V1.0
  * @Title: JUnit3 Test Class.java.java
  * @Package com.example.repository
- * @Description: TODO
- * @date 2022/2/28 下午2:41
+ * @Description:
+ *
+ * @date 2022/3/1 下午2:45
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {SystemConfig.class})
+@ContextConfiguration(classes = SystemConfig.class)
 @Transactional
-public class HibernateUserRepositoryTest extends TestCase {
+public class UserRepositoryTest extends TestCase {
 
     @Autowired
-    private HibernateUserRepository hibernateUserRepository;
+    private UserRepository userRepository;
+
+    @Test
+    public void testFindByName(){
+       testSave();
+       User user = userRepository.findByName("zhangsan");
+       Assert.notNull(user, "对象为空");
+       Assert.isTrue(1 == user.getId(), "数据库数据与实际不符");
+
+    }
 
     @Test
     public void testFindUsers() {
         testSave();
-        final List<User> users = hibernateUserRepository.findUsers(1, 20);
+        final List<User> users = userRepository.findAll();
+        System.out.println(users);
         Assert.isTrue(1 == users.size(), "应该为1条, 结果为" + users.size());
     }
 
     @Test
     public void testFindOne() {
         testSave();
-        final User one = hibernateUserRepository.findOne(1l);
+        final User one = userRepository.findOne(1l);
         Assert.notNull(one, "对象为空");
         Assert.isTrue(1 == one.getId(), "数据库数据与实际不符");
     }
@@ -50,7 +61,9 @@ public class HibernateUserRepositoryTest extends TestCase {
         user.setId(1l);
         user.setName("zhangsan");
         user.setAge(18);
-        final User save = hibernateUserRepository.save(user);
+//        nested exception is javax.persistence.TransactionRequiredException: no transaction is in progress
+//        final User save = userRepository.saveAndFlush(user);
+        final User save = userRepository.save(user);
         Assert.notNull(save, "保存失败");
     }
 }

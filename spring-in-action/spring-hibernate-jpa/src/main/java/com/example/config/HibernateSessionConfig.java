@@ -3,6 +3,7 @@ package com.example.config;
 import com.alibaba.druid.pool.DruidDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -42,7 +43,7 @@ public class HibernateSessionConfig {
         druidDataSource.setUsername("root");
         druidDataSource.setPassword("root");
 
-        druidDataSource.setInitialSize(10);
+        druidDataSource.setInitialSize(5);
         druidDataSource.setMinIdle(5);
         druidDataSource.setMaxActive(300);
         druidDataSource.setTestWhileIdle(true);
@@ -62,7 +63,7 @@ public class HibernateSessionConfig {
     }
 
     @Bean
-    public LocalSessionFactoryBean getSessionFactory(DataSource dataSource) {
+    public LocalSessionFactoryBean localSessionFactory(DataSource dataSource) {
         return buildLocalSessionFactory(dataSource);
     }
 
@@ -76,8 +77,8 @@ public class HibernateSessionConfig {
      * org.hibernate.HibernateException: Could not obtain transaction-synchronized Session for current thread
      * 需要初始化下述bean, 并且如果bean id为 transactionManager, 实现类直接使用@Transactional,
      */
-    @Bean
-    public HibernateTransactionManager transactionManager(SessionFactory sessionFactory){
+//    @Bean
+    public HibernateTransactionManager transactionManager(@Qualifier("localSessionFactory") SessionFactory sessionFactory){
         return new HibernateTransactionManager(sessionFactory);
     }
 
@@ -107,7 +108,7 @@ public class HibernateSessionConfig {
         BeanNameAutoProxyCreator transactionAutoProxy = new BeanNameAutoProxyCreator();
         transactionAutoProxy.setProxyTargetClass(true);
 //        一般指定到Service级别, 约定名称末尾为Service
-        transactionAutoProxy.setBeanNames("*Repository");
+        transactionAutoProxy.setBeanNames("*Service");
         transactionAutoProxy.setInterceptorNames("transactionInterceptor");
         return transactionAutoProxy;
     }
