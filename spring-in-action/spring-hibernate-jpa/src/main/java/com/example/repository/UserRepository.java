@@ -20,7 +20,7 @@ import java.util.List;
  * @date 2022/2/21 上午11:05
  */
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<User, Long>, UserRepositoryExt {
 
 //    @Query("select t1.id, t1.name, t1.age, t1.password from User t1 ")
 //    List<User> findUsers(long startIndex, int Count);
@@ -28,6 +28,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 //    @Query("select t1.id, t1.name, t1.age, t1.password from User t1 where id = ?1")
 //    User findOne(Long id);
 
+//   扩展定义查询方法
     User findByName(String name);
 
 //    User save(User user);

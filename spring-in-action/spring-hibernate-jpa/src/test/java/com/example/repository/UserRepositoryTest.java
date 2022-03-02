@@ -66,4 +66,9 @@ public class UserRepositoryTest extends TestCase {
         final User save = userRepository.save(user);
         Assert.notNull(save, "保存失败");
     }
+
+    @Test
+    public void testRepositoryExt(){
+        userRepository.findUserExt();
+    }
 }
