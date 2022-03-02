@@ -14,6 +14,8 @@
     <module>spring-web</module>
     <module>spring-web-flow</module>
     <module>spring-hibernate-jpa</module>
+    <module>spring-mongodb</module>
+    <module>spring-redis</module>
   </modules>
   <properties>
 <!--    java: 错误: 不支持发行版本 5-->
@@ -61,6 +63,31 @@
 
     </dependencies>
   </dependencyManagement>
+
+  <dependencies>
+<!--    equals 方法-->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.9</version>
+    </dependency>
+
+    <!--        test -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
 
 <!--  属性和插件均可, 会影响到 idea, java compiler 中的java version, 默认1.5 所以会报错-->
 <!--  <build>-->
