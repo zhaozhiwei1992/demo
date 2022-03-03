@@ -10,6 +10,7 @@
   <groupId>com.example</groupId>
   <artifactId>child2</artifactId>
   <version>1.0-SNAPSHOT</version>
+  <packaging>war</packaging>
   <name>child2</name>
   <url>http://maven.apache.org</url>
   <dependencies>
@@ -19,5 +20,50 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+
+<!--    overlay [ id com.example:child1] is not a dependency of the project.
+    overlay需要先申明以来，否则有上述错误
+-->
+    <dependency>
+      <groupId>com.example</groupId>
+      <artifactId>child1</artifactId>
+      <version>1.0-SNAPSHOT</version>
+<!--      Failed to execute goal on project child2:
+Could not resolve dependencies for project
+com.example:child2:war:1.0-SNAPSHOT:
+ Could not find artifact com.example:child1:jar:1.0-SNAPSHOT-->
+      <type>war</type>
+    </dependency>
   </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.2.2</version>
+        <configuration>
+          <webappDirectory>${basedir}/src/main/webapp</webappDirectory>
+          <warSourceDirectory>${basedir}/src/main/webapp</warSourceDirectory>
+          <outputDirectory>${basedir}/target</outputDirectory>
+<!--          目标: 引入child1中的前端文件, 但是使用child2的web.xml-->
+          <overlays>
+            <overlay>
+              <groupId>com.example</groupId>
+              <artifactId>child1</artifactId>
+              <excludes>
+                <exclude>WEB-INF/web.xml</exclude>
+                <exclude>WEB-INF/**</exclude>
+                <exclude>META-INF/**</exclude>
+              </excludes>
+              <includes>
+                <include>child1/**</include>
+                <include>bdg/**</include>
+              </includes>
+            </overlay>
+          </overlays>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
 </project>

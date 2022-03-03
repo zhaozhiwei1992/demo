@@ -9,9 +9,15 @@
   </parent>
   <groupId>com.example</groupId>
   <artifactId>child1</artifactId>
+  <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
   <name>child1</name>
   <url>http://maven.apache.org</url>
+
+  <properties>
+    <ifmis.provice>33</ifmis.provice>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -20,11 +26,11 @@
       <scope>test</scope>
     </dependency>
 
-    <dependency>
-      <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-commons</artifactId>
-      <version>${spring-cloud-commons.version}</version>
-    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>org.springframework.cloud</groupId>-->
+<!--      <artifactId>spring-cloud-commons</artifactId>-->
+<!--      <version>${spring-cloud-commons.version}</version>-->
+<!--    </dependency>-->
 
 <!--    maven optional == true 表示依赖不会传递，即父pom引入, 子项目不继承-->
 <!--    <dependency>-->
@@ -33,4 +39,55 @@
 <!--    </dependency>-->
 
   </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.0.2</version>
+        <configuration>
+          <!--以下分别是排除源文件目录，资源文件， 资源文件目录 根目录是target/classes-->
+          <excludes>
+            <exclude>bdg/script/ext/**</exclude>
+            <exclude>META-INF/resources/bdg/ext/**</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+    </plugins>
+
+    <resources>
+
+      <!--        指定资源目录-->
+      <resource>
+        <directory>src/main/sql</directory>
+        <excludes>
+          <!--  编译目录不要下述目录, 通过后续direct target方式迁移-->
+          <exclude>bdg/script/ext/**</exclude>
+        </excludes>
+      </resource>
+      <resource>
+        <directory>src/main/resources</directory>
+      </resource>
+      <resource>
+        <directory>src/main/webapp</directory>
+        <targetPath>META-INF/resources</targetPath>
+      </resource>
+
+
+      <!--        扩展脚本目录迁移-->
+<!--      扩展目录如33目录下的合并到target目录-->
+      <resource>
+        <directory>src/main/sql/bdg/script/ext/${ifmis.provice}</directory>
+        <targetPath>${project.build.directory}/classes/bdg/script/</targetPath>
+      </resource>
+
+      <!--        js扩展迁移-->
+      <resource>
+        <directory>src/main/webapp/bdg/ext/${ifmis.provice}</directory>
+        <targetPath>${project.build.directory}/classes/META-INF/resources/bdg/</targetPath>
+      </resource>
+
+    </resources>
+  </build>
 </project>
