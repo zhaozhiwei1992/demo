@@ -42,9 +42,10 @@ com.example:child2:war:1.0-SNAPSHOT:
         <artifactId>maven-war-plugin</artifactId>
         <version>3.2.2</version>
         <configuration>
-          <webappDirectory>${basedir}/src/main/webapp</webappDirectory>
-          <warSourceDirectory>${basedir}/src/main/webapp</warSourceDirectory>
-          <outputDirectory>${basedir}/target</outputDirectory>
+<!--          下述配置可以使得引入文件直接放到源目录中-->
+<!--          <webappDirectory>${basedir}/src/main/webapp</webappDirectory>-->
+<!--          <warSourceDirectory>${basedir}/src/main/webapp</warSourceDirectory>-->
+<!--          <outputDirectory>${basedir}/target</outputDirectory>-->
 <!--          目标: 引入child1中的前端文件, 但是使用child2的web.xml-->
           <overlays>
             <overlay>
