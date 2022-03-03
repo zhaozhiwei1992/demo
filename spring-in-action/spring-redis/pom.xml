@@ -1,23 +1,56 @@
 <?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.example</groupId>
+        <artifactId>spring-in-action</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
     <groupId>com.example</groupId>
-    <artifactId>spring-in-action</artifactId>
+    <artifactId>spring-redis</artifactId>
     <version>1.0-SNAPSHOT</version>
-  </parent>
-  <groupId>com.example</groupId>
-  <artifactId>spring-redis</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <name>spring-redis</name>
-  <url>http://maven.apache.org</url>
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
+    <name>spring-redis</name>
+    <url>http://maven.apache.org</url>
+    <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+            <version>1.7.2.RELEASE</version>
+        </dependency>
+
+<!--        Caused by: java.lang.ClassNotFoundException: redis.clients.jedis.JedisPoolConfig
+   redis版本问题
+-->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>2.9.0</version>
+            <optional>true</optional>
+        </dependency>
+
+        <!--    redis value 序列化使用-->
+        <!--    java: 无法访问com.fasterxml.jackson.databind.JavaType
+        -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.9.9</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-jaxb-annotations</artifactId>
+            <version>2.9.9</version>
+        </dependency>
+
+        <!--     org/apache/commons/pool2/impl/GenericObjectPoolConfig-->
+        <dependency>
+          <groupId>org.apache.commons</groupId>
+          <artifactId>commons-pool2</artifactId>
+            <version>2.2</version>
+        </dependency>
+    </dependencies>
 </project>
