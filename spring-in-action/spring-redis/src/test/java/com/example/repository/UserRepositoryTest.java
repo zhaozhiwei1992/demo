@@ -46,4 +46,14 @@ public class UserRepositoryTest {
         final User zhangsan = redisTemplate.opsForValue().get("zhangsan");
         Assert.isNull(zhangsan, "对象不为空");
     }
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Test
+    public void testFindByNameCache(){
+        User user =  userRepository.findByName("zhangsan");
+        Assert.notNull(user, "对象为空");
+        Assert.isTrue("zhangsan".endsWith(user.getName()), "未找到name是zhangsan的对象");
+    }
 }
