@@ -51,9 +51,20 @@ public class UserRepositoryTest {
     private UserRepository userRepository;
 
     @Test
+    public void testSaveCache(){
+        final User zhangsan = new User(1, "zhangsan");
+        userRepository.save(zhangsan);
+    }
+
+    @Test
     public void testFindByNameCache(){
         User user =  userRepository.findByName("zhangsan");
         Assert.notNull(user, "对象为空");
         Assert.isTrue("zhangsan".endsWith(user.getName()), "未找到name是zhangsan的对象");
+    }
+
+    @Test
+    public void testRemoveCache(){
+        userRepository.remove("zhangsan");
     }
 }

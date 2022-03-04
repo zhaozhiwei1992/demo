@@ -2,6 +2,8 @@ package com.example.repository;
 
 import com.example.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
@@ -27,13 +29,18 @@ public class UserRepository {
         return redisTemplate.opsForValue().get(name);
     }
 
-    public void save() {
-        final User zhangsan = new User(1, "zhangsan");
-        redisTemplate.opsForValue().set(zhangsan.getName(), zhangsan);
+    /**
+     * @Description: 手动指定缓存的key为用户名
+     */
+    @CachePut(value = "userCache", key = "#result.name")
+    public User save(User user) {
+        redisTemplate.opsForValue().set(user.getName(), user);
+        return user;
     }
 
-    public void remove(){
-        redisTemplate.opsForValue().set("zhangsan", null);
-        final User zhangsan = redisTemplate.opsForValue().get("zhangsan");
+    @CacheEvict(value = "userCache")
+    public void remove(String name){
+        redisTemplate.opsForValue().set(name, null);
+        final User zhangsan = redisTemplate.opsForValue().get(name);
     }
 }
