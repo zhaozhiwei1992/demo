@@ -33,8 +33,9 @@ public class UserService {
      * @Description: 描述
      * 403 - Access is denied
      */
-    @Secured("ROLE_ADMIN")
+//    @Secured("ROLE_ADMIN")
 //    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasPermission(targetObject, 'findOne')")
     public User findOne(int id){
         System.out.println("请求到方法 findOne");
         return null;
