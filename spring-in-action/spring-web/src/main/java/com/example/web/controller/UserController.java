@@ -2,6 +2,7 @@ package com.example.web.controller;
 
 import com.example.domain.User;
 import com.example.repository.UserRepository;
+import com.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -68,5 +69,18 @@ public class UserController {
             model.addAttribute(user);
         }
         return "user";
+    }
+
+    @Autowired
+    private UserService userService;
+
+    /**
+     * @Description:
+     * 目标该路径通过了security web的验证，但是方法要把它拦住
+     */
+    @GetMapping("/user/method/sec")
+    public String users(){
+        final User one = userService.findOne(1);
+        return one.toString();
     }
 }

@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface UserRepository {
 
-    List<User> findUsers(int startIndex, int Count);
+    List<User> findUsers(int startIndex, int count);
 
     User findOne(int id);
 
