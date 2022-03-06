@@ -19,7 +19,7 @@ import org.springframework.util.Assert;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = SystemConfig.class)
-public class UserServiceTest{
+public class UserServiceRmiTest {
 
     @Autowired
     private UserService userService;

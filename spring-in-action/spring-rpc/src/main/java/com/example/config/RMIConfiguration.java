@@ -15,7 +15,7 @@ import org.springframework.remoting.rmi.RmiServiceExporter;
  * @Description: 配置RMI Exporter
  * @date 2022/3/6 下午3:56
  */
-@Configuration
+//@Configuration
 public class RMIConfiguration {
 
     private static final String RMI_SERVICENAME = "UserService";

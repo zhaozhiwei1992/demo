@@ -37,7 +37,7 @@ public class CustomServletInitializer implements WebApplicationInitializer {
         servletContext.addFilter("customFilter", ServletIndexFilter.class)
                 .addMappingForUrlPatterns(null, false, "/index/**");
 
-        // 文件上传，方式1
+        // 文件上传，方式1, 手动创建dispatcherServlet
 //        final DispatcherServlet dispatcherServlet = new DispatcherServlet();
 //        final ServletRegistration.Dynamic dynamic = servletContext.addServlet("dispatcherServlet",
 //                dispatcherServlet);
