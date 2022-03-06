@@ -3,11 +3,8 @@ package com.example.config;
 import com.example.service.UserService;
 import com.example.service.UserServiceImpl;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.remoting.caucho.BurlapProxyFactoryBean;
 import org.springframework.remoting.caucho.BurlapServiceExporter;
-import org.springframework.remoting.caucho.HessianProxyFactoryBean;
-import org.springframework.remoting.caucho.HessianServiceExporter;
 import org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping;
 
 /**
@@ -30,7 +27,7 @@ import org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping;
  * 3. 创建代理
  * @date 2022/3/6 下午4:56
  */
-@Configuration
+//@Configuration
 public class BurlapRpcConfiguration {
 
 //    @Bean
@@ -43,7 +40,7 @@ public class BurlapRpcConfiguration {
     }
 
     @Bean
-    public BurlapProxyFactoryBean hessianClient(){
+    public BurlapProxyFactoryBean burlapClient(){
         final BurlapProxyFactoryBean hessianProxyFactoryBean = new BurlapProxyFactoryBean();
         hessianProxyFactoryBean.setServiceUrl("http://localhost:8080/user.burlap");
         hessianProxyFactoryBean.setServiceInterface(UserService.class);
