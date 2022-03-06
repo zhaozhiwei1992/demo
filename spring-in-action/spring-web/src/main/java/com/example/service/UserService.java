@@ -30,7 +30,8 @@ public class UserService {
      * @method: findOne
       * @param id :
      * @return: com.example.domain.User
-     * @Description: 描述
+     * @Description:
+     * 注意, hasPermission访问属性要用#, spEL
      * 403 - Access is denied
      */
 //    @Secured("ROLE_ADMIN")
