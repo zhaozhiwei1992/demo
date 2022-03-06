@@ -14,7 +14,8 @@ import org.springframework.util.Assert;
  * @version V1.0
  * @Title: JUnit3 Test Class.java.java
  * @Package com.example.service
- * @Description: TODO
+ * @Description:
+ * com.example.config.WsServiceConfiguration  打开配置
  * @date 2022/3/6 下午4:12
  */
 @RunWith(SpringJUnit4ClassRunner.class)
