@@ -35,7 +35,7 @@ public class UserService {
      */
 //    @Secured("ROLE_ADMIN")
 //    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @PreAuthorize("hasPermission(targetObject, 'findOne')")
+    @PreAuthorize("hasPermission(#id, 'findOne')")
     public User findOne(int id){
         System.out.println("请求到方法 findOne");
         return null;
