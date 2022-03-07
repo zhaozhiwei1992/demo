@@ -82,8 +82,9 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     /**
      * @Description:
      * 如果返回为users则解析为json
+     * 添加@ResponseBody注解, 跳过正常的模型/视图流程，这样就能让Spring将方法返回的List<User>转换为响应体
      */
-    @Bean
+//    @Bean
     public View users(){
         return new MappingJackson2JsonView();
     }
