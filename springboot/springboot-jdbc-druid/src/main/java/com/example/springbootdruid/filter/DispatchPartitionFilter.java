@@ -394,9 +394,7 @@ public class DispatchPartitionFilter extends FilterEventAdapter {
                 concatMethod.setAccessible(true);
                 concatMethod.invoke(classObject, i + 1, value);
             }
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
+        } catch (NoSuchMethodException | IllegalAccessException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {
             e.printStackTrace();

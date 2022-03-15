@@ -29,7 +29,7 @@ public class BusGTXTransactionBeanDefinitionParser extends AbstractSimpleBeanDef
      * Title: doParse
      * </p>
      * <p>
-     * Description:
+     * Description: 通过代理的方式, 将 transactionService作为被代理bean
      * </p>
      * @param element
      * @param parserContext
@@ -41,7 +41,7 @@ public class BusGTXTransactionBeanDefinitionParser extends AbstractSimpleBeanDef
     @Override
     protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
         String refbeanid = element.getAttribute("refbeanid");
-        // 设置需要代理的bean id
+        // 设置需要代理的beanid
         builder.addPropertyReference("target", refbeanid);
         //增加对非接口的支持
         builder.addPropertyValue("proxyTargetClass", "true");

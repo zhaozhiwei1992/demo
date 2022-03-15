@@ -1,5 +1,6 @@
 package com.example.springcloudnacos.controller;
 
+import com.alibaba.nacos.api.naming.pojo.Instance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,8 +50,20 @@ public class DiscoveryClientController {
         return discoveryClient.getServices();
     }
 
+
+    /**
+     * euraka的meta信息中的处理财年的配置key
+     */
+    public static final String YEAR_INFO_KEY = "serviceyear";
+    /**
+     * euraka的meta信息中的处理财政区划的配置key
+     */
+    public static final String PROVINCE_INF_OKEY = "serviceprovince";
+
     /**
      * 获取所有实例信息
+     * meta可以通过覆盖loadbalance方法, 根据数据源和当前登录信息进行网管分流
+     * public class ProvinceRouteLoadBalancer implements ILoadBalancer {}
      * @return
      */
     @GetMapping("/discovery/serviceinstances")
@@ -60,6 +73,10 @@ public class DiscoveryClientController {
         services.forEach(serviceName->{
             serviceInstances.addAll(discoveryClient.getInstances(serviceName));
         });
+
+        for (ServiceInstance serviceInstance : serviceInstances) {
+            logger.info("meta:serviceprovince:{}", serviceInstance.getMetadata().get(PROVINCE_INF_OKEY));
+        }
         return serviceInstances;
     }
 }
