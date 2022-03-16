@@ -23,6 +23,12 @@ public class LogController {
     @Autowired
     private LogControllerSub logControllerSub;
 
+    private String msg;
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
     /**
      * 传统方式拦截
      * @return
@@ -31,6 +37,7 @@ public class LogController {
     public String showLog2(){
 //        logger.info("当前位置--> com.example.springbootaop.controller.LogController.showLog2");
 //        return "showlog2";
+        logger.info("通过反射设置msg, 值: {}", msg);
         return logControllerSub.showLog2();
     }
 
