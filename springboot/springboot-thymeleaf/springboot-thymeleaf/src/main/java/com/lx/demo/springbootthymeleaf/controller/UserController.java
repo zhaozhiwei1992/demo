@@ -33,6 +33,7 @@ public class UserController {
     public String index(ModelMap model) {
         model.addAttribute("name", user.getName());
         model.addAttribute("msg", user.toString());
+        model.addAttribute("msg2", "首页");
         return "index";
     }
 

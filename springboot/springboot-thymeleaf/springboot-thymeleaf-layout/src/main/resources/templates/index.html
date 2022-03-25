@@ -1,11 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+
 <head>
     <meta charset="UTF-8"></meta>
     <title>Index</title>
 </head>
 <body>
-    <div th:insert="layout/copyright :: copyright"></div>
-    <div th:replace="layout/copyright :: copyright"></div>
+
+<h1>首页自己的内容</h1>
+<!--定义模板片段，可以在子页面用同名片段覆盖-->
+<div layout:fragment="content">
+    <h2>首页替换layout内容: hello world!!!</h2>
+</div>
 </body>
 </html>

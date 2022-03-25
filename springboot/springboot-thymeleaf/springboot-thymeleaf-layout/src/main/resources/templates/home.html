@@ -1,11 +1,19 @@
-<html xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorate="layout">
-<head>
-    <meta charset="UTF-8"></meta>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+>
+
+<head th:replace="layout :: common_header(~{::title},~{::link})">
     <title>Home</title>
+    <link rel="shortcut icon" th:href="@{/images/favicon.ico}">
 </head>
 <body>
-    <div  layout:fragment="content" >
-        <h2>个性化的内容</h2>
-    </div>
+
+<div layout:fragment="content">
+    <h2>Home 替换layout内容: hello world!!!</h2>
+</div>
+
+<!--<div th:insert="layout :: content">-->
+<!--    <h2>Home 替换layout内容2: hello world!!!</h2>-->
+<!--</div>-->
 </body>
 </html>

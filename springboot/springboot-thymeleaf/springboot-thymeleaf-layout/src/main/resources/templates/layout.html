@@ -1,16 +1,29 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
-<head>
-    <meta charset="UTF-8"></meta>
-    <title>Layout</title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+
+<!--公共head模板-->
+<head th:fragment="common_header(title,links)">
+    <title th:replace="${title}">Layout-基础页面</title>
+
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/myapp.css}">
+    <link rel="shortcut icon" th:href="@{/images/favicon.ico}">
+    <script type="text/javascript" th:src="@{/js/myapp.js}"></script>
+
+    <th:block th:replace="${links}" />
 </head>
 <body>
 <div >
-<!--    th:insert 和 th:replace 区别，insert 只是加载，replace 是替换。Thymeleaf 3.0 推荐使用 th:insert 替换 2.0 的 th:replace。-->
-    <div th:replace="layout/header :: header"></div>
+
+    <!--    th:insert 和 th:replace 区别，insert 只是加载，replace 是替换。Thymeleaf 3.0 推荐使用 th:insert 替换 2.0 的 th:replace。-->
+    <!-- 这种写法，如果header中有多个header tag，则都引入进来 -->
+    <div th:replace="layout/header :: header1"></div>
+<!--    <div th:insert="layout/header :: header2"></div>-->
     <div th:replace="layout/left :: left"></div>
-    <div layout:fragment="content" > content</div>
-    <div th:replace="layout/footer :: footer"></div>
+    <div layout:fragment="content" > layout-content</div>
+<!--    <div th:replace="layout/footer :: footer"></div>-->
+<!--     通过#关键字, 可以引入tag id制定的标签-->
+    <div th:replace="layout/footer :: #footer"></div>
 <!--    layout 是文件地址，如果有文件夹可以这样写fileName/layout:htmlhead，htmlhead 是指定义的代码片段 如th:fragment="copy-->
 </div>
 </body>

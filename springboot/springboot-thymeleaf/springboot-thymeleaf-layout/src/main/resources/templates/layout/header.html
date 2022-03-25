@@ -5,8 +5,18 @@
     <title>header</title>
 </head>
 <body>
-<header th:fragment="header">
+<!--使用th:fragment给html段指定一个名称，然后通过名称引用,
+如果名称和标签名称=一样就没必要了
+
+如果有多个header 但是只想引入一个, 可以指定不同的名字
+-->
+<header th:fragment="header1">
     <h1>我是 头部</h1>
+</header>
+<h2>我不在header里</h2>
+
+<header th:fragment="header2">
+    <h1>我是 头部2</h1>
 </header>
 </body>
 </html>

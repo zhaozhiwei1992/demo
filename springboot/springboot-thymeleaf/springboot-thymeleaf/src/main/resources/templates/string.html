@@ -3,6 +3,14 @@
 <head>
     <meta charset="UTF-8"></meta>
     <title>Example String </title>
+
+    <script th:inline="javascript">
+    function showMouseoverText( ts ) {
+        console.log(ts + ' UTC');
+        alert(ts);
+        return escape(ts + ' UTC');
+    }
+</script>
 </head>
 <body>
     <div >
@@ -11,6 +19,12 @@
         <span th:text="'Welcome to our application, ' + ${userName} + '!'"></span>
         <br/>
         <span th:text="|Welcome to our application, ${userName}!|"></span>
+    </div>
+
+    <div
+            th:onmouseover="showMouseoverText( 'hh '+ /*[[${userName}]]*/ );"
+            >
+        <h1>这是一个div, 鼠标移上来试试, 注意javascript标签必须后th:inline</h1>
     </div>
 </body>
 </html>
