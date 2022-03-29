@@ -36,6 +36,9 @@ public class AlertServiceImplTest extends TestCase {
         user.setPassword("123");
         alertService.sendUserAlert(user);
 
+//        发送会拦截到消息
+//        com.example.service.UserAlertHandler.onMessage
+
     }
 
     @Test

@@ -30,6 +30,18 @@ public class AlertServiceImpl implements AlertService {
         jmsOperations.convertAndSend(user);
     }
 
+    /**
+     * @data: 2022/3/29-下午6:02
+     * @User: zhaozhiwei
+     * @method: receiveUserAlert
+
+     * @return: com.example.domain.User
+     * @Description: 描述
+     * 使用JmsTemplate接收消息的最大缺点在于receive()和
+     * receiveAndConvert()方法都是同步的。这意味着接收者必须耐
+     * 心等待消息的到来，因此这些方法会一直被阻塞，直到有可用消息
+     * （或者直到超时）。同步接收异步发送的消息，是不是感觉很怪
+     */
     @Override
     public User receiveUserAlert() {
         final Object o = jmsOperations.receiveAndConvert();
