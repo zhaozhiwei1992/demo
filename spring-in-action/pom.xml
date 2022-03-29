@@ -18,6 +18,7 @@
     <module>spring-redis</module>
     <module>spring-rpc</module>
     <module>spring-web-restful</module>
+    <module>spring-jms</module>
   </modules>
   <properties>
 <!--    java: 错误: 不支持发行版本 5-->

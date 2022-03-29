@@ -24,7 +24,7 @@
     <!-- Security listener. Documentation at /docs/config/listeners.html
     <Listener className="org.apache.catalina.security.SecurityListener" />
     -->
-    <!--APR library loader. Documentation at /docs/apr.html -->
+    <!-- APR library loader. Documentation at /docs/apr.html -->
     <Listener className="org.apache.catalina.core.AprLifecycleListener" SSLEngine="on" />
     <!-- Prevent memory leaks due to use of particular java/javax APIs-->
     <Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener" />
@@ -79,8 +79,7 @@
         <!-- Define an SSL/TLS HTTP/1.1 Connector on port 8443
              This connector uses the NIO implementation. The default
              SSLImplementation will depend on the presence of the APR/native
-             library and the useOpenSSL attribute of the
-             AprLifecycleListener.
+             library and the useOpenSSL attribute of the AprLifecycleListener.
              Either JSSE or OpenSSL style configuration may be used regardless of
              the SSLImplementation selected. JSSE style configuration is used below.
         -->
@@ -128,9 +127,8 @@
 
         <!-- You should set jvmRoute to support load-balancing via AJP ie :
         <Engine name="Catalina" defaultHost="localhost" jvmRoute="jvm1">
-
-        这里修改name, 会生成tomcat/conf/{Engine.name}/localhost/
         -->
+<!--        这里修改name, 会生成tomcat/conf/{Engine.name}/localhost/-->
         <Engine name="Catalina" defaultHost="localhost">
 
             <!--For clustering, please take a look at documentation at:
@@ -159,6 +157,9 @@
                 <!--
                 <Valve className="org.apache.catalina.authenticator.SingleSignOn" />
                 -->
+                <Context path="/test" docBase="~/workspace/demo/servlet/servlet3.0-nowebxml/target/servlet.war" reloadable="true"/>
+                <Context path="" docBase="~/workspace/demo/servlet/servlet3.0-nowebxml/target/servlet.war" reload="true"/>
+
 
                 <!-- Access log processes all example.
                      Documentation at: /docs/config/valve.html

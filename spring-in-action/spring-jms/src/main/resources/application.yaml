@@ -1,0 +1,4 @@
+spring:
+  activemq:
+    #  activemq基本配置
+    brokerUrl: tcp://192.168.7.6:61616
