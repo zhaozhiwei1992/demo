@@ -166,6 +166,9 @@ public class RabbitMqAMQPDirectExchangeConfig {
 //        setMandatory：设为true使ReturnCallback生效
         rabbitTemplate.setMandatory(false);
         rabbitTemplate.setDefaultReceiveQueue(QUEUE_NAME);
+
+//        在调用convertAndSend()
+//        方法的时候，以参数的形式显式指定它们，从而覆盖掉默认值
 //        rabbitTemplate.setRoutingKey(queue().getName());
 //        rabbitTemplate.setExchange(QUEUE_NAME + ".exchange");
 
