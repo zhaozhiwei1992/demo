@@ -9,7 +9,7 @@ import org.springframework.remoting.jaxws.SimpleJaxWsServiceExporter;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-@Configuration
+//@Configuration
 public class WsServiceConfiguration {
 
     @Bean
@@ -22,6 +22,15 @@ public class WsServiceConfiguration {
         return exporter;
     }
 
+    /**
+     * @data: 2022/3/30-上午10:40
+     * @User: zhaozhiwei
+     * @method: userServiceClient
+
+     * @return: org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean
+     * @Description: 描述
+     * 给第三方提供 userServiceClient 从而访问到jaxWsExporter
+     */
     @Bean
     public JaxWsPortProxyFactoryBean userServiceClient() throws MalformedURLException {
         JaxWsPortProxyFactoryBean jaxProxy  = new JaxWsPortProxyFactoryBean();

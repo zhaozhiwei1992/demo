@@ -32,7 +32,7 @@ import java.util.Properties;
  * 3. 创建代理
  * @date 2022/3/6 下午4:56
  */
-//@Configuration
+@Configuration
 public class HessianRpcConfiguration {
 
     /**

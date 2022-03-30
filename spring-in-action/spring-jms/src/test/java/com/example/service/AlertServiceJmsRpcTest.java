@@ -2,7 +2,6 @@ package com.example.service;
 
 import com.example.config.SystemConfig;
 import com.example.domain.User;
-import junit.framework.TestCase;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,15 +16,15 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @Title: JUnit3 Test Class.java.java
  * @Package com.example.service
  * @Description:
- * 测试JMS ActiveMQ
- * @date 2022/3/29 下午4:02
+ *  注意: 跟com.example.service.AlertServiceImplTest基本一致，但是使用的客户端不同，一个是用本地服务，一个用的是rpc方式
+ * @date 2022/3/6 下午4:12
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {SystemConfig.class})
-public class AlertServiceImplTest extends TestCase {
+public class AlertServiceJmsRpcTest {
 
     @Autowired
-    @Qualifier("localAlertService")
+    @Qualifier("jmsClient")
     private AlertService alertService;
 
     @Test
@@ -33,19 +32,14 @@ public class AlertServiceImplTest extends TestCase {
 
         final User user = new User();
         user.setId(1);
-        user.setName("zhangsan");
+        user.setName("第三方的张三");
         user.setAge(18);
         user.setPassword("123");
         alertService.sendUserAlert(user);
-
-//        发送会拦截到消息
-//        com.example.service.UserAlertHandler.onMessage
-
     }
 
     @Test
-    public void testReceiveUserAlert() {
-//        getJavaTypeForMessage
+    public void testReceieUserAlert() {
         final User user = alertService.receiveUserAlert();
         Assert.assertTrue(1 == user.getId());
     }

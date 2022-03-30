@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsOperations;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service(value = "localAlertService")
 public class AlertServiceImpl implements AlertService {
 
     @Autowired

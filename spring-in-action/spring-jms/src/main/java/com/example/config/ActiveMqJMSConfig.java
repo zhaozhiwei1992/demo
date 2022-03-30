@@ -1,6 +1,5 @@
 package com.example.config;
 
-import com.example.domain.User;
 import com.example.service.CustomUserAlertHandler;
 import com.example.service.UserAlertHandler;
 import org.apache.activemq.ActiveMQConnectionFactory;
@@ -9,35 +8,34 @@ import org.apache.activemq.command.ActiveMQTopic;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.MethodParameter;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
-import org.springframework.jms.config.MethodJmsListenerEndpoint;
 import org.springframework.jms.config.SimpleJmsListenerContainerFactory;
 import org.springframework.jms.config.SimpleJmsListenerEndpoint;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.listener.DefaultMessageListenerContainer;
 import org.springframework.jms.support.converter.MappingJackson2MessageConverter;
-import org.springframework.messaging.handler.annotation.support.DefaultMessageHandlerMethodFactory;
-import org.springframework.messaging.handler.annotation.support.MessageMethodArgumentResolver;
 
 import javax.jms.ConnectionFactory;
-import java.lang.reflect.Method;
 import java.util.Arrays;
 
 @Configuration
 public class ActiveMqJMSConfig {
 
+    public static final String QUEUE_NAME = "user.alert.queue";
+
+    public static final String TOPIC_NAME = "user.alert.topic";
+
     @Bean
     public ActiveMQQueue activeMQQueue() {
         final ActiveMQQueue activeMQQueue = new ActiveMQQueue();
-        activeMQQueue.setPhysicalName("user.alert.queue");
+        activeMQQueue.setPhysicalName(QUEUE_NAME);
         return activeMQQueue;
     }
 
     @Bean
     public ActiveMQTopic activeMQTopic() {
         final ActiveMQTopic activeMQTopic = new ActiveMQTopic();
-        activeMQTopic.setPhysicalName("user.alert.topic");
+        activeMQTopic.setPhysicalName(TOPIC_NAME);
         return activeMQTopic;
     }
 
@@ -79,10 +77,13 @@ public class ActiveMqJMSConfig {
         return new UserAlertHandler("1");
     }
 
+    /**
+     * @Description: 增加Listener如果queue中有消息，可以直接获取, 异步处理更优雅
+     */
     @Bean
     public DefaultMessageListenerContainer messageListenerContainer(CustomUserAlertHandler customUserAlertHandler) throws NoSuchMethodException {
 
-//        TODO 未跑通
+//        TODO Method方式未跑通
 //        <<spring-in-action4>>  <jms:container .../>
 //        final MethodJmsListenerEndpoint endpoint = new MethodJmsListenerEndpoint();
 //        endpoint.setDestination(activeMQQueue().getPhysicalName());
@@ -115,8 +116,7 @@ public class ActiveMqJMSConfig {
 //        jmsTemplate.setDefaultDestination(activeMQTopic());
         jmsTemplate.setDefaultDestination(activeMQQueue());
 
-//        设置json消息转换,
-//        TODO 接收时空指针，暂未处理
+//        TODO 如果设置json消息转换,接收时空指针，暂未处理
 //        参考: https://stackoverflow.com/questions/32385062/spring-mappingjackson2messageconverter-give-null-pointer-exception
 //        jmsTemplate.setMessageConverter(messageConverter());
 
