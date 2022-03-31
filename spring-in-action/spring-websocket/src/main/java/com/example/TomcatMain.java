@@ -34,10 +34,10 @@ public class TomcatMain {
     public static void main(String[] args) throws LifecycleException, ServletException, ClassNotFoundException,
             InstantiationException, IllegalAccessException {
 
-        final TomcatMain tomcatMain = new TomcatMain();
+//        final TomcatMain tomcatMain = new TomcatMain();
 
         // 获取当前资源目录
-        final String classPath = tomcatMain.getClass().getResource("/").getPath();
+//        final String classPath = tomcatMain.getClass().getResource("/").getPath();
 
         final Tomcat tomcat = new Tomcat();
 

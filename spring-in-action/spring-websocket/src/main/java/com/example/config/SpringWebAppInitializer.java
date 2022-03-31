@@ -1,5 +1,6 @@
 package com.example.config;
 
+import com.example.filter.CorsFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import javax.servlet.Filter;
@@ -39,8 +40,6 @@ public class SpringWebAppInitializer extends AbstractAnnotationConfigDispatcherS
     protected Class<?>[] getServletConfigClasses() {
         // GolfingWebConfig defines beans that would be in golfing-servlet.xml
         return new Class<?>[] {
-//                WebMvcConfig.class,
-//                ThymeleafWebMvcConfiguration.class
                 WebSocketConfig.class
         };
     }
@@ -50,4 +49,10 @@ public class SpringWebAppInitializer extends AbstractAnnotationConfigDispatcherS
         return new String[] { "/" };
     }
 
+    @Override
+    protected Filter[] getServletFilters() {
+        return new Filter[]{
+                new CorsFilter()
+        };
+    }
 }
