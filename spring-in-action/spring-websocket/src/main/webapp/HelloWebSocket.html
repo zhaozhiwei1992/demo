@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8"/>
+    <title>Hello WebSocket</title>
+
+    <script type="text/javascript">
+
+        function sayHello() {
+            console.log("send Hello");
+            socket.send("Hello ");
+        };
+
+        function WebSocketTest() {
+            if ("WebSocket" in window) {
+                console.log("您的浏览器支持 WebSocket!");
+
+                // 打开一个 web socket
+                var ws = new WebSocket("ws://localhost:8080/hello");
+
+                ws.onopen = function () {
+                    console.log("Opening");
+                    // 启动后发送消息
+                    sayHello();
+                };
+
+                ws.onclose = function(){
+                    console.log("socket Closed");
+                };
+
+                ws.onmessage = function (msg) {
+                    console.log("收到消息, ", msg.data);
+                    // 收到消息后再给后台发个hello
+                    setTimeout(function () {
+                        sayHello();
+                    }, 2000);
+                };
+
+            } else {
+                // 浏览器不支持 WebSocket
+                alert("您的浏览器不支持 WebSocket!");
+            }
+        }
+
+    </script>
+</head>
+
+<body>
+<div id="sse">
+    <a href="javascript:WebSocketTest()">运行 WebSocket</a>
+</div>
+</body>
+
+</html>

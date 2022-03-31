@@ -20,6 +20,7 @@
     <module>spring-web-restful</module>
     <module>spring-jms</module>
     <module>spring-amqp</module>
+    <module>spring-websocket</module>
   </modules>
   <properties>
 <!--    java: 错误: 不支持发行版本 5-->
