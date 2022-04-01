@@ -58,21 +58,21 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
         //客户端订阅路径前缀（基于内存的STOMP消息代理）,
-//        registry.enableSimpleBroker(
-//                "/sub/"
-//                , "/queue/"
-//        );
+        registry.enableSimpleBroker(
+                "/sub/"
+                , "/queue/"
+        );
 
 //      注: 开启两个代理数据会翻倍
 //      configureMessageBroker()方法的第一行代码启用了STOMP代理中继（broker relay）功能，
 //      并将其目的地前缀设置为“/topic”和“/queue”
 
 //      只有client02能收到返回，因为client01订阅了/sub/*
-        registry.enableStompBrokerRelay("/topic/", "/queue/")
-                .setRelayHost(rabbitmqProperties.getHost())
-                .setRelayPort(Integer.parseInt(rabbitmqProperties.getPort()))
-                .setClientLogin(rabbitmqProperties.getUsername())
-                .setClientPasscode(rabbitmqProperties.getPassword());
+//        registry.enableStompBrokerRelay("/topic/", "/queue/")
+//                .setRelayHost(rabbitmqProperties.getHost())
+//                .setRelayPort(Integer.parseInt(rabbitmqProperties.getPort()))
+//                .setClientLogin(rabbitmqProperties.getUsername())
+//                .setClientPasscode(rabbitmqProperties.getPassword());
 
         //服务端点请求前缀, 客户端发送消息时候需要/request前缀, 转发到 @MessageMapping
 //      function sendMessage() {

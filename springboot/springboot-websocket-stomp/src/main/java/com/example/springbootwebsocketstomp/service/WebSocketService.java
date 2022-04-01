@@ -15,6 +15,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class WebSocketService {
+
+    /**
+     * @Description: 使用SimpMessagingTemplate,可以任意地方发消息，不用依赖先收到消息(@SendTo)
+     */
     @Autowired
     private SimpMessagingTemplate template;
     

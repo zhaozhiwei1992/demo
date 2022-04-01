@@ -42,6 +42,22 @@ public class WebSocketController {
         return "服务端返回, " + value;
     }
 
+    /**
+     * @data: 2022/4/1-下午2:50
+     * @User: zhaozhiwei
+     * @method: sendMsgNoRelay
+      * @param value :
+     * @return: java.lang.String
+     * @Description:
+     * client03.html
+     * /request/sendNoRelay
+     */
+    @MessageMapping("/sendNoRelay")
+    public String sendMsgNoRelay(String value) {
+        log.info("收到前端传入消息 {}", value);
+        return "服务端不需要代理即可返回, " + value;
+    }
+
     @Autowired
     private WebSocketService webSocketService;
 
