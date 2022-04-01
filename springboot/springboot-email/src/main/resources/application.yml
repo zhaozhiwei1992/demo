@@ -1,0 +1,23 @@
+spring:
+  #邮箱配置
+  mail:
+    host: smtp.qq.com
+#    host: smtp.126.com
+    username: 347061329@qq.com
+    #QQ邮箱的授权码
+    password: 授权码
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+  thymeleaf:
+    cache: false
+
+#设置一个邮件发送人
+app:
+  mail:
+    sender: 347061329@qq.com
