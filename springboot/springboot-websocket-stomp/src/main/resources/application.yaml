@@ -1,0 +1,8 @@
+spring:
+  rabbitmq:
+    host: 192.168.7.6
+    password: guest
+#    port: 5672
+#    默认情况下，STOMP代理中继会假设代理监听localhost的61613端口, 不能用5672
+    port: 61613
+    username: guest

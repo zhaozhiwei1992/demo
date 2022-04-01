@@ -22,6 +22,13 @@
 			<artifactId>spring-boot-starter-websocket</artifactId>
 		</dependency>
 
+<!--		'stompBrokerRelayMessageHandler'; nested exception is
+java.lang.NoClassDefFoundError: io/netty/util/concurrent/EventExecutor-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-reactor-netty</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>

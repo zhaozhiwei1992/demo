@@ -51,7 +51,7 @@
 			stompClient.connect({}, function (frame) {
 				output("client02连接成功");
 				//建立连接后的回调
-				stompClient.subscribe('/sub/chat', function (data) {
+				stompClient.subscribe('/queue/chat', function (data) {
 					output(data.body);
 				});
 			},
