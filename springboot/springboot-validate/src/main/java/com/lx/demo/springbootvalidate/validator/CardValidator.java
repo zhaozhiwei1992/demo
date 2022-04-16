@@ -32,7 +32,7 @@ public class CardValidator implements ConstraintValidator<Card, String> {
 
     /**
      *  需求: 传入卡号形式必须是 LX-6位数字
-     *  curl -H "Accept:application/json" -H "Content-Type:application/json" -X POST -d '{"id":1,"name":"lisi","email":"11@qq.com","phone":"18234837162","cardNum":"LX-123456"}' http://127.0.0.1:8080/user/save
+     *  curl -H "Accept:application/json" -H "Content-Type:application/json" -X POST -d '{"id":1,"name":"lisi","email":"11@qq.com","phone":"18233333333","cardNum":"LX-123456"}' http://127.0.0.1:8080/user/save
      *
      *  校验失败后就会 输出message信息
      * @param value 传入数据

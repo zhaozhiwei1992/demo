@@ -30,7 +30,7 @@ public class SmsValidateCodeController {
  * @param mobile :
      * @return: void
      * @Description: 描述
-     * curl -X GET -H 'deviceId: 001' -i 'http://localhost:8080/code/sms?mobile=18234837162'
+     * curl -X GET -H 'deviceId: 001' -i 'http://localhost:8080/code/sms?mobile=18233333333'
      */
     @GetMapping("/code/sms")
     public SmsCode createCode(@RequestHeader("deviceId") String deviceId, String mobile) {
