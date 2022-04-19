@@ -1,0 +1,24 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: '@artifactId@'
+  thymeleaf:
+    mode: LEGACYHTML5
+    cache: false
+  datasource:
+    password: root
+    url: jdbc:mysql://127.0.0.1:3306/activity6?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&nullCatalogMeansCurrent=true
+    username: root
+  jpa:
+    database: MYSQL
+    generateDdl: true
+    hibernate:
+      ddlAuto: update
+
+  activiti:
+    database-schema-update: true
+    check-process-definitions: false
+logging:
+  level:
+    org.activiti.engine.impl.persistence.entity: debug
