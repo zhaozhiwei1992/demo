@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@192.168.100.10:1521:pdb19
+    username: mid_ox
+    password: 1
+#    password: root
+#    url: jdbc:mysql://localhost:3306/test3
+#    username: root
+    # 建表语句
+    schema: classpath:db/schema.sql
+    data: classpath:db/data.sql
+    sql-script-encoding: utf-8
+    #在SpringBoot1.x中, 运行schema.sql不需要配置便可之间运行,但是在SpringBoot2.x中,我们需要在配置文件中配置一下:
+    initialization-mode: never
+#log4j:
+#  logger:
+#    org:
+#      apache:
+#        commons:
+#          beanutils: 'off'
+#          beanutils.MethodUtils: 'off'
+#          beanutils.converters: 'off'

@@ -1,7 +1,10 @@
 package com.lx.demo.springbootlog.web.rest;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,10 +17,12 @@ import java.util.HashMap;
  * @Description: TODO
  * @date 2021/6/21 上午11:54
  */
+@RunWith(SpringRunner.class)
 public class IndexResourceTest {
 
     private static final Logger logger = LoggerFactory.getLogger(IndexResourceTest.class);
 
+    @Test
     public void logger(){
         final HashMap<Object, Object> objectObjectHashMap = new HashMap<>();
         objectObjectHashMap.put("msg", "hh");
@@ -35,7 +40,4 @@ public class IndexResourceTest {
         }
     }
 
-    public static void main(String[] args) {
-       new IndexResourceTest().logger();
-    }
 }

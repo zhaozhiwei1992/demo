@@ -97,6 +97,10 @@ public class JcrontabDataSource implements DataSource {
         boolean[] bYears = new boolean[years];
         try {
 
+//            crontab表达式指定时间下，执行TaskClient.executeTask方法
+//            从而触发BdgCommonTask.execute方法，里面的参数就是bdg, 或者bdg.timertask.SyncIndexDataTask
+
+//            相当与实现了一个分布式定时任务
             String line = "0 51 10 * * * *" + " " + "com.example.springbootjcrontab.consumer.TaskClient#executeTask" + " " +
                     "定时任务测试" + " " + "bdg" + " " + "bdg.timertask.SyncIndexDataTask" + " " + "com.example.springbootjcrontab.business.BdgCommonTask#execute";
 

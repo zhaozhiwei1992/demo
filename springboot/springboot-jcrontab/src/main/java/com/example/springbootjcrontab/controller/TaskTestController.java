@@ -8,12 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
-/**
- * @author <a href="mailto:zhongyi@szlongtu.com">钟毅</a>于 2015-1-15 下午01:57:10
- * @ClassName: CommonManagePage
- * @Description: Description of this class
- */
-
 @RestController
 public class TaskTestController {
 
