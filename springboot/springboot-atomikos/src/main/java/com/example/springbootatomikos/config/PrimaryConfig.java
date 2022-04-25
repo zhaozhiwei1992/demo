@@ -1,82 +1,92 @@
 package com.example.springbootatomikos.config;
 
+import com.mysql.cj.jdbc.MysqlXADataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.jta.atomikos.AtomikosDataSourceBean;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.persistence.EntityManager;
 import javax.sql.DataSource;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * @author zhaozhiwei
+ * @version V1.0
  * @Title: PrimaryConfig
  * @Package com/example/springbootatomikos/config/PrimaryConfig.java
- * @Description:
- * 2. 分别配置主数据源和其它数据源
- * @author zhaozhiwei
+ * @Description: 2. 分别配置主数据源和其它数据源
+ * {@see com.example.springbootjpa.config.PrimaryConfig}
  * @date 2022/4/25 上午10:18
- * @version V1.0
  */
 @Configuration
-@EnableTransactionManagement
+@DependsOn("transactionManager")
 @EnableJpaRepositories(
-        entityManagerFactoryRef = "entityManagerFactoryPrimary",
-        transactionManagerRef = "transactionManagerPrimary",
-//  配置primary jpa repository包
-        basePackages = {"com.example.springbootatomikos.repository.primary"}
-)
+        //写入primary repository的路径
+        basePackages = "com.example.springbootatomikos.repository.primary",
+        entityManagerFactoryRef = "primaryEntityManager",
+        transactionManagerRef = "transactionManager")
 public class PrimaryConfig {
-    @Autowired
-    @Qualifier("primaryDataSource")
-    private DataSource primaryDataSource;
-
-    @Primary
-    @Bean(name = "entityManagerPrimary")
-    public EntityManager entityManager(EntityManagerFactoryBuilder builder) {
-        return entityManagerFactoryPrimary(builder).getObject().createEntityManager();
-    }
-
-    @Primary
-    @Bean(name = "entityManagerFactoryPrimary")
-    public LocalContainerEntityManagerFactoryBean entityManagerFactoryPrimary(
-            EntityManagerFactoryBuilder builder) {
-        return builder
-                .dataSource(primaryDataSource)
-                .properties(getVendorProperties())
-                //设置实体类所在位置与副数据源区分，需要修改
-                .packages("com.example.springbootatomikos.domain")
-                .persistenceUnit("primaryPersistenceUnit")
-                .build();
-    }
 
     @Autowired
-    private Environment env;
+    private JpaVendorAdapter jpaVendorAdapter;
 
-    private Map getVendorProperties() {
-        HashMap<String, Object> properties = new HashMap<>();
-        properties.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
-        properties.put("hibernate.ddl-auto", env.getProperty("hibernate.ddl-auto"));
-        properties.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
-        properties.put("hibernate.format_sql", env.getProperty("hibernate.format_sql"));
-        properties.put("hibernate.physical_naming_strategy", env.getProperty("hibernate.physical_naming_strategy"));
-        properties.put("hibernate.implicit_naming_strategy", env.getProperty("hibernate.implicit_naming_strategy"));
-        return properties;
+    //primary
+    @Primary
+    @Bean(name = "primaryDataSourceProperties")
+    @ConfigurationProperties(prefix = "spring.datasource.primary")     //注意这里
+    public DataSourceProperties primaryDataSourceProperties() {
+        return new DataSourceProperties();
     }
 
     @Primary
-    @Bean(name = "transactionManagerPrimary")
-    public PlatformTransactionManager transactionManagerPrimary(EntityManagerFactoryBuilder builder) {
-        return new JpaTransactionManager(entityManagerFactoryPrimary(builder).getObject());
+    @Bean(name = "primaryDataSource", initMethod = "init", destroyMethod = "close")
+    @ConfigurationProperties(prefix = "spring.datasource.primary")
+    public DataSource primaryDataSource() throws SQLException {
+        MysqlXADataSource mysqlXaDataSource = new MysqlXADataSource();
+        mysqlXaDataSource.setUrl(primaryDataSourceProperties().getUrl());
+        mysqlXaDataSource.setPinGlobalTxToPhysicalConnection(true);
+        mysqlXaDataSource.setPassword(primaryDataSourceProperties().getPassword());
+        mysqlXaDataSource.setUser(primaryDataSourceProperties().getUsername());
+        AtomikosDataSourceBean xaDataSource = new AtomikosDataSourceBean();
+        xaDataSource.setXaDataSource(mysqlXaDataSource);
+        xaDataSource.setUniqueResourceName("primary");
+        xaDataSource.setBorrowConnectionTimeout(60);
+        xaDataSource.setMaxPoolSize(20);
+        return xaDataSource;
+    }
+
+    @Primary
+    @Bean(name = "primaryEntityManager")
+    @DependsOn("transactionManager")
+    public LocalContainerEntityManagerFactoryBean primaryEntityManager() throws Throwable {
+
+        HashMap<String, Object> properties = new HashMap<String, Object>();
+        properties.put("hibernate.transaction.jta.platform", AtomikosJtaPlatform.class.getName());
+        properties.put("javax.persistence.transactionType", "JTA");
+        LocalContainerEntityManagerFactoryBean entityManager = new LocalContainerEntityManagerFactoryBean();
+        entityManager.setJtaDataSource(primaryDataSource());
+        entityManager.setJpaVendorAdapter(jpaVendorAdapter);
+        //这里要修改成主数据源的扫描包
+        entityManager.setPackagesToScan("com.example.springbootatomikos.domain");
+        entityManager.setPersistenceUnitName("primaryPersistenceUnit");
+        entityManager.setJpaPropertyMap(properties);
+        return entityManager;
     }
 
 }

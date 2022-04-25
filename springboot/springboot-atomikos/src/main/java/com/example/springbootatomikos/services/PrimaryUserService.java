@@ -2,7 +2,6 @@ package com.example.springbootatomikos.services;
 
 import com.example.springbootatomikos.domain.User;
 import com.example.springbootatomikos.repository.primary.PrimaryUserRepository;
-import com.example.springbootatomikos.repository.secondary.SecondaryUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,34 +22,25 @@ import java.util.List;
  * @date 2022/4/25 上午9:34
  */
 @Service
-@Transactional(rollbackOn = Exception.class)
-public class UserService {
+//@Transactional(rollbackOn = Exception.class)
+public class PrimaryUserService {
 
     @Autowired
     private PrimaryUserRepository primaryUserRepository;
 
-    @Autowired
-    private SecondaryUserRepository secondaryUserRepository;
-
     public User save(User user){
-        primaryUserRepository.save(user);
-        secondaryUserRepository.save(user);
-        return user;
+        return primaryUserRepository.save(user);
     }
 
     public List<User> saveAll(List<User> users){
-        final List<User> users1 = primaryUserRepository.saveAll(users);
-        secondaryUserRepository.saveAll(users);
-        return users1;
+        return primaryUserRepository.saveAll(users);
     }
 
     public void delete(Long id){
         primaryUserRepository.deleteByUserId(id);
-        secondaryUserRepository.deleteByUserId(id);
     }
 
     public List<User> findAll(){
-        final List<User> all = primaryUserRepository.findAll();
-        return all;
+        return primaryUserRepository.findAll();
     }
 }

@@ -6,7 +6,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import javax.transaction.Transactional;
 
 /**
  * @author zhaozhiwei
@@ -21,14 +24,32 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class UserServiceTest extends TestCase {
 
     @Autowired
-    private UserService userService;
+    private PrimaryUserService primaryUserService;
+
+    @Autowired
+    private SecondaryUserService secondaryUserService;
+
+    @Autowired
+    private ExampleService exampleService;
 
     @Test
+//    设置test默认不回滚
+    @Rollback(value = false)
+//    这里直接设置Transactional的方式不行，事物无法统一控制, 实现exampleService来处理
+    @Transactional(rollbackOn = Exception.class)
     public void testSave() {
-        final User user = new User();
-        user.setName("zhangsan");
-        user.setAge(18);
-        userService.save(user);
+
+        exampleService.testSave();
+
+//        for (int i = 0; i < 20; i++) {
+//            final User user = new User();
+//            user.setId(i);
+//            user.setName("zhangsan");
+//            user.setAge(18);
+//
+//            primaryUserService.save(user);
+//            secondaryUserService.save(user);
+//        }
     }
 
     public void testSaveAll() {

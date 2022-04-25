@@ -1,15 +1,16 @@
 spring:
   datasource:
     primary:
-#     `com.mysql.jdbc.Driver'. This is deprecated. The new driver class is `com.mysql.cj.jdbc.Driver'.
+      #     `com.mysql.jdbc.Driver'. This is deprecated. The new driver class is `com.mysql.cj.jdbc.Driver'.
       # driver-class-name: com.mysql.jdbc.Driver
       driver-class-name: com.mysql.cj.jdbc.Driver
-      jdbc-url: jdbc:mysql://localhost:3306/db1
+#      jdbc-url: jdbc:mysql://localhost:3306/db1
+      url: jdbc:mysql://localhost:3306/db1
       username: root
       password: root
     secondary:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      jdbc-url: jdbc:mysql://localhost:3306/db2
+      url: jdbc:mysql://localhost:3306/db2
       username: root
       password: root
   jpa:
@@ -17,6 +18,16 @@ spring:
     generateDdl: true
     hibernate:
       ddl-auto: create-drop
+  jta: #添加分布式JTA配置
+    atomikos:
+      datasource:
+        max-pool-size: 20
+        borrow-connection-timeout: 60
+      connectionfactory:
+        max-pool-size: 20
+        borrow-connection-timeout: 60
+    log-dir: classpath:tx-logs
+    transaction-manager-id: txManager
 #      ddl-auto: update
 hibernate:
   dialect: org.hibernate.dialect.MySQL55Dialect

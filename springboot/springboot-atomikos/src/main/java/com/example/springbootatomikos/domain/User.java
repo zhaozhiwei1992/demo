@@ -3,6 +3,7 @@ package com.example.springbootatomikos.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 /**
@@ -24,6 +25,8 @@ import javax.persistence.Id;
 public class User {
 
     @Id
+//    @GeneratedValue
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(nullable = false)
