@@ -14,6 +14,10 @@ spring:
         group: DEFAULT_GROUP
         #server-addr: 192.168.7.6:8848
         server-addr: ${CONFIG_SERVER:192.168.7.6}:${CONFIG_SERVER_PORT:8848}
+#        nacos开启认证后需要配置用户密码
+#        https://www.bookstack.cn/read/nacos-2.0-zh/b8a31d745a8ef5c6.md
+        username: nacos
+        password: nacos
         enabled: true
         #使用这个，需要把group设置为DEFAULT_GROUP, 默认的${prefix}-${profile}-${ext}会加载到最后，所以优先级更高
         shared-dataids: common.yml,environment.yml,fasp2datasource.yml
@@ -35,6 +39,8 @@ spring:
 #          group: ${NACOS_GROUP:DEFAULT_GROUP}
       discovery:
         server-addr: ${CONFIG_SERVER:192.168.7.6}:${CONFIG_SERVER_PORT:8848}
+        username: nacos
+        password: nacos
         metadata:
           serviceprovince: 3300**,3301**
           version: 1.0.0
