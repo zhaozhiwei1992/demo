@@ -76,6 +76,15 @@ public class User extends BaseEntity implements Serializable {
         this.age = age;
     }
 
+    public User() {
+    }
+
+    public User(Long id, String name, int age) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+    }
+
     @Override
     public String toString() {
         return "User{" +

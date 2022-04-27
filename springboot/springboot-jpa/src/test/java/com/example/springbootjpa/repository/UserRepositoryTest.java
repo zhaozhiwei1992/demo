@@ -33,19 +33,25 @@ public class UserRepositoryTest {
     @Autowired
     private BookRepository bookRepository;
 
-    private User user;
-
     @Before
     public void init(){
-        user = new User();
+        User user = new User();
         user.setId(5L);
-        user.setName("张三");
+        user.setName("zhangsan");
         user.setPassword("110");
         user.setAge(10);
         final Book chinese = new Book(7L, "chinese", 100f);
         bookRepository.save(chinese);
         user.setBooks(Arrays.asList(chinese));
         userRepository.save(user);
+
+        User user2 = new User();
+        user2.setId(6L);
+        user2.setName("lisi");
+        user2.setPassword("110");
+        user2.setAge(10);
+        user2.setBooks(Arrays.asList(chinese));
+        userRepository.save(user2);
         log.info("测试前执行初始化------");
     }
 
@@ -67,7 +73,7 @@ public class UserRepositoryTest {
 
     @Test
     public void testFindByNamePageable(){
-        final Page<User> users = userRepository.findByName("张三", new PageRequest(0, 1, new Sort(Sort.Direction.ASC, "id")));
+        final Page<User> users = userRepository.findByName("zhangsan", new PageRequest(0, 1, new Sort(Sort.Direction.ASC, "id")));
         users.forEach(user1 -> {
             log.info("分页用户, {}", user1);
         });
@@ -75,14 +81,15 @@ public class UserRepositoryTest {
 
     @Test
     public void testFindByIdOrName(){
-        final Optional<User> user2 = userRepository.findByIdOrName(1L, "张三");
+        final Optional<User> user2 = userRepository.findByIdOrName(1L, "zhangsan");
 //        log.info("用户, {}", user2.get());
-        Assert.assertEquals(user2.get().getName(), user.getName());
+        Assert.assertEquals(user2.get().getName(), "zhangsan");
     }
 
     @Test
     public void testFindByName(){
-        Assert.assertEquals(user.getName(), userRepository.findByName(user.getName()).get().getName());
+        String name = "zhangsan";
+        Assert.assertEquals(name, userRepository.findByName(name).get().getName());
     }
 
     @Test
@@ -90,8 +97,37 @@ public class UserRepositoryTest {
     public void testDefaultImpl(){
         log.info("所有用户信息, {}", userRepository.findAll());
         log.info("删除前用户总数: {}", userRepository.count());
+        User user = new User();
+        user.setId(5L);
+        user.setName("zhangsan");
+        user.setPassword("110");
+        user.setAge(10);
+        final Book chinese = new Book(7L, "chinese", 100f);
+        user.setBooks(Arrays.asList(chinese));
         userRepository.delete(user);
         log.info("删除后用户总数: {}", userRepository.count());
+    }
+
+    /**
+     * @Description: sql注入测试
+     */
+    @Test
+    public void testSelectByName(){
+        final List<User> zhangsan = userRepository.selectByName("zhangsan");
+//        log.info("用户信息: {}", zhangsan);
+        Assert.assertEquals(1, zhangsan.size());
+//        这种形式直接查不到东西,jpa本生已经处理
+        final List<User> users = userRepository.selectByName("zhangsan or name is not null");
+//        log.info("用户信息: {}", users);
+        Assert.assertEquals(0, users.size());
+    }
+
+
+    @Test
+    public void testFindBySql(){
+        final List<User> users = userRepository.findBySql();
+//        log.info("用户信息: {}", users);
+        Assert.assertEquals(2, users.size());
     }
 
     @After

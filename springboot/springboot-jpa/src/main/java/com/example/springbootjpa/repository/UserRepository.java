@@ -28,7 +28,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
      * 在 SQL 的查询方法上面使用@Query注解，如涉及到删除和修改在需要加上@Modifying.也可以根据需要添加 @Transactional对事物的支持，查询超时的设置等。
      * @return
      */
-    @Query("select id, name, age from User")
+    @Query("select new User(id, name, age) from User")
     List<User> findBySql();
 
     @Modifying
@@ -39,6 +39,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Modifying
     @Query("delete from User where id = ?1")
     void deleteByUserId(Long id);
+
+    @Query("select new User(id, name, age) from User where name = ?1")
+    List<User> selectByName(String name);
 
     /**
      *
