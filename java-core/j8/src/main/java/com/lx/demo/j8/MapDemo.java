@@ -24,5 +24,15 @@ public class MapDemo {
             return map;
         }).collect(Collectors.toList());
         System.out.println(collect);
+
+        final HashMap<String, Object> map4 = new HashMap<>();
+        map4.put("fzb_99", "hello");
+
+        for (Map.Entry<String, Object> stringObjectEntry : map4.entrySet()) {
+            final String key = stringObjectEntry.getKey();
+            final Object value = stringObjectEntry.getValue();
+            map4.put(key.substring(4), value);
+        }
+        System.out.println(map4);
     }
 }
