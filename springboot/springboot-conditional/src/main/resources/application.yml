@@ -1,7 +1,8 @@
 remote:
   rest:
-    remoteinfo:
-      enabled: false
+#    remote-info:
+    remoteInfo:
+      enabled: true
     zzding:
       access-key: ceshiaccesskey
       enabled: true
