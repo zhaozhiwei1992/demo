@@ -81,8 +81,11 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
             return;
         }
         try {
+
+//            这里增加了自己的认证逻辑
             UsernamePasswordAuthenticationToken authentication = getAuthentication(request, response);
 
+//            成功以后把成功认证信息放到context中，方便后续获取
             SecurityContextHolder.getContext().setAuthentication(authentication);
             chain.doFilter(request, response);
 

@@ -84,6 +84,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 //其他所有请求需要身份认证
                 .anyRequest().authenticated()
                 .and()
+//                增加自己的认证方式, 需要去掉前边session认证方式
                 .addFilter(new JWTAuthenticationFilter(authenticationManager(), userDetailsService));
     }
 
