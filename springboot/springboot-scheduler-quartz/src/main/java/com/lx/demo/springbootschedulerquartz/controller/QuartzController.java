@@ -22,7 +22,7 @@ public class QuartzController {
 
     /**
      * curl -X GET http://localhost:8080/quartz/job2
-     *
+     * <p>
      * 效果:
      * jobToBeExecuted
      * Job : group2.job2 is going to start...
@@ -39,6 +39,7 @@ public class QuartzController {
      * 2019-08-11 17:57:25.002  INFO 7976 --- [ryBean_Worker-3] c.l.d.s.jobs.ScheduledJob                : 执行自定义定时任务
      * jobWasExecuted
      * Job : group2.job2 is finished...
+     *
      * @return
      */
     @RequestMapping(value = "/job2", method = RequestMethod.GET)
@@ -69,10 +70,11 @@ public class QuartzController {
 
     /**
      * 启动配置或者数据库中所有定时任务
+     *
      * @return
      */
     @GetMapping("/all")
-    public String startSchedulerJobAll(){
+    public String startSchedulerJobAll() {
         // 这里可以是任意地方配置
         final ArrayList<Map<String, String>> jobList = new ArrayList<>();
         final HashMap<String, String> job1 = new HashMap<>();
@@ -86,14 +88,16 @@ public class QuartzController {
         job2.put("jobName", "com.lx.demo.springbootschedulerquartz.business.Job2#execute");
         job2.put("jobGroup", "group1");
         jobList.add(job2);
-            jobList.forEach(jobMap -> {
-                try {
-                    myScheduler.startJob(jobMap.get("cron"), jobMap.get("jobName"), jobMap.get("jobGroup"), ScheduledJob.class);
-                } catch (SchedulerException e) {
-                    e.printStackTrace();
-                }
 
-            });
+        jobList.forEach(jobMap -> {
+            try {
+                myScheduler.startJob(jobMap.get("cron"), jobMap.get("jobName"), jobMap.get("jobGroup"),
+                        ScheduledJob.class);
+            } catch (SchedulerException e) {
+                e.printStackTrace();
+            }
+
+        });
         return "启动定时器成功";
     }
 
