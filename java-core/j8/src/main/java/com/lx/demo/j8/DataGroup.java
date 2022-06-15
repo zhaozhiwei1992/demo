@@ -35,6 +35,9 @@ public class DataGroup {
         Map<Object, List<Map>> id = maps.stream().collect(Collectors.groupingBy(map -> map.get("id")));
         System.out.println("j8 后分组结果: " + id);
 
+        Map<Object, List<Map>> idAndName = maps.stream().collect(Collectors.groupingBy(map -> map.get("id") + "_" + map.get("name")));
+        System.out.println("j8 后分组结果: " + idAndName);
+
         // 金额分组
         final Map<String, List<Map>> groupByAmt = groupByAmt(maps);
         System.out.println("根据金额分组: " + groupByAmt);
