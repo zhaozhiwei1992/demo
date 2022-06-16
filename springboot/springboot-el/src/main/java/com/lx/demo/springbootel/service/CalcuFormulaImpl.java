@@ -38,18 +38,9 @@ public class CalcuFormulaImpl {
                 TemplateParserContext parserContext = new TemplateParserContext();
                 String format = parser.parseExpression(formulaStr,parserContext).getValue(data, String.class);
 
-                String evelResult = null;
-                try {
-                    format = format.toLowerCase();
-                    // 3. 通过jep进行填充后公式计算, 计算结果写入到
-                    evelResult = evaluate(format);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                BigDecimal result = null;
-                result = new BigDecimal(evelResult).setScale(0, RoundingMode.HALF_UP);
-                data.put(colCode, result);
+                final BigDecimal bigDecimal = parser.parseExpression(format).getValue(BigDecimal.class).setScale(0,
+                        RoundingMode.HALF_UP);
+                data.put(colCode, bigDecimal);
             }
         }
     }
@@ -57,6 +48,8 @@ public class CalcuFormulaImpl {
     private Jep jep = new Jep();
 
     private String evaluate(String content) throws ParseException, EvaluationException {
+//        试用版本天坑
+        // com.singularsys.jep.ParseException: Trial version limitation: Number of parse calls exceeded
         jep.parse(content);
         Object result = jep.evaluate();
         return result == null ? "0.00" : result.toString();
