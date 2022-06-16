@@ -30,6 +30,13 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
+<!--		公式计算包-->
+		<dependency>
+			<groupId>com.singularsys</groupId>
+			<artifactId>jep</artifactId>
+			<version>4.0-trial</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
