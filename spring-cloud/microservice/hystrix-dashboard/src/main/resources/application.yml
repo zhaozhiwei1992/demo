@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: @artifactId@
+server:
+  port: ${port:9000}
+hystrix:
+  dashboard:
+    proxy-stream-allow-list: "localhost"

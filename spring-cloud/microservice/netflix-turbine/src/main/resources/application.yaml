@@ -1,11 +1,12 @@
-#eureka:
-#  client:
-#    serviceUrl:
+eureka:
+  client:
+    serviceUrl:
 #      defaultZone: http://user:password@peer1:8761/eureka,http://user:password@peer2:8762/eureka #高可用配置
-#  instance:
-#    hostname: localhost
-#    port: 8761
-#    preferIpAddress: true # 将自己的ip注册到eureka server上, 没起作用
+      defaultZone: http://user:password@localhost:8761/eureka
+  instance:
+    hostname: localhost
+    port: 8761
+    preferIpAddress: true # 将自己的ip注册到eureka server上, 没起作用
 management:
   security:
     enabled: false
@@ -24,3 +25,12 @@ spring:
 #turbine:
 #  appConfig: user-service-provider
 #  clusterNameExpression: "'default'"
+turbine:
+  aggregator:
+    clusterConfig: default # 指定聚合哪些集群“,” 分割，默认为default。可用
+  appConfig: user-service-provider,user-service-client
+  # appConifg 配置Euraka中的serviceId列表，表明监控哪些服务
+  clusterNameExpression: "'default'"
+  # 1. clusterNameExpression 指定集群名称，默认表达式appName; 此时 turbine.aggregator.clusterConfig 需要配置要监控的应用名称
+  # 2. clusterNameExpression: "'default'" 时 clusterConfig: default 同时设置为default
+  # 3. clusterNameExpression: metadata['cluster']时 应用配置 eureka.instance.metadata-map.cluster:ABC 则 clusterConfig 也配置成ABC

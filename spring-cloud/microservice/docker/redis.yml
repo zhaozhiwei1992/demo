@@ -1,0 +1,16 @@
+version: "2"
+services:
+  # redis
+  redis:
+    image: redis
+    hostname: hm-redis
+    networks:
+      - eureka-net
+    ports:
+      - "6379:6379"
+      #    restart: always
+    volumes:
+      - "${HOME}/docker/redis/redis.conf:/etc/redis/redis.conf"
+      - "${HOME}/docker/redis/data:/data"
+    command:
+      redis-server /etc/redis/redis.conf --appendonly yes

@@ -20,8 +20,9 @@
             <artifactId>custom-monitor</artifactId>
             <version>${project.version}</version>
         </dependency>
-<!-- rebbitmq-->
+<!-- rabbitmq-->
         <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-zipkin -->
+<!--        使用zipkin进行链路跟踪-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-zipkin</artifactId>

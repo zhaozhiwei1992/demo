@@ -42,9 +42,9 @@ public class LoggingAspect {
     /**
      * Pointcut that matches all Spring beans in the application's main packages.
      */
-    @Pointcut("within(com.lx.demo.repository..*)"+
-        " || within(com.lx.demo.service..*)"+
-        " || within(com.lx.demo.web.rest..*)")
+    @Pointcut("within(com.example.repository..*)"+
+        " || within(com.example.service..*)"+
+        " || within(com.example.web.rest..*)")
     public void applicationPackagePointcut() {
         // Method is empty as this is just a Pointcut, the implementations are in the advices.
     }

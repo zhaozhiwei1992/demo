@@ -1,0 +1,11 @@
+# service-provider 同时也作为eureka的 client, 注册到eureka中
+# eureka的实例host和port, 这些最终要统一用配置中心管理
+eureka:
+  instance:
+    hostname: localhost
+    port: 10000
+my:
+  name: tangrenren
+service:
+  provider:
+    name: user-service-provider

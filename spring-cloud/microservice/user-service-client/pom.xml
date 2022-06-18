@@ -20,6 +20,13 @@
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
+        <!--   一些系统通用配置, 监控等-->
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>custom-monitor</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>

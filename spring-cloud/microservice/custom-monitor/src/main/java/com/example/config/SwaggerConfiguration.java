@@ -17,6 +17,15 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * @Title: SwaggerConfiguration
+ * @Package com/example/config/SwaggerConfiguration.java
+ * @Description:
+ * 引入该依赖包后, 服务启动可以通过 http://localhost:9090/swagger-ui.html来查看swagger配置
+ * @author zhaozhiwei
+ * @date 2022/6/18 下午3:44
+ * @version V1.0
+ */
 @EnableSwagger2
 @Configuration
 public class SwaggerConfiguration {
@@ -32,7 +41,7 @@ public class SwaggerConfiguration {
 
     /**
      * Springfox 提供了一个 Docket 对象，让我们可以灵活的配置 Swagger 的各项属性
-     * http://localhost:8080/ v2/api-docs
+     * http://localhost:8080/v2/api-docs
      *
      * @return
      */

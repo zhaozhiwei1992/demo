@@ -48,6 +48,7 @@ hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds:
 
 # ribbon设置超时
 ribbon:
+  #Closing connections idle longer than 30000 SECONDS
   ConnectTimeout: 30000
   ReadTimeout: 60000
 

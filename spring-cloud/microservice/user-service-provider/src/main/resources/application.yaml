@@ -30,10 +30,15 @@ spring:
     rabbitmq:
       queue: zipkin
 #    # zipkin的地址：通过真实IP地址访问
-##    base-url: http://${ZIPKIN_SERVER:127.0.0.1}:${ZIPKIN_SERVER_PORT:9411}
-#    #通过服务名访问
+    base-url: http://${ZIPKIN_SERVER:127.0.0.1}:${ZIPKIN_SERVER_PORT:9411}
+    #关闭服务发现，否则spring cloud会把zipkin的url当作服务名称
+    discovery-client-enabled: false
+    sender:
+      #使用http的方式传输数据
+      type: web
+    #通过服务名访问
 #    base-url: http://zipkin-server/
-#    enabled: true
+    enabled: true
   sleuth:
     web:
       client:
@@ -41,6 +46,13 @@ spring:
     sampler:
       #设置采样率，为了测试设置100%采集，设置为1.0
       percentage: 1.0  #zipkin采集率  0.1表示 10%采集率
+    traceId128: true
+    propagation-keys: user_name
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
 #  cloud:
 #    config:
 #      failFast: true
