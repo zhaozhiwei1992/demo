@@ -11,7 +11,7 @@ spring:
       # 用到git的时候使用
       label: master
       # 访问配置中心的配置文件名前缀
-      name: serviceclient
+      name: serviceclient,zipkin
       #激活类型
       profile: default
       # 配置怎么访问到配置服务器, url的方式

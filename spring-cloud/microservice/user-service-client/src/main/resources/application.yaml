@@ -18,6 +18,12 @@ service:
     name: user-service-provider
 logging:
   level:
+    root: INFO
+    org:
+      springframework:
+        web:
+          servlet:
+            DispatcherServlet: DEBUG
     com:
       example:
         web:

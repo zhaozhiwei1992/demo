@@ -14,6 +14,11 @@
 management:
   security:
     enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
 server:
   port: ${port:10086}
 spring:

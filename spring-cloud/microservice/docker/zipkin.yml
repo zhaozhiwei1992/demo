@@ -1,7 +1,7 @@
 version: "2"
 services:
-  # rabbitmq启动, guest/guest
-  rabbitmq:
+  # zipkin 链路追踪
+  zipkin:
     image: openzipkin/zipkin
     container_name: zipkin
 #    environment:

@@ -32,6 +32,9 @@ public class PreRequestLogFilter extends ZuulFilter {
     /**
      * 测试:
      * http://127.0.0.1:10086/user-service-provider/users
+     *
+     * 多次请求测试, 通过客户端访问服务, 测试链路追踪
+     * seq 5 |xargs -i echo "http://127.0.0.1:10086/user-service-client/users" |xargs -n 1 curl -X GET
      * 反馈:
      * 2019-08-03 14:13:40.425  INFO 24334 --- [io-10086-exec-4] com.example.filter.PreRequestLogFilter
      *  : send GET request to http://127.0.0.1:10086/user-service-provider/users

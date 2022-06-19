@@ -25,6 +25,8 @@ spring:
     port: 5672
     username: guest
     password: guest
+
+# 服务追踪配置开始
   #zipkin
   zipkin:
     rabbitmq:
@@ -48,6 +50,8 @@ spring:
       percentage: 1.0  #zipkin采集率  0.1表示 10%采集率
     traceId128: true
     propagation-keys: user_name
+# 服务追踪配置结束
+
 management:
   endpoints:
     web:

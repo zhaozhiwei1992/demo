@@ -24,6 +24,12 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>custom-monitor</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <!--启动zuul服务报错：java.lang.NoClassDefFoundError: com/netflix/zuul/ZuulFilter-->
 <!--        <dependency>-->
 <!--            <groupId>com.netflix.zuul</groupId>-->

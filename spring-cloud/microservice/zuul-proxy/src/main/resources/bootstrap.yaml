@@ -13,7 +13,7 @@ spring:
         enabled: true
         serviceId: config-server
       label: master
-      name: zuul
+      name: zuul,zipkin
       profile: default
       username: user
       password: password
