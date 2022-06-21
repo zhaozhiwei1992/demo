@@ -44,4 +44,27 @@ public class EchoResource {
             System.out.println(Thread.currentThread().getName() + " echo: " + msg);
         });
     }
+
+    @RequestMapping("/execute/time/out")
+    public void executorTimeOut(){
+        //java.util.concurrent.RejectedExecutionException: Task com.example.springbootexecutor.resource
+        // .EchoResource$$Lambda$382/1873461416@24b51184 rejected from java.util.concurrent
+        // .ThreadPoolExecutor@781d82d9[Running, pool size = 10, active threads = 10, queued tasks = 50, completed
+        // tasks = 0]
+        //	at java.util.concurrent.ThreadPoolExecutor$AbortPolicy.rejectedExecution(ThreadPoolExecutor.java:2063)
+        //	~[na:1.8.0_181]
+        //	at java.util.concurrent.ThreadPoolExecutor.reject(ThreadPoolExecutor.java:830) [na:1.8.0_181]
+        //	at java.util.concurrent.ThreadPoolExecutor.execute(ThreadPoolExecutor.java:1379) [na:1.8.0_181]
+
+        // 最大线程很小, 但是循环execute时候，会报上述错，超出最大线程
+        for (int i = 0; i < 150; i++) {
+            executor.execute(() ->{
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+        }
+    }
 }
