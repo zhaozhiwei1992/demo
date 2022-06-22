@@ -23,11 +23,17 @@ public class MultiDataSourceConfiguration {
     @Bean
     @Primary
     public DataSource masterDataSource(){
+//        return DataSourceBuilder.create()
+//                .driverClassName("oracle.jdbc.OracleDriver")
+//                .url("jdbc:oracle:thin:@192.168.100.10:1521/pdb19")
+//                .username("mid_ox")
+//                .password("1").build();
+
         return DataSourceBuilder.create()
-                .driverClassName("oracle.jdbc.OracleDriver")
-                .url("jdbc:oracle:thin:@192.168.100.10:1521/pdb19")
-                .username("mid_ox")
-                .password("1").build();
+                .driverClassName("com.mysql.jdbc.Driver")
+                .url("jdbc:mysql://localhost:3306/test")
+                .username("root")
+                .password("root").build();
     }
 
     /**
