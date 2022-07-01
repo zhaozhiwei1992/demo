@@ -13,6 +13,8 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
+
 /**
  * 其他方法接入上述注解后就会加入日志
  *  这种方式适合定点爆破, 谁用谁加， 事务注解应该也可以根据这种方式进行搞{@link Transactional}
@@ -44,7 +46,7 @@ public class CacheAnnotationAspect {
     public void before(JoinPoint joinPoint, Cacheable cacheable) {
         // 记录请求到达时间
         beginTime.set(System.currentTimeMillis());
-        logger.info(String.format("当前请求: %s, 开始时间: %s, 我想说: %s", joinPoint.toString(), beginTime.get(), cacheable.value()));
+        logger.info(String.format("当前请求: %s, 开始时间: %s, 我想说: %s", joinPoint.toString(), beginTime.get(), Arrays.toString(cacheable.value())));
     }
 
     @Autowired
@@ -63,6 +65,6 @@ public class CacheAnnotationAspect {
         final Cache.ValueWrapper name = cache.get("name");
         logger.info("缓存信息{}", name);
         //统计耗时
-        logger.info(String.format("当前请求: %s, 耗时: %s, 我想说: %s", joinPoint.toString(), System.currentTimeMillis()-beginTime.get(), cacheable.value()));
+        logger.info(String.format("当前请求: %s, 耗时: %s, 我想说: %s", joinPoint.toString(), System.currentTimeMillis()-beginTime.get(), Arrays.toString(cacheable.value())));
     }
 }

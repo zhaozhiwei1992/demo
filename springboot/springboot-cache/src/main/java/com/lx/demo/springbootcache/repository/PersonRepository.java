@@ -3,10 +3,13 @@ package com.lx.demo.springbootcache.repository;
 import com.lx.demo.springbootcache.domain.Person;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 
 @Repository
+// 通过cacheconfig可以统一设置 缓存名称persons
+//@CacheConfig(cacheNames = {"persons"})
 public class PersonRepository {
     private static final Logger logger = LoggerFactory.getLogger(PersonRepository.class);
 
@@ -19,6 +22,7 @@ public class PersonRepository {
      * @return
      */
     @Cacheable(cacheNames = "persons")
+//    @Cacheable(cacheNames = {"persons"}, key = "targetClass + methodName +#p0")
     public Person findByID(Long id){
         logger.info("方法内部查询!");
         Person person = new Person();

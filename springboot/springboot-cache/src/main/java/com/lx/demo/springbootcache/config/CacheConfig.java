@@ -17,6 +17,8 @@ import java.util.Date;
 
 /**
  * 自定义cachemap
+ * cachemanager一般配合cacheable注解使用
+ * 如果用redistemplate操作redis, 跟这个没关系
  */
 @Configuration
 @EnableCaching

@@ -6,6 +6,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,6 +55,10 @@ public class CacheController {
      */
     @GetMapping(value = "/find/{key}")
     public Map<String, Object> findByKey(@PathVariable String key) {
+
+        final Collection<String> cacheNames = simpleCacheManager.getCacheNames();
+        System.out.println("所有的缓存信息" + cacheNames);
+
         Cache cache = simpleCacheManager.getCache("cache-1");
         HashMap<String, Object> map = new HashMap<>();
         map.put(key, cache.get(key).get());
