@@ -1,0 +1,12 @@
+# 查看配置中心配置： http://192.168.0.109:7070/zuul/default
+my:
+  name: zhangsansan
+zhao:
+  encrypt: 398b0bce3f777e971aa9761120491d062736c92619a8a5d451dd330e0a4be7e1
+
+# 转发服务 forward
+#zuul:
+#  routes:
+#    api-a:
+#      path: /**
+#      serviceId: user-service-client

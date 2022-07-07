@@ -1,0 +1,20 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://user:password@localhost:8761/eureka
+  instance:
+    hostname: localhost
+    port: 8761
+spring:
+  cloud:
+    config:
+      # 用到git的时候使用
+      label: master
+      # 访问配置中心的配置文件名前缀
+      name: serviceclient,zipkin
+      #激活类型
+      profile: default
+      # 配置怎么访问到配置服务器, url的方式
+      uri: http://localhost:7070
+      username: user
+      password: password

@@ -14,18 +14,23 @@
     <name>user-service-provider</name>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
 <!--        文档-->
         <dependency>
             <groupId>com.example</groupId>
             <artifactId>custom-monitor</artifactId>
             <version>${project.version}</version>
         </dependency>
-<!-- rebbitmq-->
+<!-- rabbitmq-->
         <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-zipkin -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-zipkin</artifactId>
-        </dependency>
+<!--        使用zipkin进行链路跟踪-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.cloud</groupId>-->
+<!--            <artifactId>spring-cloud-starter-zipkin</artifactId>-->
+<!--        </dependency>-->
         <!-- https://mvnrepository.com/artifact/org.springframework.amqp/spring-rabbit -->
         <dependency>
             <groupId>org.springframework.amqp</groupId>

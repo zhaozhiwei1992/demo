@@ -14,7 +14,7 @@ import org.springframework.integration.annotation.Poller;
 import org.springframework.integration.core.MessageSource;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,13 +30,14 @@ import java.util.Map;
 @EnableHystrix
 @EnableBinding(value = {InputOutputChannel.class})
 public class UserProviderMain
-        extends WebMvcConfigurerAdapter {
+        implements WebMvcConfigurer {
     public static void main(String[] args) {
         SpringApplication.run(UserProviderMain.class, args);
     }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+//      拦截请求
         registry.addInterceptor(new CustomIntercepter());
     }
 

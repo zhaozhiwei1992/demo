@@ -15,9 +15,20 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.example</groupId>
             <artifactId>user-api</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <!--   一些系统通用配置, 监控等-->
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>custom-monitor</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>

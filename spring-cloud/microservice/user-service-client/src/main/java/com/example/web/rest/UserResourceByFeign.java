@@ -19,9 +19,10 @@ import java.util.List;
 public class UserResourceByFeign {
 
     /**
-     *
+     * 通过api的方式直接引入 provider提供的客户端接口包
+     * 跟第三方对接使用该方式也会更加优雅
      */
-    @Autowired
+//    @Autowired
     private UserServiceFeignHystrix userServiceFeignHystrix;
 
     @GetMapping("/users/feign")

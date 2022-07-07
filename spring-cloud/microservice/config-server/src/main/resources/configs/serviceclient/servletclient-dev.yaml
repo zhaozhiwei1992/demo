@@ -1,0 +1,9 @@
+eureka:
+  instance:
+    hostname: localhost
+    port: 10000
+my:
+  name: ttang
+service:
+  provider:
+    name: user-service-provider

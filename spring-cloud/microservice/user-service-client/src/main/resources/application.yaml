@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: '@artifactId@'
+server:
+  port: ${port:8080}
+feign:
+  client:
+    config:
+      default:
+        # 设置feign超时 单位ms
+        connectTimeout: 5000
+        readTimeout: 5000
+      user-service-provider:
+        loggerLevel: full
+
+service:
+  provider:
+    name: user-service-provider
+logging:
+  level:
+    root: INFO
+    org:
+      springframework:
+        web:
+          servlet:
+            DispatcherServlet: DEBUG
+    com:
+      example:
+        web:
+          rest:
+            UserResourceByFeign: debug
+ribbon:
+  NFLoadBalanceRuleClassName: com.netflix.loadbalancer.RandomRule
+user-service-provider:
+  ribbon:
+    # 配置随机负载均衡策略
+    NFLoadBalanceRuleClassName: com.netflix.loadbalancer.RandomRule

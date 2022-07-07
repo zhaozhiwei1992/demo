@@ -1,0 +1,5 @@
+# 查看配置中心配置： http://localhost:10086/gateway/default
+my:
+  name: zhangsansan
+zhao:
+  encrypt: 398b0bce3f777e971aa9761120491d062736c92619a8a5d451dd330e0a4be7e1
