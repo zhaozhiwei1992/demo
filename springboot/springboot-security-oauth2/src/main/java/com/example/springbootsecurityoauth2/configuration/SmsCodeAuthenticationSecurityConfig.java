@@ -41,6 +41,7 @@ public class SmsCodeAuthenticationSecurityConfig extends SecurityConfigurerAdapt
         provider.setCaffeineCache(caffeineCache);
 
         // 将SmsCodeAuthenticationFilter放到过滤器链的UsernamePasswordAuthenticationFilter的后面
+        // 放前边可以替换掉 UsernamePasswordAuthenticationFilter, 看需要灵活使用
         http
                 .authenticationProvider(provider)
                 .addFilterAfter(smsCodeAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);

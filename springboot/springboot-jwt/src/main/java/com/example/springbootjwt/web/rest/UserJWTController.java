@@ -36,6 +36,9 @@ public class UserJWTController {
 
     /**
      * curl -X POST http://127.0.0.1:8080/api/authenticate -H "Content-Type:application/json;charset=utf8" -d '{"id":1,"username":"zhangsan","password":"1"}'
+     *
+     * token的认证方式, 每次请求带token,
+     * 跟jwt区别 就是获取具体用户需要再次去查数据库
      * @return
      */
     @PostMapping("/authenticate")
@@ -55,6 +58,18 @@ public class UserJWTController {
         return "请求成功";
     }
 
+    /**
+     * @data: 2022/7/4-下午2:26
+     * @User: zhaozhiwei
+     * @method: doLogin
+      * @param username :
+     * @param password :
+     * @param response :
+     * @return: com.example.springbootjwt.web.rest.vm.ResponseData
+     * @Description:
+     *
+     * jwt方式, 返回的token同时带有了登录用户信息, 放在payload中，实际可以直接使用, 减少通过数据库获取用户信息
+     */
     @PostMapping("/login")
     public ResponseData doLogin(@PathParam("username") String username, @PathParam("password") String password,
                                 HttpServletResponse response){

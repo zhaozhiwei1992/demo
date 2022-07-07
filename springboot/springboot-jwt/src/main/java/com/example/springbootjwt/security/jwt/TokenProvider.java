@@ -73,10 +73,12 @@ public class TokenProvider {
     }
 
     /**
-     * 根據payload生成token
-     * 參考 鼓泡學院 mic dubbo
-     * @param payLoad
-     * @return
+     * @data: 2022/7/4-下午2:41
+     * @User: zhaozhiwei
+     * @method: generatorToken
+      * @param payLoad :
+     * @return: java.lang.String
+     * @Description: 生成的token可以带有用户信息, 一般适用放到cookie中只用,放header里内容会比较大
      */
     public String generatorToken(Map<String, Object> payLoad) {
         ObjectMapper objectMapper = new ObjectMapper();

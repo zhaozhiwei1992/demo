@@ -44,8 +44,9 @@ public class JwtUtil {
 
     /**
      *
-     * @author: xxm
      * 功能描述:创建Token, 生成方式和解析方式一定是配套
+     *
+     * jwt方式 token中可以通过payload方式多写点信息, 可以减少数据库再去获取
      * @date: 2020/5/28 16:09
      * @param: 
      * @return: 
