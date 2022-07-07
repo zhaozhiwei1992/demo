@@ -1,4 +1,4 @@
-package com.sixj.license.model;
+package com.example.domain;
 
 import de.schlichtherle.license.AbstractKeyStoreParam;
 

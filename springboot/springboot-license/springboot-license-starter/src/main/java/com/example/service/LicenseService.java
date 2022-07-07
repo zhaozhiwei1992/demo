@@ -1,6 +1,7 @@
-package com.example.verify;
+package com.example.service;
 
 import com.example.domain.CustomKeyStoreParam;
+import com.example.domain.CustomLicenseParam;
 import de.schlichtherle.license.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -16,9 +17,9 @@ import java.util.prefs.Preferences;
  * @date 2021-05-25-15:16
  */
 @Slf4j
-public class LicenseVerify {
+public class LicenseService {
 
-    public synchronized LicenseContent install(LicenseVerifyParam param){
+    public synchronized LicenseContent install(CustomLicenseParam param){
         LicenseContent result = null;
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -32,7 +33,6 @@ public class LicenseVerify {
         }catch (Exception e){
             log.error("证书安装失败！",e);
             throw new RuntimeException("++++++++ 证书安装失败 ++++++++");
-
         }
 
         return result;
@@ -63,12 +63,12 @@ public class LicenseVerify {
      * @param param
      * @return
      */
-    private LicenseParam initLicenseParam(LicenseVerifyParam param){
-        Preferences preferences = Preferences.userNodeForPackage(LicenseVerify.class);
+    private LicenseParam initLicenseParam(CustomLicenseParam param){
+        Preferences preferences = Preferences.userNodeForPackage(LicenseService.class);
 
         CipherParam cipherParam = new DefaultCipherParam(param.getStorePass());
 
-        KeyStoreParam publicStoreParam = new CustomKeyStoreParam(LicenseVerify.class
+        KeyStoreParam publicStoreParam = new CustomKeyStoreParam(LicenseService.class
                 ,param.getPublicKeysStorePath()
                 ,param.getPublicAlias()
                 ,param.getStorePass()

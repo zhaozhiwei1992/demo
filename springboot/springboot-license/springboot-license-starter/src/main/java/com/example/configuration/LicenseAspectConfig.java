@@ -1,12 +1,9 @@
-package com.example.aspect;
+package com.example.configuration;
 
+import com.example.aspect.LicenseAspect;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/**
- * @author sixiaojie
- * @date 2021-05-25-15:26
- */
 @Configuration
 public class LicenseAspectConfig {
     @Bean

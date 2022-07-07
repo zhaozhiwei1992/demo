@@ -1,6 +1,6 @@
 package com.example.aspect;
 
-import com.example.verify.LicenseVerify;
+import com.example.service.LicenseService;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -21,7 +21,7 @@ public class LicenseAspect {
     /**
      * AOP 需要判断共享组的判断点 @License
      */
-    @Pointcut("@annotation(com.sixj.license.aspect.License)")
+    @Pointcut("@annotation(com.example.aspect.License)")
     public void isLicensePointcut() {}
 
     /**
@@ -33,7 +33,7 @@ public class LicenseAspect {
         Method method = signature.getMethod();
         License license = method.getAnnotation(License.class);
         if (!Objects.isNull(license)) {
-            LicenseVerify licenseVerify = new LicenseVerify();
+            LicenseService licenseVerify = new LicenseService();
             //1. 校验证书是否有效
             boolean verifyResult = licenseVerify.verify();
             if(!verifyResult){

@@ -1,7 +1,7 @@
-package com.sixj.license.creator;
+package com.example.service;
 
-import com.sixj.license.model.CustomKeyStoreParam;
-import com.sixj.license.model.CustomLicenseParam;
+import com.example.domain.CustomKeyStoreParam;
+import com.example.domain.CustomLicenseParam;
 import de.schlichtherle.license.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -12,15 +12,13 @@ import java.util.prefs.Preferences;
 
 /**
  * License生成类，用于生成License证书
- * @author sixiaojie
- * @date 2021-05-25-13:58
  */
 @Slf4j
-public class LicenseCreator {
+public class LicenseService {
     private final static X500Principal DEFAULT_HOLDER_AND_ISSUER = new X500Principal("CN=localhost, OU=localhost, O=localhost, L=SH, ST=SH, C=CN");
     private CustomLicenseParam param;
 
-    public LicenseCreator(CustomLicenseParam param) {
+    public LicenseService(CustomLicenseParam param) {
         this.param = param;
     }
 
@@ -48,12 +46,12 @@ public class LicenseCreator {
      * @return
      */
     private LicenseParam initLicenseParam(){
-        Preferences preferences = Preferences.userNodeForPackage(LicenseCreator.class);
+        Preferences preferences = Preferences.userNodeForPackage(LicenseService.class);
 
         //设置对证书内容加密的秘钥
         CipherParam cipherParam = new DefaultCipherParam(param.getStorePass());
 
-        KeyStoreParam privateStoreParam = new CustomKeyStoreParam(LicenseCreator.class
+        KeyStoreParam privateStoreParam = new CustomKeyStoreParam(LicenseService.class
                 ,param.getPrivateKeysStorePath()
                 ,param.getPrivateAlias()
                 ,param.getStorePass()

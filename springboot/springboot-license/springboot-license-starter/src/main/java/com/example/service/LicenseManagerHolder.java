@@ -1,6 +1,5 @@
-package com.example.verify;
+package com.example.service;
 
-import com.example.manager.CustomLicenseManager;
 import de.schlichtherle.license.LicenseManager;
 import de.schlichtherle.license.LicenseParam;
 
