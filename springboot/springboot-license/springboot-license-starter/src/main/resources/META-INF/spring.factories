@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-LicenseVerifyAutoConfiguration
+com.example.configuration.LicenseVerifyAutoConfiguration

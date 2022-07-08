@@ -1,4 +1,4 @@
-package com.sixj.license.model;
+package com.example.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;

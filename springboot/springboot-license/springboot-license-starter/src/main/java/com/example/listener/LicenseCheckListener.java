@@ -1,5 +1,7 @@
-package com.example.verify;
+package com.example.listener;
 
+import com.example.domain.CustomLicenseParam;
+import com.example.service.LicenseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
@@ -50,14 +52,16 @@ public class LicenseCheckListener implements CommandLineRunner {
         if(!StringUtils.isEmpty(licensePath)){
             log.info("++++++++ 开始安装证书 ++++++++");
 
-            LicenseVerifyParam param = new LicenseVerifyParam();
+            CustomLicenseParam param = new CustomLicenseParam();
             param.setSubject(subject);
             param.setPublicAlias(publicAlias);
             param.setStorePass(storePass);
             param.setLicensePath(licensePath);
             param.setPublicKeysStorePath(publicKeysStorePath);
 
-            LicenseVerify licenseVerify = new LicenseVerify();
+            log.info("证书信息 {}", param);
+
+            LicenseService licenseVerify = new LicenseService();
             //安装证书
             licenseVerify.install(param);
 
