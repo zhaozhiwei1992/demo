@@ -1,73 +1,33 @@
 package com.example.listener;
 
-import com.example.domain.CustomLicenseParam;
+import com.example.configuration.CustomLicenseParam;
 import com.example.service.LicenseService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 /**
- * @author sixiaojie
- * @date 2021-05-25-15:42
+ * @author zhaozhiwei
+ * @version V1.0
+ * @Title: LicenseCheckListener
+ * @Package com/example/listener/LicenseCheckListener.java
+ * @Description: 启动服务时，这里会获取到license的配置信息,
+ * 然后去解析license的配置, 进行安装
+ * @date 2022/7/8 上午9:59
  */
 @Slf4j
 @Component
 public class LicenseCheckListener implements CommandLineRunner {
-    /**
-     * 证书subject
-     */
-    @Value("${license.subject}")
-    private String subject;
 
-    /**
-     * 公钥别称
-     */
-    @Value("${license.publicAlias}")
-    private String publicAlias;
-
-    /**
-     * 访问公钥库的密码
-     */
-    @Value("${license.storePass}")
-    private String storePass;
-
-    /**
-     * 证书生成路径
-     */
-    @Value("${license.licensePath}")
-    private String licensePath;
-
-    /**
-     * 密钥库存储路径
-     */
-    @Value("${license.publicKeysStorePath}")
-    private String publicKeysStorePath;
-
+    @Autowired
+    private LicenseService licenseService;
 
 
     @Override
     public void run(String... args) throws Exception {
-        if(!StringUtils.isEmpty(licensePath)){
-            log.info("++++++++ 开始安装证书 ++++++++");
-
-            CustomLicenseParam param = new CustomLicenseParam();
-            param.setSubject(subject);
-            param.setPublicAlias(publicAlias);
-            param.setStorePass(storePass);
-            param.setLicensePath(licensePath);
-            param.setPublicKeysStorePath(publicKeysStorePath);
-
-            log.info("证书信息 {}", param);
-
-            LicenseService licenseVerify = new LicenseService();
-            //安装证书
-            licenseVerify.install(param);
-
-            log.info("++++++++ 证书安装结束 ++++++++");
-        }else {
-            throw new RuntimeException("++++++++ 未配置License证书 ++++++++");
-        }
+        licenseService.install();
     }
 }

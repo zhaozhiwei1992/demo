@@ -1,0 +1,24 @@
+# ????license????
+license:
+  expiryTime: "2032-07-07 19:07:59"
+  issuedTime: "2022-07-07 19:07:00"
+  keyPass: 12345678A
+  privateAlias: SYSHLANG
+  licensePath: "/tmp/license.lic"
+  privateKeysStorePath: "/tmp/privateKeys.keystore"
+  storePass: 12345678A
+  subject: "pushi-kn-graph"
+  customLicenseParamExt:
+#    ?????????????, ????
+    mainBoardSerial: 41983BBB
+    macAddress:
+      - "02-42-E4-43-62-57"
+      - "02-42-4A-B2-CE-B9"
+      - "02-42-53-1C-F0-C0"
+      - "8C-16-45-32-C5-FF"
+    cpuSerial: "EA 06 08 00 FF FB EB BF"
+    ipAddress:
+      - "172.19.0.1"
+      - "172.18.0.1"
+      - "172.17.0.1"
+      - "10.10.15.159"

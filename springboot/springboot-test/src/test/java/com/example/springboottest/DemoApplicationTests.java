@@ -4,9 +4,10 @@ import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DemoApplicationTests {
+public class DemoApplicationTests {
 
-	void contextLoads() {
+	@Test
+	public void contextLoads() {
 
 	}
 

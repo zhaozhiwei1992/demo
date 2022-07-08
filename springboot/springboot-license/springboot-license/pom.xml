@@ -8,10 +8,10 @@
         <version>2.1.7.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.sixj.license</groupId>
+    <groupId>com.example</groupId>
     <artifactId>springboot-license</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>license-creator</name>
+    <name>springboot-license</name>
     <description>Demo project for Spring Boot</description>
     <properties>
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
@@ -38,6 +38,23 @@
             <version>1.18.22</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.5.6</version>
+        </dependency>
     </dependencies>
 
     <build>

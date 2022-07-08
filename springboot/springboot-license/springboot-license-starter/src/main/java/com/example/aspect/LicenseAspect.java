@@ -12,23 +12,23 @@ import java.lang.reflect.Method;
 import java.util.Objects;
 
 /**
- * @author sixiaojie
- * @date 2021-05-25-15:22
+ * @author zhaozhiwei
+ * @version V1.0
+ * @Title: LicenseAspect
+ * @Package com/example/aspect/LicenseAspect.java
+ * @Description: 通过拦截器的方式校验某些接口license是否有效
+ * 一般来说启动时候已经校验，这个适用性一般, 除非好几年不重启服务
+ * @date 2022/7/8 下午1:58
  */
 @Aspect
 @Order(1)
 public class LicenseAspect {
-    /**
-     * AOP 需要判断共享组的判断点 @License
-     */
     @Pointcut("@annotation(com.example.aspect.License)")
-    public void isLicensePointcut() {}
+    public void isLicensePointcut() {
+    }
 
-    /**
-     * AOP点之前就开始判断
-     */
     @Before("isLicensePointcut()")
-    public void beforeIsLicensePointcutCheck(JoinPoint joinPoint){
+    public void beforeIsLicensePointcutCheck(JoinPoint joinPoint) {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
         License license = method.getAnnotation(License.class);
@@ -36,7 +36,7 @@ public class LicenseAspect {
             LicenseService licenseVerify = new LicenseService();
             //1. 校验证书是否有效
             boolean verifyResult = licenseVerify.verify();
-            if(!verifyResult){
+            if (!verifyResult) {
                 //抛异常
                 throw new RuntimeException("您的证书无效，请核查服务器是否取得授权或重新申请证书");
             }
