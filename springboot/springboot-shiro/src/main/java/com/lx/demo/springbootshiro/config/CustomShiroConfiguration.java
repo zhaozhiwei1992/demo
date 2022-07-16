@@ -207,7 +207,7 @@ public class CustomShiroConfiguration {
         securityManager.setRealm(userRealm);
         //注入缓存管理器;
 //        securityManager.setCacheManager(ehCacheManager());//这个如果执行多次，也是同样的一个对象;
-        // 自定义缓存实现 使用redis
+        // 自定义缓存实现 使用redis, 这里使用缓存以后会缓存权限, 如果数据库有变更记得刷缓存
         securityManager.setCacheManager(cacheManager());
         // 自定义session管理 使用redis
         securityManager.setSessionManager(sessionManager());

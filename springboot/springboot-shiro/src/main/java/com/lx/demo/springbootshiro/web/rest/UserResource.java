@@ -84,6 +84,8 @@ public class UserResource {
      * @return
      */
     @GetMapping("/users")
+    @RequiresRoles(value = {"admin"})
+    @RequiresPermissions(value = {"admin:list"})
     public List<User> findAll(){
         return new ArrayList<>(userService.findAll());
     }

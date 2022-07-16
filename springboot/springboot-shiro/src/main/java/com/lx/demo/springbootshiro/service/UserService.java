@@ -33,7 +33,8 @@ public class UserService {
         // 用户具有admin和user角色, admin具有所有权限
         user.setRoleList(Arrays.asList(
 //                new Role("user", Arrays.asList(new Permission("add"), new Permission("delete"))),
-                new Role("admin", Arrays.asList(new Permission("add")))
+                // 字符串可以自己编, 约定好规范即可
+                new Role("admin", Arrays.asList(new Permission("admin:list")))
                 )
         );
 
