@@ -7,6 +7,7 @@ import com.lx.demo.springbootsecurity.handler.CustomAuthenticationSuccessHandler
 import com.lx.demo.springbootsecurity.handler.CustomExpiredSessionStrategy;
 import com.lx.demo.springbootsecurity.handler.CustomLogoutSuccessHandler;
 import com.lx.demo.springbootsecurity.provicer.CustomLoginAuthenticationProvider;
+import com.lx.demo.springbootsecurity.service.methodPermissionEvaluator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -19,6 +20,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
@@ -134,6 +136,22 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Value("#{'${auth_whitelist}'.split(',')}")
     private List<String> authWhitelist;
 
+    /**
+     * @data: 2022/7/18-上午11:22
+     * @User: zhaozhiwei
+     * @method: methodSecurityExpressionHandler
+
+     * @return: org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler
+     * @Description: 自定义方法权限, TODO 待测试
+    .anyRequest().access("@rbacServiceImpl.hasPermission(request, authentication)")
+     跟上述方式有啥区别?
+     */
+//    @Bean
+    public DefaultWebSecurityExpressionHandler methodSecurityExpressionHandler() {
+        DefaultWebSecurityExpressionHandler handler = new DefaultWebSecurityExpressionHandler();
+        handler.setPermissionEvaluator(new methodPermissionEvaluator());
+        return handler;
+    }
     /**
      * @param http
      * @throws Exception
