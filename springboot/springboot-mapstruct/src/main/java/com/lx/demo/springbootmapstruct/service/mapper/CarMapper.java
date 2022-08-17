@@ -26,7 +26,10 @@ public interface CarMapper {
     @Mapping(source = "numberOfSeats", target = "seatCount")
     CarDto carToCarDto(Car car);
 
-//    @Mapping(source = "numberOfSeats", target = "seatCount")
+    /**
+     * @Description: 注意这个批量的不用加mapping, 有了单个的转换，批量会自动处理
+    //    @Mapping(source = "numberOfSeats", target = "seatCount")
+     */
     List<CarDto> carsToCarDtos(List<Car> cars);
 }
 
