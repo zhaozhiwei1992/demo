@@ -25,13 +25,37 @@ import java.time.Duration;
  */
 public class Bucket4jFilter extends OncePerRequestFilter {
 
-    // 最大桶容量20
+    /**
+     * @data: 2022/8/18-下午2:27
+     * @User: zhaozhiwei
+     * @method:
+      * @param null :
+     * @return:
+     * @Description: 描述
+    // 最大桶容量20, 每次最多20个请求能通过
+     */
     private static final long OVERDRAFT = 20;
 
-    // 每个周期生成的令牌个数
+    /**
+     * @data: 2022/8/18-下午2:28
+     * @User: zhaozhiwei
+     * @method:
+      * @param null :
+     * @return:
+     * @Description:
+    // 每个周期生成的令牌个数, 跟SECONDS_PER_PERIOD配套, 如果没有令牌，光桶也没用
+     */
     private static final long MAX_REQUESTS_PER_PERIOD = 10;
 
-    // 每个周期的长度
+    /**
+     * @data: 2022/8/18-下午2:28
+     * @User: zhaozhiwei
+     * @method:
+      * @param null :
+     * @return:
+     * @Description:
+    // 每个周期的长度, 刷新令牌的时间, 1秒
+     */
     private static final long SECONDS_PER_PERIOD = 1;
 
     public Bucket4jFilter(CacheManager simpleCacheManager) {
