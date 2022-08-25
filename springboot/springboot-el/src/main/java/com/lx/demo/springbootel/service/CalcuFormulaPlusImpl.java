@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.*;
 import java.util.concurrent.*;
+import java.util.stream.Collectors;
 
 /**
  * @author zhaozhiwei
@@ -45,22 +46,22 @@ public class CalcuFormulaPlusImpl {
 //        }
 
         final long l2 = System.currentTimeMillis();
-        // 异步计算方式, 随着数据量增大, 性能不一定比顺序执行更好
-        calcuFormula.calculation(datas, formula);
+        // 异步计算方式,
+        final List<Map<String, Object>> calculation = calcuFormula.calculation(datas, formula);
         System.out.println("异步计算耗时: " + (System.currentTimeMillis() - l2));
 
 //        50000数据, 30公式
 //        顺序计算耗时: 9911
-//        异步计算耗时: 447
+//        异步计算耗时: 4470
 
-//        for (Map<String, Object> data : datas) {
+//        for (Map<String, Object> data : calculation) {
 //            System.out.println(data);
 //        }
     }
 
     /**
-     * @param dataList :
-     * @param formula  :
+     * @param datas :
+     * @param formula  : 防止公式转换冲突, 公式的配置都会带有表名
      * @data: 2022/8/23-上午11:15
      * @User: zhaozhiwei
      * @method: calculation
@@ -68,22 +69,34 @@ public class CalcuFormulaPlusImpl {
      * @Description: 异步公式计算
      * 采用CompletableFuture实现
      */
-    public void calculation(List<Map<String, Object>> dataList, Map<String, String> formula) throws ExecutionException, InterruptedException {
+    public List<Map<String, Object>> calculation(List<Map<String, Object>> datas, Map<String, String> formula) throws ExecutionException, InterruptedException {
 
-        // 这里可以增加数据转换逻辑, c1, c2转换为t0.c1, t0.c2方便配合公式计算, 返回数据时记得覆盖
+        // 1. 数据增加t0.前缀, 数据量大, 字段多的时很耗时, 还是自己转好再传过来
+        // c1, c2转换为t0.c1, t0.c2方便配合公式计算, 返回数据时记得覆盖
+//        final List<Map<String, Object>> datas = dataList.stream().map(m -> {
+//            final Map<String, Object> data = new HashMap<>();
+//            for (Map.Entry<String, Object> map : m.entrySet()) {
+//                final String key = map.getKey();
+//                final Object value = map.getValue();
+//                if (!key.contains(".")) {
+//                    data.put("t0." + key, value);
+//                } else {
+//                    data.put(key, value);
+//                }
+//            }
+//            return data;
+//        }).collect(Collectors.toList());
 
         final ExpressionParser parser = new SpelExpressionParser();
         final TemplateParserContext parserContext = new TemplateParserContext();
 
-        // 10个线程进行公式计算
-//        final ExecutorService executor = Executors.newFixedThreadPool(10);
-        // 线程不释放处理
         ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors()*2);
-        executor.setKeepAliveTime(10, TimeUnit.SECONDS);
-        executor.allowCoreThreadTimeOut(true);
+        // 线程不释放处理1, 可以指定释放时间
+//        executor.setKeepAliveTime(10, TimeUnit.SECONDS);
+//        executor.allowCoreThreadTimeOut(true);
 
         // 1. 遍历数据, 每条数据进行公式计算
-        for (Map<String, Object> data : dataList) {
+        for (Map<String, Object> data : datas) {
             // 2. 遍历每一个公式, 通过数据进行公式填充
             for (Map.Entry<String, String> formulaMap : formula.entrySet()) {
                 final String colCode = formulaMap.getKey();
@@ -95,10 +108,34 @@ public class CalcuFormulaPlusImpl {
                             RoundingMode.HALF_UP);
                     // 计算结果塞入 数据中
                     // 标准字段应该去掉t0,
-                    data.put(colCode.replace("t0.", ""), bigDecimal);
+                    data.put(colCode, bigDecimal);
                 });
             }
         }
+
+        executor.shutdown();
+        try {
+            //等待直到所有任务完成, 否则可能还没计算完成就去获取计算结果了
+            executor.awaitTermination(Long.MAX_VALUE, TimeUnit.MINUTES);
+        } catch (InterruptedException e) {
+            System.out.println("线程执行异常");
+            e.printStackTrace();
+        }
+
+        // 3. 去掉数据中的 t0. 前缀, 公式计算处理这个太耗时。
+//        return datas.stream().map(m -> {
+//            final Map<String, Object> data = new HashMap<>();
+//            for (Map.Entry<String, Object> map : m.entrySet()) {
+//                final String key = map.getKey();
+//                final Object value = map.getValue();
+//                if(key.contains(".")){
+//                    data.put(key.replaceAll("t0\\.", ""), value);
+//                }
+//            }
+//            return data;
+//        }).collect(Collectors.toList());
+        return null;
+
     }
 
     /**
