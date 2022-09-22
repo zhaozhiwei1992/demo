@@ -1,4 +1,4 @@
-# ????license????
+# 证书配置, 用来生成证书的基本配置信息
 license:
   expiryTime: "2032-07-07 19:07:59"
   issuedTime: "2022-07-07 19:07:00"
@@ -9,14 +9,18 @@ license:
   storePass: 12345678A
   subject: "pushi-kn-graph"
   customLicenseParamExt:
-#    ?????????????, ????
+#   服务器配置信息
     mainBoardSerial: 41983BBB
+#  mac地址
     macAddress:
-      - "02-42-E4-43-62-57"
-      - "02-42-4A-B2-CE-B9"
-      - "02-42-53-1C-F0-C0"
+      - "02-42-94-8E-DB-C1"
+      - "02-42-17-63-E8-35"
+      - "02-42-41-0D-E7-EE"
+      - "02-42-77-FA-22-81"
       - "8C-16-45-32-C5-FF"
+#   cpu序列号
     cpuSerial: "EA 06 08 00 FF FB EB BF"
+#   地址信息
     ipAddress:
       - "172.19.0.1"
       - "172.18.0.1"
