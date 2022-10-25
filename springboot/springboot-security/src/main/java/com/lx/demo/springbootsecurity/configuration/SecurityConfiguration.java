@@ -169,6 +169,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         // X-Frame-Options header
         // 相同域名是允许的
 //        http.headers().frameOptions().sameOrigin();
+//        禁用X-Frame-Options允许页面嵌入到iframe中
+//        http.headers().frameOptions().disable();
 
         // 实现白名单方式
 //        http.headers().addHeaderWriter(new XFrameOptionsHeaderWriter(new AllowFromStrategy() {

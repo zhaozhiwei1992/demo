@@ -9,6 +9,17 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import javax.naming.NamingException;
 
+/**
+ * @Title: SpringBeanRegisAndLoadDemo
+ * @Package com/example/springbootbean/bootstrap/SpringBeanRegisAndLoadDemo.java
+ * @Description:
+ * 编程式注入bean
+ * 可以自定义一种注册方式，通过扫描类或者方法注解, 动态注入bean
+ * {@see com.example.springbootdruid.config.MultiDataSourceRegister#registerBeanDefinitions}
+ * @author zhaozhiwei
+ * @date 2022/9/22 下午6:10
+ * @version V1.0
+ */
 public class SpringBeanRegisAndLoadDemo {
     public static void main(String[] args) throws NamingException {
 

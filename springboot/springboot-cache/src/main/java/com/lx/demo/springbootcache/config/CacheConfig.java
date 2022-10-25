@@ -57,4 +57,5 @@ public class CacheConfig {
     }
 
     //todo 同时假如各种缓存 redis, jcache, ehcache等，如何切换
+    // spring-in-action/spring-redis
 }

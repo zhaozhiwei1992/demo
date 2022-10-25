@@ -9,8 +9,9 @@ import org.springframework.cache.annotation.EnableCaching;
  * @Package com/lx/demo/springbootcache/SpringbootCacheApplication.java
  * @Description:
  * 1. 简单缓存测试 com.lx.demo.springbootcache.config.CacheConfig#simpleCacheManager()
- * 2. TODO ehcache测试
- * 3. TODO 使用j2cache实现二级缓存 内存 + redis
+ * 2. ehcache测试
+ * 3. 使用j2cache实现二级缓存 内存 + redis
+ * 保证增删改缓存的准确性
  * @author zhaozhiwei
  * @date 2022/9/23 上午9:54
  * @version V1.0

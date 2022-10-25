@@ -21,9 +21,13 @@ import org.springframework.cglib.proxy.MethodInterceptor;
 import org.springframework.cglib.proxy.MethodProxy;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.ResourceLoaderAware;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.core.type.filter.AnnotationTypeFilter;
 import org.springframework.stereotype.Component;
 
@@ -78,6 +82,28 @@ public class CustomizeScanTest {
 			scanner.scan("com.example.springbootcustomannotation");
 		}
 	}
+
+	// 这种方式也可以动态注入bean
+//	public class MapperAutoConfigureRegistrar implements ImportBeanDefinitionRegistrar, ResourceLoaderAware {
+//
+//		private ResourceLoader resourceLoader;
+//
+//		@Override
+//		public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
+//			Scanner scanner = new Scanner(registry, false);
+//			scanner.setResourceLoader(resourceLoader);
+//			scanner.registerFilters();
+//			//这里增加对Ma注解类的扫描
+//			scanner.addIncludeFilter(new AnnotationTypeFilter(CustomizeComponent2.class));
+//			//测试直接写死，可改成要scan的目录
+//			scanner.doScan("com.example.springbootcustomannotation");
+//		}
+//
+//		@Override
+//		public void setResourceLoader(ResourceLoader resourceLoader) {
+//			this.resourceLoader = resourceLoader;
+//		}
+//	}
 
 	public final static class Scanner extends ClassPathBeanDefinitionScanner {
 

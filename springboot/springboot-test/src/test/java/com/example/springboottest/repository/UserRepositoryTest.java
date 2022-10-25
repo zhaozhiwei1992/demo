@@ -18,6 +18,7 @@ import org.springframework.test.context.junit4.SpringRunner;
  * @Title: JUnit3 Test Class.java.java
  * @Package com.example.springboottest.repository
  * @Description: 涉及到的bean需要引入才能autowired
+ * 或者直接使用@SpringbootTest搞定
  * @date 2021/10/20 下午4:31
  */
 @RunWith(SpringRunner.class)
