@@ -23,8 +23,8 @@ import java.util.Arrays;
  * cachemanager一般配合cacheable注解使用
  * 如果用redistemplate操作redis, 跟这个没关系
  */
-@Configuration
-@EnableCaching
+//@Configuration
+//@EnableCaching
 public class CacheConfig {
 
     /**

@@ -1,6 +1,11 @@
 package com.lx.demo.springbootcache.domain;
 
-public class Person {
+import java.io.Serializable;
+
+public class Person implements Serializable {
+
+    private long serialVersionUID = 1;
+    // field of a Serializable class is not declared 'private static final long'
 
     private Long id;
 

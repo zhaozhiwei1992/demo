@@ -1,0 +1,11 @@
+spring:
+  cache:
+    ehcache:
+      config: classpath:j2cache/ehcache.xml
+
+# j2cache配置
+j2cache:
+  config-location: classpath:j2cache/j2cache.properties
+  cache-clean-mode: active
+  open-spring-cache: true
+  redis-client: lettuce

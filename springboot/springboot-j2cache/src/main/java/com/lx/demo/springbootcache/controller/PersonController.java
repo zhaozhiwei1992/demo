@@ -21,7 +21,9 @@ public class PersonController {
      * @method: findByID
       * @param id :
      * @return: com.lx.demo.springbootcache.domain.Person
-     * @Description: 获取十次， 只有第一次是读库，后续都是取缓存
+     * @Description:
+     * 获取十次， 只有第一次是读库，后续都是取缓存
+     * 直接删掉redis缓存里的内容，仍然可以获取数据，并且走缓存，此时获取的是服务缓存ehcache中的信息
      * seq 10 |xargs -i curl -XGET 'http://localhost:8080/persons/2'
      */
     @GetMapping("/persons/{id}")
