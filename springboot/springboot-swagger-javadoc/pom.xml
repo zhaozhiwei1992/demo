@@ -71,7 +71,16 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 			<plugin>
-				<!-- 生成java doc
+				<groupId>com.example</groupId>
+				<artifactId>javadoc-json-maven-plugin</artifactId>
+				<version>2.0-SNAPSHOT</version>
+				<configuration>
+<!--					指定java注释扫描目录-->
+					<basePackage>com/example/web/rest</basePackage>
+				</configuration>
+			</plugin>
+			<plugin>
+				<!-- 生成普通java doc, 就是xml那玩意儿
           单模块：mvn javadoc:javadoc
                多模块：mvn javadoc:aggregate
           -->
