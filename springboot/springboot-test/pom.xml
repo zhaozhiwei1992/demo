@@ -37,11 +37,162 @@
 		</dependency>
 	</dependencies>
 
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<profiles.active>dev</profiles.active>
+				<skipTest>false</skipTest>
+				<skipITest>true</skipITest>
+			</properties>
+			<build>
+				<!--        spring.profiles.active替换-->
+				<resources>
+					<resource>
+						<directory>src/main/resources</directory>
+						<excludes>
+							<exclude>application-test.yml</exclude>
+							<exclude>application-prod.yml</exclude>
+						</excludes>
+						<filtering>true</filtering>
+					</resource>
+				</resources>
+			</build>
+		</profile>
+
+		<profile>
+			<id>test</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<profiles.active>test</profiles.active>
+				<skipTest>false</skipTest>
+				<skipITest>false</skipITest>
+			</properties>
+			<build>
+				<!--        spring.profiles.active替换-->
+				<resources>
+					<resource>
+						<directory>src/main/resources</directory>
+						<excludes>
+							<exclude>application-dev.yml</exclude>
+							<exclude>application-prod.yml</exclude>
+						</excludes>
+						<filtering>true</filtering>
+					</resource>
+				</resources>
+			</build>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<profiles.active>prod</profiles.active>
+				<skipTest>false</skipTest>
+				<skipITest>false</skipITest>
+			</properties>
+			<build>
+				<!--        spring.profiles.active替换-->
+				<resources>
+					<resource>
+						<directory>src/main/resources</directory>
+						<excludes>
+							<exclude>application-dev.yml</exclude>
+							<exclude>application-test.yml</exclude>
+						</excludes>
+						<filtering>true</filtering>
+					</resource>
+				</resources>
+			</build>
+			<dependencies>
+				<!-- 认证 -->
+				<dependency>
+					<groupId>com.example</groupId>
+					<artifactId>springboot-license-starter</artifactId>
+					<version>0.0.1-SNAPSHOT</version>
+				</dependency>
+			</dependencies>
+		</profile>
+	</profiles>
+
 	<build>
+
+
 		<plugins>
+
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+
+			<!--            把集成测试目录下的测试代码加入到 测试源码中, *Test.java为单元测试, *ITest.java为集成测试-->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>3.0.0</version>
+				<executions>
+					<execution>
+						<id>add-integration-test-sources</id>
+						<phase>generate-test-sources</phase>
+						<goals>
+							<goal>add-test-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>src/test-integration/java</source>
+							</sources>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>add-integration-test-resources</id>
+						<phase>generate-test-resources</phase>
+						<goals>
+							<goal>add-test-resource</goal>
+						</goals>
+						<configuration>
+							<resources>
+								<resource>
+									<directory>src/test-integration/resources</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!--            单元测试-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skipTests>${skipTest}</skipTests>
+					<includes>
+						<include>**/*Test.java</include>
+					</includes>
+					<excludes>
+						<exclude>**/*ITest.java</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+
+			<!--            集成测试测试-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<configuration>
+					<skipITs>${skipITest}</skipITs>
+					<includes>
+						<!--                        Test前面带 I的为集成测试  integration-test -->
+						<include>**/*ITest.java</include>
+					</includes>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

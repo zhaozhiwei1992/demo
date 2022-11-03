@@ -1,17 +1,24 @@
 package com.example.springboottest.web;
 
 import com.example.springboottest.configuration.UserConfiguration;
+import com.example.springboottest.domain.User;
 import com.example.springboottest.repository.UserRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
-import org.springframework.http.MediaType;
+import org.springframework.http.*;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.util.Assert;
+import org.springframework.web.client.RestTemplate;
+
+import java.net.URI;
+import java.util.HashMap;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -26,27 +33,20 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @date 2021/10/20 下午3:26
  */
 @RunWith(SpringRunner.class)
-@WebMvcTest(UserController.class)
-@Import(UserConfiguration.class)
-public class UserControllerTest {
+@SpringBootTest
+public class UserControllerITest {
 
     @Autowired
-    private MockMvc mockMvc;
-
-    //Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name
-    // 'userController': Unsatisfied dependency expressed through field 'userRepository'; nested exception is org
-    // .springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.example
-    // .springboottest.repository.UserRepository' available: expected at least 1 bean which qualifies as autowire
-    // candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-    @MockBean
-    private UserRepository userRepository;
+    private RestTemplate restTemplate;
 
     @Test
     public void findOne() throws Exception {
-        // 发起请求
-        mockMvc.perform(MockMvcRequestBuilders.get("/user").accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andDo(print())
-                .andReturn();
+
+        String url = "http://127.0.0.1:8080/user";
+        final ResponseEntity<User> exchange = restTemplate.exchange(
+                RequestEntity.get(new URI(url)).build()
+                        , User.class);
+
+        Assert.isTrue(exchange.getStatusCode().equals(HttpStatus.OK), "获取用户接口请求异常");
     }
 }

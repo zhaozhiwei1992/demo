@@ -104,4 +104,8 @@ public class EchoController {
         return tokenid;
     }
 
+    @GetMapping("/echo/amt/{amt}")
+    public String echoAmtStr(@PathVariable String amt){
+        return "echo: "  + amt;
+    }
 }

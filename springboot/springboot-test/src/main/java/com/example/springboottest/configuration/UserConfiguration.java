@@ -1,4 +1,4 @@
-package com.example.springboottest;
+package com.example.springboottest.configuration;
 
 import com.example.springboottest.domain.User;
 import org.springframework.context.annotation.Bean;

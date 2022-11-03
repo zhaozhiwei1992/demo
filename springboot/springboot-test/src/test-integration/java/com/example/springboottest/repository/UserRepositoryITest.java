@@ -7,6 +7,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -21,7 +22,9 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 @RunWith(SpringRunner.class)
 @Import({UserConfiguration.class, UserRepository.class})
-public class UserRepositoryTest extends TestCase {
+// 对于这个测试使用import和使用下边SpringBootTest注解效果差不多了
+//@SpringBootTest
+public class UserRepositoryITest extends TestCase {
 
     @Autowired
     private User user;
