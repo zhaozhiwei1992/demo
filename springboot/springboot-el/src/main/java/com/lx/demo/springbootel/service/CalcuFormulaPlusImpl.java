@@ -15,7 +15,8 @@ import java.util.stream.Collectors;
  * @version V1.0
  * @Title: CalcuFormulaPlusImpl
  * @Package com/lx/demo/springbootel/service/CalcuFormulaPlusImpl.java
- * @Description: 屌炸天版本公式计算
+ * @Description: 屌炸天版本公式计算, 按列计算
+ * 这个有局限性, 多表数据必须本身的关联到一行, 类似与left join给合到一起, 没一行可能多表多列的数据
  * 1. 实现公式权重排序, 整理好公式间依赖顺序, 方便异步计算
  * 2. 采用CompletableFuture的方式进行组合计算, 并填充结果
  * <p>

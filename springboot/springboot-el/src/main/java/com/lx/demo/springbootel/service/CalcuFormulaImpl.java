@@ -59,6 +59,7 @@ public class CalcuFormulaImpl {
 
 //        使用spring-expressoin实现, 文本替换
 //        这里要注意, 字符串两边加 单引号, 否则 .号会做特殊解析
+//        为啥要用{}, 一个表达式如果还包含其它特殊字符串，需要{}起来
         String smsTemplate = "验证码:#{['code.x']},您正在登录管理后台，5分钟内输入有效。";
         Map<String, Object> params = new HashMap();
         params.put("code.x", 1234);;
