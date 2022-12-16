@@ -33,14 +33,14 @@ class CalcuFormulaFieldImplTest {
         final Map<String, Object> map1 = new HashMap<>();
         map1.put("report_code", "t01");
         map1.put("pro_code", "001");
-        map1.put("amt01", new BigDecimal(100));
-        map1.put("amt02", new BigDecimal(200));
+        map1.put("amt01", new BigDecimal("100.00"));
+        map1.put("amt02", new BigDecimal("200.00"));
         // t01['001:amt03'] = t01['001:amt01'] + t01['001:amt02']
         dataList.add(map1);
         final Map<String, Object> map2 = new HashMap<>();
         map2.put("report_code", "t02");
         map2.put("pro_code", "002");
-        map2.put("amt01", new BigDecimal(100));
+        map2.put("amt01", new BigDecimal("100.00"));
         // t02['002:amt02'] = t01['001:amt03'] + t02['002:amt01']
 //        map2.put("amt02", new BigDecimal(0));
         // t02['002:amt03'] = t02['002:amt01'] + t02['002:amt02']
@@ -76,11 +76,11 @@ class CalcuFormulaFieldImplTest {
         calcuFormulaField.calculation(dataList, ruleList);
 
         //t01['001:amt03'] == 300
-        Assert.isTrue(new BigDecimal(String.valueOf(dataList.get(0).get("amt03"))).equals(new BigDecimal(300)), "计算不准确应为300");
+        Assert.isTrue(new BigDecimal(String.valueOf(dataList.get(0).get("amt03"))).equals(new BigDecimal("300.00")), "计算不准确应为300");
 //        t01['001:amt03'] + t02['002:amt01'] == 400
-        Assert.isTrue(new BigDecimal(String.valueOf(dataList.get(1).get("amt02"))).equals(new BigDecimal(400)), "计算不准确应为400");
+        Assert.isTrue(new BigDecimal(String.valueOf(dataList.get(1).get("amt02"))).equals(new BigDecimal("400.00")), "计算不准确应为400");
 //        t02['002:amt01'] + t02['002:amt02'] == 500
-        Assert.isTrue(new BigDecimal(String.valueOf(dataList.get(1).get("amt03"))).equals(new BigDecimal(500)), "计算不准确应为500");
+        Assert.isTrue(new BigDecimal(String.valueOf(dataList.get(1).get("amt03"))).equals(new BigDecimal("500.00")), "计算不准确应为500");
 
     }
 }

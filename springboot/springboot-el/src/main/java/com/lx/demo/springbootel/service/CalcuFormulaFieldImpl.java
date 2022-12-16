@@ -63,7 +63,7 @@ public class CalcuFormulaFieldImpl {
             // 构建规则，校验数据, 所有校验规则返回应该都是bool类型
             // 例: 公式: t01['001:amt01'] + t01['001:amt02']
             final BigDecimal result = parser.parseExpression(formulaContent).getValue(standardEvaluationContext,
-                    BigDecimal.class).setScale(0, RoundingMode.HALF_UP);
+                    BigDecimal.class).setScale(2, RoundingMode.HALF_UP);
 
             final Map<String, Object> fieldMap = new HashMap<>();
             fieldMap.put("report_code", ruleMap.get("report_code"));

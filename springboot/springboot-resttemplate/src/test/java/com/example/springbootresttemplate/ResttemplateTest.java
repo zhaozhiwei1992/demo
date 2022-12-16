@@ -13,11 +13,6 @@ public class ResttemplateTest {
 
     public static void main(String[] args) {
 
-//        参数
-        final HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("param1", "我是param1");
-        hashMap.put("param2", "我是param2");
-
         RestTemplate restTemplate = new RestTemplate();
 
         final List<Map> maps = new ArrayList<>();
@@ -34,6 +29,11 @@ public class ResttemplateTest {
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
         //使用httpEntity的方式比较灵活，里面可以包装map, javabean,字符串等序列化对象
         final HttpEntity<List<Map>> userHttpEntity = new HttpEntity<>(maps, httpHeaders);
+
+//        参数
+        final HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("param1", "我是param1");
+        hashMap.put("param2", "我是param2");
         final ResponseEntity<List> userResponseEntity = restTemplate.postForEntity("http://127.0.0.1:8080/echo/mutiparam?param1={param1}&param2={param2}", userHttpEntity,
                 List.class, hashMap);
 

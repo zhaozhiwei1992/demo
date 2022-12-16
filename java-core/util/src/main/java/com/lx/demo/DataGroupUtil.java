@@ -2,6 +2,7 @@ package com.lx.demo;
 
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class DataGroupUtil {
 
@@ -61,8 +62,8 @@ public class DataGroupUtil {
         }
 
         //j8分组
-//        Map<Object, List<Map>> id = maps.stream().collect(Collectors.groupingBy(map -> map.get("id")));
-//        System.out.println("j8 后分组结果: " + id);
+        Map<Object, List<Map>> id = maps.stream().collect(Collectors.groupingBy(map -> map.get("id")));
+        System.out.println("j8 后分组结果: " + id);
 
         // 金额分组
 //        final Map<String, List<Map>> groupByAmt = groupByAmt(maps);

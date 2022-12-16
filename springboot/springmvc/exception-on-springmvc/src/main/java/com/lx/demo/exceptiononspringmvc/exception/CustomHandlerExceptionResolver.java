@@ -1,4 +1,4 @@
-package com.lx.demo.exceptiononspringmvc;
+package com.lx.demo.exceptiononspringmvc.exception;
 
 import com.lx.demo.exceptiononspringmvc.dto.BussinessException;
 import com.lx.demo.exceptiononspringmvc.dto.ResultVO;
@@ -34,15 +34,15 @@ import java.util.List;
  *  请求
  * curl -X GET http://127.0.0.1:8080/npe
  * 结果:
- * handler object : public java.lang.String com.lx.demo.exceptiononspringmvc.IndexController.npe()
- * 2019-07-24 23:20:08.271 ERROR 12128 --- [nio-8080-exec-1] c.l.d.e.CustomHandlerExceptionResolver   : [public java.lang.String com.lx.demo.exceptiononspringmvc.IndexController.npe()] system error
+ * handler object : public java.lang.String com.lx.demo.exceptiononspringmvc.web.IndexController.npe()
+ * 2019-07-24 23:20:08.271 ERROR 12128 --- [nio-8080-exec-1] c.l.d.e.CustomHandlerExceptionResolver   : [public java.lang.String com.lx.demo.exceptiononspringmvc.web.IndexController.npe()] system error
  * 注意, 这里 HandlerExceptionResolver和@RestControllerAdvice 同时存在, 只走 RestControllerAdvice中的精确匹配
  *
  * 这里可以判断异常类型实现handler精确匹配的效果，但是不优雅
  *
  * order 数字小优先加载, 如果使用了order 就可以优先于RestControllerAdvice精确异常
  * 统一异常处理的一种方案
- * 原springxml项目可以直接<bean id="exceptionResolver" class="com.lx.demo.exceptiononspringmvc.CustomHandlerExceptionResolver"/>
+ * 原springxml项目可以直接<bean id="exceptionResolver" class="com.lx.demo.exceptiononspringmvc.exception.CustomHandlerExceptionResolver"/>
  */
 @Component
 @Slf4j

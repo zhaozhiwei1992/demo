@@ -1,4 +1,4 @@
-package com.lx.demo.exceptiononspringmvc;
+package com.lx.demo.exceptiononspringmvc.web;
 
 import com.lx.demo.exceptiononspringmvc.dto.BussinessException;
 import lombok.extern.slf4j.Slf4j;
@@ -34,6 +34,10 @@ public class IndexController {
 
     @RequestMapping("/npe")
     public String npe(){
+        // 空指针测试, 不带msg
+//        Map o = null;
+//        o.get("x");
+        // 带异常信息msg
         throw new NullPointerException("故意抛异常！");
     }
 
@@ -90,6 +94,6 @@ public class IndexController {
     })
     @ResponseBody
     public void exceptionHandler(Exception e) {
-        log.error("[{}] system error", e);
+        log.error("system error", e);
     }
 }
