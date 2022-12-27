@@ -1,27 +1,25 @@
 package com.example.service;
 
-import cn.hutool.system.OsInfo;
-import cn.hutool.system.SystemUtil;
-import com.example.domain.CustomLicenseParamExt;
-import com.example.service.dto.AbstractServerDTO;
-import com.example.service.dto.LinuxServerDTO;
-import com.example.service.dto.MacOsServerDTO;
-import com.example.service.dto.WindowsServerDTO;
+import cn.hutool.extra.spring.SpringUtil;
+import com.example.service.validate.IValidate;
 import de.schlichtherle.license.*;
 import de.schlichtherle.xml.GenericCertificate;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.util.StringUtils;
 
 import java.beans.XMLDecoder;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
-import java.util.List;
+import java.util.Map;
 
 /**
- * @author sixiaojie
- * @date 2021-05-25-15:34
+ * @author zhaozhiwei
+ * @version V1.0
+ * @Title: LicenseManagerHolder
+ * @Package com/example/service/LicenseManagerHolder.java
+ * @Description: 校验入口
+ * @date 2022/12/16 下午2:41
  */
 public class LicenseManagerHolder {
     private static LicenseManager licenseManager;
@@ -40,9 +38,6 @@ public class LicenseManagerHolder {
 
     /**
      * 自定义CustomLicenseManager继承LicenseManager，实现自定义的参数校验。
-     *
-     * @author sixiaojie
-     * @date 2021-05-25-13:51
      */
     @Slf4j
     static class CustomLicenseManager extends LicenseManager {
@@ -62,7 +57,6 @@ public class LicenseManagerHolder {
         public CustomLicenseManager(LicenseParam param) {
             super(param);
         }
-
 
         /**
          * 复写create方法
@@ -115,7 +109,6 @@ public class LicenseManagerHolder {
         @Override
         protected synchronized LicenseContent verify(final LicenseNotary notary)
                 throws Exception {
-            GenericCertificate certificate = getCertificate();
 
             // Load license key from preferences,
             final byte[] key = getLicenseKey();
@@ -123,7 +116,7 @@ public class LicenseManagerHolder {
                 throw new NoLicenseInstalledException(getLicenseParam().getSubject());
             }
 
-            certificate = getPrivacyGuard().key2cert(key);
+            GenericCertificate certificate = getPrivacyGuard().key2cert(key);
             notary.verify(certificate);
             final LicenseContent content = (LicenseContent) this.load(certificate.getEncoded());
             this.validate(content);
@@ -167,37 +160,15 @@ public class LicenseManagerHolder {
         @Override
         protected synchronized void validate(final LicenseContent content)
                 throws LicenseContentException {
-            //1\. 首先调用父类的validate方法
+            //1 调用父类的validate方法
             super.validate(content);
 
-            //2\. 然后校验自定义的License参数
-            //License中可被允许的参数信息
-            CustomLicenseParamExt expectedCheckModel = (CustomLicenseParamExt) content.getExtra();
-            //当前服务器真实的参数信息
-            CustomLicenseParamExt serverCheckModel = getServerDTO();
-
-            if (expectedCheckModel != null && serverCheckModel != null) {
-                //校验IP地址
-                if (!checkIpAddress(expectedCheckModel.getIpAddress(), serverCheckModel.getIpAddress())) {
-                    throw new LicenseContentException("当前服务器的IP没在授权范围内");
-                }
-
-                //校验Mac地址
-                if (!checkIpAddress(expectedCheckModel.getMacAddress(), serverCheckModel.getMacAddress())) {
-                    throw new LicenseContentException("当前服务器的Mac地址没在授权范围内");
-                }
-
-                //校验主板序列号
-                if (!checkSerial(expectedCheckModel.getMainBoardSerial(), serverCheckModel.getMainBoardSerial())) {
-                    throw new LicenseContentException("当前服务器的主板序列号没在授权范围内");
-                }
-
-                //校验CPU序列号
-                if (!checkSerial(expectedCheckModel.getCpuSerial(), serverCheckModel.getCpuSerial())) {
-                    throw new LicenseContentException("当前服务器的CPU序列号没在授权范围内");
-                }
-            } else {
-                throw new LicenseContentException("不能获取服务器硬件信息");
+            //2 自定义license校验
+            final Map<String, IValidate> beansOfType =
+                    SpringUtil.getApplicationContext().getBeansOfType(IValidate.class);
+            for (Map.Entry<String, IValidate> iValidateEntry : beansOfType.entrySet()) {
+                final IValidate validateBean = iValidateEntry.getValue();
+                validateBean.validate(content);
             }
         }
 
@@ -230,73 +201,7 @@ public class LicenseManagerHolder {
                     log.error("XMLDecoder解析XML失败", e);
                 }
             }
-
             return null;
-        }
-
-        /**
-         * 获取当前服务器需要额外校验的License参数
-         *
-         * @return
-         */
-        private CustomLicenseParamExt getServerDTO() {
-            AbstractServerDTO abstractServerDTO;
-
-            //根据不同操作系统类型选择不同的数据获取方法
-            OsInfo osInfo = SystemUtil.getOsInfo();
-            if (osInfo.isWindows()) {
-                abstractServerDTO = new WindowsServerDTO();
-            } else if (osInfo.isMac()) {
-                abstractServerDTO = new MacOsServerDTO();
-            } else {//其他服务器类型
-                abstractServerDTO = new LinuxServerDTO();
-            }
-
-            return abstractServerDTO.getServerInfos();
-        }
-
-
-        /**
-         * 校验当前服务器的IP/Mac地址是否在可被允许的IP范围内<br/>
-         * 如果存在IP在可被允许的IP/Mac地址范围内，则返回true
-         *
-         * @param expectedList
-         * @param serverList
-         * @return
-         */
-        private boolean checkIpAddress(List<String> expectedList, List<String> serverList) {
-            if (expectedList != null && expectedList.size() > 0) {
-                if (serverList != null && serverList.size() > 0) {
-                    for (String expected : expectedList) {
-                        if (serverList.contains(expected.trim())) {
-                            return true;
-                        }
-                    }
-                }
-
-                return false;
-            } else {
-                return true;
-            }
-        }
-
-        /**
-         * 校验当前服务器硬件（主板、CPU等）序列号是否在可允许范围内
-         *
-         * @param expectedSerial
-         * @param serverSerial
-         * @return
-         */
-        private boolean checkSerial(String expectedSerial, String serverSerial) {
-            if (!StringUtils.isEmpty(expectedSerial)) {
-                if (!StringUtils.isEmpty(serverSerial)) {
-                    return expectedSerial.equals(serverSerial);
-                }
-
-                return false;
-            } else {
-                return true;
-            }
         }
     }
 }

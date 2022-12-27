@@ -1,6 +1,5 @@
 package com.example.service;
 
-import com.example.domain.CustomKeyStoreParam;
 import com.example.configuration.CustomLicenseParam;
 import de.schlichtherle.license.*;
 import lombok.extern.slf4j.Slf4j;

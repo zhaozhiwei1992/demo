@@ -1,8 +1,9 @@
-package com.example.domain;
+package com.example.service.dto;
 
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -12,7 +13,7 @@ import java.util.List;
  * @date 2021-05-25-13:34
  */
 @Data
-public class CustomLicenseParamExt implements Serializable {
+public class HardWareParamDTO extends HashMap<String, Object> implements Serializable {
     /**
      * 可被允许的IP地址
      */

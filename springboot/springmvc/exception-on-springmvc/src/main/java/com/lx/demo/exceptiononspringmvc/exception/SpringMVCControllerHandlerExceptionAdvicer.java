@@ -42,7 +42,9 @@ public class SpringMVCControllerHandlerExceptionAdvicer {
     public Object handleNPE(
             Throwable throwable) {
         Map<String,Object> data = new HashMap<>();
-        data.put("message", Objects.isNull(throwable.getMessage())? throwable.toString(): throwable.getMessage());
+//        data.put("message", Objects.isNull(throwable.getMessage())? throwable.toString(): throwable.getMessage());
+        data.put("message", throwable.toString());
+        throwable.printStackTrace();
         return data;
     }
 }

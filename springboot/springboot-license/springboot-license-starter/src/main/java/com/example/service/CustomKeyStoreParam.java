@@ -1,4 +1,4 @@
-package com.example.domain;
+package com.example.service;
 
 import de.schlichtherle.license.AbstractKeyStoreParam;
 
