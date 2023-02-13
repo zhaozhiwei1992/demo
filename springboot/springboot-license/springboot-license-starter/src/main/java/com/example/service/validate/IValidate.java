@@ -2,7 +2,7 @@ package com.example.service.validate;
 
 import cn.hutool.system.OsInfo;
 import cn.hutool.system.SystemUtil;
-import com.example.service.dto.HardWareParamDTO;
+import com.example.domain.CustomLicenseParamExt;
 import com.example.service.dto.AbstractServerDTO;
 import com.example.service.dto.LinuxServerDTO;
 import com.example.service.dto.MacOsServerDTO;
@@ -27,7 +27,7 @@ public interface IValidate {
      *
      * @return
      */
-    default HardWareParamDTO getServerDTO() {
+    default CustomLicenseParamExt getServerDTO() {
         AbstractServerDTO abstractServerDTO;
 
         //根据不同操作系统类型选择不同的数据获取方法

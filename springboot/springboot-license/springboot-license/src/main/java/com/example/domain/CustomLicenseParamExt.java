@@ -32,4 +32,9 @@ public class CustomLicenseParamExt implements Serializable {
      * 可被允许的主板序列号
      */
     private String mainBoardSerial;
+
+    /**
+     * 允许的数据库地址
+     */
+    private String databaseUrl;
 }

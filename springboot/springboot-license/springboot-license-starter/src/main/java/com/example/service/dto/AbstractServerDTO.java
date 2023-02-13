@@ -1,5 +1,6 @@
 package com.example.service.dto;
 
+import com.example.domain.CustomLicenseParamExt;
 import lombok.extern.slf4j.Slf4j;
 
 import java.net.InetAddress;
@@ -21,8 +22,8 @@ public abstract class AbstractServerDTO {
      * 组装需要额外校验的License参数
      * @return
      */
-    public HardWareParamDTO getServerInfos(){
-        HardWareParamDTO result = new HardWareParamDTO();
+    public CustomLicenseParamExt getServerInfos(){
+        CustomLicenseParamExt result = new CustomLicenseParamExt();
 
         try {
             result.setIpAddress(this.getIpAddress());

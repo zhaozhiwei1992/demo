@@ -1,6 +1,6 @@
 package com.example.service.validate;
 
-import com.example.service.dto.HardWareParamDTO;
+import com.example.domain.CustomLicenseParamExt;
 import de.schlichtherle.license.LicenseContent;
 import de.schlichtherle.license.LicenseContentException;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,8 +30,8 @@ public class DatabaseConnectValidate implements IValidate{
         // 1. 获取数据库url, 解析出ip信息
 
         // 2. 获取content中要求的ip信息
-        HashMap expectedCheckModel = (HashMap<String, Object>) content.getExtra();
-        final Object databaseUrl = expectedCheckModel.get("database_url");
+        CustomLicenseParamExt expectedCheckModel = (CustomLicenseParamExt) content.getExtra();
+        final String databaseUrl = expectedCheckModel.getDatabaseUrl();
 
         if (!StringUtils.isEmpty(databaseUrl)
                 && !url.equals(databaseUrl)) {

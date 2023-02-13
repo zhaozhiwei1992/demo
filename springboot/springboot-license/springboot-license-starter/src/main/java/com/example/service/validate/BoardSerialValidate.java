@@ -1,6 +1,6 @@
 package com.example.service.validate;
 
-import com.example.service.dto.HardWareParamDTO;
+import com.example.domain.CustomLicenseParamExt;
 import de.schlichtherle.license.LicenseContent;
 import de.schlichtherle.license.LicenseContentException;
 import org.springframework.stereotype.Component;
@@ -19,9 +19,11 @@ public class BoardSerialValidate implements IValidate {
     @Override
     public void validate(LicenseContent content) throws LicenseContentException {
         //License中可被允许的参数信息
-        HardWareParamDTO expectedCheckModel = (HardWareParamDTO) content.getExtra();
+        // 这里要注意, 反序列化要和生成文件时使用的序列化类一致 springboot-license/com.example.domain.CustomLicenseParamExt
+        // 否则context.getExtra为空
+        CustomLicenseParamExt expectedCheckModel = (CustomLicenseParamExt) content.getExtra();
         //当前服务器真实的参数信息
-        HardWareParamDTO serverCheckModel = getServerDTO();
+        CustomLicenseParamExt serverCheckModel = getServerDTO();
 
         if (expectedCheckModel != null && serverCheckModel != null) {
             final String expectedSerial = expectedCheckModel.getMainBoardSerial();

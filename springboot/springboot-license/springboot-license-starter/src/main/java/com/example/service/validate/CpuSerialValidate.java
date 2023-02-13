@@ -1,6 +1,6 @@
 package com.example.service.validate;
 
-import com.example.service.dto.HardWareParamDTO;
+import com.example.domain.CustomLicenseParamExt;
 import de.schlichtherle.license.LicenseContent;
 import de.schlichtherle.license.LicenseContentException;
 import org.springframework.stereotype.Component;
@@ -19,9 +19,9 @@ public class CpuSerialValidate implements IValidate {
     @Override
     public void validate(LicenseContent content) throws LicenseContentException {
         //License中可被允许的参数信息
-        HardWareParamDTO expectedCheckModel = (HardWareParamDTO) content.getExtra();
+        CustomLicenseParamExt expectedCheckModel = (CustomLicenseParamExt) content.getExtra();
         //当前服务器真实的参数信息
-        HardWareParamDTO serverCheckModel = getServerDTO();
+        CustomLicenseParamExt serverCheckModel = getServerDTO();
 
         if (expectedCheckModel != null && serverCheckModel != null) {
             final String expectedSerial = expectedCheckModel.getCpuSerial();

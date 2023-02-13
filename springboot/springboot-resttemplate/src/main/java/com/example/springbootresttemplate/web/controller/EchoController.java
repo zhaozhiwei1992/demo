@@ -108,4 +108,10 @@ public class EchoController {
     public String echoAmtStr(@PathVariable String amt){
         return "echo: "  + amt;
     }
+
+    @GetMapping("/echo/list/map")
+    public String echoListMap(@RequestParam List<Map> params){
+        // TODO 待测试
+        return "echo: " + params;
+    }
 }

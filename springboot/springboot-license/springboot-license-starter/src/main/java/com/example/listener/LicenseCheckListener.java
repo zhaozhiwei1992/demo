@@ -1,13 +1,10 @@
 package com.example.listener;
 
-import com.example.configuration.CustomLicenseParam;
 import com.example.service.LicenseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
 /**
  * @author zhaozhiwei
@@ -28,6 +25,8 @@ public class LicenseCheckListener implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        // 里边依赖applicationContext, 所以这里要保证ApplicationContext已经初始化
+        // com.example.util.SpringUtil.setApplicationContext
         licenseService.install();
     }
 }
