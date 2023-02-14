@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
  * @version V1.0
  */
 @Configuration
-@ComponentScan(value = "com.example")
+@ComponentScan(basePackages= {"com.example", "cn.hutool.extra.spring"})
 public class LicenseVerifyAutoConfiguration {
 
 }

@@ -1,7 +1,7 @@
 package com.example.service;
 
+import cn.hutool.extra.spring.SpringUtil;
 import com.example.service.validate.IValidate;
-import com.example.util.SpringUtil;
 import de.schlichtherle.license.*;
 import de.schlichtherle.xml.GenericCertificate;
 import lombok.extern.slf4j.Slf4j;

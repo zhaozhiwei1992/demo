@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.stereotype.Component;
@@ -33,6 +34,9 @@ import org.springframework.stereotype.Component;
  * {@link ApplicationRunner} 也可以做该处理
  */
 @SpringBootApplication
+// hutool中SpringUtil默认是不加载的，需要增加到扫描中才可以
+// 或者就是自定义实现一个, springboot默认扫描只有启动类及其子类
+@ComponentScan(basePackages= {"cn.hutool.extra.spring"})
 public class DemoApplication {
 
 	private static final Logger logger = LoggerFactory.getLogger(DemoApplication.class);
