@@ -15,12 +15,12 @@ import java.util.stream.Collectors;
  * @Title: null.java
  * @Package: com.example.service
  * @Description: 使用el表达式进行动态规则解析
- * 该实现只支持el能够支持的规则，特殊规则请用其它实现
+ * 跨年度数据校验公式实现
  * @author: zhaozhiwei
  * @date: 2022/10/29 下午8:23
  * @version: V1.0
  */
-public class DynamicRuleELImpl implements DynamicRule{
+public class MultiYearDynamicRuleELImpl extends DynamicRuleELImpl{
 
     private final ExpressionParser parser = new SpelExpressionParser();
 
@@ -58,45 +58,31 @@ public class DynamicRuleELImpl implements DynamicRule{
     }
 
     /**
-     * @date: 2022/10/30-下午6:07
-     * @author: zhaozhiwei
+     * @data: 2023/2/21-下午2:06
+     * @User: zhaozhiwei
      * @method: listToMap
       * @param dataList :
      * @return: java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.lang.Object>>
-     * @Description: 数据转换, list根据规则转成map表达
-     * 如:
-     * list:
-     * |pro_code   |amt01     |amt02     | amt03   |
-     * |001        |1         |  2       |  3      |
-     * |002        |1         |  2       |  3      |
-     * |003        |1         |  2       |  3      |
-     *
-     * 转map:
-     * map['001:amt01'] = 1
-     * map['001:amt02'] = 2
-     * map['001:amt03'] = 3
-     * map['002:amt01'] = 1
-     * map['002:amt02'] = 2
-     * ......
-     *
-     * 根据第一列pro_code作为行标识, 其它作为列，转换为map, 如list中 第一行的金额1转换为   001:amt01的key-value
-     *
-     * 最终map需要根据report_code区分，多表, 给StandardEvaluationContext使用, 公式可能涉及多表
-     *
+     * @Description: 跨年度数据构建, 表前面增加 YYYY_T01['行:列']
      */
     private Map<String, Map<String, Object>> listToMap(List<Map<String, Object>> dataList) {
         final Map<String, Map<String, Object>> result = new HashMap<>();
+
+        // 分年分月单元格表示  #yyyy-MM_T01['行:列']
+        // 决算, 跨年不跨月
+        // 根据当期年度替换公式, 及数据构建, 决算将当前所有年度数据分组, 取数不能再过滤年度
+        // 月报, 跨月不跨年
+
         // 多个报表数据源需要拆分开, 方便校验
-        final Map<Object, List<Map<String, Object>>> groupByReportCode =
-                dataList.stream().collect(Collectors.groupingBy(m -> m.get("report_code")));
-        for (Map.Entry<Object, List<Map<String, Object>>> listEntry : groupByReportCode.entrySet()) {
-            final String reportCode = String.valueOf(listEntry.getKey());
+        final Map<Object, List<Map<String, Object>>> groupByYearAndReportCode =
+                dataList.stream().collect(Collectors.groupingBy(m -> "_" + m.get("year") + "_00_" + m.get("report_code")));
+        for (Map.Entry<Object, List<Map<String, Object>>> listEntry : groupByYearAndReportCode.entrySet()) {
+            final String yearAndReportCode = String.valueOf(listEntry.getKey());
             final List<Map<String, Object>> curReportCodeList = listEntry.getValue();
             //
             final Map<String, Object> curReportCodeMap = new HashMap<>();
             for (Map<String, Object> map : curReportCodeList) {
                 final String pro_code = String.valueOf(map.get("pro_code"));
-                // 所有金额列，转换为单元格表示形式, 方便后续处理 map.put(项目:xx金额字段, 金额值)
                 for (Map.Entry<String, Object> entry : map.entrySet()) {
                     final String key = entry.getKey();
                     final Object value = entry.getValue();
@@ -106,7 +92,7 @@ public class DynamicRuleELImpl implements DynamicRule{
                     }
                 }
             }
-            result.put(reportCode, curReportCodeMap);
+            result.put(yearAndReportCode, curReportCodeMap);
         }
         return result;
     }

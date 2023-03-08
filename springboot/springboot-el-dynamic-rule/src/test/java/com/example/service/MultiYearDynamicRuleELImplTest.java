@@ -9,29 +9,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 /**
  * @Title: JUnit5 Test Class.java.java
  * @Package: com.example.service
- * @Description: TODO
+ * @Description:
  * @author: zhaozhiwei
- * @date: 2022/10/29 下午8:23
+ * @date: 2023/2/21 下午2:09
  * @version: V1.0
  */
-class DynamicRuleELImplTest {
+class MultiYearDynamicRuleELImplTest {
 
-    /**
-     * @date: 2022/10/30-下午5:46
-     * @author: zhaozhiwei
-     * @method: testExecute
-
-     * @return: void
-     * @Description: 多表测试
-     */
     @Test
     void testExecute() {
 
-        //1. 构建待校验数据: 如果公式涉及多个表, 则构建数据必须把多个表的数据都放入集合, 并且必须包含report_code
-        // pro_code是为了进行数据 行 定位, 必须存在, 需要跟公式进行匹配
+        // 跨年度校验, 增加年度信息
         final List<Map<String, Object>> dataList = new ArrayList<>();
         final Map<String, Object> map1 = new HashMap<>();
         map1.put("report_code", "t01");
@@ -40,7 +33,18 @@ class DynamicRuleELImplTest {
         // 单元格表示t01.[001:amt01]  t01.[001:amt02]
         map1.put("amt03", new BigDecimal(100));
         map1.put("remark", "xx备注测试");
+        map1.put("year", "2022");
         dataList.add(map1);
+        // 跟上述数据年度/金额不同
+        final Map<String, Object> map10 = new HashMap<>();
+        map10.put("report_code", "t01");
+        map10.put("pro_code", "001");
+        //001项目这行: amt01, amt02不能为空
+        // 单元格表示t01.[001:amt01]  t01.[001:amt02]
+        map10.put("amt03", new BigDecimal(100));
+        map10.put("remark", "xx备注测试");
+        map10.put("year", "2023");
+        dataList.add(map10);
         final Map<String, Object> map2 = new HashMap<>();
         map2.put("report_code", "t02");
         map2.put("pro_code", "002");
@@ -49,17 +53,20 @@ class DynamicRuleELImplTest {
         // 002项目这一行: amt03 > amt01 + amt02
         map2.put("amt03", new BigDecimal(50));
         map2.put("remark", "xx备注测试");
+        map2.put("year", "2023");
         dataList.add(map2);
         final Map<String, Object> map3 = new HashMap<>();
-        map3.put("report_code", "t03");
+        map3.put("report_code", "t02");
         map3.put("pro_code", "003");
         map3.put("amt01", new BigDecimal(100));
         map3.put("amt02", new BigDecimal(100));
         map3.put("amt03", new BigDecimal(100));
         // 备注以xx开头
         map3.put("remark", "xx备注测试");
+        map3.put("year", "2023");
         dataList.add(map3);
         //2. 构建校验规则 t01表规则
+        // 公式需要根据配置动态替换年度, 月份, 比如同期，上期, 最终跟数据匹配
 //       | 报表id | 校验公式                              | 错误提示信息       |
 //|--------+---------------------------------------+--------------------|
 //|      1 | t1.[x0:y0] == 0                       | 单元格值必须为0    |
@@ -71,24 +78,26 @@ class DynamicRuleELImplTest {
         final Map<String, Object> rule01 = new HashMap<>();
         rule01.put("report_code", "t01");
         rule01.put("pro_code", "001");
-        rule01.put("formula_content", "#t01['001:amt01'] != null");
+        rule01.put("formula_content", "#_2023_00_t01['001:amt01'] != null");
         rule01.put("error_msg", "t01表 001项 金额1栏 不能为空");
         ruleList.add(rule01);
         final Map<String, Object> rule02 = new HashMap<>();
         rule02.put("report_code", "t02");
         rule02.put("pro_code", "002");
-        rule02.put("formula_content", "#t02['002:amt02'] > 0");
+        rule02.put("formula_content", "#_2023_00_t02['002:amt02'] > 0");
         rule02.put("error_msg", "t02表 002项 金额2 栏必须大于0");
         ruleList.add(rule02);
-        final Map<String, Object> rule03 = new HashMap<>();
-        rule03.put("report_code", "t01");
-        rule03.put("pro_code", "002");
-        // 校验公式也支持 + - * /
-        rule03.put("formula_content", "(#t02['002:amt01'] + 0) > #t03['003:amt01']");
-        rule03.put("error_msg", "t02表的002项amt01 必须大于t03表003项amt01");
-        ruleList.add(rule03);
 
-        final DynamicRuleELImpl dynamicRuleEL = new DynamicRuleELImpl();
+        // 跨年比对, t01表2023的金额3要大于2022年度金额3
+        final Map<String, Object> rule04 = new HashMap<>();
+        rule04.put("report_code", "t01");
+        rule04.put("pro_code", "002");
+        // 校验公式也支持 + - * /
+        rule04.put("formula_content", "#_2023_00_t01['001:amt03'] > #_2022_00_t01['001:amt03']");
+        rule04.put("error_msg", "2023年t01表的001项amt03 必须大于2022年t01表001项amt03");
+        ruleList.add(rule04);
+
+        final MultiYearDynamicRuleELImpl dynamicRuleEL = new MultiYearDynamicRuleELImpl();
         // 存在异常信息才返回结果
         // |表     |项      |栏   |异常信息    |
         // |t01    | 001   |amt01|金额为空    |

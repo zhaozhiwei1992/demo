@@ -91,6 +91,13 @@ public class ELApiTest {
 //        parser.parseExpression("#map['a']").setValue(evaluationContext, 4);
         Integer result2 = parser.parseExpression("#map['a']").getValue(evaluationContext, int.class);
         Assert.isTrue(result2.equals(1), "返回值应该是1");
+
+//        #后边不能直接跟数字
+        formulaStr = "#t0_2023_00['row1:col5'] != null";
+        evaluationContext.setVariable("t0_2023_00", data);
+        value = parser.parseExpression(formulaStr).getValue(evaluationContext, Boolean.class);
+        Assert.isTrue(value.equals(false), "t0表第1行第5列不能为空");
+
     }
 
     /**

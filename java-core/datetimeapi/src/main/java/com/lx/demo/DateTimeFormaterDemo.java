@@ -34,7 +34,7 @@ public class DateTimeFormaterDemo {
         System.out.printf("通过french格式化 %s\n", formatByFrench);
 
         //日其转字符串
-        final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("E yyyy-MM-dd HH:mm");
+        final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("E yyyy-MM-dd HH:mm:ss");
         final String customFormat = dateTimeFormatter.format(now);
         System.out.printf("自定义日期格式化 %s \n", customFormat);
 
