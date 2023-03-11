@@ -1,0 +1,8 @@
+#+TITLE: ${title}
+#+OPTIONS: ^:nil
+#+OPTIONS: toc:2
+#+LANGUAGE: zh-CN
+
+#foreach ($item in $items)
+$item
+#end
