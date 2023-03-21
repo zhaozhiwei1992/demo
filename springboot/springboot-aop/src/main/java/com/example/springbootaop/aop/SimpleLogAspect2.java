@@ -19,14 +19,22 @@ import java.util.Objects;
 import java.util.stream.Stream;
 
 /**
- * 这种方式根据匹配的规则一刀切, 适合通用方案
+ * @Title: SimpleLogAspect2
+ * @Package com/example/springbootaop/aop/SimpleLogAspect2.java
+ * @Description: 相同拦截点通过order指定顺序测试
+ *  com.example.springbootaop.controller.LogController#showLog2()
+ *  order 越小越优先
+ *  {@see com.example.springbootaop.aop.SimpleLogAspect}
+ * @author zhaozhiwei
+ * @date 2023/3/21 下午3:36
+ * @version V1.0
  */
 @Component
 @Aspect
-@Order(1)
-public class SimpleLogAspect {
+@Order(0)
+public class SimpleLogAspect2 {
 
-    private static final Logger logger = LoggerFactory.getLogger(SimpleLogAspect.class);
+    private static final Logger logger = LoggerFactory.getLogger(SimpleLogAspect2.class);
 
     ThreadLocal<Long> beginTime = new ThreadLocal<>();
 
@@ -41,7 +49,7 @@ public class SimpleLogAspect {
     public void before(JoinPoint joinPoint){
         // 记录请求到达时间
         beginTime.set(System.currentTimeMillis());
-        logger.info(String.format("Aspect1-before: 当前请求: %s, 开始时间: %s", joinPoint.toString(), beginTime.get()));
+        logger.info(String.format("Aspect2-before: 当前请求: %s, 开始时间: %s", joinPoint.toString(), beginTime.get()));
     }
 
     @After("execution(* com.example.springbootaop.controller..*.showLog2())")

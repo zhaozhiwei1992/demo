@@ -31,6 +31,7 @@ public class LogController {
 
     /**
      * 传统方式拦截
+     * com.example.springbootaop.aop.SimpleLogAspect
      * @return
      */
     @GetMapping("/showlog2")

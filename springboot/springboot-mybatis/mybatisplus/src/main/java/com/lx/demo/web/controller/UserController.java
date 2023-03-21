@@ -1,5 +1,6 @@
 package com.lx.demo.web.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lx.demo.domain.User;
@@ -33,5 +34,25 @@ public class UserController {
         Page<User> page = new Page<>(1, 2);
         final IPage<User> selectPage = userMapper.selectPage(page, null);
         return selectPage;
+    }
+
+    /**
+     * @data: 2023/3/9-下午5:03
+     * @User: zhaozhiwei
+     * @method: usersMultiParam
+
+     * @return: List<User>
+     * @Description: 多条件查询示例
+     * 动态方式跟jpa的方法查询方式各有千秋
+     *
+     * jpa的方法签名方式, 如果配置有误，服务都起不来，用起来个人感觉更爽, 习惯问题
+     */
+    public List<User> usersMultiParam(){
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper
+                .isNull("name")
+                .ge("age", 12)
+                .isNotNull("email");
+        final java.util.List<User> tList = userMapper.selectList(queryWrapper);
     }
 }
