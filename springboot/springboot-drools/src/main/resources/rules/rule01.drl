@@ -1,0 +1,48 @@
+package rules
+
+import com.example.domain.Order
+
+rule "zero"
+    no-loop true
+    lock-on-active true
+    salience 1
+    when
+        $s : Order(price <= 100)
+    then
+        $s.setScore(0);
+        update($s);
+end
+
+rule "add100"
+    no-loop true
+    lock-on-active true
+    salience 1
+    when
+        $s : Order(price > 100 && price <= 500)
+    then
+        $s.setScore(100);
+        // 更新数据, 方便后续程序处理
+        update($s);
+end
+
+rule "add500"
+    no-loop true
+    lock-on-active true
+    salience 1
+    when
+        $s : Order(price > 500 && price <= 1000)
+    then
+        $s.setScore(500);
+        update($s);
+end
+
+rule "add1000"
+    no-loop true
+    lock-on-active true
+    salience 1
+    when
+        $s : Order(price > 1000)
+    then
+        $s.setScore(1000);
+        update($s);
+end
