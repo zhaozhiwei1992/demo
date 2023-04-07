@@ -38,6 +38,17 @@ public class DataGroup {
         Map<Object, List<Map>> idAndName = maps.stream().collect(Collectors.groupingBy(map -> map.get("id") + "_" + map.get("name")));
         System.out.println("j8 后多字段分组结果: " + idAndName);
 
+        final Map<String, Object> collect =
+                maps.stream().collect(Collectors.groupingBy(map -> String.valueOf(map.get("name")),
+                Collectors.reducing(BigDecimal.ZERO, (result, item) -> {
+                    // 每次计算结果写入result
+                    System.out.println("result" + result);
+                    // item: 分组集合中每一项
+                    System.out.println("item" + item);
+                    return new BigDecimal(String.valueOf(result)).add(new BigDecimal(String.valueOf(((Map) item).get("amt"))));
+                })));
+        System.out.println("分组+合计: " + collect);
+
         // 金额分组
         final Map<String, List<Map>> groupByAmt = groupByAmt(maps);
         System.out.println("根据金额分组: " + groupByAmt);

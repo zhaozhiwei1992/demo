@@ -31,8 +31,9 @@ public class CustomLicenseParam implements Serializable {
 
     /**
      * 密钥密码（需要妥善保管，不能让使用者知道）
+     * 可以给默认值，可以不用前台传
      */
-    private String keyPass;
+    private String keyPass = "12345678A";
 
     /**
      * 访问秘钥库的密码
