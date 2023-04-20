@@ -4,7 +4,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.context.expression.BeanFactoryResolver;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.expression.EvaluationContext;
+import org.springframework.expression.Expression;
 import org.springframework.expression.ExpressionParser;
+import org.springframework.expression.ParserContext;
 import org.springframework.expression.common.TemplateParserContext;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
@@ -169,6 +171,12 @@ public class ELApiTest {
         formulaStr = "#t0['row1:col1'] > 0";
         value = parser.parseExpression(formulaStr).getValue(evaluationContext, Boolean.class);
         Assert.isTrue(value.equals(true), "第一行第一列要大于0");
+
+        // 校验同一个表里数据, 可以直接用该方式 #字段, 或者使用模板语法，先解析再获取
+        // 可以循环对evaluation.variable赋值
+        evaluationContext.setVariable("PAYEE_ACCT_NAME", "0");
+        formulaStr = "#PAYEE_ACCT_NAME == '0'";
+        Assert.isTrue(parser.parseExpression(formulaStr).getValue(evaluationContext, Boolean.class));
     }
 
     /**
@@ -265,6 +273,28 @@ public class ELApiTest {
     @Test
     public void testReg() {
         Assert.isTrue(parser.parseExpression("'123' matches '\\d{3}'").getValue(Boolean.class), "应为true");
+
+        // 抽取动态数据构建校验表达式校验
+        String rule = "'#{['PAYEE_ACCT_NAME']}' matches '\\d{3}'";
+        // 动态数据填充公式
+        final Map<String, Object> data = new HashMap<>();
+        data.put("PAYEE_ACCT_NAME", 123);
+        // 在#{}中表示这是表达式块， 一般是混合了描述和表达式, 描述是el解析不了的
+        String ruleFormat = parser.parseExpression(rule, templateParserContext).getValue(data, String.class);
+        System.out.println("解析后数据: " + ruleFormat);
+
+        Assert.isTrue(parser.parseExpression(ruleFormat).getValue(Boolean.class), "应为true");
+
+        // 方式2 调整模板格式, 该方式获取value需要传入context, #就是去EvaluationContext中内容的, 而上边默认的传入map即可, 需要取舍
+        // 为了配置使用统一， 都通过#获取字段， 可以用方式2配置模板
+        ParserContext context = new TemplateParserContext("%{", "}");
+        rule = "'%{#PAYEE_ACCT_NAME}' matches '\\d{3}'";
+        EvaluationContext evaluationContext = new StandardEvaluationContext();
+        evaluationContext.setVariable("PAYEE_ACCT_NAME", 123);
+        ruleFormat = parser.parseExpression(rule, context).getValue(evaluationContext, String.class);
+        System.out.println(ruleFormat);
+        Assert.isTrue(parser.parseExpression(ruleFormat).getValue(Boolean.class), "应为true");
+
     }
 
     /**
@@ -342,6 +372,8 @@ public class ELApiTest {
      * @method: testFunc
      * @return: void
      * @Description: 测试自定义函数
+     *
+     * 可以自己写个类，定义好函数, 通过改方式进行校验, 如length()
      */
     @Test
     public void testFunc() throws NoSuchMethodException {

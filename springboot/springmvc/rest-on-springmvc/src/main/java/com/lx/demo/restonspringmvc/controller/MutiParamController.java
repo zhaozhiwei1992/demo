@@ -33,10 +33,12 @@ public class MutiParamController {
      * "age":18,"name":"goudan"}
      * 这种方式是可行的
      * @param person
+     * @param name 这个参数得url中通过 name=xx单独传, requetbody中属性是不会解析的
      * @return
      */
     @PostMapping("/mutiparam2")
-    public String mutiParam2(@RequestBody Person person){
+    public String mutiParam2(String name, @RequestBody Person person){
+        System.out.println(name);
         System.out.println(person);
         return "";
     }
