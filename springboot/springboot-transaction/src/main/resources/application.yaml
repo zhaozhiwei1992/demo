@@ -1,0 +1,16 @@
+logging:
+  level:
+    ROOT: DEBUG
+    org.hibernate.SQL: DEBUG
+    com.example: DEBUG
+spring:
+  datasource:
+    driver-class: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@//192.168.100.80:1521/ORCL
+    password: 1
+    username: pay_34
+  jpa:
+    database: ORACLE
+    generateDdl: true
+    hibernate:
+      ddl-auto: update
