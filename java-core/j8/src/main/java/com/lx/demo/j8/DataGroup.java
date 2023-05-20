@@ -35,9 +35,11 @@ public class DataGroup {
         Map<Object, List<Map>> id = maps.stream().collect(Collectors.groupingBy(map -> map.get("id")));
         System.out.println("j8 后分组结果: " + id);
 
-        Map<Object, List<Map>> idAndName = maps.stream().collect(Collectors.groupingBy(map -> map.get("id") + "_" + map.get("name")));
+        Map<Object, List<Map>> idAndName =
+                maps.stream().collect(Collectors.groupingBy(map -> map.get("id") + "_" + map.get("name")));
         System.out.println("j8 后多字段分组结果: " + idAndName);
 
+<<<<<<< HEAD
         final Map<String, Object> collect =
                 maps.stream().collect(Collectors.groupingBy(map -> String.valueOf(map.get("name")),
                 Collectors.reducing(BigDecimal.ZERO, (result, item) -> {
@@ -48,6 +50,11 @@ public class DataGroup {
                     return new BigDecimal(String.valueOf(result)).add(new BigDecimal(String.valueOf(((Map) item).get("amt"))));
                 })));
         System.out.println("分组+合计: " + collect);
+=======
+        final Map<Object, IntSummaryStatistics> collect = maps.stream().collect(Collectors.groupingBy(map -> map.get(
+                "name"), Collectors.summarizingInt(map -> Integer.parseInt(String.valueOf(map.get("amt"))))));
+        System.out.println(collect);
+>>>>>>> 0874431f (fixed: 数据分组)
 
         // 金额分组
         final Map<String, List<Map>> groupByAmt = groupByAmt(maps);
@@ -78,14 +85,14 @@ public class DataGroup {
     }
 
     /**
+     * @param dataList :
      * @data: 2021/12/16-下午4:28
      * @User: zhaozhiwei
      * @method: groupByAmt
-      * @param dataList :
-     * @return: java.util.Map<java.lang.String,java.util.List<T>>
+     * @return: java.util.Map<java.lang.String, java.util.List < T>>
      * @Description: 根据金额, 大于0, 小于0, 等于0分组
      */
-    public static <T extends Map> Map<String, List<T>> groupByAmt(List<T> dataList){
+    public static <T extends Map> Map<String, List<T>> groupByAmt(List<T> dataList) {
         T dataItem;
         Map<String, List<T>> resultMap = new HashMap<String, List<T>>();
         for (T aDataList : dataList) {
@@ -93,11 +100,11 @@ public class DataGroup {
             String packReg = "";
 //            根据金额, 大于0: gt0, 小于0: lt0, 等于0:lt0分组
             final BigDecimal curAmt = new BigDecimal(String.valueOf(dataItem.get("amt")));
-            if(curAmt.compareTo(BigDecimal.ZERO) < 0){
+            if (curAmt.compareTo(BigDecimal.ZERO) < 0) {
                 packReg = "lt0";
-            }else if(curAmt.compareTo(BigDecimal.ZERO) == 0){
+            } else if (curAmt.compareTo(BigDecimal.ZERO) == 0) {
                 packReg = "eq0";
-            }else{
+            } else {
                 packReg = "gt0";
             }
             if (resultMap.containsKey(packReg)) {
