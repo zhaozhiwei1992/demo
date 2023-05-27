@@ -39,7 +39,6 @@ public class DataGroup {
                 maps.stream().collect(Collectors.groupingBy(map -> map.get("id") + "_" + map.get("name")));
         System.out.println("j8 后多字段分组结果: " + idAndName);
 
-<<<<<<< HEAD
         final Map<String, Object> collect =
                 maps.stream().collect(Collectors.groupingBy(map -> String.valueOf(map.get("name")),
                 Collectors.reducing(BigDecimal.ZERO, (result, item) -> {
@@ -50,11 +49,10 @@ public class DataGroup {
                     return new BigDecimal(String.valueOf(result)).add(new BigDecimal(String.valueOf(((Map) item).get("amt"))));
                 })));
         System.out.println("分组+合计: " + collect);
-=======
-        final Map<Object, IntSummaryStatistics> collect = maps.stream().collect(Collectors.groupingBy(map -> map.get(
+
+        final Map<Object, IntSummaryStatistics> collect2 = maps.stream().collect(Collectors.groupingBy(map -> map.get(
                 "name"), Collectors.summarizingInt(map -> Integer.parseInt(String.valueOf(map.get("amt"))))));
-        System.out.println(collect);
->>>>>>> 0874431f (fixed: 数据分组)
+        System.out.println(collect2);
 
         // 金额分组
         final Map<String, List<Map>> groupByAmt = groupByAmt(maps);

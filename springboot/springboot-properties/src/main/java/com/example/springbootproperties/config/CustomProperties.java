@@ -16,7 +16,7 @@ public class CustomProperties {
 		// 读取配置文件
 		try {
 			props.load(CustomProperties.class.getClassLoader()
-                .getResourceAsStream("kaptcha.properties"));
+                .getResourceAsStream("captcha.properties"));
 		}catch (Exception e) {
 			e.printStackTrace();
 		}

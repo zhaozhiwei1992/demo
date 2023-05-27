@@ -1,3 +1,6 @@
+spring:
+  profiles:
+    active: dev
 msg: old_msg
 name: old_name
 transfer:
