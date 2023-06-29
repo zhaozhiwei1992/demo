@@ -4,3 +4,10 @@ transfer:
     table1: xx-dev
     table2: xx22-dev
 auth_whitelist: /,/home,/hello,/code/image,/login,/logout,/signOut
+# list即可不能通过value去直接获取 list: [/,/home,/hello] 等价
+z:
+  prop:
+    list:
+      - /
+      - /home
+      - /hello

@@ -1,5 +1,7 @@
 package com.example.springbootproperties.controller;
 
+import com.example.springbootproperties.config.ListProperties;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,5 +25,16 @@ public class ListController {
     @GetMapping("writelist")
     public List writelist(){
        return authWhitelist;
+    }
+
+    // 不能用@Value直接获取list
+//    @Value("${list1}")
+//    private List<String> list;
+    @Autowired
+    private ListProperties listProperties;
+
+    @GetMapping("list")
+    public List list(){
+        return listProperties.getList();
     }
 }

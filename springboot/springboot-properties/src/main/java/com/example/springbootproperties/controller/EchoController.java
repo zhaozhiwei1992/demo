@@ -30,7 +30,7 @@ public class EchoController {
      * @data: 2022/2/15-下午3:15
      * -Da=xxx -Db=${a}  增加这样参数也是生效的
      */
-    @Value("${b}")
+//    @Value("${b}")
     private String b;
 
     @GetMapping("/echo/b")
