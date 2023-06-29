@@ -38,6 +38,7 @@ public class DataGroup {
         Map<Object, List<Map>> idAndName = maps.stream().collect(Collectors.groupingBy(map -> map.get("id") + "_" + map.get("name")));
         System.out.println("j8 后多字段分组结果: " + idAndName);
 
+        // 分组合计
         final Map<String, Object> collect =
                 maps.stream().collect(Collectors.groupingBy(map -> String.valueOf(map.get("name")),
                 Collectors.reducing(BigDecimal.ZERO, (result, item) -> {
@@ -48,6 +49,11 @@ public class DataGroup {
                     return new BigDecimal(String.valueOf(result)).add(new BigDecimal(String.valueOf(((Map) item).get("amt"))));
                 })));
         System.out.println("分组+合计: " + collect);
+
+        // 分组按key排序
+        // 注意linkedHashMap这个参数, 加入以后，就会根据实际传入顺序分组
+        // 解决Java8使用groupingBy分组后顺序被改变问题
+//        LinkedHashMap<String, List<Brand>> brandMap = brandList.stream().collect(Collectors.groupingBy(Brand::getFirstLetter, LinkedHashMap::new, Collectors.toList()));
 
         // 金额分组
         final Map<String, List<Map>> groupByAmt = groupByAmt(maps);

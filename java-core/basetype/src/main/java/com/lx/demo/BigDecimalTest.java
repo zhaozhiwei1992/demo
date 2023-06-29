@@ -2,7 +2,9 @@ package com.lx.demo;
 
 import org.springframework.util.Assert;
 
+import java.lang.reflect.Field;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  * @Title: BigDecimalTest
@@ -42,5 +44,26 @@ public class BigDecimalTest {
 
         Assert.isTrue(bigDecimalStr1.compareTo(bigDecimalStr1_1)==0, "通过字符串类型初始化bigdecimal.compareto相同");
         Assert.isTrue(bigDecimalStr1_1.compareTo(bigDecimalStr1_1_1)==0, "通过字符串类型初始化bigdecimal.compareto相同");
+
+        // 如何修改BigDecimal精度并且不改变原值
+        BigDecimal bigDecimal = new BigDecimal("1.112233");
+        System.out.println("原: " + bigDecimal);
+        // 不起作用, 未修改参数值
+        changeScale(bigDecimal);
+        System.out.println("新: " + bigDecimal);
     }
+
+    // TODO 如何直接修改原对象?
+    // 反射好像也不管用, java8
+    public static void changeScale(BigDecimal bigDecimal){
+        try {
+            final Field intCompact = BigDecimal.class.getDeclaredField("intCompact");
+            intCompact.setAccessible(true);
+            intCompact.setLong(bigDecimal, bigDecimal.setScale(2, RoundingMode.DOWN).longValue());
+            System.out.println(bigDecimal);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

@@ -57,6 +57,7 @@ public class EchoController {
 
     /**
      * 请求带多参数，并且大数据量
+     * curl -X POST -H 'Content-Type:application/json;charset=utf-8' http://127.0.0.1:8080/echo/mutiparam\?param1\=11.1,11.2,11.3\&param2\=xx,xx1 -d '[{}]'
      */
     @PostMapping("/echo/mutiparam")
     public List<Map> echo(@RequestBody List<Map> datas, @RequestParam String param1, @RequestParam String param2){

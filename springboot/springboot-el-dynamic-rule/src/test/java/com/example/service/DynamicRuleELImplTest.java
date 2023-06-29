@@ -67,26 +67,42 @@ class DynamicRuleELImplTest {
 //|      1 | t1.[x0:y0] like 'xx%'                 | 不是以xx开头       |
 //|      1 | t1.[x0:y0] like '%xx'                 | 不是以xx结尾       |
 //|      1 | t1.[x0:y0] like '%xx%'                | 不包含xx           |
-        final List<Map<String, Object>> ruleList = new ArrayList<>();
-        final Map<String, Object> rule01 = new HashMap<>();
-        rule01.put("report_code", "t01");
-        rule01.put("pro_code", "001");
-        rule01.put("formula_content", "#t01['001:amt01'] != null");
-        rule01.put("error_msg", "t01表 001项 金额1栏 不能为空");
-        ruleList.add(rule01);
-        final Map<String, Object> rule02 = new HashMap<>();
-        rule02.put("report_code", "t02");
-        rule02.put("pro_code", "002");
-        rule02.put("formula_content", "#t02['002:amt02'] > 0");
-        rule02.put("error_msg", "t02表 002项 金额2 栏必须大于0");
-        ruleList.add(rule02);
-        final Map<String, Object> rule03 = new HashMap<>();
-        rule03.put("report_code", "t01");
-        rule03.put("pro_code", "002");
-        // 校验公式也支持 + - * /
-        rule03.put("formula_content", "(#t02['002:amt01'] + 0) > #t03['003:amt01']");
-        rule03.put("error_msg", "t02表的002项amt01 必须大于t03表003项amt01");
-        ruleList.add(rule03);
+        final List<Map<String, Object>> ruleList = new ArrayList<Map<String, Object>>(){{
+            {
+                final Map<String, Object> rule = new HashMap<>();
+                rule.put("report_code", "t01");
+                rule.put("pro_code", "001");
+                rule.put("formula_content", "#t01['001:amt01'] != null");
+                rule.put("error_msg", "t01表 001项 金额1栏 不能为空");
+                add(rule);
+            }
+            {
+                final Map<String, Object> rule = new HashMap<>();
+                rule.put("report_code", "t02");
+                rule.put("pro_code", "002");
+                rule.put("formula_content", "#t02['002:amt02'] > 0");
+                rule.put("error_msg", "t02表 002项 金额2 栏必须大于0");
+                add(rule);
+            }
+            {
+                final Map<String, Object> rule = new HashMap<>();
+                rule.put("report_code", "t01");
+                rule.put("pro_code", "002");
+                // 校验公式也支持 + - * /
+                rule.put("formula_content", "(#t02['002:amt01'] + 0) > #t03['003:amt01']");
+                rule.put("error_msg", "t02表的002项amt01 必须大于t03表003项amt01");
+                add(rule);
+            }
+            {
+                final Map<String, Object> rule = new HashMap<>();
+                rule.put("report_code", "t01");
+                rule.put("pro_code", "002");
+                // 自定义函数计算支持, 需要context.registerFunction
+                rule.put("formula_content", "#sum(#t02['002:amt01'], 1.1) > #t03['003:amt01']");
+                rule.put("error_msg", "t02表的002项amt01 必须大于t03表003项amt01, 自定义函数");
+                add(rule);
+            }
+        }};
 
         final DynamicRuleELImpl dynamicRuleEL = new DynamicRuleELImpl();
         // 存在异常信息才返回结果

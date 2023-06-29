@@ -8,8 +8,8 @@
 		<version>2.2.2.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.lx.demo</groupId>
-	<artifactId>springboot-el</artifactId>
+	<groupId>com.example</groupId>
+	<artifactId>springboot-el-dynamic-rule</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>demo</name>
 	<description>Demo project for Spring Boot</description>

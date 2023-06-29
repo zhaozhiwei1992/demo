@@ -66,6 +66,13 @@
 			<version>${oracle.version}</version>
 		</dependency>
 
+		<dependency>
+			<!-- 实现数据库文档 -->
+			<groupId>cn.smallbun.screw</groupId>
+			<artifactId>screw-core</artifactId>
+			<version>1.0.5</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

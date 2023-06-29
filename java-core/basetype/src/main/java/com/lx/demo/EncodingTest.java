@@ -1,9 +1,6 @@
 package com.lx.demo;
 
-import sun.nio.cs.ext.GBK;
-
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 /**

@@ -1,10 +1,13 @@
 package com.example.service;
 
-import org.springframework.expression.EvaluationContext;
+import com.example.service.rule.ELExtMethod;
 import org.springframework.expression.ExpressionParser;
+import org.springframework.expression.common.TemplateParserContext;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 
+import java.lang.reflect.Method;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,6 +27,8 @@ public class DynamicRuleELImpl implements DynamicRule{
 
     private final ExpressionParser parser = new SpelExpressionParser();
 
+    private final TemplateParserContext templateParserContext = new TemplateParserContext();
+
     @Override
     public List<Map<String, Object>> execute(List<Map<String, Object>> dataList, List<Map<String, Object>> ruleList) {
 
@@ -31,11 +36,17 @@ public class DynamicRuleELImpl implements DynamicRule{
         final List<Map<String, Object>> errorList = new ArrayList<>();
 
         // 数据转换: list根据传入数据转换成行列表示的map, 如:map.put("row1:col1", xx);
+        // map套map
         Map<String, Map<String, Object>> listToMap = listToMap(dataList);
-        EvaluationContext standardEvaluationContext = new StandardEvaluationContext();
+        StandardEvaluationContext standardEvaluationContext = new StandardEvaluationContext();
         for (Map.Entry<String, Map<String, Object>> mapEntry : listToMap.entrySet()) {
             // 这里要塞入校验的数据源对象, 如t01, t02
             standardEvaluationContext.setVariable(mapEntry.getKey(), mapEntry.getValue());
+        }
+        final Method[] declaredMethods = ELExtMethod.class.getDeclaredMethods();
+        for (Method declaredMethod : declaredMethods) {
+            final String name = declaredMethod.getName();
+            standardEvaluationContext.registerFunction(name, declaredMethod);
         }
 
         // 遍历校验传入公式
@@ -43,7 +54,7 @@ public class DynamicRuleELImpl implements DynamicRule{
             // 规则字符串
             final String formulaContent = String.valueOf(ruleMap.get("formula_content"));
             // 构建规则，校验数据, 所有校验规则返回应该都是bool类型
-            final Boolean bool = parser.parseExpression(formulaContent).getValue(standardEvaluationContext, Boolean.class);
+            final Boolean bool = parser.parseExpression(formulaContent).getValue(standardEvaluationContext, templateParserContext, Boolean.class);
             if(Boolean.FALSE.equals(bool)){
                 // 校验不通过, 构造异常信息放入到errorList中
                 final Map<String, Object> errorMap = new HashMap<>();

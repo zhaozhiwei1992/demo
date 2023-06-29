@@ -15,6 +15,17 @@ import java.util.HashSet;
 import java.util.Set;
 
 
+/**
+ * @Title: DubboProviderBootstrap
+ * @Package com/dubbo/example/provider/DubboProviderBootstrap.java
+ * @Description:
+ * // 开启基于注解的dubbo功能（主要是包扫描@DubboComponentScan）
+ * // 也可以在配置文件中使用dubbo.scan.base-package来替代 @EnableDubbo
+ * {@see org.apache.dubbo.spring.boot.autoconfigure.DubboAutoConfiguration}
+ * @author zhaozhiwei
+ * @date 2023/6/7 下午2:34
+ * @version V1.0
+ */
 @EnableAutoConfiguration
 public class DubboProviderBootstrap {
 
@@ -40,6 +51,7 @@ public class DubboProviderBootstrap {
         autowiredAnnotationTypes.add(Autowired.class);
         autowiredAnnotationTypes.add(Value.class);
 //        dubbo reference作为autowired类型， 可以同时兼容dubbo外部引入和spring本地bean注入方式
+        // reference当作Autowried用, 遗留项目偷懒用这个方式, 平时慎用
         autowiredAnnotationTypes.add(com.alibaba.dubbo.config.annotation.Reference.class);
 
         try {

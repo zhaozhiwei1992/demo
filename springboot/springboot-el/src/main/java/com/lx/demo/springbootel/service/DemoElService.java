@@ -11,6 +11,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 
 /**
  *
@@ -40,6 +41,10 @@ public class DemoElService {
      */
     @Value("#{T(java.lang.Math).random() * 100.0}")
     private String randomNumber;
+
+    // 自定义计算类测试
+    @Value("#{T(com.lx.demo.springbootel.service.rule.Math).sum(1.0,20,30,1.11)}")
+    private BigDecimal sumNum;
 
     /**
      * //注入其他Bean属性
@@ -74,6 +79,7 @@ public class DemoElService {
     }
 
     public void outputResource(){
+        System.out.println("合计: " + sumNum);
         try {
             System.out.println(normal);
             System.out.println(osName);
