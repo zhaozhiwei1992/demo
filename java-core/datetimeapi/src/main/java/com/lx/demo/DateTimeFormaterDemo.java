@@ -42,6 +42,11 @@ public class DateTimeFormaterDemo {
         final LocalDate parse = LocalDate.parse("2019-10-20");
         System.out.printf("2019-10-20转换为日期 %s \n", parse);
 
+        //字符串转日期
+        final DateTimeFormatter yyyyMMdd = DateTimeFormatter.ofPattern("yyyyMMdd");
+        final LocalDate parse2 = LocalDate.parse("20191020", yyyyMMdd);
+        System.out.printf("2019-10-20转换为日期2 %s \n", parse2);
+
         //自定义日期格式转换, 如果时datetime那么日期时间就得都有，否则报错
         final ZonedDateTime parse1 = ZonedDateTime.parse("1990-08-07 12:12:00-0400"
                 , DateTimeFormatter.ofPattern("yyyy-MM" + "-dd HH:mm:ssxx"));

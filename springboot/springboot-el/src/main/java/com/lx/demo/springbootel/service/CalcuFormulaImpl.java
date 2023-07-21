@@ -3,16 +3,15 @@ package com.lx.demo.springbootel.service;
 import com.singularsys.jep.EvaluationException;
 import com.singularsys.jep.Jep;
 import com.singularsys.jep.ParseException;
+import org.springframework.expression.EvaluationContext;
 import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.common.TemplateParserContext;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
+import org.springframework.expression.spel.support.StandardEvaluationContext;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class CalcuFormulaImpl {
 
@@ -89,8 +88,20 @@ public class CalcuFormulaImpl {
         final CalcuFormulaImpl calcuFormula = new CalcuFormulaImpl();
 
         calcuFormula.calculation(datas, formula);
-        System.out.println(datas);
+//        System.out.println(datas);
 
+        // 测试财政部规范垃圾公式
+
+        EvaluationContext standardEvaluationContext = new StandardEvaluationContext();
+        final HashMap<String, Object> map = new HashMap<>();
+        map.put("czybggyszcjsjjfllr0027:je3", new BigDecimal(200));
+        standardEvaluationContext.setVariable("czybggyszcjsjjfllr0027", map);
+
+        String fContent = "#czybggyszcjsjjfllr0027['czybggyszcjsjjfllr0027:je3'] + 100";
+        final BigDecimal result =
+                Objects.requireNonNull(parser.parseExpression(fContent).getValue(standardEvaluationContext,
+                        BigDecimal.class)).setScale(2, RoundingMode.HALF_UP);
+        System.out.println(result);
 
     }
 }
