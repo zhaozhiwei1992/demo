@@ -16,4 +16,8 @@ public class Math {
     public static BigDecimal sum(BigDecimal ...param){
         return Arrays.stream(param).reduce(BigDecimal.ZERO, BigDecimal::add);
     }
+
+    public static BigDecimal abs(BigDecimal value){
+        return value.abs();
+    }
 }
