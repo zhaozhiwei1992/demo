@@ -1,6 +1,7 @@
 package com.lx.demo.springbootresourceloader.controller;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.util.ResourceUtils;
@@ -10,13 +11,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.*;
 import java.net.URL;
+import java.nio.charset.Charset;
 
 @RestController
 @RequestMapping("/resource")
 public class ResourceController {
 
     @GetMapping("test")
-    public String test(){
+    public String test() throws IOException {
+        final InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream("myres/testx.txt");
+        final String string = IOUtils.toString(resourceAsStream, Charset.defaultCharset());
+        System.out.println(string);
         // 启动main 方法 /home/lx7ly/workspace/demo/springboot/springboot-resourceloader/target/classes/myres
         // 使用jar包  file:/home/lx7ly/workspace/demo/springboot/springboot-resourceloader/target/springboot-resourceloader-0.0.1-SNAPSHOT.jar!/BOOT-INF/classes!/myres
         final URL myres = Thread.currentThread().getContextClassLoader().getResource("myres");

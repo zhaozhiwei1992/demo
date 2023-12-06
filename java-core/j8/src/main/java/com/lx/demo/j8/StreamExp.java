@@ -1,7 +1,9 @@
 package com.lx.demo.j8;
 
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.RoundingMode;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -24,6 +26,8 @@ import java.util.stream.Stream;
 public class StreamExp {
 
     public static void main(String[] args) {
+
+        testMinScale();
 
         // 基础要素流和普通对象流
         final int[] ints = IntStream.of(1, 2, 3).toArray();
@@ -157,6 +161,35 @@ public class StreamExp {
                 .map(bigInteger -> bigInteger.intValue())
                 .reduce(Integer::sum).ifPresent(System.out::println);
 
+    }
+
+    /**
+     * @data: 2023/11/27-上午11:05
+     * @User: zhaozhiwei
+     * @method: testMinScale
+
+     * @return: void
+     * @Description: 按照更接近四舍五入结果进行排序, 接近优先
+     * 1.3. 1.4 那么1.3优先, 1.6和1.7则1.7优先
+     */
+    private static void testMinScale(){
+        final Map<String, BigDecimal> childReportItemMap = new HashMap<>();
+        childReportItemMap.put("1", BigDecimal.valueOf(11.3));
+        childReportItemMap.put("2", BigDecimal.valueOf(1.5));
+        childReportItemMap.put("3", BigDecimal.valueOf(1.6));
+        childReportItemMap.put("4", BigDecimal.valueOf(1222.7));
+        childReportItemMap.put("5", BigDecimal.valueOf(1222.2));
+
+        List<Map.Entry<String, BigDecimal>> sortedList = childReportItemMap.entrySet()
+                .stream()
+                .sorted(Comparator.comparing(entry -> {
+                    BigDecimal value = entry.getValue();
+                    BigDecimal roundedValue = value.setScale(0, RoundingMode.HALF_UP);
+                    return value.subtract(roundedValue.abs()).abs();
+                }))
+                .collect(Collectors.toList());
+        System.out.println("测试按照舍位结果差异最小排序");
+        System.out.println(sortedList);
     }
 
     private static Stream<Character> characterStream(String s) {
