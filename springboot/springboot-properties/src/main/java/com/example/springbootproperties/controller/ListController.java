@@ -35,6 +35,7 @@ public class ListController {
 
     @GetMapping("list")
     public List list(){
+        System.out.println(listProperties.getRoot());
         return listProperties.getList();
     }
 }

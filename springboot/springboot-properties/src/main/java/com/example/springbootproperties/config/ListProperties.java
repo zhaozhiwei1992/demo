@@ -7,7 +7,7 @@ import java.util.List;
 
 @Component
 @ConfigurationProperties(prefix = "z.prop")
-public class ListProperties {
+public class ListProperties extends RootProperties{
 
     public List<String> getList() {
         return list;
