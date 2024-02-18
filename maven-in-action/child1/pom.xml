@@ -37,6 +37,13 @@
 <!--      <groupId>org.springframework.boot</groupId>-->
 <!--      <artifactId>spring-boot-starter-web</artifactId>-->
 <!--    </dependency>-->
+    <!-- https://mvnrepository.com/artifact/com.zaxxer/HikariCP-java7 -->
+    <dependency>
+      <groupId>com.zaxxer</groupId>
+      <artifactId>HikariCP-java7</artifactId>
+      <version>2.4.13</version>
+    </dependency>
+
 
   </dependencies>
 
