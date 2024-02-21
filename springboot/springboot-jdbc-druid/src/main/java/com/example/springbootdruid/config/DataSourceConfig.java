@@ -18,13 +18,17 @@ public class DataSourceConfig {
 
     /**
      * 创建由动态数据源提供的JdbcTemplete
+     *
+     * 手动注册datasource: beanDefinitionRegistry.registerBeanDefinition("datasource", define);
+     * druidDatasource: com.example.springbootdruid.config.DruidConfiguration#druid()
      * @param dataSource
      * @return
      */
     @Bean(name = "JdbcTemplate")
     @Primary
     public JdbcTemplate primaryJdbcTemplate(
-            @Qualifier("datasource") DataSource dataSource) {
+//            @Qualifier("druid") DataSource dataSource) {
+        @Qualifier("datasource") DataSource dataSource) {
         return new JdbcTemplate(dataSource);
     }
 

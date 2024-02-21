@@ -1,6 +1,6 @@
 package com.example.service;
 
-import com.example.config.PolardbProperties;
+import com.example.config.OracleProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,10 +19,10 @@ import java.util.concurrent.Executors;
  * @date 2024/2/18 下午9:04
  */
 @Component
-public class PolardbConnTestService {
+public class OracleConnTestService {
 
     @Autowired
-    private PolardbProperties polardbProperties;
+    private OracleProperties oracleProperties;
 
     /**
      * @param nThreads  :  并行线程数
@@ -43,8 +43,8 @@ public class PolardbConnTestService {
                 // 模拟创建数据库连接的耗时操作
                 try {
                     long startTime = System.currentTimeMillis();
-                    final Connection connection = DriverManager.getConnection(polardbProperties.getUrl()
-                            , polardbProperties.getUsername(), polardbProperties.getPassword());
+                    final Connection connection = DriverManager.getConnection(oracleProperties.getUrl()
+                            , oracleProperties.getUsername(), oracleProperties.getPassword());
                     long connectionCreationTime = System.currentTimeMillis() - startTime;
                     System.out.println("Connection created in " + connectionCreationTime + " ms");
 

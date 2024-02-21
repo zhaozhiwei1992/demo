@@ -1,8 +1,10 @@
 package com.example.springbootdruid.config;
 
+import com.alibaba.druid.filter.Filter;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
+import com.example.springbootdruid.filter.ConnectionTimeFilter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -12,9 +14,16 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
+import java.util.Arrays;
 
 @Configuration
 public class DruidConfiguration {
+
+    @Bean
+    public Filter connectionTimeFilter() {
+        return new ConnectionTimeFilter();
+    }
+
     /**
      * 注册一个StatViewServlet
      *
@@ -85,7 +94,9 @@ public class DruidConfiguration {
     @Bean
     @ConfigurationProperties(prefix = "spring.datasource")
     public DruidDataSource druid() {
-        return new DruidDataSource();
+        final DruidDataSource druidDataSource = new DruidDataSource();
+        druidDataSource.setProxyFilters(Arrays.asList(new ConnectionTimeFilter()));
+        return druidDataSource;
     }
 
     /**

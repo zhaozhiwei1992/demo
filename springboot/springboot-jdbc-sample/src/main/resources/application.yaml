@@ -2,8 +2,8 @@ spring:
   datasource:
     oracle:
       driver-class-name: oracle.jdbc.OracleDriver
-      url: jdbc:oracle:thin:@192.168.100.10:1521:pdb19
-      username: mid_ox
+      url: jdbc:oracle:thin:@192.168.100.80:1521:orcl
+      username: pay_34
       password: 1
     mysql:
       driver-class-name: oracle.jdbc.OracleDriver
@@ -11,10 +11,13 @@ spring:
       username: root
       password: root
     polardb:
-      driver-class-name: oracle.jdbc.OracleDriver
-      url: jdbc:mysql://localhost:3306/test
-      username: root
-      password: root
+      driver-class-name: com.aliyun.polardb.Driver
+      url: jdbc:polardb://10.249.161.213:3433/zjww_dev2_0
+      username: bdg23_330000_cs
+      password: 1
+      initialSize: 5
+      minIdle: 5
+      maxActive: 30
     postgresql:
       url: jdbc:postgresql://127.0.0.1:5432/postgres
       username: postgres

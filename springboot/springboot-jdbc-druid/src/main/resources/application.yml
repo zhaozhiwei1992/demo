@@ -1,17 +1,22 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/user
-    username: root
-    password: root
+#    url: jdbc:mysql://localhost:3306/user
+#    username: root
+#    password: root
+    driver-class-name: com.aliyun.polardb.Driver
+    url: jdbc:polardb://10.249.161.213:3433/zjww_dev2_0
+    username: bdg23_330000_cs
+    password: 1
     # 下面为连接池的补充设置，应用到上面所有数据源中
     # 初始化大小，最小，最大
-    initialSize: 5
-    maxActive: 20
+    # 第一次进行数据库请求就会默认初始化initialSize个connect
+    initialSize: 1
+    minIdle: 1
+    maxActive: 1
     # 配置获取连接等待超时的时间
-    maxWait: 60000
+    maxWait: 20000
     # 配置一个连接在池中最小生存的时间，单位是毫秒
-    minEvictableIdleTimeMillis: 300000
-    minIdle: 5
+    minEvictableIdleTimeMillis: 3000
     openMulti: true
     multi:
       - driver-class-name: oracle.jdbc.OracleDriver

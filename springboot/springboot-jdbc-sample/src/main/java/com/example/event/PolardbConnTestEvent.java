@@ -3,7 +3,9 @@ package com.example.event;
 import com.example.service.PolardbConnTestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PolardbConnTestEvent implements CommandLineRunner {
 
     @Autowired
