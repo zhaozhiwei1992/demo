@@ -27,8 +27,8 @@ public class DataSourceConfig {
     @Bean(name = "JdbcTemplate")
     @Primary
     public JdbcTemplate primaryJdbcTemplate(
-//            @Qualifier("druid") DataSource dataSource) {
-        @Qualifier("datasource") DataSource dataSource) {
+            @Qualifier("druid") DataSource dataSource) {
+//        @Qualifier("datasource") DataSource dataSource) {
         return new JdbcTemplate(dataSource);
     }
 

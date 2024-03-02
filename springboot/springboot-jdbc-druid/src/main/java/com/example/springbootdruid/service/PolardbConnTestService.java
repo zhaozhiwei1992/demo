@@ -36,12 +36,12 @@ public class PolardbConnTestService {
     @Transactional
     public void exec() {
         // 测试连接超时
-//        final long i = (long) (Math.random() * 1000 + 500);
-//        try {
-//            Thread.sleep(i);
-//        } catch (InterruptedException e) {
-//            throw new RuntimeException(e);
-//        }
+        final long i = (long) (Math.random() * 500 + 100);
+        try {
+            Thread.sleep(i);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         jdbcTemplate.execute("select 1");
     }
 }

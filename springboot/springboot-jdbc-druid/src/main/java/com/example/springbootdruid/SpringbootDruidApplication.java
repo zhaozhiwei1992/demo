@@ -13,6 +13,7 @@ import org.springframework.context.annotation.ImportResource;
  */
 @SpringBootApplication
 @ImportResource(locations = {"classpath:applicationContext.xml"}, reader = LoadXmlBeanDefinitionReader.class)
+//@EnableAspectJAutoProxy(exposeProxy = true)
 public class SpringbootDruidApplication {
 
 	public static void main(String[] args) {

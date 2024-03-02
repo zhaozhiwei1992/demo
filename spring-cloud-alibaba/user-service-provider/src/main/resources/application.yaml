@@ -1,0 +1,42 @@
+server:
+  port: 9091
+spring:
+  application:
+    name: user-service-provider
+  # mq
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  cloud:
+    config:
+      enabled: false
+    nacos:
+      config:
+        file-extension: yml
+        group: DEFAULT_GROUP
+        server-addr: 127.0.0.1:8848
+        enabled: true
+        shared-dataids: common.yml,environment.yml,${spring.application.name}.yml
+        # 默认public
+        namespace: ${NACOS_NAMESPACE:}
+      discovery:
+        server-addr: 127.0.0.1:8848
+        namespace: ${NACOS_NAMESPACE:}
+
+# 自定义白名单
+security:
+  ignoring:
+    antpatterns: '/demo/**,/swagger-ui.html,/api/**'
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web.servlet.DispatcherServlet: DEBUG

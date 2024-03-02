@@ -10,11 +10,13 @@ spring:
     # 下面为连接池的补充设置，应用到上面所有数据源中
     # 初始化大小，最小，最大
     # 第一次进行数据库请求就会默认初始化initialSize个connect
-    initialSize: 1
-    minIdle: 1
-    maxActive: 1
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
     # 配置获取连接等待超时的时间
-    maxWait: 20000
+    maxWait: 1000
+    # 连接池不满重试次数
+    notFullTimeoutRetryCount: 100
     # 配置一个连接在池中最小生存的时间，单位是毫秒
     minEvictableIdleTimeMillis: 3000
     openMulti: true

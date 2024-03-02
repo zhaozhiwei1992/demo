@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -25,12 +26,19 @@ public class PolardbConnTestEvent implements CommandLineRunner {
             }
         }
 
+        CountDownLatch countDownLatch = new CountDownLatch(nThreads);
         // 创建线程池
         ExecutorService executorService = Executors.newFixedThreadPool(nThreads);
 
         // 模拟创建和释放数据库连接
         for (int j = 0; j < nThreads; j++) {
             executorService.execute(() -> {
+                countDownLatch.countDown();
+                try {
+                    countDownLatch.await();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
                 polardbConnTestService.exec();
             });
         }

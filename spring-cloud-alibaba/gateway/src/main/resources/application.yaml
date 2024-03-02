@@ -1,0 +1,34 @@
+server:
+  port: ${port:10086}
+
+spring:
+  application:
+    name: '@artifactId@'
+  # 上传控制大小限制
+  http:
+    multipart:
+      max-file-size: 200Mb
+      max-request-size: 200Mb
+  # 开启 Gateway 服务注册中心服务发现
+#  开启后可自动从服务注册中心拉取服务列表，通过各个服务的spring:
+#    application:
+#      name作为前缀进行转发，该配置默认为false:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+
+management:
+  security:
+    enabled: false
+  # 暴露所有endpoint
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+# 配置Gateway日志等级，输出转发细节信息
+logging:
+  level:
+    org.springframework.cloud.gateway: debug

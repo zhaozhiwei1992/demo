@@ -56,6 +56,15 @@ ribbon:
   #Closing connections idle longer than 30000 SECONDS
   ConnectTimeout: 30000
   ReadTimeout: 60000
+  #重试设置，为避免重复请求，设置为0
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 0
+  #每个应用host最大请求数量
+  MaxConnectionsPerHost: 2000
+  #全部服务总和的最大数量
+  MaxTotalConnections: 4000
+  # WeightedResponseTimeRule规则,心跳检测时间
+  ServerWeightTaskTimerInterval: 10000
 
 # 禁用过滤器 zuul.<filtername>.<filtertype>.disable=true
 # 这个龟儿子关不掉..
@@ -66,3 +75,36 @@ zuul:
   ribbon:
     eager-load:
       enabled: true # 提前加载，加快首次访问速度
+  #配置属性 zuul.max.host.connections 已经被两个新的配置属性替代,
+  #zuul.host.maxTotalConnections （总连接数）和 zuul.host.maxPerRouteConnections,（每个路由连接数） 默认值分别是200和20.
+  #max:
+  #host:
+  #connections: 500
+  host:
+    #zuul.host.connect-timeout-millis， zuul.host.socket-timeout-millis这两个配置，这两个和ribbon.ReadTimeout， ribbon.SocketTimeout这两个就是ribbon超时时间设置都是配超时的。
+    #区别在于，如果路由方式是serviceId的方式，那么ribbon的生效，如果是url的方式，则zuul.host开头的生效。（此处重要！使用serviceId路由和url路由是不一样的超时策略）
+    #如果你在zuul配置了熔断fallback的话，熔断超时也要配置，不然如果你配置的ribbon超时时间大于熔断的超时，那么会先走熔断，相当于你配的ribbon超时就不生效了。
+    #熔断超时是这样的： hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 60000
+    socket-timeout-millis: 3600000
+    connect-timeout-millis: 10000
+    #路径前缀的配置，这个不要改
+    stripPrefix: true
+    #最大的总连接数（根据实际的需要进行设置，可以设置较大的值，5000-20000）
+    maxTotalConnections: 5000
+    #每个路由连接数（这个按实际并发进行分配，压力测试时，需要调大）
+    maxPerRouteConnections: 2000
+  semaphore:
+    #设置全部路由最大信号量
+    max-semaphores: 1000
+
+app:
+  zuul:
+    log:
+      #如果日志量非常大，可以只记录异常日志，默认为false
+      saveerroronly: false
+      #如果日志量非常大，可以只记录操作超过多少秒的日志
+      dealtime: 1
+      #启用批量记录日志，默认为true，所以不配置也可以，如果需要实时的记录，需要配置为false，数据库压力较大，须谨慎
+      enablebatch: true
+      #批量记录日志的大小，建议根据现场1分钟的日志量进行设置，太大则会有内存溢出的风险，建议不要超过10w
+      batchsize: 50
