@@ -1,6 +1,6 @@
 spring:
   application:
-    name: '@artifactId@'
+    name: user-service-client
 server:
   port: ${port:8080}
 feign:

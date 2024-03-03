@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: '@artifactId@'
+    name: gateway
   # 上传控制大小限制
   http:
     multipart:
@@ -18,6 +18,20 @@ spring:
       discovery:
         locator:
           enabled: true
+    config:
+      enabled: false
+    nacos:
+      config:
+        file-extension: yml
+        group: DEFAULT_GROUP
+        server-addr: 127.0.0.1:8848
+        enabled: true
+        shared-dataids: common.yml,environment.yml,${spring.application.name}.yml
+        # 默认public
+        namespace: ${NACOS_NAMESPACE:}
+      discovery:
+        server-addr: 127.0.0.1:8848
+        namespace: ${NACOS_NAMESPACE:}
 
 management:
   security:
