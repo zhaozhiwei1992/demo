@@ -27,6 +27,17 @@ public class StreamExp {
 
     public static void main(String[] args) {
 
+        // 测试peek后toList
+        final List<String> collect4 = Stream.of("1", "2", "3")
+//                返回新值
+//                .map(m -> {
+//                    return m + "1";
+//                })
+//                不影响原值
+//                .peek(s -> s += "1")
+                .collect(Collectors.toList());
+        System.out.println("我是peek后的结果" + collect4);
+
         testMinScale();
 
         // 基础要素流和普通对象流
