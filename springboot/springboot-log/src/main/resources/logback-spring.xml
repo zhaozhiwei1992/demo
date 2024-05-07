@@ -25,6 +25,20 @@
     <property name="log.pattern.MDC"
               value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%X{IP}] [%X{RequestId}] [%X{RequestURI}] [%thread] [%X{ThreadId}] %-5level %logger{36} - %msg%n"/>
 
+<!--    sleuth日志输出-->
+    <springProperty scope="context" name="springAppName" source="spring.application.name"/>
+
+    <!-- You can override this to have a custom pattern -->
+    <property name="CONSOLE_LOG_PATTERN"
+              value="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+
+    <!-- 控制台输出 -->
+    <appender name="consoleSleuth" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} traceId[%X{X-B3-TraceId}] spanId[%X{X-B3-SpanId}] parentSpanId[%X{X-B3-ParentSpanId}] [%thread] %-5level %logger{36} -%msg%n</pattern>
+        </encoder>
+    </appender>
+
     <!-- 控制台设置 自定义日志格式-->
     <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="com.lx.demo.springbootlog.logback.ThreadUserPatternLayoutEncoder">
@@ -167,8 +181,9 @@
 
 <!--    info或者info级别以上的都会根据下面配置分门别类放入不同文件中-->
     <root level="info">
-        <appender-ref ref="consoleAppender" />
-        <appender-ref ref="runtimelog" />
+        <appender-ref ref="consoleSleuth" />
+<!--        <appender-ref ref="consoleAppender" />-->
+<!--        <appender-ref ref="runtimelog" />-->
 <!--        <appender-ref ref="debugAppender" />-->
 <!--        <appender-ref ref="infoAppender" />-->
 <!--        <appender-ref ref="errorAppender" />-->
