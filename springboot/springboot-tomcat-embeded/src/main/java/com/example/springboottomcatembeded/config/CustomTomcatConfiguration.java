@@ -32,7 +32,7 @@ public class CustomTomcatConfiguration implements WebServerFactoryCustomizer<Con
 
             // 增加connector
             final Connector connector = new Connector();
-            connector.setPort(9090);
+            connector.setPort(9099);
             connector.setURIEncoding("UTF-8");
 
             tomcatServletWebServerFactory.addAdditionalTomcatConnectors(connector);
