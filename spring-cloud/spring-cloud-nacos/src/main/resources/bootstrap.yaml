@@ -1,5 +1,5 @@
 #NACOS_NAMESPACE: f4d92ae7-ace2-4df7-a0a9-26b296293d1d
-CONFIG_SERVER: 192.168.7.6
+CONFIG_SERVER: 127.0.0.1
 CONFIG_SERVER_PORT: 8848
 spring:
   datasource:
@@ -12,8 +12,8 @@ spring:
 #         dataid 默认后缀
         file-extension: yml
         group: DEFAULT_GROUP
-        #server-addr: 192.168.7.6:8848
-        server-addr: ${CONFIG_SERVER:192.168.7.6}:${CONFIG_SERVER_PORT:8848}
+        #server-addr: 127.0.0.1:8848
+        server-addr: ${CONFIG_SERVER:127.0.0.1}:${CONFIG_SERVER_PORT:8848}
 #        nacos开启认证后需要配置用户密码
 #        https://www.bookstack.cn/read/nacos-2.0-zh/b8a31d745a8ef5c6.md
         username: nacos
@@ -38,7 +38,7 @@ spring:
 #          data-id: fasp2datasource.yml
 #          group: ${NACOS_GROUP:DEFAULT_GROUP}
       discovery:
-        server-addr: ${CONFIG_SERVER:192.168.7.6}:${CONFIG_SERVER_PORT:8848}
+        server-addr: ${CONFIG_SERVER:127.0.0.1}:${CONFIG_SERVER_PORT:8848}
         username: nacos
         password: nacos
         metadata:
