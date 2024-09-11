@@ -5,8 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c811c152-d7cf-4bdd-84b7-5c3c83cbc148" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../springboot-el/src/main/java/com/lx/demo/springbootel/service/CalcuFormulaFieldImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot-el/src/main/java/com/lx/demo/springbootel/service/CalcuFormulaFieldImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../springboot-el/src/test/java/com/lx/demo/springbootel/service/CalcuFormulaFieldImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot-el/src/test/java/com/lx/demo/springbootel/service/CalcuFormulaFieldImplTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java-core/pattern/src/main/java/com/example/RegexMatches.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java-core/pattern/src/main/java/com/example/RegexMatches.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java-core/socket/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../java-core/socket/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lx/demo/springbooteasyexcel/web/controller/EasyExcelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lx/demo/springbooteasyexcel/web/controller/EasyExcelController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/lx/demo/springbooteasyexcel/ReadTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/lx/demo/springbooteasyexcel/ReadTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,19 +37,32 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
   <component name="ProjectId" id="1UmZ9DJaYVSBPmhw6LyiiXazEGY" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JUnit.ReadTest.dynamicRead.executor": "Run",
+    "JUnit.ReadTest.dynamicReadAll.executor": "Debug",
+    "JUnit.ReadTest.headerBuild.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true"
   }
-}</component>
-  <component name="RunManager" selected="Application.DemoApplication">
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.lx.demo.springbooteasyexcel.listener" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.ReadTest.headerBuild">
     <configuration name="DemoApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.lx.demo.springbooteasyexcel.DemoApplication" />
       <module name="springboot-easyexcel" />
@@ -60,6 +76,54 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ReadTest.dynamicReadAll" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="springboot-easyexcel" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.lx.demo.springbooteasyexcel.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.lx.demo.springbooteasyexcel" />
+      <option name="MAIN_CLASS_NAME" value="com.lx.demo.springbooteasyexcel.ReadTest" />
+      <option name="METHOD_NAME" value="dynamicReadAll" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ReadTest.dynamicReadSheet0" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="springboot-easyexcel" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.lx.demo.springbooteasyexcel.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.lx.demo.springbooteasyexcel" />
+      <option name="MAIN_CLASS_NAME" value="com.lx.demo.springbooteasyexcel.ReadTest" />
+      <option name="METHOD_NAME" value="dynamicReadSheet0" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ReadTest.headerBuild" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="springboot-easyexcel" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.lx.demo.springbooteasyexcel.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.lx.demo.springbooteasyexcel" />
+      <option name="MAIN_CLASS_NAME" value="com.lx.demo.springbooteasyexcel.ReadTest" />
+      <option name="METHOD_NAME" value="headerBuild" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="DemoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="springboot-easyexcel" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.lx.demo.springbooteasyexcel.DemoApplication" />
@@ -69,6 +133,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ReadTest.headerBuild" />
+        <item itemvalue="JUnit.ReadTest.dynamicReadAll" />
+        <item itemvalue="JUnit.ReadTest.dynamicReadSheet0" />
         <item itemvalue="Application.DemoApplication" />
       </list>
     </recent_temporary>
@@ -115,5 +182,16 @@
     <MESSAGE value="easy excel demo&#10;https://alibaba-easyexcel.github.io/quickstart/read.html" />
     <MESSAGE value="easyexcel动态表头，多sheet页导出" />
     <option name="LAST_COMMIT_MESSAGE" value="easyexcel动态表头，多sheet页导出" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/lx/demo/springbooteasyexcel/listener/MutiSheetReadListener.java</url>
+          <line>37</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

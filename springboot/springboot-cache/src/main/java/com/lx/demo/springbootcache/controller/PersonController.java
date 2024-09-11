@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 public class PersonController {
@@ -31,6 +31,10 @@ public class PersonController {
         // 记录到缓存后，这里可以拿到值
         Cache cache = simpleCacheManager.getCache("persons");
         System.out.println("缓存值: " + cache.get(id).get());
+
+        // 获取所有条目
+        Map<String, Object> map = (Map<String, Object>)cache.getNativeCache();
+        System.out.println("缓存值: " + map);
 
         return byID;
     }

@@ -39,7 +39,7 @@ public class CalcuFormulaPlusImpl {
         calcuFormula.transFormula(formula);
 
         final long l = System.currentTimeMillis();
-        new CalcuFormulaImpl().calculation(datas, formula);
+//        new CalcuFormulaImpl().calculation(datas, formula);
         System.out.println("顺序计算耗时: " + (System.currentTimeMillis() - l));
 
 //        for (Map<String, Object> data : datas) {

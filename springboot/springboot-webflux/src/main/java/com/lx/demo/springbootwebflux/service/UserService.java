@@ -31,6 +31,11 @@ public class UserService {
     }
 
     public List<User> findAll(){
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         return new ArrayList<>(userRepository.values());
     }
 
