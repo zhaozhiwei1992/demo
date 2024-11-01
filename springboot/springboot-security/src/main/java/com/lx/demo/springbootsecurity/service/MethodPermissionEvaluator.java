@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * @date 2022/7/18 上午11:15
  * @version V1.0
  */
-public class methodPermissionEvaluator implements PermissionEvaluator {
+public class MethodPermissionEvaluator implements PermissionEvaluator {
 
     /**
      * hasPermission鉴权方法

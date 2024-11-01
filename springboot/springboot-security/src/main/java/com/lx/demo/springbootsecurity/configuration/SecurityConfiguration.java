@@ -7,7 +7,7 @@ import com.lx.demo.springbootsecurity.handler.CustomAuthenticationSuccessHandler
 import com.lx.demo.springbootsecurity.handler.CustomExpiredSessionStrategy;
 import com.lx.demo.springbootsecurity.handler.CustomLogoutSuccessHandler;
 import com.lx.demo.springbootsecurity.provicer.CustomLoginAuthenticationProvider;
-import com.lx.demo.springbootsecurity.service.methodPermissionEvaluator;
+import com.lx.demo.springbootsecurity.service.MethodPermissionEvaluator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -149,7 +149,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //    @Bean
     public DefaultWebSecurityExpressionHandler methodSecurityExpressionHandler() {
         DefaultWebSecurityExpressionHandler handler = new DefaultWebSecurityExpressionHandler();
-        handler.setPermissionEvaluator(new methodPermissionEvaluator());
+        handler.setPermissionEvaluator(new MethodPermissionEvaluator());
         return handler;
     }
     /**

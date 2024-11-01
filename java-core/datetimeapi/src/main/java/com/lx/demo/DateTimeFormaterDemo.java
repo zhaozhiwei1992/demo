@@ -1,11 +1,10 @@
 package com.lx.demo;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZonedDateTime;
+import java.text.SimpleDateFormat;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.util.Date;
 import java.util.Locale;
 
 /**
@@ -54,5 +53,11 @@ public class DateTimeFormaterDemo {
 
         final LocalDate parse3 = LocalDate.parse("1990-08-07", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         System.out.printf("自定义日期字符串转日期 %s \n", parse3);
+
+        final Instant start = Instant.now();
+        Date from = Date.from(start);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String format1 = simpleDateFormat.format(from);
+        System.out.println("Instant格式化" + format1);
     }
 }

@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.ParameterMode;
 import javax.persistence.PersistenceContext;
 import javax.persistence.StoredProcedureQuery;
+import java.sql.SQLException;
 
 @RestController
 @RequestMapping("/proc")
@@ -20,6 +21,11 @@ public class ProcController {
     @GetMapping("/query")
     public String query(){
        return procService.query();
+    }
+
+    @GetMapping("/query2")
+    public String query2() throws SQLException {
+        return procService.query2();
     }
 
     @PersistenceContext
