@@ -1,15 +1,14 @@
 package com.example.springbootbean.bootstrap;
 
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.*;
 
 import java.util.stream.Stream;
 
 //@SpringBootApplication
 //@Configuration("annotationBeanInit")
 @ComponentScan(basePackages = "com.example.springbootbean.bootstrap")
+// 同时引入xml和注解配置bean
+//@ImportResource("classpath:META-INF/dev-context.xml")
 public class AnnotationBeanInitBootstrap {
 
     public static void main(String[] args) {
