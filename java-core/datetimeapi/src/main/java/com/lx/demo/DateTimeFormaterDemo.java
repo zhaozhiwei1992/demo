@@ -59,5 +59,10 @@ public class DateTimeFormaterDemo {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String format1 = simpleDateFormat.format(from);
         System.out.println("Instant格式化" + format1);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        // 将Instant转换为LocalDateTime
+        LocalDateTime dateTime = LocalDateTime.ofInstant(start, ZoneId.systemDefault());
+        System.out.println("Instant格式化2:" + formatter.format(dateTime));
     }
 }

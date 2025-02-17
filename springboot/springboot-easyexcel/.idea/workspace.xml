@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c811c152-d7cf-4bdd-84b7-5c3c83cbc148" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../java-core/pattern/src/main/java/com/example/RegexMatches.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java-core/pattern/src/main/java/com/example/RegexMatches.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../java-core/socket/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../java-core/socket/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lx/demo/springbooteasyexcel/web/controller/EasyExcelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lx/demo/springbooteasyexcel/web/controller/EasyExcelController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/lx/demo/springbooteasyexcel/ReadTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/lx/demo/springbooteasyexcel/ReadTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java-core/mutithreading/src/main/java/com/lx/demo/concurrent/CompletableFutureDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java-core/mutithreading/src/main/java/com/lx/demo/concurrent/CompletableFutureDemo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +50,7 @@
     "JUnit.ReadTest.headerBuild.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true"
   }
