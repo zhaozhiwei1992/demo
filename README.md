@@ -43,3 +43,6 @@
 2. springboot 2.x+
 3. mysql 5.7.5+
 4. redis 5.0.7+
+
+# 参考
+https://github.com/alibaba/spring-cloud-alibaba/tree/2023.x/spring-cloud-alibaba-examples

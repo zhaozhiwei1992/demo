@@ -3,19 +3,15 @@ package com.example.springbootresttemplate.web.controller;
 import com.example.springbootresttemplate.domain.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * 通过resttemplate访问该接口
@@ -114,5 +110,16 @@ public class EchoController {
     public String echoListMap(@RequestParam List<Map> params){
         // TODO 待测试
         return "echo: " + params;
+    }
+
+    @PostMapping("/run")
+    public String run(@RequestBody Map obj) throws Exception {
+        String apiKey = String.valueOf(obj.get("api_key"));
+        if (apiKey.equals("null")) {
+            throw new RuntimeException("api_key不能为空");
+        }
+        HashMap<String, Object> inputParam = new HashMap<>();
+        inputParam.put("data", obj.get("data"));
+        return obj.toString();
     }
 }
