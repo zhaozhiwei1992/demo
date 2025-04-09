@@ -1,5 +1,9 @@
 package com.lx.demo;
 
+import sun.misc.ProxyGenerator;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
@@ -63,9 +67,16 @@ class ServiceImpl implements Service{
  */
 public class DynamicProxyDemo {
     public static void main(String[] args) {
+        //@see sun.misc.ProxyGenerator
+        // 这个玩意儿生成以后会到项目根目录, <=1.8之前写法, 但是没法指定目录
+//        System.setProperty("sun.misc.ProxyGenerator.saveGeneratedFiles", "true");
+        // >1.8后写法
+//        System.setProperty("jdk.proxy.ProxyGenerator.saveGeneratedFiles", "true");
+        // 指定目录写法
+        saveProxyFile();
         final ServiceImpl service = new ServiceImpl();
         final Class<? extends Service> clazz = service.getClass();
-        ServiceImpl service1 = (ServiceImpl) Proxy.newProxyInstance(clazz.getClassLoader(), clazz.getInterfaces(), new InvocationHandler() {
+        Service service1 = (Service) Proxy.newProxyInstance(clazz.getClassLoader(), clazz.getInterfaces(), new InvocationHandler() {
             @Override
             public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
                 System.out.println(String.format("调用 %s 之前", method.getName()));
@@ -75,5 +86,27 @@ public class DynamicProxyDemo {
             }
         });
         service1.echo("hh");
+    }
+
+    private static void saveProxyFile() {
+        String path = Service.class.getResource("").getPath();
+        System.out.println(path);
+        FileOutputStream out = null;
+        try {
+            byte[] classFile = ProxyGenerator.generateProxyClass("$Proxy0", Service.class.getInterfaces());
+            out = new FileOutputStream(path + "$Proxy0.class");
+            out.write(classFile);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (out != null) {
+                    out.flush();
+                    out.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
