@@ -14,7 +14,7 @@ public class ConsumerDemo {
     public static void main(String[] args) throws ClientException, IOException, InterruptedException {
         final ClientServiceProvider provider = ClientServiceProvider.loadService();
         // 接入点地址，需要设置成Proxy的地址和端口列表，以下为k8s环境下rocketmq的proxy地址。
-        String endpoints = "localhost:8081";
+        String endpoints = "localhost:8080";
         ClientConfiguration clientConfiguration = ClientConfiguration.newBuilder()
                 .setEndpoints(endpoints)
                 .build();

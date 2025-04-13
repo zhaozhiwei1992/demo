@@ -22,7 +22,7 @@ import java.io.IOException;
 public class ProducerDemo {
     public static void main(String[] args) throws ClientException, IOException {
         // 接入点地址，需要设置成Proxy的地址和端口列表，以下为k8s环境下rocketmq的proxy地址。
-        String endpoint = "localhost:8081";
+        String endpoint = "localhost:8080";
         // 消息发送的目标Topic名称，需要提前创建。
         String topic = "TestTopic";
         ClientServiceProvider provider = ClientServiceProvider.loadService();

@@ -6,11 +6,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RocketMQMessageListener(topic = "TestTopic", consumerGroup = "TestGroup")
-public class MyConsumer implements RocketMQListener<String> {
+public class MyConsumer2 implements RocketMQListener<String> {
 
     @Override
     public void onMessage(String message) {
         // 处理消息的逻辑
-        System.out.println("Received message: " + message);
+        System.out.println("MyConsumer2 Received message: " + message);
     }
 }
