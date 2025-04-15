@@ -12,7 +12,10 @@ public class MapKeyDemo {
 //        java.lang.ClassCastException: class java.lang.Integer cannot be cast to class java.lang.String
 //        final String num = (String)hashMap.get("num");
 
-        Map<Integer, String> map = Map.of(1, "A");
+//        java 9+
+//        Map<Integer, String> map = Map.of(1, "A");
+        Map<Integer, String> map = new HashMap<>();
+        map.put(1, "A");
         // map的get方法主要根据是否equals来判断
         //java.util.ImmutableCollections.Map1.get
         System.out.println(map.get(1));//A
