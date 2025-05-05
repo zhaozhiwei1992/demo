@@ -12,7 +12,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <jdk.version>1.7</jdk.version>
     <junit.version>4.12</junit.version>
-    <spring.version>4.3.8.RELEASE</spring.version>
+    <spring.version>5.3.1</spring.version>
     <mysql.version>5.1.40</mysql.version>
     <druid.version>1.0.29</druid.version>
     <mybatis.version>3.2.6</mybatis.version>
