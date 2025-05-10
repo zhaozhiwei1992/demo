@@ -1,10 +1,5 @@
 package com.lx.demo;
 
-import jdk.nashorn.internal.runtime.regexp.JoniRegExp;
-
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 /**
  * @author zhaozhiwei
  * @version V1.0

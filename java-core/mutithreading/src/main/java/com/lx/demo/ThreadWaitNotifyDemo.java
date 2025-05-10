@@ -24,6 +24,8 @@ public class ThreadWaitNotifyDemo {
 //            monitor.notify(); // notify first one
             monitor.notifyAll();
         }
+        // 这里睡一会儿线程就会先执行，说明这个启动还是需要耗点时间的
+//        Thread.sleep(1000);
         System.out.println("exec in mainthread"); // exec after join
     }
 
