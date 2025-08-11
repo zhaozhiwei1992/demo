@@ -1,0 +1,13 @@
+# keytool -genkeypair -alias dev.com -keyalg RSA -dname "CN=Web Server,OU=Unit,O=Organization,L=City,S=State,C=US" -keypass 123456 -storepass 123456 -keystore dev.com.jks -keysize 2048
+server:
+  port: 8080
+#  port: 8443
+#  ssl:
+#    key-store: classpath:dev.com.jks
+#    #??????????????????????
+#    key-store-password: 123456
+#    #???????
+#    key-store-type: jks
+#    # ??
+#    key-alias: dev.com
+#    enabled: true
