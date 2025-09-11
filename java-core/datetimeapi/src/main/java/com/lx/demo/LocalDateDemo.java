@@ -14,14 +14,14 @@ public class LocalDateDemo {
 //        自动补0
         System.out.printf("当前月补0, %s \n", DateTimeFormatter.ofPattern("MM").format(now));
 
-        final LocalDate ttangBirthDay = LocalDate.of(1990, Month.AUGUST, 07);
-        System.out.printf("birthday, %s \n", ttangBirthDay);
-        System.out.printf("1990年 %s 为闰年\n", ttangBirthDay.isLeapYear());
-        System.out.printf("2020年的生日日期 %s \n", ttangBirthDay.plus(Period.ofYears(Year.now().getValue() - 1989)));
+        final LocalDate xBirthDay = LocalDate.of(1990, Month.AUGUST, 07);
+        System.out.printf("birthday, %s \n", xBirthDay);
+        System.out.printf("1990年 %s 为闰年\n", xBirthDay.isLeapYear());
+        System.out.printf("2020年的生日日期 %s \n", xBirthDay.plus(Period.ofYears(Year.now().getValue() - 1989)));
 
         // 时间段
-        final long until = ttangBirthDay.until(LocalDate.now(), ChronoUnit.DAYS);
-        System.out.printf("ttang birthday到现在时间 %s天\n", until);
+        final long until = xBirthDay.until(LocalDate.now(), ChronoUnit.DAYS);
+        System.out.printf("x birthday到现在时间 %s天\n", until);
 
         System.out.printf("今年的程序员日 %s \n", LocalDate.of(Year.now().getValue(), 1, 1).plusDays(255));
 
