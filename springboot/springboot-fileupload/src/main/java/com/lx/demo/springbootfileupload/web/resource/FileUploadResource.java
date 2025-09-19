@@ -82,9 +82,6 @@ public class FileUploadResource {
                 fileName);
     }
 
-    /*
-    * http://localhost:8080/images?fileName=jk-flow.jpg
-     */
     @GetMapping(value = "/images", produces = MediaType.IMAGE_JPEG_VALUE)
     public byte[] getImage(String fileName) throws IOException {
         URL url = Thread.currentThread().getContextClassLoader().getResource("/");
@@ -108,5 +105,34 @@ public class FileUploadResource {
 
         // 读取文件内容并返回字节数组
         return Files.readAllBytes(destFile.toPath());
+    }
+
+    private byte[] db = null;
+
+    @GetMapping("/upload/db")
+    public String uploadAndGetUrl2DB() throws Exception {
+        String bucketName = "images", fileName="jk-flow.jpg", filePath="/tmp/11.jpg";
+
+        File sourceFile = new File(filePath);
+        db = Files.readAllBytes(sourceFile.toPath());
+        System.out.println("File content: " + new String(db));
+        // 3. 返回服务器地址信息 一体化网关地址 + 系统标识 + bucket + 文件名
+        // 格式示例: http://your-gateway.com/your-system-id/images/jk-flow.jpg
+        return String.format("%s/%s/%s/%s",
+                gatewayBaseUrl.trim(),
+                "esms",
+                bucketName,
+                fileName);
+    }
+
+    /*
+    * http://localhost:8080/images/db?fileName=jk-flow.jpg
+     */
+    @GetMapping(value = "/images/db", produces = MediaType.IMAGE_JPEG_VALUE)
+    public byte[] getImageFromDB(String fileName) throws IOException {
+        if (db == null) {
+            throw new IOException("File not found: " + fileName);
+        }
+        return db;
     }
 }
