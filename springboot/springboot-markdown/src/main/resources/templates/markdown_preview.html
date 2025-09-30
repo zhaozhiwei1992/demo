@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Markdown编辑器与预览</title>
+    <!-- 引入Editor.md的CSS -->
+    <link rel="stylesheet" th:href="@{/editormd/css/editormd.min.css}"/>
+    <!-- 引入页面自定义样式 -->
+    <style>
+        .container {
+            width: 90%;
+            margin: 20px auto;
+        }
+        #btn-export {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Markdown编辑器</h1>
+    <!-- 编辑器容器 -->
+    <div id="editor-md">
+        <textarea style="display:none;" id="md-content" name="md-content"></textarea>
+    </div>
+    <!-- 导出按钮 -->
+    <button id="btn-export">导出为Word文档</button>
+</div>
+
+<!-- 引入jQuery -->
+<script th:src="@{/js/jquery.min.js}"></script>
+<!-- 引入Editor.md的JS -->
+<script th:src="@{/editormd/editormd.min.js}"></script>
+
+<script th:inline="javascript">
+    $(function () {
+        // 初始化Editor.md
+        var editor = editormd("editor-md", {
+            height: 640,
+            path: "/editormd/lib/", // Editor.md依赖库的路径
+            saveHTMLToTextarea: true, // 将生成的HTML同时保存到Textarea（如果需要）
+            /* 可选：启用预览功能 */
+            watch: true,
+            toolbar: true,
+            preview: true
+        });
+
+        // 导出按钮点击事件
+        $("#btn-export").click(function () {
+            // 获取编辑器中的Markdown原始内容
+            var markdownContent = editor.getMarkdown();
+
+            // 通过Ajax将内容发送到后端
+            $.ajax({
+                url: "/export/docx", // 后端处理导出请求的URL
+                type: "POST",
+                data: {
+                    content: markdownContent
+                },
+                xhrFields: { responseType: 'blob' },
+                success: function (data) {
+                    // 创建Blob对象的URL
+                    var blobUrl = URL.createObjectURL(data);
+                    // 创建一个隐藏的<a>标签元素
+                    var link = document.createElement('a');
+                    link.href = blobUrl;
+                    link.download = 'tempate.docx'; // 设置下载的文件名
+                    link.style.display = 'none';
+                    // 将<a>标签添加到DOM中（某些浏览器需要这样做）
+                    document.body.appendChild(link);
+                    // 模拟点击该链接
+                    link.click();
+                    // 从DOM中移除该<a>标签
+                    document.body.removeChild(link);
+                    // 释放Blob URL以释放内存
+                    URL.revokeObjectURL(blobUrl);
+                    alert("导出成功！");
+                },
+                error: function (xhr, status, error) {
+                    alert("导出失败: " + error);
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
