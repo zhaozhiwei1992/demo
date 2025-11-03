@@ -10,7 +10,10 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @RestController
@@ -158,6 +161,50 @@ public class RestTemplateController {
         formEntity = new HttpEntity<>(objectHashMap.toString(), headers);
         result = restTemplate.postForObject(url, formEntity, String.class);
         log.info("传入token {}, 返回结果 {}", tokenid, result);
+    }
+
+    @GetMapping("/echo/menu")
+    public void testMenu(){
+
+        String ifmisPortalBaseAddress = "192.168.100.222:8001";
+        String tokenid = "B4E9C32BADB81AC1E0530100007F5914oAHhlNQX";
+        Map<String, String> userinfo = new HashMap<>();
+        userinfo.put("year", "2024");
+        userinfo.put("province", "340000000");
+
+        String url;
+        //  curl -X POST http://192.168.100.222:8001/buscommon/llm/queryPermission?tokenid=B4E9C32BADB81AC1E0530100007F5914oAHhlNQX&fiscal_year=2024&mof_div_code=340000000 -H "Content-Type:application/json;charset=UTF-8" -H "Accept:application/json;charset=UTF-8"  -d '["menuid_000","menuid_001","menuid_002","menuid_003"]'
+        url = String.format("http://%s/buscommon/llm/queryPermission?tokenid=%s&fiscal_year=%s&mof_div_code=%s"
+                , ifmisPortalBaseAddress, tokenid, userinfo.get("year"), userinfo.get("province"));
+        log.info("获取菜单权限请求地址：{}", url);
+        try {
+            List<String> menuList = new ArrayList<>();
+            menuList.add("123654");
+            ResponseEntity<Object> responseEntity = restTemplate.postForEntity(url, menuList, Object.class);
+            if (responseEntity.getStatusCode().equals(HttpStatus.OK)) {
+                log.info("一体化服务端返回数据：{}", responseEntity.getBody());
+                Map<String, Object> responseBody = (Map<String, Object>) responseEntity.getBody();
+                // 安全处理 data 字段：可能是 List 或 Map
+                Object dataObj = responseBody.get("data");
+                List<Map<String, Object>> dataList = new ArrayList<>();
+
+                if (dataObj instanceof List) {
+                    // 如果 data 是数组，直接强转为 List
+                    dataList = (List<Map<String, Object>>) dataObj;
+                } else if (dataObj instanceof Map) {
+                    // 如果 data 是单个对象，包装为单元素 List
+                    dataList.add((Map<String, Object>) dataObj);
+                } else {
+                    // 处理其他意外类型（例如 null 或未知类型）
+                    throw new RuntimeException("data字段类型不预期: " + (dataObj != null ? dataObj.getClass() : "null"));
+                }
+
+                Map<String, Object> m2 = dataList.get(0);
+                System.out.println(m2);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("一体化服务端获取菜单权限信息失败", e);
+        }
     }
 
 }

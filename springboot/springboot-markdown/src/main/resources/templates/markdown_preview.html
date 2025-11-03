@@ -32,6 +32,7 @@
     </div>
     <!-- 导出按钮 -->
     <button id="btn-export">导出为Word文档</button>
+    <button id="btn-export-2">按模板导出为Word文档</button>
 </div>
 
 <!-- 引入jQuery -->
@@ -60,6 +61,42 @@
             // 通过Ajax将内容发送到后端
             $.ajax({
                 url: "/export/docx", // 后端处理导出请求的URL
+                type: "POST",
+                data: {
+                    content: markdownContent
+                },
+                xhrFields: { responseType: 'blob' },
+                success: function (data) {
+                    // 创建Blob对象的URL
+                    var blobUrl = URL.createObjectURL(data);
+                    // 创建一个隐藏的<a>标签元素
+                    var link = document.createElement('a');
+                    link.href = blobUrl;
+                    link.download = 'tempate.docx'; // 设置下载的文件名
+                    link.style.display = 'none';
+                    // 将<a>标签添加到DOM中（某些浏览器需要这样做）
+                    document.body.appendChild(link);
+                    // 模拟点击该链接
+                    link.click();
+                    // 从DOM中移除该<a>标签
+                    document.body.removeChild(link);
+                    // 释放Blob URL以释放内存
+                    URL.revokeObjectURL(blobUrl);
+                    alert("导出成功！");
+                },
+                error: function (xhr, status, error) {
+                    alert("导出失败: " + error);
+                }
+            });
+        });
+
+        $("#btn-export-2").click(function () {
+            // 获取编辑器中的Markdown原始内容
+            var markdownContent = editor.getMarkdown();
+
+            // 通过Ajax将内容发送到后端
+            $.ajax({
+                url: "/export/docx/with/style", // 后端处理导出请求的URL
                 type: "POST",
                 data: {
                     content: markdownContent

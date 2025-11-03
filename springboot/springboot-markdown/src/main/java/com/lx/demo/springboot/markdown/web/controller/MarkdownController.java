@@ -4,11 +4,14 @@ import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.MutableDataSet;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.xmlbeans.XmlException;
 import org.docx4j.convert.in.xhtml.XHTMLImporterImpl;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.exceptions.InvalidFormatException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTStyles;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -97,7 +100,7 @@ public class MarkdownController {
      */
     @PostMapping("/export/docx/with/style")
     public void exportToDocxWithStyle(@RequestParam("content") String markdownContent,
-                             HttpServletResponse response) throws IOException {
+                             HttpServletResponse response) throws IOException, XmlException {
         // 1. 将markdown转换为html
         markdownContent = markdownContent.replaceAll("\\\\n", "\n").replaceAll("undefined", "");
         String markdownToHtml = parseMarkdownToHtml(markdownContent);
@@ -106,7 +109,11 @@ public class MarkdownController {
 
         // 3. html转docx
 
-        InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream("docs/template.docx");
+        InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream("docs/export_template.docx");
+
+        XWPFDocument model = new XWPFDocument(resourceAsStream);
+        CTStyles modelStyle = model.getStyle();
+        System.out.println("报告导出模板样式：" + modelStyle);
 
         // 将输入流直接导出(测试)
 //        String fileName = "template.docx"; // 指定下载的文件名
