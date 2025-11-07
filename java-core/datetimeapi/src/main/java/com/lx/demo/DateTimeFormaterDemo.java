@@ -15,6 +15,7 @@ import java.util.Locale;
 public class DateTimeFormaterDemo {
 
     public static void main(String[] args) {
+        System.out.println(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss")));
         final LocalDateTime now = LocalDateTime.now();
         final String format = DateTimeFormatter.ISO_DATE_TIME.format(now);
         System.out.printf("当前时间格式化 %s\n", format);
