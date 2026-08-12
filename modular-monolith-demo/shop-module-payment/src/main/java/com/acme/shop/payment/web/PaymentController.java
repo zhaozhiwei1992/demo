@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+/** web 层只依赖 api 契约（实现类是 application 层的 PaymentApplicationService）。 */
 @RestController
 @RequestMapping("/api/payment")
 public class PaymentController {

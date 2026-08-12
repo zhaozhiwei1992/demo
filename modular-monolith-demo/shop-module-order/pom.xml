@@ -20,6 +20,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        <!-- @Transactional（事务在 application 层声明）；版本由 Boot BOM 管理 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+        </dependency>
 
         <!-- @ApplicationModule 注解在 main 源码里（RUNTIME retention），compile 依赖；
              不含 starter 自动配置，运行时惰性；per-biz verify 测试也用它 -->

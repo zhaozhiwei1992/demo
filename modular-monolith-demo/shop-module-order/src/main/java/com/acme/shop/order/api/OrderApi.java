@@ -1,9 +1,11 @@
 package com.acme.shop.order.api;
 
 /**
- * 订单对外契约。其他模块（若需）只允许依赖本接口，不允许依赖 service/repository 实现类。
+ * 订单对外契约（COLA client 思想：契约只放接口 + DTO）。
+ * 实现类在 application 层（OrderApplicationService）。
+ * 将来抽 RPC 时，把实现换成远程 FeignClient，调用方（web / 其他模块）不用改。
  */
 public interface OrderApi {
 
-    Long createOrder(String goodsCode, int count);
+    Long createOrder(OrderCreateCommand command);
 }
