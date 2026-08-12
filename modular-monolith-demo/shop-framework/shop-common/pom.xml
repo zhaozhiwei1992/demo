@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.acme</groupId>
+        <artifactId>shop-framework</artifactId>
+        <version>${revision}</version>
+    </parent>
+    <artifactId>shop-common</artifactId>
+    <description>无业务依赖的工具、异常、基础 DTO。业务模块只能依赖这里和 starter，不能依赖其他业务模块</description>
+
+    <dependencies>
+        <!-- @ApplicationModule 注解在 main 源码里（RUNTIME retention），需要 compile 依赖；
+             spring-modulith-core 不含 starter 自动配置，运行时是惰性的 -->
+        <dependency>
+            <groupId>org.springframework.modulith</groupId>
+            <artifactId>spring-modulith-core</artifactId>
+        </dependency>
+    </dependencies>
+</project>

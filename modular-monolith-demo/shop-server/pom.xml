@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.acme</groupId>
+        <artifactId>modular-monolith-demo</artifactId>
+        <version>${revision}</version>
+    </parent>
+    <artifactId>shop-server</artifactId>
+    <description>聚合入口：空壳工程，通过依赖「组装」业务模块。唯一有 main 的工程，也是唯一能跑第 2/3 层整体守卫的地方</description>
+
+    <dependencies>
+        <!-- 业务模块按需组装：注释掉某个依赖 = 从单体里去掉该模块 -->
+        <dependency>
+            <groupId>com.acme</groupId>
+            <artifactId>shop-module-order</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.acme</groupId>
+            <artifactId>shop-module-payment</artifactId>
+        </dependency>
+        <!-- 可裁剪演示：连同根 pom 的 <module> 一起注释掉 -->
+        <dependency>
+            <groupId>com.acme</groupId>
+            <artifactId>shop-module-user</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- 第 2 层守卫（聚合 verify）+ 第 3 层守卫（ArchUnit）：只进测试 -->
+        <dependency>
+            <groupId>org.springframework.modulith</groupId>
+            <artifactId>spring-modulith-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.tngtech.archunit</groupId>
+            <artifactId>archunit-junit5</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- 打可执行 fat jar（K8s 部署用） -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
