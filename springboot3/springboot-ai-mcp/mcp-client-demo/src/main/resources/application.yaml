@@ -4,7 +4,7 @@ server:
 spring:
   ai:
     openai:
-      base-url: https://19921514.xyz/new-api/v1   # 或你的兼容网关
+      base-url: https://19921514.xyz/new-api/
       api-key: ${NEW_API_KEY}
       chat:
         options:
