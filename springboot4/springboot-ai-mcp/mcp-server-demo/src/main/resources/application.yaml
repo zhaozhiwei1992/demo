@@ -1,0 +1,16 @@
+server:
+  port: 8088  # 服务端口，可自定义
+  servlet:
+    encoding:
+      enabled: true
+      force: true
+      charset: UTF-8  # 避免中文乱码
+spring:
+  application:
+    name: mcp-server-demo # 服务端应用名称
+  ai:
+    mcp:
+      server:
+        type: async  # 异步模式，提升调用性能
+        name: mcp-server-demo  # MCP服务名称
+        version: 1.0.0  # 服务版本
