@@ -1,0 +1,63 @@
+[
+  {
+    "name": "findNearbyFood",
+    "description": "查询指定位置附近的美食店",
+    "type": "http",
+    "endpoint": "https://api.example.com/v1/nearby/food",
+    "httpMethod": "POST",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "location": { "type": "string", "description": "当前位置" },
+        "radius": { "type": "integer", "description": "搜索半径（米）" }
+      },
+      "required": ["location"]
+    }
+  },
+  {
+    "name": "findNearbyMall",
+    "description": "查询指定位置附近的商场",
+    "type": "http",
+    "endpoint": "https://api.example.com/v1/nearby/mall",
+    "httpMethod": "POST",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "location": { "type": "string", "description": "当前位置" }
+      },
+      "required": ["location"]
+    }
+  },
+  {
+    "name": "findNearbyPark",
+    "description": "查询指定位置附近的公园",
+    "type": "http",
+    "endpoint": "https://api.example.com/v1/nearby/park",
+    "httpMethod": "GET",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "location": { "type": "string", "description": "当前位置" },
+        "maxCount": { "type": "integer", "description": "最多返回数量" }
+      },
+      "required": ["location"]
+    }
+  },
+  {
+    "name": "calculateDistance",
+    "description": "计算两个坐标之间的距离（本地计算，不走HTTP）",
+    "type": "local",
+    "handlerBean": "localToolService",
+    "handlerMethod": "calculateDistance",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "lat1": { "type": "number" },
+        "lng1": { "type": "number" },
+        "lat2": { "type": "number" },
+        "lng2": { "type": "number" }
+      },
+      "required": ["lat1", "lng1", "lat2", "lng2"]
+    }
+  }
+]
