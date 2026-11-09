@@ -27,6 +27,16 @@ public class FileUploadConfiguration {
     private String tmpLocation;
 
     /**
+     * 上传大小限制改成可配置：原硬编码 128KB 会让 zip 样例直接失败，
+     * 这里默认放大到 100MB/120MB，想复现超限异常可在 application.properties 改回小值
+     */
+    @Value("${spring.servlet.multipart.max-file-size:100MB}")
+    private String maxFileSize;
+
+    @Value("${spring.servlet.multipart.max-request-size:120MB}")
+    private String maxRequestSize;
+
+    /**
      * @data: 2021/6/24-下午8:04
      * @User: zhaozhiwei
      * @method: multipartConfigElement
@@ -45,10 +55,10 @@ public class FileUploadConfiguration {
         MultipartConfigFactory factory = new MultipartConfigFactory();
 
         //// 设置文件大小限制 ,超了，页面会抛出异常信息，这时候就需要进行异常信息的处理了;
-        factory.setMaxFileSize(DataSize.parse("128KB")); //KB,MB
+        factory.setMaxFileSize(DataSize.parse(maxFileSize)); //KB,MB
 
         /// 设置总上传数据总大小
-        factory.setMaxRequestSize(DataSize.parse("256KB"));
+        factory.setMaxRequestSize(DataSize.parse(maxRequestSize));
 
         //Sets the directory location where files will be stored.
         File tmpFile = new File(tmpLocation);

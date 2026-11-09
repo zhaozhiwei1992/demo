@@ -34,6 +34,13 @@
 			<version>1.2.15</version>
 		</dependency>
 
+		<!-- zip 解压稳定方案：支持 Zip64、多种压缩方法、编码可控（JDK 自带 java.util.zip 只支持 stored/deflate） -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-compress</artifactId>
+			<version>1.26.2</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>

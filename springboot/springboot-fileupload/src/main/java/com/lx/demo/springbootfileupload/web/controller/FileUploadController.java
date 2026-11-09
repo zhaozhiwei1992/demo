@@ -1,10 +1,12 @@
 package com.lx.demo.springbootfileupload.web.controller;
 
 import com.lx.demo.springbootfileupload.domain.FileEntity;
+import com.lx.demo.springbootfileupload.util.zip.ZipExtractor;
 import com.lx.demo.springbootfileupload.web.dto.AjaxJson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -33,6 +35,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -43,6 +46,18 @@ public class FileUploadController {
 
     @Autowired
     private RestTemplate restTemplate;
+
+    /**
+     * zip 解压实现，由 file.upload.zip-extractor 选择 commons-compress（默认）或 jdk
+     */
+    @Autowired
+    private ZipExtractor zipExtractor;
+
+    /**
+     * zip 解压的默认目标目录，调用时可用 targetDir 参数覆盖
+     */
+    @Value("${file.upload.zip-target-dir:/tmp}")
+    private String zipTargetDir;
 
     /**
      * curl -X POST http://127.0.0.1:8080/send -F 'url="http://127.0.0.1:8080/upload"' -F 'path=/tmp/test/1.txt'
@@ -227,6 +242,74 @@ public class FileUploadController {
         }
 
         return "redirect:/uploadStatus";
+    }
+
+    /**
+     * 上传 zip 压缩包，按压缩包内原有目录结构解压到本地目录（默认 /tmp）。
+     *
+     * <p>解压后会固定落在一个父目录下，不会把一堆文件直接倒进目标目录：
+     * <ul>
+     *     <li>压缩包内所有条目同一个一级目录（常见：demo/a.txt、demo/b/c.txt）-&gt; 保留 demo</li>
+     *     <li>压缩包内文件直接躺在根下 -&gt; 用压缩包文件名当父目录</li>
+     *     <li>目标目录已有同名父目录 -&gt; 旧目录改名成「目录名-bak-时间」备份，新内容仍落在原目录名上
+     *         （以新的为准，备份默认只留最近 5 份）</li>
+     * </ul>
+     *
+     * <p>curl 测试：
+     * <pre>
+     * curl -F 'file=@/tmp/demo.zip' http://127.0.0.1:8080/upload/zip
+     * curl -F 'file=@/tmp/demo.zip' -F 'targetDir=/tmp/unzip' http://127.0.0.1:8080/upload/zip
+     * </pre>
+     * 注意：targetDir 由客户端指定只适合内网/调试，生产环境应固定目录或做白名单校验。
+     *
+     * @param file      上传的 zip 文件
+     * @param targetDir 解压目标目录，为空取配置 file.upload.zip-target-dir，默认 /tmp
+     * @return 解压结果：实际根目录、文件数、总字节
+     */
+    @ResponseBody
+    @PostMapping("/upload/zip")
+    public AjaxJson handlerZipUpload(@RequestParam(value = "file", required = true) MultipartFile file,
+                                     @RequestParam(value = "targetDir", required = false) String targetDir) {
+        AjaxJson result = new AjaxJson();
+        String originalFilename = file.getOriginalFilename();
+        if (file.isEmpty() || originalFilename == null
+                || !originalFilename.toLowerCase().endsWith(".zip")) {
+            return result.setAjResult("请上传 .zip 压缩包", "9998", false, null);
+        }
+
+        String dir = targetDir == null || targetDir.trim().isEmpty() ? zipTargetDir : targetDir.trim();
+        Path zipTmp = null;
+        try {
+            // 先落临时文件，避免把整个 zip 读进内存（MultipartFile.getBytes 大包会 OOM）
+            zipTmp = Files.createTempFile("upload-", ".zip");
+            file.transferTo(zipTmp.toFile());
+
+            ZipExtractor.Result extractResult = zipExtractor.extract(zipTmp, Paths.get(dir), originalFilename);
+            logger.info("zip 解压完成 dir={} root={} backup={} files={} bytes={}", dir,
+                    extractResult.getRootDir(), extractResult.getBackupDir(),
+                    extractResult.getFileCount(), extractResult.getTotalBytes());
+
+            Map<String, Object> data = new LinkedHashMap<>();
+            data.put("targetDir", dir);
+            data.put("rootDir", extractResult.getRootDir().toString());
+            data.put("backupDir", extractResult.getBackupDir() == null
+                    ? "" : extractResult.getBackupDir().toString());
+            data.put("extractor", zipExtractor.getClass().getSimpleName());
+            data.put("fileCount", extractResult.getFileCount());
+            data.put("totalBytes", extractResult.getTotalBytes());
+            return result.setAjResult("解压成功", "9999", true, data);
+        } catch (IOException | RuntimeException e) {
+            logger.error("zip 解压失败 dir={} file={}", dir, originalFilename, e);
+            return result.setAjResult("解压失败: " + e.getMessage(), "9997", false, null);
+        } finally {
+            if (zipTmp != null) {
+                try {
+                    Files.deleteIfExists(zipTmp);
+                } catch (IOException e) {
+                    logger.warn("临时文件删除失败: {}", zipTmp, e);
+                }
+            }
+        }
     }
 
     @GetMapping("/uploadMuti")
