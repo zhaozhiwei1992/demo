@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Spring Boot 文件下载示例</title>
+    <!-- axios CDN（第三种方式用） -->
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.0/dist/axios.min.js"></script>
+</head>
+<body>
+<h1>Spring Boot file download example</h1>
+
+<!-- 模拟参数输入 -->
+<p>
+    agentCode: <input type="text" id="agentCode" value="test001">
+    <br><br>
+    token: <input type="text" id="tokenid" value="abc123">
+    <br><br>
+    BASE路径: <input type="text" id="baseUrl" value="http://localhost:8080">
+</p>
+
+<!-- 方式一：window.open -->
+<div style="margin-top:20px; padding:10px; border:1px solid #ccc;">
+    <p>
+        <b>window.open（后端必须给文件名）</b><br>
+        后端必须正确设置 Content-Disposition header，否则浏览器拿不到文件名会显示 undefined。
+    </p>
+    <button onclick="doDownload1()">使用 window.open 下载</button>
+</div>
+
+<!-- 方式二：fetch + blob（推荐） -->
+<div style="margin-top:20px; padding:10px; border:1px solid #ccc;">
+    <p>
+        <b>Blob 下载（推荐，后端不需要管文件名）</b><br>
+        1. 前端 fetch 请求，responseType: 'blob'<br>
+        2. 拿到 blob 后创建 object URL<br>
+        3. 用 &lt;a download="任意文件名"&gt; 触发下载<br>
+        4. 文件名完全由前端决定，后端只管吐流
+    </p>
+    <button onclick="doDownload2()">使用 fetch+blob 下载</button>
+</div>
+
+<!-- 方式三：axios + blob -->
+<div style="margin-top:20px; padding:10px; border:1px solid #ccc;">
+    <p>
+        <b>axios + blob 下载</b><br>
+        和 fetch+blob 同理，只是换用 axios 发请求。
+    </p>
+    <button onclick="doDownload3()">使用 axios+blob 下载</button>
+</div>
+
+<script>
+    // ===== 获取参数的辅助函数 =====
+    function getParams() {
+        return {
+            agentCode: document.getElementById('agentCode').value,
+            tokenid: document.getElementById('tokenid').value,
+            BASE: document.getElementById('baseUrl').value
+        };
+    }
+
+    // ===== 方式一：window.open =====
+    function doDownload1() {
+        var params = getParams();
+        var url = params.BASE + '/download?agentCode=' + params.agentCode + '&aitoken=' + params.tokenid;
+        window.open(url, '_blank');
+    }
+
+    // ===== 方式二：fetch + blob（推荐）=====
+    async function doDownload2() {
+        var params = getParams();
+        var url = params.BASE + '/download?agentCode=' + params.agentCode + '&aitoken=' + params.tokenid;
+
+        try {
+            var res = await fetch(url);
+
+            if (!res.ok) {
+                console.error('下载失败', res.status);
+                alert('下载失败: ' + res.status);
+                return;
+            }
+
+            var blob = await res.blob();
+            var objectUrl = window.URL.createObjectURL(blob);
+
+            var a = document.createElement('a');
+            a.href = objectUrl;
+            a.download = params.agentCode + '_222.zip';   // ✅ 前端随便起名
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+
+            window.URL.revokeObjectURL(objectUrl);
+        } catch (e) {
+            console.error('下载异常', e);
+            alert('下载异常: ' + e.message);
+        }
+    }
+
+    // ===== 方式三：axios + blob =====
+    async function doDownload3() {
+        var params = getParams();
+        var url = params.BASE + '/download';
+
+        try {
+            var res = await axios.get(url, {
+                params: {
+                    agentCode: params.agentCode,
+                    aitoken: params.tokenid
+                },
+                responseType: 'blob'
+            });
+
+            var blob = new Blob([res.data], { type: 'application/zip' });
+            var objectUrl = window.URL.createObjectURL(blob);
+
+            var a = document.createElement('a');
+            a.href = objectUrl;
+            a.download = params.agentCode + '_333.zip';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+
+            window.URL.revokeObjectURL(objectUrl);
+        } catch (e) {
+            console.error('下载异常', e);
+            alert('下载异常: ' + e.message);
+        }
+    }
+</script>
+</body>
+</html>

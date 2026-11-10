@@ -183,7 +183,7 @@ public class FileUploadController {
         }
     }
 
-    @GetMapping("/")
+    @GetMapping("/upload")
     public String index(){
         return "upload";
     }
